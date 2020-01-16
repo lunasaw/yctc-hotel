@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sign in</title>
+</head>
+
+<body>
+	<header th:replace="component/header :: header"></header>
+	<h1>Sign in(login)</h1>
+	<form action="/hotel/user/signin" method="post">
+		<label>User name:</label>
+		<input type="text" name="username" th:value="${userDO.username}" />
+
+		<label>Password:</label>
+		<input type="text" name="password" th:value="${userDO.password}" />
+
+		<input type="submit" value="提交" />
+	</form>
+</body>
+</html>

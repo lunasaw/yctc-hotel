@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon/favicon.ico}" type="image/x-icon" />
+    <link rel="apple-touch-icon" th:href="@{/assets/images/favicon/apple-touch-icon.jpeg}" />
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{/assets/images/favicon/apple-touch-icon-57x57.jpeg}" />
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/assets/images/favicon/apple-touch-icon-72x72.jpeg}" />
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/images/favicon/apple-touch-icon-76x76.jpeg}" />
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/assets/images/favicon/apple-touch-icon-114x114.jpeg}" />
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{/assets/images/favicon/apple-touch-icon-120x120.jpeg}" />
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/assets/images/favicon/apple-touch-icon-144x144.jpeg}" />
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{/assets/images/favicon/apple-touch-icon-152x152.jpeg}" />
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/assets/images/favicon/apple-touch-icon-180x180.jpeg}" />
+
+    <title>Benedict - by Distinctive Themes</title>
+    <link th:href="@{/assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js}"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js}"></script>
+    <![endif]-->
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,100,700,300|Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
+
+    <link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/pe-icons/css/pe-icon-7-stroke.css}" rel="stylesheet">
+
+    <link th:href="@{/assets/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/plugins.css}" rel="stylesheet">
+    <link th:href="@{/style.css}" rel="stylesheet">
+
+</head>
+
+<body class="top-navigation pushy-left-side pushy-left-open">
+
+<nav class="pushy pushy-left">
+    <ul class="list-unstyled">
+        <li><a class="logo" href="index.html"><img alt="" class="logo img-responsive" th:src="@{/assets/images/logo-light.png}"></a></li>
+        <li class="pushy-submenu">
+            <a class="submenu-link" href="#">Home <i class="fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index-portfolio.html">Home Portfolio</a></li>
+                <li><a href="index-fashion.html">Home Fashion</a></li>
+                <li><a href="index-business.html">Home Business</a></li>
+                <li><a href="index-single-page.html">Home Single Page</a></li>
+            </ul>
+        </li>
+        <li class="pushy-submenu">
+            <a class="submenu-link" href="#">Blog <i class="fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="news-reel.html">Blog Reel</a></li>
+                <li><a href="news-grid.html">Blog Grid</a></li>
+                <li><a href="news-list.html">Blog List</a></li>
+                <li><a href="news-carousel.html">Blog Carousel</a></li>
+                <li><a href="single-post.html">Single Post</a></li>
+                <li><a href="single-post-gallery.html">Single Post Gallery</a></li>
+                <li><a href="single-post-video.html">Single Post Video</a></li>
+                <li><a href="single-post-no-sidebar.html">Single Post No Sidebar</a></li>
+            </ul>
+        </li>
+        <li class="pushy-submenu">
+            <a class="submenu-link" href="#">Portfolio <i class="fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="portfolio-masonry.html">Portfolio Masonry</a></li>
+                <li><a href="portfolio-masonry-alt.html">Portfolio Masonry Alternative</a></li>
+                <li><a href="portfolio-masonry-fullwidth.html">Portfolio Masonry Fullwidth</a></li>
+                <li><a href="portfolio-carousel.html">Portfolio Carousel</a></li>
+                <li><a href="single-portfolio.html">Single Portfolio</a></li>
+                <li><a href="single-portfolio-video.html">Single Portfolio Video</a></li>
+            </ul>
+        </li>
+        <li class="pushy-submenu">
+            <a class="submenu-link" href="#">Pages <i class="fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+                <li><a href="404.html">404</a></li>
+                <li><a href="coming-soon.html">Coming Soon</a></li>
+            </ul>
+        </li>
+        <li class="pushy-submenu">
+            <a class="submenu-link" href="#">Features <i class="fa fa-angle-down"></i></a>
+            <ul>
+                <li class="pushy-submenu">
+                    <a class="submenu-link" href="#">Blog Feeds <i class="fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="news-grid.html">Blog Style 1</a></li>
+                        <li><a href="news-carousel.html">Blog Style 2</a></li>
+                        <li><a href="news-list.html">Blog Style 3</a></li>
+                        <li><a href="news-reel.html">Blog Style 4</a></li>
+                    </ul>
+                </li>
+                <li class="pushy-submenu">
+                    <a class="submenu-link" href="#">Team Feeds <i class="fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="index.html#our-staff">Team Style 1</a></li>
+                        <li><a href="index-fashion.html#our-team">Team Style 2</a></li>
+                        <li><a href="index-business.html#our-team">Team Style 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<!-- Site Overlay -->
+<div class="site-overlay"></div>
+
+<div id="master-wrapper">
+
+    <div class="preloader">
+        <div class="preloader-img">
+            <span class="loading-animation animate-flicker"><img th:src="@{/assets/images/loading.gif}" alt="loading" /></span>
+        </div>
+    </div>
+
+    <div class="nav-wrapper smoothie">
+        <div class="nav-inner smoothie">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-6">
+                        <a class="logo" href="index.html"><img alt="" class="logo img-responsive" th:src="@{/assets/images/logo-light.png}"></a>
+                    </div>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false" aria-controls="navbar">
+                        <a class="tcon tcon-menu--minus menu-btn" aria-label="toggle menu">
+                            <span class="tcon-menu__lines" aria-hidden="true"></span>
+                            <span class="tcon-visuallyhidden">toggle menu</span>
+                        </a>
+                    </button>
+                    <div class="col-sm-9 col-xs-6 hidden-xs nopaddingleftright">
+                        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <div class="nav-search-form-wrapper">
+                                            <form class="form-inline">
+                                                <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
+                                            </form>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li class="share-li twitter-bg">
+                                    <a href="#"><span>Tweet</span> <i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="share-li facebook-bg">
+                                    <a href="#"><span>Share</span> <i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li class="share-li gplus-bg">
+                                    <a href="#"><span>+1</span> <i class="fa fa-google-plus"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header id="home backstretched fullheight"th:style="'background-image: url('+@{/assets/images/hero-bg.jpeg}+');'">
+        <div class="dark-overlay fullheight">
+            <div class="container fullheight">
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-sm-11 col-xs-12">
+                            <h1><small>Welcome To</small><br>
+                                Benedict Co.</h1>
+                            <p>
+                                <a class="btn btn-white btn-lg page-scroll" href="#featured-news" role="button">Latest</a>
+                                <a class="btn btn-lg btn-primary page-scrol" href="#projects" role="button">Projects</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="featured-news" class="white-wrapper">
+        <div class="section-inner nopaddingbottom">
+            <div class="container">
+                <div class="row mb60 text-center">
+                    <div class="col-sm-12">
+                        <h3 class="section-title">Featured News</h3>
+                        <p class="section-sub-title">Hot from the news desk.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row" >
+                    <div class="col-sm-6">
+                        <div class="row post-tile">
+                            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-3 nopaddingleftright match-height background-cover" th:style="'background-image: url('+@{/assets/images/blog-square.jpeg}+');'">
+                                <div class="hover-effect smoothie">
+                                    <a href="#" class="smoothie"></a>
+                                    <div class="hover-caption dark-overlay smoothie text-center">
+                                        <div class="vertical-center.js}">
+                                            <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9 blog-caption match-height pure-white-wrapper">
+                                <div class="vertical-center.js}">
+                                    <h4 class="mb60">Latest Camera Reviewed and Tested</h4>
+                                    <p class="mb20"><small>Credibly monetize empowered portals before distinctive methodologies. Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row post-tile post-tile-alt">
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9 blog-caption match-height pure-white-wrapper">
+                                <div class="vertical-center-js text-right">
+                                    <h4 class="mb60">We Walk With Mr Green</h4>
+                                    <p class="mb20"><small>Credibly monetize empowered portals before distinctive methodologies. Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-3 nopaddingleftright match-height background-cover" th:style="'background-image: url('+@{/assets/images/blog-square-2.jpeg}+');'">
+                                <div class="hover-effect smoothie">
+                                    <div class="hover-caption dark-overlay smoothie text-center">
+                                        <div class="vertical-center.js}">
+                                            <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row post-tile">
+                            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-3 nopaddingleftright match-height background-cover" th:style="'background-image: url('+@{/assets/images/blog-square-3.jpeg}+');'">
+                                <div class="hover-effect smoothie">
+                                    <div class="hover-caption dark-overlay smoothie text-center">
+                                        <div class="vertical-center.js}">
+                                            <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9 blog-caption match-height pure-white-wrapper">
+                                <div class="vertical-center.js}">
+                                    <h4 class="mb60">Climing High With Panda Fries</h4>
+                                    <p class="mb20"><small>Credibly monetize empowered portals before distinctive methodologies. Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row post-tile">
+                            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-3 nopaddingleftright match-height background-cover" th:style="'background-image: url('+@{/assets/images/blog-square-4.jpeg}+');'">
+                                <div class="hover-effect smoothie">
+                                    <div class="hover-caption dark-overlay smoothie text-center">
+                                        <div class="vertical-center.js}">
+                                            <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9 blog-caption match-height pure-white-wrapper">
+                                <div class="vertical-center.js}">
+                                    <h4 class="mb60">Fine Wine Awards, Our Verdict</h4>
+                                    <p class="mb20"><small>Credibly monetize empowered portals before distinctive methodologies. Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row post-tile post-tile-alt">
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9 blog-caption match-height pure-white-wrapper">
+                                <div class="vertical-center-js text-right">
+                                    <h4 class="mb60">Model Dies During Blue Steel</h4>
+                                    <p class="mb20"><small>Credibly monetize empowered portals before distinctive methodologies. Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-3 nopaddingleftright match-height background-cover" th:style="'background-image: url('+@{/assets/images/blog-square-5.jpeg}+');'">
+                                <div class="hover-effect smoothie">
+                                    <div class="hover-caption dark-overlay smoothie text-center">
+                                        <div class="vertical-center.js}">
+                                            <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row post-tile">
+                            <div class="col-lg-6 col-md-4 col-sm-4 col-xs-3 nopaddingleftright match-height background-cover" th:style="'background-image: url('+@{/assets/images/blog-square-6.jpeg}+');'">
+                                <div class="hover-effect smoothie">
+                                    <div class="hover-caption dark-overlay smoothie text-center">
+                                        <div class="vertical-center.js}">
+                                            <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-9 blog-caption match-height pure-white-wrapper">
+                                <div class="vertical-center.js}">
+                                    <h4 class="mb60">Wash Your Shows In The Sea?</h4>
+                                    <p class="mb20"><small>Credibly monetize empowered portals before distinctive methodologies. Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+
+    <section class="dark-wrapper">
+        <div class="section-inner">
+            <div class="container">
+                <div class="row mb60 text-center">
+                    <div class="col-sm-12">
+                        <h3 class="section-title">Our Partners</h3>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-md-10 col-sm-offset-1">
+                        <div class="row">
+                            <div class="col-md-3"><img class="img-responsive" th:src="@{/assets/images/clients/logo1.png}" alt=""></div>
+                            <div class="col-md-3"><img class="img-responsive" th:src="@{/assets/images/clients/logo2.png}" alt=""></div>
+                            <div class="col-md-3"><img class="img-responsive" th:src="@{/assets/images/clients/logo3.png}" alt=""></div>
+                            <div class="col-md-3"><img class="img-responsive" th:src="@{/assets/images/clients/logo4.png}" alt=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="our-staff" class="pure-white-wrapper">
+        <div class="section-inner nopaddingbottom">
+            <div class="container">
+                <div class="row mb60 text-center">
+                    <div class="col-sm-12">
+                        <h3 class="section-title">The Staff</h3>
+                        <p class="section-sub-title">They bring you the best.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hover-shift smoothie match-height parallax" data-parallax="scroll" th:data-image-th:src="@{/assets/images/section-bg-1.jpg}" data-speed="0.8" data-mh="page-splitter">
+        <div class="container">
+            <div class="row "  th:style="'background-image: url('+@{/assets/images/section-bg-2.jpg}+');'">
+                <div class="col-md-4 col-md-offset-6 dark-overlay fill-right smoothie">
+                    <div class="section-inner">
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-10">
+                                <h3>Philip Davies</h3>
+                                <h5 class="mb40">Editor</h5>
+                                <p>Holisticly orchestrate superior total linkage rather than end-to-end internal or "organic" sources. Seamlessly procrastinate client-based ROI without long-term high-impact.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 member-social smoothie">
+                    <div class="section-inner">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-soundcloud"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hover-shift smoothie match-height parallax" data-parallax="scroll" th:data-image-th:src="@{/assets/images/section-bg-2.jpg}" data-speed="0.8" data-mh="page-splitter">
+        <div class="container">
+            <div class="row" th:style="'background-image: url('+@{/assets/images/section-bg-1.jpg}+');'">
+                <div class="col-xs-1 member-social smoothie">
+                    <div class="section-inner">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-soundcloud"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 dark-overlay fill-left smoothie match-height" data-mh="page-splitter">
+                    <div class="section-inner">
+                        <div class="row" >
+                            <div class="col-md-offset-1 col-md-10">
+                                <h3>Emily Jane</h3>
+                                <h5 class="mb40">Fashion Editor</h5>
+                                <p>Distinctively revolutionize value-added channels for clicks-and-mortar niche markets. Rapidiously exploit out-of-the-box intellectual capital without orthogonal e-services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hover-shift smoothie match-height parallax" data-parallax="scroll" th:data-image-th:src="@{/assets/images/section-bg-3.jpg}" data-speed="0.8" data-mh="page-splitter">
+        <div class="container">
+            <div class="row"  th:style="'background-image: url('+@{/assets/images/section-bg-3.jpg}+');'">
+                <div class="col-md-4 col-md-offset-6 dark-overlay fill-right smoothie">
+                    <div class="section-inner">
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-10">
+                                <h3>Rhys Jones</h3>
+                                <h5 class="mb40">Photographer</h5>
+                                <p>Holisticly orchestrate superior total linkage rather than end-to-end internal or "organic" sources. Seamlessly procrastinate client-based ROI without long-term high-impact.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 member-social smoothie">
+                    <div class="section-inner">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-soundcloud"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="pure-white-wrapper">
+        <div class="section-inner nopaddingbottom">
+            <div class="container">
+                <div class="row mb60 text-center">
+                    <div class="col-sm-12">
+                        <h3 class="section-title">Staff Picks</h3>
+                        <p class="section-sub-title">We are aweomse, this is why.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <header class="owl-carousel remove-item-paddings" data-items="5">
+                    <div class="match-height nopaddingleftright">
+                        <div class="hover-effect smoothie">
+                            <a href="#" class="smoothie">
+                                <img th:src="@{/assets/images/blog-tall-1.jpeg}" abackstretchedlt="Image" class="img-responsive smoothie"></a>
+                            <div class="hover-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <h4>How to Avoid Bad Wine</h4>
+                                </div>
+                            </div>
+                            <div class="hover-caption dark-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <p class="mb60"><small>Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                    <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-height nopaddingleftright">
+                        <div class="hover-effect smoothie">
+                            <a href="#" class="smoothie">
+                                <img th:src="@{/assets/images/blog-tall-2.jpeg}" alt="Image" class="img-responsive smoothie"></a>
+                            <div class="hover-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <h4>Why Are Forests Dying?</h4>
+                                </div>
+                            </div>
+                            <div class="hover-caption dark-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <p class="mb60"><small>Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                    <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-height nopaddingleftright">
+                        <div class="hover-effect smoothie">
+                            <a href="#" class="smoothie">
+                                <img th:src="@{/assets/images/blog-tall-3.jpeg}" alt="Image" class="img-responsive smoothie"></a>
+                            <div class="hover-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <h4>Is Coffee Killing You?</h4>
+                                </div>
+                            </div>
+                            <div class="hover-caption dark-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <p class="mb60"><small>Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                    <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-height nopaddingleftright">
+                        <div class="hover-effect smoothie">
+                            <a href="#" class="smoothie">
+                                <img th:src="@{/assets/images/blog-tall-4.jpeg}" alt="Image" class="img-responsive smoothie"></a>
+                            <div class="hover-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <h4>Student Reaches Goal</h4>
+                                </div>
+                            </div>
+                            <div class="hover-caption dark-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <p class="mb60"><small>Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                    <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-height nopaddingleftright">
+                        <div class="hover-effect smoothie">
+                            <a href="#" class="smoothie">
+                                <img th:src="@{/assets/images/blog-tall-5.jpeg}" alt="Image" class="img-responsive smoothie"></a>
+                            <div class="hover-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <h4>Traveling Naked at Night</h4>
+                                </div>
+                            </div>
+                            <div class="hover-caption dark-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <p class="mb60"><small>Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                    <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-height nopaddingleftright">
+                        <div class="hover-effect smoothie">
+                            <a href="#" class="smoothie">
+                                <img th:src="@{/assets/images/blog-tall-6.jpeg}" alt="Image" class="img-responsive smoothie"></a>
+                            <div class="hover-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <h4>New Yorks at Night in the 80s</h4>
+                                </div>
+                            </div>
+                            <div class="hover-caption dark-overlay smoothie text-center">
+                                <div class="vertical-center.js}">
+                                    <p class="mb60"><small>Credibly monetize empowered portals before distinctive methodologies.</small></p>
+                                    <a href="single-post.html" class="btn btn-primary btn-green">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+    </section>
+
+    <section class="pure-white-wrapper">
+        <div class="section-inner">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-sm-12">
+                        <h3 class="section-title">Get In Touch</h3>
+                        <p class="section-sub-title">We are aweomse, this is why.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="silver-wrapper">
+        <div class="section-inner">
+            <div class="vertical-center.js}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p>Competently develop client-focused customer service whereas team driven leadership skills. Monotonectally synergize out-of-the-box platforms after next-generation web services. Phosfluorescently reintermediate state of the art methods of empowerment whereas excellent architectures. Professionally expedite distributed best practices after orthogonal human capital. Competently predominate resource-leveling materials via end-to-end ideas.</p>
+                        </div>
+                        <div class="col-sm-8 col-sm-offset-1">
+                            <div class="row">
+                                <div id="message" class="col-sm-12"></div>
+                                <div class="col-sm-12">
+                                    <form method="post" action="sendemail.php" id="contactform" class="main-contact-form">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control col-md-4 mb20" name="name" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name." />
+                                            <input type="text" class="form-control col-md-4 mb20" name="email" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address." />
+                                            <input type="text" class="form-control col-md-4 mb20" name="website" placeholder="Your URL *" id="website" required data-validation-required-message="Please enter your web address." />
+                                        </div>
+                                        <textarea name="comments" class="form-control mb20" id="comments" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>
+                                        <input class="btn btn-primary mt30 pull-right" type="submit" name="submit" value="Submit" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="pure-white-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="text-widget widget">
+                        <h4 class="widget-title mb40">Location</h4>
+                        <div class="widget-content">
+                            <p>Conveniently enhance high-quality imperatives vis-a-vis team driven technologies. Intrinsicly fashion economically sound communities rather than principle-centered deliverables. Synergistically impact.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="useful-link-widget widget">
+                        <h4 class="widget-title mb40">Pages</h4>
+                        <div class="widget-content">
+                            <div class="useful-link-list">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="index.html"> Home</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Portfolio</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Support</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Why Us?</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Social Media</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Site Map</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Company</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Latest News</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Partners</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Blog Post</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Help Topic</a>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-angle-right"></i><a href="#"> Policies</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="mailing-widget widget">
+                        <h4 class="widget-title mb40">Mailing List</h4>
+                        <div class="content-wiget">
+                            <p class="mb40">Subscribe to our newsletter for the latest updates and offers.</p>
+                            <form action="index.html">
+                                <div class="input-group">
+                                    <input class="form-control form-email-widget" placeholder="Email address" type="text"><span class="input-group-btn"><input class="btn btn-email" type="submit" value="✓"></span>
+                                </div>
+                            </form>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+</div>
+
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugins.js}"></script>
+<script th:src="@{/assets/js/owl-carousel.js}"></script>
+
+<script th:src="@{/assets/js/init.js}"></script>
+
+</body>
+</html>

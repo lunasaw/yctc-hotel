@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>用户功能页面</title>
+</head>
+<body>
+	我的功能
+	<hr />
+	<div shiro:hasPermission="tea:classroomApplication">
+		<a href="/hotel/manage/classroom-application">教师-教室申请</a>
+	</div>
+
+	<div shiro:hasPermission="tea:teachingSchedule">
+		<a href="/hotel/manage/teaching-schedule">教师-教学课表</a>
+	</div>
+
+	<div shiro:hasPermission="stu:myClassQuality">
+		<a href="/hotel/manage/my-class-quality">学生-我的听课质量</a>
+	</div>
+
+	<div shiro:hasPermission="stu:mySchedule">
+		<a href="/hotel/manage/my-schedule">学生-我的课表</a>
+	</div>
+
+	<div shiro:hasPermission="admin:authorityManagement">
+		<a href="/hotel/manage/authority-management">管理员-权限管理</a>
+	</div>
+
+	<div shiro:hasPermission="admin:studentsManagement">
+		<a href="/hotel/manage/students-management">管理员-学生管理</a>
+	</div>
+
+	<div shiro:hasPermission="admin:teachersManagement">
+		<a href="/hotel/manage/teachers-management">管理员-教师管理</a>
+	</div>
+
+	<div shiro:hasPermission="admin:classroomsManagement">
+		<a href="/hotel/manage/classrooms-management">管理员-教室管理</a>
+	</div>
+
+	<div shiro:hasPermission="admin:classesManagement">
+		<a href="/hotel/manage/classes-management">管理员-班级管理</a>
+	</div>
+	
+	<div shiro:hasPermission="admin:coursesManagement">
+		<a href="/hotel/manage/courses-management">管理员-课程管理</a>
+	</div>
+
+	<div shiro:hasPermission="user:classroomLive">
+		<a href="/hotel/manage/classroom-live">管理员-教室直播</a>
+	</div>
+
+	<div shiro:hasPermission="user:lessonDetails">
+		<a href="/hotel/manage/lesson-details">课堂详情</a>
+	</div>
+
+	<div shiro:hasPermission="user:courseDetails">
+		<a href="/hotel/manage/course-details">课程详情</a>
+	</div>
+
+	<div shiro:hasPermission="user:studentDetails">
+		<a href="/hotel/manage/student-details">学生详情</a>
+	</div>
+	
+
+</body>
+</html>

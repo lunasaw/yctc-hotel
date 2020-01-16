@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body onload="showNews()">
+	<header th:replace="component/header :: header"></header>
+
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row">
+			<div th:replace="component/sidebar"></div>
+			<div class="col-md-9">
+				<div th:replace="component/page-title::pageTitle('消息列表')"></div>
+
+				<div class="row">
+					<div class="col-md-12">
+					<h2>未读通知</h2>
+						<table id="listTable-unread" class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">编号</th>
+									<th scope="col">标题</th>
+									<th scope="col">发送时间</th>
+								</tr>
+							</thead>
+							<tbody>
+							<!-- 动态追加tr -->
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+					<div class="row">
+					<div class="col-md-12">
+					<h2>已读通知</h2>
+						<table id="listTable-readed" class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">编号</th>
+									<th scope="col">标题</th>
+									<th scope="col">发送时间</th>
+								</tr>
+							</thead>
+							<tbody>
+							<!-- 动态追加tr -->
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<button type="button" class="btn btn-primary" onclick="turnAllToReaded()">标记全部已读</button>
+						<button type="button" class="btn btn-primary" onclick="deleteReadedNews()">删除已读通知</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="component/footer :: footer"></footer>
+	<div th:replace="component/footer-lib"></div>
+	<script type="text/javascript" th:src="@{/js/newsService.js}"></script>
+</body>
+
+</html>
