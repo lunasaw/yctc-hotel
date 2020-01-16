@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<body>
+	<header th:replace="component/header :: header"></header>
+
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row">
+			<div th:replace="component/sidebar"></div>
+
+			<div class="col-md-9">
+				<h2>你没有获得此功能的授权！</h2>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="component/footer :: footer"></footer>
+</body>
+</html>

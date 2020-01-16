@@ -1,0 +1,96 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body onload="fillHref();showNewsDetails();">
+	<header th:replace="component/header :: header"></header>
+
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row">
+			<div th:replace="component/sidebar"></div>
+			<div class="col-md-9">
+				<div th:replace="component/page-title::pageTitle('消息详情')"></div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<h4 id="newsTitle"></h4><!-- 动态填充标题 -->
+						<p id="newsContent"></p><!-- 动态填充正文 -->
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<a href="#" role="button" class="btn btn btn-secondary" id="news-url">返回</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="component/footer :: footer"></footer>
+
+	<script type="text/javascript">
+		function getUrl() {
+			var url = location.search; //获取url中"?"符后的字串
+			var theRequest = new Object();
+			if (url.indexOf("?") != -1) {
+				var str = url.substr(1);
+				strs = str.split("&");
+				for (var i = 0; i < strs.length; i++) {
+					theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+				}
+			}
+			return theRequest;
+		}
+
+		function fillHref() {
+			document.getElementById("news-url").href = "/genesis/news/news";
+		}
+
+		function getNewsDOById(id) {
+			$.ajax({
+				url: "/genesis/restnews/get-newsdo-by-id",
+				type: "POST",
+				data: id,
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				success: function (result) {
+					if (result.success == false) {
+						if (result.code == 9002)
+							alert("参数非法");
+						if (result.code == 9999)
+							alert("系统错误");
+					} else {
+						var newsDO = result.module;
+						console.log(newsDO);
+						document.getElementById('newsTitle').innerHTML = newsDO.title;
+						document.getElementById('newsContent').innerHTML = newsDO.content;
+						//标记为已读
+						turnToReaded(id);
+					}
+				},
+
+				error: function (e) {
+					console.log(e);
+					alert("调用失败 ");
+				}
+			});
+		}
+
+		function showNewsDetails() {
+			var theRequest = new Object();
+			theRequest = getUrl();
+			//获取id
+			var id = theRequest["id"];
+			var newsDO;
+			getNewsDOById(id);
+		}
+	</script>
+
+	<div th:replace="component/footer-lib"></div>
+	<script type="text/javascript" th:src="@{/js/newsService.js}"></script>
+</body>
+
+</html>

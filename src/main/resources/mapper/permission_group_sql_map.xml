@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.altersoftware.hotel.dao.PermissionGroupDAO">
+	<resultMap type="com.altersoftware.hotel.entity.PermissionGroupDO" id="PermissionGroupDO">
+		<id column="id" property="id" jdbcType="BIGINT"/>
+		<result column="name" property="name"/>
+		<result column="create_time" property="createTime"/>
+		<result column="modify_time" property="modifyTime"/>
+	</resultMap>
+<!--插入一个权限组	-->
+	<insert id="insert" parameterType="com.altersoftware.hotel.entity.PermissionGroupDO">
+		<selectKey keyProperty="id" order="AFTER" resultType="long">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO tb_permission_group(
+			name,
+			create_time,
+			modify_time
+		)VALUES(
+			#{name},
+			NOW(),
+			NOW()
+		);
+	</insert>
+<!--权限组id查询权限组	-->
+	<select id="getPermissionGroupDOById" parameterType="long" resultMap="PermissionGroupDO">
+		SELECT
+			id,
+			name,
+			create_time,
+			modify_time
+		FROM tb_permission_group WHERE
+			id = #{id}
+	</select>
+<!--更新权限组	-->
+	<update id="update" parameterType="com.altersoftware.hotel.entity.PermissionGroupDO">
+		UPDATE tb_permission_group
+		SET name=#{name},
+			modify_time=NOW()
+		WHERE id=#{id}
+	</update>
+<!--id删除权限组-->
+	<delete id="deleteById" parameterType="long">
+		DELETE FROM
+		tb_permission_group
+		WHERE id=#{id}
+	</delete>
+<!--通过权限组的name获取权限组的id	-->
+	<select id="getPermissionGroupIdByName" parameterType="String" resultType="long">
+		SELECT
+			id
+		FROM tb_permission_group WHERE
+			name = #{name}
+	</select>
+<!--通过权限组的id获取权限组的name	-->
+	<select id="getPermissionGroupNameById" parameterType="long" resultType="String">
+		SELECT
+			name
+		FROM tb_permission_group WHERE
+			id = #{id}
+	</select>
+<!--展示所有的权限组	-->
+	<select id="showALLPermissionGroups" resultMap="PermissionGroupDO">
+		SELECT
+			id,
+			name,
+			create_time,
+			modify_time
+		FROM tb_permission_group
+	</select>
+<!--通过权限组的name删除权限组	-->
+	<delete id="deletePermissionGroupByName" parameterType="String">
+		DELETE FROM
+		tb_permission_group
+		WHERE name=#{name}
+	</delete>
+</mapper>

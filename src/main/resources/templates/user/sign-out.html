@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body>
+	<header th:replace="component/header :: header"></header>
+
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 offset-md-4">
+				<div class="text-center">
+					<h1>注销确认</h1>
+					<p>真的要注销吗？</p>
+					<form action="/hotel/user/sign-out" method="post">
+						<button type="submit" class="btn btn-secondary btn-block">确认注销</button>
+						<button class="btn btn-primary btn-block" onclick="back(); return false;">返回</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End page content -->
+
+	<footer th:replace="component/footer :: footer"></footer>
+	<div th:replace="component/footer-lib"></div>
+	<script type="text/javascript">
+		function back() {
+			history.back(-1);
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="智室，智慧的学情分析">
+	<meta name="author" content="haruko">
+
+	<title>智慧教室</title>
+
+	<!-- Font Awesome icons-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<!-- Bootstrap core CSS 标准库-->
+	<link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://getbootstrap.com/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
+</head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+<body onload="GetRequest()">
+	<header>
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<a class="navbar-brand" href="/genesis/index">智室</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03"
+		 aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExample03">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/genesis/index">主页<span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">新闻</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">联系我们</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
+					 aria-expanded="false">下载</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown03">
+						<a class="dropdown-item" href="#">Ios</a>
+						<a class="dropdown-item" href="#">Android</a>
+						<a class="dropdown-item" href="#">Mac</a>
+						<a class="dropdown-item" href="#">PC</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+
+	<!-- Begin page content -->
+	<div class="container text-center">
+		<h1>error!</h1>
+		<p id="errortext"></p>
+	</div>
+	<footer class="footer">
+    <div class="footer-container">
+        <span class="text-muted">
+            <div class="text-center">智慧教室©2019 WATB</div>
+        </span>
+    </div>
+</footer>
+</body>
+</html>
+	<Script language="javascript">
+		function GetRequest() {
+			var url = location.search; //获取url中"?"符后的字串   
+			if (url == "?parameter%20invalid")
+				document.getElementById("errortext").innerHTML = "参数非法";
+			if (url == "?db%20error")
+				document.getElementById("errortext").innerHTML = "数据库错误";
+			if (url == "?sign%20in%20error")
+				document.getElementById("errortext").innerHTML = "登陆错误";
+			if (url == "?system%20error")
+				document.getElementById("errortext").innerHTML = "系统错误";
+			if (url == "?no%20such%20user")
+				document.getElementById("errortext").innerHTML = "没有当前用户";
+			if (url == "?verificationCode%20not%20match")
+				document.getElementById("errortext").innerHTML = "验证码不匹配";
+			if (url == "?verificationCode%20timeout")
+				document.getElementById("errortext").innerHTML = "验证码超时";
+			if (url == "?confirm%20invalid")
+				document.getElementById("errortext").innerHTML = "二次验证不一致";
+			if (url == "?incorrect%20number%20of%20password")
+				document.getElementById("errortext").innerHTML = "用户名或密码错误";
+			if (url == "?password%20error")
+				document.getElementById("errortext").innerHTML = "密码错误";
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sign up</title>
+</head>
+<body>
+	<h1>Sign up</h1>
+	<form action="/hotel/user/sign-up" method="post">
+		<label>Number:</label>
+		<input type="text" name="number" th:value="${userDO.number}" />
+		<label>User name:</label>
+		<input type="text" name="name" th:value="${userDO.name}" />
+		<label>Password:</label>
+		<input type="text" name="password" th:value="${userDO.password}" />
+		<label>Type:</label>
+		<input type="text" name="type" th:value="${userDO.type}" />
+		<label>Sex:</label>
+		<input type="text" name="sex" th:value="${userDO.sex}" />
+		<label>idCardNumber:</label>
+		<input type="text" name="idCardNumber" th:value="${userDO.idCardNumber}" />
+		<label>Phone:</label>
+		<input type="text" name="phone" th:value="${userDO.phone}" />
+		<label>Mail:</label>
+		<input type="text" name="mail" th:value="${userDO.mail}" />
+		<label>FaceToken:</label>
+		<input type="text" name="faceToken" th:value="${userDO.faceToken}" />
+		<label>Picture:</label>
+		<input type="text" name="picture" th:value="${userDO.picture}" />
+		<input type="submit" value="提交" />
+	</form>
+</body>
+</html>

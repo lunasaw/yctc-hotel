@@ -1,0 +1,141 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body onload="getRequest()">
+	<header th:replace="component/header :: header"></header>
+
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row">
+			<div th:replace="component/sidebar"></div>
+
+			<div class="col-md-9">
+				<div th:replace="component/page-title::pageTitle('我的信息')"></div>
+
+				<div shiro:hasPermission="stu:myPictureAndClassAndFaceTokenShow" class="row" >
+					<div class="col-md-4 offset-md-4 mb-3">
+						<div class="text-center">
+							<img  id="basic-url-picture" src="" alt="用户照片" class="img-thumbnail">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">学院</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-academy" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div shiro:hasPermission="stu:myPictureAndClassAndFaceTokenShow" class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">班级</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-classes" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">学/工号</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-number" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">姓名</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-name" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">性别</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-sex" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">身份证</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-idCardNumber" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">手机号</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-phone" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">邮箱</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-mail" aria-describedby="basic-addon3" readonly>
+						</div>
+						<div shiro:hasPermission="stu:myPictureAndClassAndFaceTokenShow" class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon3">Face-token</span>
+							</div>
+							<input type="text" class="form-control" id="basic-url-faceToken" aria-describedby="basic-addon3" readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="component/footer :: footer"></footer>
+
+	<script th:inline="javascript">
+		
+		function getRequest() {
+			//获取id
+			var id = [[${userId}]];
+			id = unescape(id);
+			$.ajax({
+				url: "/hotel/restuser/get-user-information-by-id",
+				type: "POST",
+				data: id,
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: true,
+				success: function (result) {
+					if (result.success == false) {
+						if (result.code == 9002) {
+							alert("参数错误");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						} else if (result.code == 1025) {
+							alert("数据库查找不到相关数据");
+						}
+					} else {
+						var vo = result.module;
+						document.getElementById('basic-url-academy').value = vo.academyName;
+						document.getElementById('basic-url-number').value = vo.userDO.number;
+						document.getElementById('basic-url-name').value = vo.userDO.name;
+						document.getElementById('basic-url-sex').value = vo.userDO.sex;
+						document.getElementById('basic-url-idCardNumber').value = vo.userDO.idCardNumber;
+						document.getElementById('basic-url-phone').value = vo.userDO.phone;
+						document.getElementById('basic-url-mail').value = vo.userDO.mail;
+						
+						var type = vo.userDO.type;
+						if(type==2){
+							document.getElementById('basic-url-classes').value = vo.className;
+							document.getElementById('basic-url-picture').src = vo.userDO.picture;
+							document.getElementById('basic-url-faceToken').value = vo.userDO.faceToken;
+						} 
+					}
+				},
+				error: function (e) {
+					alert("getRequest异常");
+				}
+			});
+		}	
+	</script>
+
+	<div th:replace="component/footer-lib"></div>
+</body>
+
+</html>

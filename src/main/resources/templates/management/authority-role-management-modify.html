@@ -1,0 +1,217 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body onload="showName(), showPermissionsState()">
+	<header th:replace="component/header :: header"></header>
+
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row">
+
+			<div th:replace="component/sidebar"></div>
+
+			<div class="col-md-9">
+				<h5>权限管理—角色管理-角色修改</h5>
+				<hr />
+				<div class="col-md-12" id="modifyRoleDetails">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">角色名称（英文）</span>
+						</div>
+						<input type="text" class="form-control" id="name" aria-describedby="basic-addon3">
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">修改该角色拥有的权限</span>
+						</div>
+					</div>
+					<table id="listTable" class="table table-striped">
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-md-8 offset-md-10">
+						<button onclick="modify()" type="button" class="btn btn-primary">确定</button>
+						<a href="/hotel/education/authority-role-management" class="btn btn-secondary" role="button">返回</a>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<footer th:replace="component/footer :: footer"></footer>
+
+	<script>
+	function showName() {
+		var theRequest = new Object();
+		theRequest = getUrl();
+		var id = theRequest["id"];
+		var permissionGroupId = unescape(id); 
+		$.ajax({
+			url: "/hotel/restpermission/get-permissionname-by-permissiongroupid",
+			type: "POST",
+			data: permissionGroupId,
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			async: true,
+			success: function (result) {
+				if (result.success == false) {
+					if (result.code == 9002) {
+						alert("参数错误");
+					} else if (result.code == 9999) {
+						alert("系统错误");
+					} else if (result.code == 1034) {
+						alert("系统角色，无法修改");
+						window.location.href = "/hotel/education/authority-role-management";
+					}
+				} else {
+					//得到权限list
+					var name = result.module;
+					$("#name").val(name);                 
+				}                             
+			},
+			error: function (e) {
+				alert("获取库中权限异常");
+			}
+		});
+	}
+	function showAllPermissions() {
+		//获取数据库中的所有权限
+		$.ajax({
+			url: "/hotel/restpermission/show-all-permissions",
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			async: true,
+			success: function (result) {
+				if (result.success == false) {
+					if (result.code == 9002) {
+						alert("参数错误");
+					} else if (result.code == 9999) {
+						alert("系统错误");
+					}
+				} else {
+					//得到权限list
+					var list = result.module;
+					for (var i = 0; i < list.length; i++) {
+							$("#listTable tbody").append("<tr class='col-md-6' style='float:left'><td class='col-md-12' style='display:inline-block'><input type='checkbox' style='margin-right:5%' name='id' value='"+list[i].id+"'>"+list[i].name+"</td></tr>");
+					}                         
+				}                             
+			},
+			error: function (e) {
+				alert("获取库中权限异常");
+			}
+		});
+	}
+	
+	function getUrl() {
+		var url = location.search; //获取url中"?"符后的字串
+		var theRequest = new Object();
+		if (url.indexOf("?") != -1) {
+			var str = url.substr(1);
+			strs = str.split("&");
+			for (var i = 0; i < strs.length; i++) {
+				theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			}
+		}
+		return theRequest;
+	}
+	/**
+	 *展示原有权限
+	 */
+	 function showPermissionsState() {
+		//1.获得URL后面的id	
+		var theRequest = new Object();
+		theRequest = getUrl();
+		var id = theRequest["id"];
+		var permissionGroupId = unescape(id);
+		//2.页面渲染数据库中的所有权限
+		showAllPermissions();
+		//3.获得原有的权限
+		$.ajax({
+			url: "/hotel/restpermission/get-permissionidlist-by-permissiongroupid",
+			type: "POST",
+			data: permissionGroupId,
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			async: true,
+			success: function (result) {
+				if (result.success == false) {
+					if (result.code == 9002) {
+						alert("参数错误");
+					} else if (result.code == 9999) {
+						alert("系统错误");
+					} else if (result.code == 1034) {
+						alert("系统角色，无法修改");
+						window.location.href = "/hotel/education/authority-role-management";
+					}
+				} else {
+					//得到permissionIdlist
+					var list = result.module;
+					for (var i = 0; i < list.length; i++) {
+						$('input[name="id"]').each(function(){  
+							var value = $(this).val();
+							if (value==list[i]){
+								$(this).attr("checked",'checked');
+							}
+						}); 
+					}                         
+				}                             
+			},
+			error: function (e) {
+				alert("获取库中权限异常");
+			}
+		});
+	}
+		
+	function modify() {	
+		var theRequest = new Object();
+		theRequest = getUrl();
+		var id = theRequest["id"];	
+		var name =  $("#name").val();
+		var permissonIds = new Array();  
+		$('input[name="id"]:checked').each(function(){  
+			permissonIds.push($(this).val());  
+		}); 	
+		$.ajax({
+			url: "/hotel/restpermission/modify-role",
+			type: "POST",
+			data: JSON.stringify({
+				"name": name,
+				"id":id,
+				"permissonIds": permissonIds,
+			}),
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			async: true,
+			success: function (result) {
+				if (result.success == false) {
+					if (result.code == 9002) {
+						alert("参数错误,请重新填写");
+					} else if (result.code == 9999) {
+						alert("系统错误");
+					} else if (result.code == 1034) {
+						alert("系统角色，无法修改");
+						window.location.href = "/hotel/education/authority-role-management";
+					}
+				} else {
+					alert("角色修改成功！");
+					window.location.href = "/hotel/education/authority-role-management";
+				}
+			},
+			error: function (e) {
+				alert("modifyRole异常");
+			}
+		});
+	}	
+		
+		
+		
+	</script>
+
+	<div th:replace="component/footer-lib"></div>
+</body>
+
+</html>

@@ -1,0 +1,1878 @@
+@charset "utf-8";
+/*
+/*	Copyright (c) 2019 Marketify
+/*	Author: Marketify
+/*	This file is made for CURRENT TEMPLATE
+
+
+01) WANTAM BASE
+02) WANTAM SIDEBAR
+03) WANTAM MAINPART
+04) WANTAM ABOUT
+05) WANTAM SERVICES
+06) WANTAM PROGRESS
+07) WANTAM PORTFOLIO
+08) WANTAM CALL TO ACTION
+09) WANTAM DETAILS
+10) WANTAM TEAM MEMBERS
+11) WANTAM TESTIMONIALS
+12) WANTAM NEWS
+13) WANTAM PARTNERS
+14) WANTAM CONTACT
+15) WANTAM FOOTER
+16) WANTAM MEDIA QUERIES (FOR SMALL DEVIVES)
+
+
+/*---------------------------------------------------*/
+/*	01) WANTAM BASE
+/*---------------------------------------------------*/
+
+html {
+	overflow-x: hidden;
+	padding: 0px;
+	margin: 0px
+}
+body{
+	font-family: "Roboto";
+	font-size: 16px;
+	line-height: 2;
+	letter-spacing: 0.5px;
+	word-wrap: break-word;
+	font-weight: 400;
+	background-color: #fff;
+	color: #6f6f6f;
+}
+svg{
+	fill: currentcolor;
+	width: 15px;
+	height: 15px;
+}
+img.svg{
+	width: 15px;
+	height: 15px;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #6f6f6f;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #6f6f6f;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #6f6f6f;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #6f6f6f;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color: #6f6f6f;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color: #6f6f6f;
+}
+
+.wantam_tm_loader-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 11111111;
+}
+.wantam_tm_loader-wrapper .loader {
+    height: 1px;
+    background-color: #fff;
+    z-index: 11111111;
+	position: absolute;
+}
+.wantam_tm_all_wrap,
+.wantam_tm_all_wrap *{
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
+			box-sizing: border-box; /* Opera/IE 8+ */
+}
+.wantam_tm_all_wrap{
+	width: 100%;
+	min-height: 100vh;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+}
+.wantam_tm_section{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.wantam_tm_section.testimonial{background-color: #f7f7f7;}
+
+/*---------------------------------------------------*/
+/*	02) WANTAM SIDEBAR
+/*---------------------------------------------------*/
+
+.wantam_tm_sidebar_wrap{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 5;
+}
+.wantam_tm_sidebar_wrap .info_wrap{
+	width: 90px;
+	height: 100vh;
+	background-color: #fff;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
+}
+.wantam_tm_sidebar_wrap .info_wrap:before{
+	position: absolute;
+	content: "";
+	width: 1px;
+	height: 100%;
+	right: 0px;
+	top: 0px;
+	background-color: rgba(0,0,0,.06);
+}
+.wantam_tm_sidebar_wrap .info_wrap .inner_wrap{
+	widows: 100%;
+	height: 100%;
+	position: relative;
+}
+.wantam_tm_sidebar_wrap .info_wrap .inner_wrap .centered_word{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+.wantam_tm_sidebar_wrap .info_wrap .inner_wrap .logo{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 90px;
+	height: 90px;
+	background-color: #ff214f;
+	text-align: center;
+	line-height: 90px;
+}
+.wantam_tm_sidebar_wrap .info_wrap .inner_wrap .link{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+.wantam_tm_sidebar_wrap .trigger_wrap{
+	width: 90px;
+	height: 90px;
+	border-bottom: 1px solid rgba(0,0,0,.06);
+	top: 0px;
+	left: 0px;
+	position: absolute;
+}
+.wantam_tm_sidebar_wrap .trigger_wrap .trigger{
+	width: 30px;
+	height: 12px;
+	position: relative;
+	transform: translateX(-50%);
+	top: 37px;
+	left: 50%;
+}
+.wantam_tm_sidebar_wrap .trigger_wrap .trigger span{
+	position: absolute;
+	width: 30px;
+	height: 3px;
+	background-color: #000;
+	display: inline-block;
+}
+.wantam_tm_sidebar_wrap .trigger_wrap .trigger .two{margin-top: 12px;}
+.wantam_tm_sidebar_wrap .menu_wrap:before{
+	position: absolute;
+	content: "";
+	width: 1px;
+	height: 100%;
+	right: 0px;
+	top: 0px;
+	background-color: rgba(0,0,0,.06);
+}
+.wantam_tm_sidebar_wrap .menu_wrap{
+	width: 330px;
+	height: 100vh;
+	position: fixed;
+	top: 0px;
+	left: -240px;
+	background-color: #fff;
+	z-index: 1;
+}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner .nav_list{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	padding-right: 45px;
+	width: 100%;
+}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner .nav_list > ul{
+	margin: 0px;
+	list-style-type: none;
+	display: flex;
+    align-items: center;
+    max-width: 100%;
+    flex-direction: column;
+	min-height: 100%;
+	justify-content: center;
+}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner .nav_list > ul > li{
+	margin: 0px;
+	list-style-type: none;
+	position: relative;
+	width: 100%;
+	padding-left: 38px;
+	padding-right: 20px;
+	text-align: left;
+}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner .nav_list > ul > li:last-child{margin-bottom: 0px;}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner .nav_list > ul > li > a{
+	text-decoration: none;
+	color: #000;
+	text-transform: capitalize;
+	font-size: 30px;
+	font-weight: 700;
+	display: block;
+	font-family: "Raleway";
+	position: relative;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner .nav_list > ul > li > a:hover{color: #ff214f;}
+.wantam_tm_sidebar_wrap .menu_wrap .menu_inner .nav_list > ul > li.active a{color: #ff214f;}
+
+/*---------------------------------------------------*/
+/*	03) WANTAM MAINPART
+/*---------------------------------------------------*/
+
+.wantam_tm_mainpart_wrap{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding-left: 90px;
+}
+.wantam_tm_mainpart_wrap .mainpart_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_mainpart_wrap .mainpart_inner.opened{padding-left: 330px;}
+.wantam_tm_mainpart_wrap .hero_header{
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	float: left;
+	margin-bottom: 190px;
+}
+.wantam_tm_mainpart_wrap .hero_header .hero_image{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.wantam_tm_mainpart_wrap .hero_header .hero_image.agency{background-image: url("..//img/slider/1.jpg");}
+.wantam_tm_mainpart_wrap .hero_header .hero_image.personal{background-image: url("..//img/slider/3.jpg");}
+.wantam_tm_mainpart_wrap .hero_header .hero_overlay{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(0,0,0,.6);
+	z-index: 1;
+}
+.wantam_tm_mainpart_wrap .hero_header .hero_texts{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+}
+.wantam_tm_mainpart_wrap .hero_header .container{height: 100%;}
+.wantam_tm_mainpart_wrap .hero_header .name_holder{
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 65px;
+	margin-bottom: 32px;
+	color: #fff;
+}
+.wantam_tm_mainpart_wrap .hero_header .subtitle{
+	color: #fff;
+	font-size: 19px;
+	max-width: 450px;
+	margin-bottom: 58px;
+}
+.wantam_tm_mainpart_wrap .hero_header .subtitle span{color: #ff214f;}
+.wantam_tm_button{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	min-width: max-content;
+}
+.wantam_tm_button a{
+	text-decoration: none;
+	display: inline-block;
+	padding: 14px 55px;
+	font-family: "Raleway";
+	font-weight: 500;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_button[data-color="white"] a{
+	color: #000;
+	background-color: #fff;
+	border: 3px solid #fff;
+	box-shadow: 0px 5px 16px 0px rgba(255,255,255,0.4);
+}
+.wantam_tm_button[data-color="white"] a:hover{
+	color: #fff;
+	background-color: transparent;
+}
+.wantam_tm_button[data-color="pink"] a{
+	color: #fff;
+	border: 3px solid #ff214f;
+	background-color: #ff214f;
+	box-shadow: 0px 5px 16px 0px rgba(255,33,79,0.6);
+}
+.wantam_tm_button[data-color="pink"] a:hover{
+	background-color: transparent;
+	color: #000;
+}
+
+/*---------------------------------------------------*/
+/*	04) WANTAM ABOUT
+/*---------------------------------------------------*/
+
+.wantam_tm_about{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 150px;
+}
+.wantam_tm_about .about_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+	align-items: center;
+}
+.wantam_tm_about .about_inner .leftpart{
+	width: 40%;
+	height: auto;
+}
+.wantam_tm_about .about_inner .leftpart .author_image{position: relative;}
+.wantam_tm_about .about_inner .leftpart .author_image img{min-width: 100%;}
+.wantam_tm_about .about_inner .leftpart .author_image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.wantam_tm_about .about_inner .leftpart .author_image .shape{
+	position: absolute;
+	width: 350px;
+	height: 350px;
+	background-color: #ff214f;
+	top: -40px;
+	left: -40px;
+	z-index: -1;
+}
+.wantam_tm_about .about_inner .rightpart{
+	width: 60%;
+	padding-left: 100px;
+}
+.wantam_tm_about .about_inner .rightpart .about_title{
+	width: 100%;
+	float: left;
+	margin-bottom: 45px;
+}
+.wantam_tm_about .about_inner .rightpart .about_title h3{
+	font-size: 40px;
+	font-weight: 700;
+}
+.wantam_tm_about .about_inner .rightpart .about_title h3 span{color: #ff214f;font-style: italic;}
+.wantam_tm_about .about_inner .rightpart .text{
+	width: 100%;
+	float: left;
+	margin-bottom: 60px;
+}
+
+/*---------------------------------------------------*/
+/*	05) WANTAM SERVICES
+/*---------------------------------------------------*/
+
+.wantam_tm_service{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	background-color: #f7f7f7;
+	padding: 150px 0px 100px 0px;
+	margin-bottom: 130px;
+}
+.wantam_tm_service .service_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.wantam_tm_service .service_inner ul{
+	margin: 0px 0px 0px -50px;
+	list-style-type: none;
+}
+.wantam_tm_service .service_inner ul li{
+	margin: 0px 0px 50px 0px;
+	width: 33.3333%;
+	float: left;
+	padding-left: 50px;
+}
+.wantam_tm_service .service_inner ul li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+	padding: 55px 40px;
+	background-color: #fff;
+	box-shadow: 0 0 20px rgba(0,0,0,.1);
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_service .service_inner ul li .inner .number{margin-bottom: 20px;}
+.wantam_tm_service .service_inner ul li .inner .number h3{
+	font-family: "Roboto";
+	font-size: 55px;
+	font-weight: 700;
+	color: #ff214f;
+}
+.wantam_tm_service .service_inner ul li .inner .title{margin-bottom: 30px;}
+.wantam_tm_service .service_inner ul li .inner .title h3{
+	font-size: 21px;
+	font-weight: 700;
+}
+.wantam_tm_service .service_inner ul li.active .number h3{color: #fff;}
+.wantam_tm_service .service_inner ul li.active .title h3{color: #fff;}
+.wantam_tm_service .service_inner ul li.active .inner{background-color: #ff214f;}
+.wantam_tm_service .service_inner ul li.active .inner .text p{color: #fff;}
+.wantam_tm_service .service_inner ul li .inner:hover{background-color: #ff214f;}
+.wantam_tm_service .service_inner ul li .inner:hover .number h3{color: #fff;}
+.wantam_tm_service .service_inner ul li .inner:hover .title h3{color: #fff;}
+.wantam_tm_service .service_inner ul li .inner:hover .text p{color: #fff;}
+
+/*---------------------------------------------------*/
+/*	06) WANTAM PROGRESS
+/*---------------------------------------------------*/
+
+.wantam_tm_progress_wrap{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 126px;
+}
+.wantam_tm_progress_wrap .progress_wrap_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+}
+.wantam_tm_progress_wrap .progress_wrap_inner .left{
+	width: 50%;
+	padding-right: 40px;
+}
+.wantam_tm_progress_wrap .progress_wrap_inner .left .main_title{
+	width: 100%;
+	float: left;
+	margin-bottom: 44px;
+}
+.wantam_tm_progress_wrap .progress_wrap_inner .left .main_title h3{
+	font-size: 40px;
+    font-weight: 700;
+}
+.wantam_tm_progress_wrap .progress_wrap_inner .left .main_title h3 span{
+	font-style: italic;
+	color: #ff214f
+}
+.wantam_tm_progress_wrap .right{
+	width: 50%;
+	height: auto;
+	padding-left: 50px;
+}
+.wantam_progress{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 9px;
+}
+.progress_inner{
+	width:100%;
+	margin-bottom:17px;
+}
+.progress_inner > span{
+	margin:0px 0px 7px 0px;
+	width:100%;
+	display:block;
+	text-align:left;
+}
+.progress_inner span.label{
+	font-size:13px;
+	font-weight:700;
+	text-transform: uppercase;
+	font-family: "Raleway";
+}
+.progress_inner span.number{
+	font-size:13px;
+	font-weight:700;
+	text-transform: uppercase;
+	float: right;
+}
+.progress_inner .background{
+	background:#07081f;
+	width:100%;
+	min-width:100%;
+	position:relative;
+	height:8px;
+}
+.progress_inner .background .bar_in{
+	height:100%;
+	background:#333;
+	width:0px;
+	overflow:hidden;
+}
+.progress_inner .background .bar{
+	width:0px;
+	height:100%;
+}
+.progress_inner .background .bar.open{
+	-webkit-animation: wow 3s cubic-bezier(0.165, 0.840, 0.440, 1.000);  /* Safari 4+ */
+	-moz-animation:    wow 3s cubic-bezier(0.165, 0.840, 0.440, 1.000);  /* Fx 5+ */
+	animation:         wow 3s cubic-bezier(0.165, 0.840, 0.440, 1.000);  /* IE 10+ */
+	width:100%;	
+}
+
+@-webkit-keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
+@-moz-keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
+@keyframes wow {0%{ width:0%; } 100%{ width:100%; }}
+
+/*---------------------------------------------------*/
+/*	07) WANTAM PORTFOLIO
+/*---------------------------------------------------*/
+
+.wantam_tm_title_holder{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	text-align: center;
+}
+.wantam_tm_title_holder h3{
+	font-size: 40px;
+    font-weight: 700;
+}
+.wantam_tm_title_holder h3 span{color: #ff214f;}
+.wantam_tm_portfolio_wrap{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding: 100px 50px 0px 50px;
+	margin-bottom: 100px;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_filter{
+	width:100%;
+	height: auto;
+	text-align:center;
+	list-style-type:none;
+	margin: 0px 0px 29px 0px;
+	display: inline-block;
+}
+
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_filter li{
+	display:inline-block;
+	margin:0px 40px 0px 0px;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_filter li:last-child{margin-right: 0px;}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_filter li a{
+	text-decoration:none;
+	font-weight:500;
+	color:#000;
+	display: inline-block;
+	margin-bottom: 10px;
+	position: relative;
+	
+	-webkit-transition: all .1s ease;
+	   -moz-transition: all .1s ease;
+	    -ms-transition: all .1s ease;
+	     -o-transition: all .1s ease;
+	        transition: all .1s ease;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_filter li a:hover{color: #ff214f;}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_filter li a.current{color: #ff214f;}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list{
+	margin: 0px 0px 0px -50px;
+	list-style-type: none;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li{
+	margin: 0px 0px 50px 0px;
+	float: left;
+	width: 25%;
+	padding-left: 50px;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .image_wrap{position: relative;}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .image_wrap img{min-width: 100%;}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .image_wrap .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .overlay{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(255,33,79,.85);
+	z-index: 1;
+	opacity: 0;
+	visibility: hidden;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner:hover .overlay{
+	opacity: 1;
+	visibility: visible;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .overlay .overlay_text{
+	position: absolute;
+	top: 35px;
+	left: 35px;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .overlay .overlay_text h3{
+	font-size: 18px;
+	color: #fff;
+	font-weight: 700;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .overlay .overlay_text span{
+	color: #fff;
+	font-size: 16px;
+}
+.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li .inner .link{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 2;
+}
+
+/*---------------------------------------------------*/
+/*	08) WANTAM CALL TO ACTION
+/*---------------------------------------------------*/
+
+.wantam_tm_call_action{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	background-color: #ff214f;
+	padding: 73px 0px 77px 0px;
+	margin-bottom: 129px;
+}
+.wantam_tm_call_action .action_inner .left{padding-right: 40px;}
+.wantam_tm_call_action .action_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.wantam_tm_call_action .action_inner .left p{
+	color: #fff;
+	font-family: "Raleway";
+	font-size: 30px;
+	font-weight: 600;
+}
+
+/*---------------------------------------------------*/
+/*	09) WANTAM DETAILS
+/*---------------------------------------------------*/
+
+.wantam_tm_details_wrap{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	background-color: #f7f7f7;
+	padding: 152px 0px 138px 0px;
+	margin-bottom: 150px;
+}
+.wantam_tm_details_wrap .details_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+}
+.wantam_tm_details_wrap .details_inner .left{
+	width: 50%;
+	padding-right: 35px;
+}
+.wantam_tm_details_wrap .details_inner .left ul{
+	margin: 0px 0px 0px -30px;
+	list-style-type: none;
+}
+.wantam_tm_details_wrap .details_inner .left ul li{
+	margin: 0px;
+	width: 50%;
+	float: left;
+	padding-left: 30px;
+}
+.wantam_tm_details_wrap .details_inner .left ul li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+}
+.wantam_tm_details_wrap .details_inner .left ul li .inner .image{position: relative;}
+.wantam_tm_details_wrap .details_inner .left ul li .inner .image img{min-width: 100%;}
+.wantam_tm_details_wrap .details_inner .left ul li .inner .image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.wantam_tm_details_wrap .details_inner .right{
+	width: 50%;
+	padding-left: 35px;
+}
+.wantam_tm_details_wrap .details_inner .right ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.wantam_tm_details_wrap .details_inner .right ul li{
+	margin: 0px 0px 48px 0px;
+	float: left;
+	width: 100%;
+}
+.wantam_tm_details_wrap .details_inner .right ul li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+}
+.wantam_tm_details_wrap .details_inner .right ul li .icon{
+	position: absolute;
+	top: 7px;
+	left: 0px;
+}
+.wantam_tm_details_wrap .details_inner .right ul li .icon .svg{
+	color: #ff214f;
+	width: 30px;
+	height: 30px;
+}
+.wantam_tm_details_wrap .details_inner .right ul li .text{padding-left: 60px;}
+.wantam_tm_details_wrap .details_inner .right ul li .text h3{
+	font-size: 21px;
+    font-weight: 700;
+	margin-bottom: 10px;
+}
+
+/*---------------------------------------------------*/
+/*	10) WANTAM TEAM MEMBERS
+/*---------------------------------------------------*/
+
+.wantam_tm_team{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 150px;
+}
+.wantam_tm_team .team_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.wantam_tm_team .team_inner > ul{
+	margin: 0px 0px 0px -50px;
+	list-style-type: none;
+}
+.wantam_tm_team .team_inner > ul > li{
+	margin: 0px;
+	width: 33.3333%;
+	float: left;
+	padding-left: 50px;
+}
+.wantam_tm_team .team_inner > ul > li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+	box-shadow: 0 0 20px rgba(0,0,0,.1);
+}
+.wantam_tm_team .team_inner > ul > li .inner .image{
+	position: relative;
+	overflow: hidden;
+}
+.wantam_tm_team .team_inner > ul > li .inner .image img{min-width: 100%;}
+.wantam_tm_team .team_inner > ul > li .inner .image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.wantam_tm_team .team_inner > ul > li .inner .details{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding: 30px;
+}
+.wantam_tm_team .team_inner > ul > li .inner .details h3{
+	font-size: 21px;
+	font-weight: 700;
+}
+.wantam_tm_team .team_inner > ul > li .inner .social{
+	position:absolute;
+	left: 0px;
+	bottom: -32px;
+	background-color: #ff214f;
+	padding: 0px 10px;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_team .team_inner > ul > li .inner:hover .social{bottom: 0px;}
+.wantam_tm_team .team_inner > ul > li .inner .social ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.wantam_tm_team .team_inner > ul > li .inner .social ul li{
+	margin: 0px 3px 0px 0px;
+	display: inline-block;
+}
+.wantam_tm_team .team_inner > ul > li .inner .social ul li a{
+	text-decoration: none;
+	color: #fff;
+}
+
+/*---------------------------------------------------*/
+/*	11) WANTAM TESTIMONIALS
+/*---------------------------------------------------*/
+
+.wantam_tm_testimonial{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	margin-bottom: 129px;
+}
+.wantam_tm_testimonial .testimonial_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+}
+.wantam_tm_testimonial .testimonial_bg{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1;
+}
+.wantam_tm_testimonial .testimonial_bg .image{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-image: url("..//img/slider/3.jpg");
+}
+.wantam_tm_testimonial .testimonial_bg .overlay{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1;
+	background-color: rgba(0,0,0,.8);
+}
+.wantam_tm_testimonial .testimonial_content{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+	z-index: 2;
+	padding: 125px 20px 136px 20px;
+}
+.wantam_tm_testimonial .testimonial_content .content_inner{
+	width: 100%;
+	max-width: 700px;
+	height: auto;
+	margin: 0px auto;
+	text-align: center;
+}
+.wantam_tm_testimonial .testimonial_content .content_inner .icon{
+	float: left;
+	width: 100%;
+	margin-bottom: 17px;
+}
+.wantam_tm_testimonial .testimonial_content .content_inner .icon i{
+	font-size: 45px;
+	color: #ff214f;
+}
+.wantam_tm_testimonial .testimonial_content .content_inner .text{
+	float: left;
+	width: 100%;
+	margin-bottom: 33px;
+}
+.wantam_tm_testimonial .testimonial_content .content_inner .text p{
+	color: #fff;
+    font-family: "Raleway";
+    font-size: 30px;
+    font-weight: 600;
+}
+.wantam_tm_testimonial .testimonial_content .content_inner .name span{
+	font-size: 21px;
+	color: #fff;
+}
+
+/*---------------------------------------------------*/
+/*	12) WANTAM NEWS
+/*---------------------------------------------------*/
+
+.wantam_tm_news{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	background-color: #f7f7f7;
+	padding: 0px 0px 100px 0px;
+}
+.wantam_tm_news .news_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding-top: 136px;
+}
+.wantam_tm_news .news_inner ul{
+	margin: 0px 0px 0px -50px;
+	list-style-type: none;
+}
+.wantam_tm_news .news_inner ul li{
+	margin: 0px 0px 50px 0px;
+	width: 33.3333%;
+	float: left;
+	padding-left: 50px;
+}
+.wantam_tm_news .news_inner ul li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+	box-shadow: 0 0 20px rgba(0,0,0,.1);
+	top: 0px;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_news .news_inner ul li .inner:hover{top: -6px;}
+.wantam_tm_news .news_inner ul li .inner .image{position: relative;}
+.wantam_tm_news .news_inner ul li .inner .image img{min-width: 100%;}
+.wantam_tm_news .news_inner ul li .inner .image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-position:center;
+	background-size: cover;
+}
+.wantam_tm_news .news_inner ul li .inner .link{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1;
+}
+.wantam_tm_news .news_inner ul li .inner .details{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding: 30px;
+	background-color: #fff;
+}
+.wantam_tm_news .news_inner ul li .inner .details .time{
+	width: 100%;
+	float:left; 
+}
+.wantam_tm_news .news_inner ul li .inner .details .time p a{
+	text-decoration: none;
+	color: #000;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_news .news_inner ul li .inner .details .time p a:hover{color: #ff214f;}
+.wantam_tm_news .news_inner ul li .inner .details .title h3{
+	font-size: 21px;
+    font-weight: 700;
+	color: #000;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_news .news_inner ul li .inner .details .title a{
+	text-decoration: none;
+	color: #000;
+}
+.wantam_tm_news .news_inner ul li .inner .details .title a:hover h3{color: #ff214f;}
+
+/*---------------------------------------------------*/
+/*	13) WANTAM PARTNERS
+/*---------------------------------------------------*/
+
+.wantam_tm_partners{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding: 90px 0px;
+	background-color: #ff214f;
+	margin-bottom: 130px;
+}
+.wantam_tm_partners .partners_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.wantam_tm_partners .partners_inner ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.wantam_tm_partners .partners_inner ul li{
+	margin: 0px;
+	text-align: center;
+}
+
+/*---------------------------------------------------*/
+/*	14) WANTAM CONTACT
+/*---------------------------------------------------*/
+
+.wantam_tm_contact{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.wantam_tm_contact .contact_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+	padding: 128px 0px 113px 0px;
+}
+.wantam_tm_contact .contact_inner .left{
+	width: 50%;
+	padding-right: 40px;
+}
+.wantam_tm_contact .contact_inner .left .title{
+	width: 100%;
+	float: left;
+	margin-bottom: 50px;
+}
+.wantam_tm_contact .contact_inner .left .title h3{
+	font-size: 21px;
+    font-weight: 700;
+}
+.wantam_tm_contact .contact_inner .left ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.wantam_tm_contact .contact_inner .left ul li{
+	margin: 0px 0px 47px 0px;
+	width: 100%;
+	float: left;
+}
+.wantam_tm_contact .contact_inner .left ul li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+}
+.wantam_tm_contact .contact_inner .left ul li .inner .icon{
+	position:absolute;
+	top: 7px;
+	left: 0px;
+}
+.wantam_tm_contact .contact_inner .left ul li .inner .icon .svg{
+	color: #ff214f;
+    width: 30px;
+    height: 30px;
+}
+.wantam_tm_contact .contact_inner .left ul li .inner .text{
+	padding-left: 60px;
+}
+.wantam_tm_contact .contact_inner .left ul li .inner .text h3{
+	font-size: 21px;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+.wantam_tm_contact .contact_inner .left ul li .inner .text span a{
+	text-decoration: none;
+	color: #6f6f6f;
+	border-bottom: 1px solid #6f6f6f;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_contact .contact_inner .left ul li .inner .text span a:hover{
+	color: #ff214f;
+	border-bottom-color: #ff214f;
+}
+.wantam_tm_contact .contact_inner .right{
+	width: 50%;
+}
+.wantam_tm_contact .contact_inner .right .input_wrap{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.wantam_tm_contact .contact_inner .right .input_wrap ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.wantam_tm_contact .contact_inner .right .input_wrap ul li{
+	margin: 0px 0px 25px 0px;
+	width: 100%;
+	float:left; 
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+.wantam_tm_contact .contact_inner .right .input_wrap ul li input{
+	width: 100%;
+	background-color: transparent;
+	border: none;
+}
+.wantam_tm_contact .contact_inner .right .input_wrap ul li input:focus{
+	outline: none;
+}
+.wantam_tm_contact .contact_inner .right .input_wrap ul li textarea{
+	width: 100%;
+	background-color: transparent;
+	border: none;
+}
+.wantam_tm_contact .contact_inner .right .input_wrap ul li textarea:focus{
+	outline: none;
+}
+
+.wantam_tm_contact .empty_notice{
+	color: #F52225;
+	margin-bottom: 7px;
+	display: none;
+	text-align: left;
+	font-weight: 500;
+}
+.wantam_tm_contact .contact_error{
+	color: #F52225;
+	text-align: left;
+	font-weight: 500;
+}
+.wantam_tm_contact .returnmessage{
+	color:#3A00FF;
+	margin-bottom: 7px;
+	text-align: left;
+	font-weight: 500;
+}
+
+/*---------------------------------------------------*/
+/*	15) WANTAM FOOTER
+/*---------------------------------------------------*/
+
+.wantam_tm_footer{
+	width: 100%;
+	height: 90px;
+	line-height: 90px;
+	clear: both;
+	float: left;
+	background-color: #000000;
+}
+.wantam_tm_footer .footer_inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+	justify-content: space-between;
+}
+.wantam_tm_footer .footer_inner .left p{
+	color: #fff;
+}
+.wantam_tm_footer .footer_inner .left p a{
+	text-decoration: none;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_footer .footer_inner .left p a:hover{
+	color: #ff214f;
+	border-bottom-color: #ff214f;
+}
+.wantam_tm_footer .footer_inner .right ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.wantam_tm_footer .footer_inner .right ul li{
+	margin: 0px 10px 0px 0px;
+	float: left;
+}
+.wantam_tm_footer .footer_inner .right ul li a{
+	text-decoration: none;
+	color: #fff;
+	
+	-webkit-transition: all .3s ease;
+	   -moz-transition: all .3s ease;
+	    -ms-transition: all .3s ease;
+	     -o-transition: all .3s ease;
+	        transition: all .3s ease;
+}
+.wantam_tm_footer .footer_inner .right ul li a:hover{color: #ff214f;}
+
+.wantam_tm_all_wrap.no-margin .wantam_tm_mainpart_wrap .hero_header{margin-bottom: 0px;}
+
+/*---------------------------------------------------*/
+/*	  WANTAM GLITCH DEMO
+/*---------------------------------------------------*/
+
+.glitch{
+	position: fixed;
+ 	width: 100%;
+ 	height: 100%;
+	top: 0;
+ 	left: 0;
+	background-image: url(..//img/slider/1.jpg);
+	background-size: cover;
+	-webkit-background-size: cover;
+	background-position: center;
+	z-index: -1 !important;
+	opacity: 1;
+	transform: scale(1);
+}
+.glitch:before{
+	content: "";
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color:rgba(0,0,0,.6);
+}
+
+/*---------------------------------------------------*/
+/*	  WANTAM KENBURN DEMO
+/*---------------------------------------------------*/
+
+.wantam_hero_wrap_kenburn{
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #fff;
+}
+.wantam_hero_wrap_kenburn .overlay{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(0,0,0,.6);
+	z-index: 1;
+}
+
+.wantam_hero_wrap_kenburn .text_all{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 2;
+}
+.wantam_hero_wrap_kenburn .hero_texts{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+}
+.wantam_hero_wrap_kenburn .container{height: 100%;}
+.wantam_hero_wrap_kenburn .name_holder{
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 65px;
+	margin-bottom: 32px;
+	color: #fff;
+}
+.wantam_hero_wrap_kenburn .subtitle{
+	color: #fff;
+	font-size: 19px;
+	max-width: 450px;
+	margin-bottom: 58px;
+}
+.wantam_hero_wrap_kenburn .subtitle span{color: #ff214f;}
+
+
+/*---------------------------------------------------*/
+/*	  WANTAM VIDEO DEMO
+/*---------------------------------------------------*/
+
+.wantam_hero_wrap_video{
+	width: 100%;
+	height: 100vh;
+	position: relative;
+}
+.wantam_hero_wrap_video .overlay{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(0,0,0,.8);
+	z-index: 1;
+}
+
+.wantam_hero_wrap_video .text_all{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 2;
+}
+.wantam_hero_wrap_video .hero_texts{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+}
+.wantam_hero_wrap_video .container{height: 100%;}
+.wantam_hero_wrap_video .name_holder{
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 65px;
+	margin-bottom: 32px;
+	color: #fff;
+}
+.wantam_hero_wrap_video .subtitle{
+	color: #fff;
+	font-size: 19px;
+	max-width: 450px;
+	margin-bottom: 58px;
+}
+.wantam_hero_wrap_video .subtitle span{color: #ff214f;}
+
+/*---------------------------------------------------*/
+/*	  WANTAM PARTICLE DEMO
+/*---------------------------------------------------*/
+
+#particles-js {
+	width: 100%;
+	height: 100vh;
+  	position: absolute;
+  	z-index: 2;
+}
+.wantam_tm_mainpart_wrap .hero_header.particles{background-image: url("..//img/slider/1.jpg");}
+
+/*---------------------------------------------------*/
+/*	  WANTAM WATER DEMO
+/*---------------------------------------------------*/
+
+.wantam_hero_wrap_another{
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #fff;
+	background-image: url("..//img/slider/1.jpg");
+}
+
+.wantam_hero_wrap_another .overlay{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(0,0,0,.6);
+	z-index: 1;
+}
+
+.wantam_hero_wrap_another .text_all{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 2;
+}
+.wantam_hero_wrap_another .hero_texts{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+}
+.wantam_hero_wrap_another .container{height: 100%;}
+.wantam_hero_wrap_another .name_holder{
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 65px;
+	margin-bottom: 32px;
+	color: #fff;
+}
+.wantam_hero_wrap_another .subtitle{
+	color: #fff;
+	font-size: 19px;
+	max-width: 450px;
+	margin-bottom: 58px;
+}
+.wantam_hero_wrap_another .subtitle span{color: #ff214f;}
+
+
+
+
+
+
+/*---------------------------------------------------*/
+/*	  WANTAM INTRO
+/*---------------------------------------------------*/
+
+.wantam_tm_intro_wrap{
+	width: 100%;
+	min-height: 100vh;
+	float: left;
+	position: relative;
+	clear: both;
+	background-color: #f7f7f7;
+}
+.wantam_tm_intro_wrap .intro_hero{
+	width: 100%;
+	height: 75vh;
+	float: left;
+	position: relative;
+	margin-bottom: 100px;
+}
+.wantam_tm_intro_wrap .intro_hero .image{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-image: url("..//img/slider/1.jpg");
+}
+.wantam_tm_intro_wrap .intro_hero .overlay{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: rgba(0,0,0,.8);
+}
+.wantam_tm_intro_wrap .intro_hero .hero_texts{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 1;
+	text-align: center;
+}
+.wantam_tm_intro_wrap .intro_hero .hero_texts h3{
+	color: #fff;
+	font-weight: 700;
+	font-size: 60px;
+	margin-bottom: 20px;
+}
+.wantam_tm_intro_wrap .intro_hero .hero_texts p{
+	font-size: 25px;
+}
+.wantam_tm_intro_wrap .hero_button{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	min-width: max-content;
+	padding-top: 47px;
+}
+.wantam_tm_intro_wrap .hero_button a{
+	text-decoration: none;
+    display: inline-block;
+    padding: 14px 55px;
+    font-family: "Raleway";
+    font-weight: 500;
+	color: #000;
+    background-color: #fff;
+    border: 3px solid #fff;
+    box-shadow: 0px 5px 16px 0px rgba(255,255,255,0.4);
+	
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+.wantam_tm_intro_wrap .hero_button a:hover{
+	background-color: transparent;
+	color: #fff;
+}
+.wantam_main_demo{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+}
+.wantam_main_demo .main_demo_list{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding-top: 100px;
+	margin-bottom: 80px;
+}
+.wantam_main_demo .main_demo_list ul{
+	margin: 0px 0px 0px -50px;
+	list-style-type: none;
+}
+.wantam_main_demo .main_demo_list ul li{
+	margin: 0px 0px 50px 0px;
+	width: 50%;
+	float: left;
+	padding-left: 50px;
+}
+.wantam_main_demo .main_demo_list ul li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+	box-shadow: 0 0 20px rgba(0,0,0,.1);
+	transition: all .3s ease;
+	top: 0px;
+}
+.wantam_main_demo .main_demo_list ul li .inner:hover{top: -5px;}
+.wantam_main_demo .main_demo_list ul li .inner .image{position: relative;}
+.wantam_main_demo .main_demo_list ul li .inner .image img{min-width: 100%;}
+.wantam_main_demo .main_demo_list ul li .inner .image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.wantam_main_demo .main_demo_list ul li .inner .title{
+	width: 100%;
+	height: auto;
+	padding: 30px;
+	background-color: #fff;
+	text-align: center;
+}
+.wantam_main_demo .main_demo_list ul li .inner .title h3{
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: 700;
+}
+.wantam_main_demo .main_demo_list ul li .inner .full_link{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1;
+}
+
+.wantam_tm_extra_demos{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	background-color: #fff;
+	padding: 100px 0px 50px 0px;
+}
+.wantam_tm_extra_demos .wantam_tm_title_holder_second{
+	width: 100%;
+	max-width: 700px;
+	height: auto;
+	clear: both;
+	margin: 0px auto;
+	text-align:center;
+}
+.wantam_tm_extra_demos .wantam_tm_title_holder_second h3{
+	font-style: italic;
+	font-size: 35px;
+}
+.wantam_tm_extra_demos .wantam_tm_title_holder_second h3 span{color: #ff214f;}
+
+.wantam_tm_extra_demos .main_list{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	padding-top: 100px;
+}
+.wantam_tm_extra_demos .main_list ul{
+	margin: 0px 0px 0px -50px;
+	list-style-type: none;
+}
+.wantam_tm_extra_demos .main_list ul li{
+	margin: 0px 0px 50px 0px;
+	width: 50%;
+	float: left;
+	padding-left: 50px;
+}
+.wantam_tm_extra_demos .main_list ul li .inner{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	position: relative;
+	box-shadow: 0 0 20px rgba(0,0,0,.1);
+	transition: all .3s ease;
+	top: 0px;
+}
+.wantam_tm_extra_demos .main_list ul li .inner:hover{top: -5px;}
+.wantam_tm_extra_demos .main_list ul li .inner .image{position: relative;}
+.wantam_tm_extra_demos .main_list ul li .inner .image img{min-width: 100%;}
+.wantam_tm_extra_demos .main_list ul li .inner .image .main{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.wantam_tm_extra_demos .main_list ul li .inner .title{
+	width: 100%;
+	height: auto;
+	padding: 30px;
+	background-color: #fff;
+	text-align: center;
+}
+.wantam_tm_extra_demos .main_list ul li .inner .title h3{
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: 700;
+}
+.wantam_tm_extra_demos .main_list ul li .inner .full_link{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1;
+}
+.wantam_tm_intro_footer{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	background-color: #000000;
+	padding: 50px 0px;
+}
+.wantam_tm_intro_footer .inner_wrap{
+	width: 100%;
+	height: auto;
+	clear: both;
+	float: left;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.wantam_tm_intro_footer .inner_wrap .left p a{
+	text-decoration: none;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+	transition: all .3s ease;
+}
+.wantam_tm_intro_footer .inner_wrap .left p a:hover{
+	color: #ff214f;
+	border-bottom-color: #ff214f;
+}
+.wantam_tm_intro_footer .inner_wrap .right ul{
+	margin: 0px;
+	list-style-type: none;
+}
+.wantam_tm_intro_footer .inner_wrap .right ul li{
+	margin: 0px 10px 0px 0px;
+	float: left;
+}
+.wantam_tm_intro_footer .inner_wrap .right ul li a{
+	text-decoration: none;
+	color: #fff;
+	transition: all .3s ease;
+}
+.wantam_tm_intro_footer .inner_wrap .right ul li a:hover{color: #ff214f;}
+
+/*---------------------------------------------------*/
+/*	16) WANTAM MEDIA QUERIES (FOR SMALL DEVIVES)
+/*---------------------------------------------------*/
+
+@media (max-width: 1200px) {
+	.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li{width: 33.3333%;}
+}
+@media (max-width: 1040px) {
+	.wantam_tm_mainpart_wrap .hero_header .name_holder{font-size: 55px;}
+	.wantam_tm_about .about_inner .leftpart{display: none;}
+	.wantam_tm_about .about_inner .rightpart{padding-left: 0px;width: 100%;}
+	.wantam_tm_service .service_inner ul li{width: 100%;padding-left: 0px;}
+	.wantam_tm_service .service_inner ul{margin: 0px;}
+	.wantam_tm_progress_wrap .progress_wrap_inner{flex-direction: column;}
+	.wantam_tm_progress_wrap .progress_wrap_inner .left{padding-right: 0px;width: 100%;margin-bottom: 40px;}
+	.wantam_tm_progress_wrap .right{padding-left: 0px;width: 100%;}
+	.wantam_tm_call_action .action_inner .left p{font-size: 25px;}
+	.wantam_tm_call_action .action_inner{flex-direction: column;justify-content:flex-start;align-items: flex-start;}
+	.wantam_tm_call_action .action_inner .left{margin-bottom: 30px;}
+	.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li{width: 50%;}
+	.wantam_tm_details_wrap .details_inner{flex-direction: column;}
+	.wantam_tm_details_wrap .details_inner .left{width: 100%;padding-right: 0px;margin-bottom: 40px;}
+	.wantam_tm_details_wrap .details_inner .right{padding-left: 0px;width: 100%;}
+	.wantam_tm_team .team_inner > ul > li{width: 50%;}
+	.wantam_tm_portfolio_wrap{padding: 100px 20px 0px 20px;}
+	.wantam_tm_testimonial .testimonial_content .content_inner .text p{font-size: 25px;}
+	.wantam_tm_news .news_inner ul li{width: 50%;}
+	.wantam_tm_contact .contact_inner{flex-direction: column;}
+	.wantam_tm_contact .contact_inner .left{padding-right: 0px;width: 100%;}
+	.wantam_tm_contact .contact_inner .right{width: 100%;}
+	.wantam_tm_loader-wrapper{display: none;}
+	
+}
+@media (max-width: 768px) {
+	.wantam_tm_mainpart_wrap .hero_header .name_holder{font-size: 50px;}
+	.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list li{width: 100%;padding-left: 0px;}
+	.wantam_tm_portfolio_wrap .wantam_tm_portfolio_list{margin: 0px;}
+	.wantam_tm_team .team_inner > ul > li{width: 100%;padding-left: 0px;}
+	.wantam_tm_team .team_inner > ul{margin: 0px;}
+	.wantam_tm_news .news_inner ul li{width: 100%;padding-left: 0px;}
+	.wantam_tm_news .news_inner ul{margin: 0px;}
+	.wantam_tm_footer .footer_inner{flex-direction: column; text-align: center;}
+	.wantam_tm_footer{height: auto;padding: 20px 0px;line-height: 3;}
+}
+@media (max-width: 480px) {
+	
+}	
