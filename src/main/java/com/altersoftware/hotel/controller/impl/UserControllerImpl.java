@@ -26,10 +26,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
 @Controller
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/user")
 /**
  * userController接口实现
@@ -41,13 +39,13 @@ public class UserControllerImpl implements UserController {
     private final static Logger LOG = LoggerFactory.getLogger("controllerLogger");
 
     @Autowired
-    private UserIService userService;
+    private UserIService        userService;
 
     @Autowired
-    private PermissionIService permissionService;
+    private PermissionIService  permissionService;
 
     @Override
-    @PostMapping("sign-up")
+    @PostMapping("signup")
     @Deprecated
     public String signup(@ModelAttribute UserDO userDO) {
         ResultDO<Void> resultDO = userService.signup(userDO);
@@ -70,6 +68,13 @@ public class UserControllerImpl implements UserController {
     public String showSignup(ModelMap map) {
         map.addAttribute("userDO", new UserDO());
         return TemplatePath.USER_SIGNUP;
+    }
+
+    @Override
+    @GetMapping("sign-up-success")
+    public String showSignupsuccess(ModelMap map) {
+        map.addAttribute("userDO", new UserDO());
+        return TemplatePath.USER_SIGN_UP_SUCCESS;
     }
 
     @Override
