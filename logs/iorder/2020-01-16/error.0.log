@@ -299,7 +299,7 @@ Caused by: java.lang.ClassNotFoundException: Cannot find class: com.altersotfwar
 	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
 	... 111 common frames omitted
 [ERROR] 2020-01-16 20:45:00 [http-nio-7901-exec-1] o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/hotel] threw exception [Request processing failed; nested exception is CICException [code=1000, message=user not sign in, data=null]] with root cause
-com.altersoftware.hotel.exception.GenesisException: user not sign in
+com.altersoftware.hotel.exception.HotelException: user not sign in
 	at com.altersoftware.hotel.controller.session.SessionContentHolder.getSignInUserIdBySessionId(SessionContentHolder.java:107)
 	at com.altersoftware.hotel.controller.impl.UserControllerImpl.showUserHome(UserControllerImpl.java:699)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

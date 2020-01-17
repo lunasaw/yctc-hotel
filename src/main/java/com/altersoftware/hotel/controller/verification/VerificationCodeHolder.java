@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.exception.GenesisException;
+import com.altersoftware.hotel.exception.HotelException;
 import com.altersoftware.hotel.util.CaptchaUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
@@ -45,7 +45,7 @@ public class VerificationCodeHolder {
     public static final String getMailVerificationCode(String mail) {
         if (StringUtils.isEmpty(mail)) {
             LOG.error("mail is empty, mail={}", mail);
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
 
         // 生成验证码
@@ -74,7 +74,7 @@ public class VerificationCodeHolder {
     public static final String getPhoneVerificationCode(String phone) {
         if (StringUtils.isEmpty(phone)) {
             LOG.error("phone is empty, phone={}", phone);
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
 
         // 生成验证码
@@ -101,7 +101,7 @@ public class VerificationCodeHolder {
      */
     public static final void deleteMailVerificationCodeByMail(String mail) {
         if (StringUtils.isEmpty(mail)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (MAIL_VERIFICATION_CODE_MAP.containsKey(mail) == false) {
             return;
@@ -116,7 +116,7 @@ public class VerificationCodeHolder {
      */
     public static final void deletePhoneVerificationCodeByPhone(String phone) {
         if (StringUtils.isEmpty(phone)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (PHONE_VERIFICATION_CODE_MAP.containsKey(phone) == false) {
             return;
@@ -133,7 +133,7 @@ public class VerificationCodeHolder {
      */
     public static final boolean checkMailVerificationCode(String mail, String verificationCode) {
         if (StringUtils.isEmpty(mail) || StringUtils.isEmpty(verificationCode)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         return StringUtils.equals(MAIL_VERIFICATION_CODE_MAP.get(mail), verificationCode);
     }
@@ -147,7 +147,7 @@ public class VerificationCodeHolder {
      */
     public static final boolean checkPhoneVerificationCode(String phone, String verificationCode) {
         if (StringUtils.isEmpty(phone) || StringUtils.isEmpty(verificationCode)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         return StringUtils.equals(PHONE_VERIFICATION_CODE_MAP.get(phone), verificationCode);
     }

@@ -1,24 +1,24 @@
 package com.altersoftware.hotel.exception;
 
-public class GenesisException extends RuntimeException {
+public class HotelException extends RuntimeException {
 
     private static final long serialVersionUID = 7780579901230034749L;
     private int code;
     private String message;
     private Object data;
 
-    public GenesisException() {
+    public HotelException() {
         super();
     }
 
-    public GenesisException(int code, String message, Object data) {
+    public HotelException(int code, String message, Object data) {
         super();
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public GenesisException(int code, String message) {
+    public HotelException(int code, String message) {
         this(code, message, null);
     }
 

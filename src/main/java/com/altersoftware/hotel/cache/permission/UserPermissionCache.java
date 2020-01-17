@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.exception.GenesisException;
+import com.altersoftware.hotel.exception.HotelException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.slf4j.Logger;
@@ -76,7 +76,7 @@ public class UserPermissionCache {
         // 获取当前系统时间
         Date timeOfGetPermission = new Date();
         if (userId <= 0 || timeOfGetPermission == null) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         PERMISSION_LIST_TIME_MAP.put(userId, timeOfGetPermission);
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
