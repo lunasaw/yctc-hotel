@@ -13,12 +13,19 @@ public class TemplatePath {
 
     /** 注册 */
     @Deprecated
-    public static final String USER_SIGNUP = "user/sign-up";
+    public static final String USER_SIGNUP = "user/register";
 
     /** 登录 */
     public static final String USER_SIGN_IN = "user/sign-in";
+
+    /** 注册 */
+    public static final String USER_SIGN_UP="/user/sign-up";
+
     /** 登陆成功页 */
     public static final String USER_SIGN_IN_SUCCESS = "user/sign-in-success";
+
+    /** 注册成功页面 */
+    public static final String USER_SIGN_UP_SUCCESS = "user/sign-up-success";
 
     /** 注销登陆 */
     public static final String USER_SIGN_OUT = "user/sign-out";

@@ -6,6 +6,7 @@ import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.vo.*;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 
 
 public interface UserController {
@@ -26,6 +27,9 @@ public interface UserController {
      */
     @Deprecated
     String signup(UserDO userDO);
+
+    @GetMapping("sign-up-success")
+    String showSignupsuccess(ModelMap map);
 
     /**
      * 展示登陆页面
