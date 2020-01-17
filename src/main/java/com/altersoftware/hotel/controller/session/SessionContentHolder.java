@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.exception.GenesisException;
+import com.altersoftware.hotel.exception.HotelException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.slf4j.Logger;
@@ -101,10 +101,10 @@ public class SessionContentHolder {
      */
     public static long getSignInUserIdBySessionId(String sessionId) {
         if (StringUtils.isEmpty(sessionId)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_2_SIGN_IN_USER_ID_MAP.containsKey(sessionId) == false) {
-            throw new GenesisException(ResultCode.USER_NOT_SIGN_IN, ResultCode.MSG_USER_NOT_SIGN_IN);
+            throw new HotelException(ResultCode.USER_NOT_SIGN_IN, ResultCode.MSG_USER_NOT_SIGN_IN);
         }
         return SESSION_2_SIGN_IN_USER_ID_MAP.get(sessionId);
     }
@@ -118,7 +118,7 @@ public class SessionContentHolder {
     public static void addSignInUserId(String sessionId, long userId) {
 
         if (StringUtils.isEmpty(sessionId) || userId <= 0) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_2_SIGN_IN_USER_ID_MAP.containsKey(sessionId)
             || SESSION_2_SIGN_IN_USER_ID_MAP.containsValue(userId)) {
@@ -132,7 +132,7 @@ public class SessionContentHolder {
         Date loginTime = new Date();
 
         if (StringUtils.isEmpty(sessionId) || loginTime == null) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
 
         SESSION_SIGN_IN_USER_TIME_MAP.put(sessionId, loginTime);
@@ -145,10 +145,10 @@ public class SessionContentHolder {
      */
     public static void deleteSignInSessionBySessionId(String sessionId) {
         if (StringUtils.isEmpty(sessionId)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (!SESSION_2_SIGN_IN_USER_ID_MAP.containsKey(sessionId)) {
-            throw new GenesisException(ResultCode.NO_SUCH_USER, ResultCode.MSG_NO_SUCH_USER);
+            throw new HotelException(ResultCode.NO_SUCH_USER, ResultCode.MSG_NO_SUCH_USER);
         }
         SESSION_2_SIGN_IN_USER_ID_MAP.remove(sessionId);
     }
@@ -161,7 +161,7 @@ public class SessionContentHolder {
      */
     public static String getPhoneBySessionId(String sessionId) {
         if (StringUtils.isEmpty(sessionId)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_PHONE_MAP.containsKey(sessionId) == false) {
             return null;
@@ -177,7 +177,7 @@ public class SessionContentHolder {
      */
     public static String getMailBySessionId(String sessionId) {
         if (StringUtils.isEmpty(sessionId)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_MAIL_MAP.containsKey(sessionId) == false) {
             return null;
@@ -193,7 +193,7 @@ public class SessionContentHolder {
      */
     public static void addMail(String sessionId, String mail) {
         if (StringUtils.isEmpty(sessionId) || StringUtils.isEmpty(mail)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_MAIL_MAP.containsKey(sessionId) || SESSION_MAIL_MAP.containsValue(mail)) {
             SESSION_MAIL_MAP.remove(sessionId);
@@ -219,7 +219,7 @@ public class SessionContentHolder {
      */
     public static void addPhone(String sessionId, String phone) {
         if (StringUtils.isEmpty(sessionId) || StringUtils.isEmpty(phone)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
 
         if (SESSION_PHONE_MAP.containsKey(sessionId)) {
@@ -245,10 +245,10 @@ public class SessionContentHolder {
      */
     public static void deleteMailSessionBySessionId(String sessionId) {
         if (StringUtils.isEmpty(sessionId)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_MAIL_MAP.containsKey(sessionId) == false) {
-            throw new GenesisException(ResultCode.NO_SUCH_MAIL, ResultCode.MSG_NO_SUCH_MAIL);
+            throw new HotelException(ResultCode.NO_SUCH_MAIL, ResultCode.MSG_NO_SUCH_MAIL);
         }
         SESSION_MAIL_MAP.remove(sessionId);
 
@@ -270,10 +270,10 @@ public class SessionContentHolder {
      */
     public static void deletePhoneSessionBySessionId(String sessionId) {
         if (StringUtils.isEmpty(sessionId)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_PHONE_MAP.containsKey(sessionId) == false) {
-            throw new GenesisException(ResultCode.NO_SUCH_PHONE, ResultCode.MSG_NO_SUCH_PHONE);
+            throw new HotelException(ResultCode.NO_SUCH_PHONE, ResultCode.MSG_NO_SUCH_PHONE);
         }
         SESSION_PHONE_MAP.remove(sessionId);
 
@@ -296,12 +296,12 @@ public class SessionContentHolder {
      */
     public static ResultDO<Long> judgeSignin(String sessionId) {
         if (StringUtils.isBlank(sessionId)) {
-            throw new GenesisException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+            throw new HotelException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         if (SESSION_2_SIGN_IN_USER_ID_MAP.containsKey(sessionId)) {
             long id = SESSION_2_SIGN_IN_USER_ID_MAP.get(sessionId);
             if (id <= 0) {
-                throw new GenesisException(ResultCode.NO_SUCH_USER, ResultCode.MSG_NO_SUCH_USER);
+                throw new HotelException(ResultCode.NO_SUCH_USER, ResultCode.MSG_NO_SUCH_USER);
             }
             return new ResultDO<Long>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, id);
         }
