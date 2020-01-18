@@ -2,63 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.altersoftware.hotel.dao.UserDAO">
-	<resultMap id="UserDO" type="com.altersoftware.hotel.entity.UserDO">
-		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="academy_id" property="academyId"/>
-		<result column="class_id" property="classId"/>
-		<result column="number" property="number"/>
-		<result column="password" property="password" />
-		<result column="name" property="name" />
-		<result column="type" property="type" />
-		<result column="sex" property="sex" />
-		<result column="id_card_number" property="idCardNumber" />
-		<result column="phone" property="phone" />
-		<result column="mail" property="mail" />
-		<result column="picture" property="picture" />
-		<result column="face_token" property="faceToken" />
-		<result column="create_time" property="createTime"/>
-		<result column="modify_time" property="modifyTime"/>
-	</resultMap>
+    <resultMap id="UserDO" type="com.altersoftware.hotel.entity.UserDO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="academy_id" property="academyId"/>
+        <result column="class_id" property="classId"/>
+        <result column="number" property="number"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="sex" property="sex"/>
+        <result column="id_card_number" property="idCardNumber"/>
+        <result column="phone" property="phone"/>
+        <result column="mail" property="mail"/>
+        <result column="picture" property="picture"/>
+        <result column="face_token" property="faceToken"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
 
-<!--	插入学生-->
-	<insert id="insert" parameterType="com.altersoftware.hotel.entity.UserDO">
-		<selectKey keyProperty="id" order="AFTER" resultType="long">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-		INSERT INTO tb_user(
-			academy_id,
-			class_id,
-			number,
-			password,
-			name,
-			type,
-			sex,
-			id_card_number,
-			phone,
-			mail,
-			picture,
-			face_token,
-			create_time,
-			modify_time
-		) VALUES(
-			#{academyId},
-			#{classId},
-			#{number},
-			#{password},
-			#{name},
-			#{type},
-			#{sex},
-			#{idCardNumber},
-			#{phone},
-			#{mail},
-			#{picture},
-			#{faceToken},
-			NOW(),
-			NOW()
-		);
-	</insert>
-<!--  id查询用户-->
-	<select id="getUserDOById" parameterType="long" resultMap="UserDO">
+    <!--	插入学生-->
+    <insert id="insert" parameterType="com.altersoftware.hotel.entity.UserDO">
+        <selectKey keyProperty="id" order="AFTER" resultType="long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tb_user(
+        academy_id,
+        class_id,
+        number,
+        password,
+        name,
+        type,
+        sex,
+        id_card_number,
+        phone,
+        mail,
+        picture,
+        face_token,
+        create_time,
+        modify_time
+        ) VALUES(
+        #{academyId},
+        #{classId},
+        #{number},
+        #{password},
+        #{name},
+        #{type},
+        #{sex},
+        #{idCardNumber},
+        #{phone},
+        #{mail},
+        #{picture},
+        #{faceToken},
+        NOW(),
+        NOW()
+        );
+    </insert>
+    <!--  id查询用户-->
+    <select id="getUserDOById" parameterType="long" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -78,8 +78,8 @@
 		FROM tb_user WHERE
 			id=#{id}
 	</select>
-<!--用户名密码校验用户-->
-	<select id="getUserDOByNumberAndPassword" resultMap="UserDO">
+    <!--用户名密码校验用户-->
+    <select id="getUserDOByNumberAndPassword" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -101,8 +101,8 @@
 		AND
 			password=#{password}
 	</select>
-<!--	更新用户-->
-	<update id="update" parameterType="com.altersoftware.hotel.entity.UserDO">
+    <!--	更新用户-->
+    <update id="update" parameterType="com.altersoftware.hotel.entity.UserDO">
 		UPDATE tb_user
 		SET academy_id=#{academyId},
 			class_id=#{classId},
@@ -119,14 +119,14 @@
 			modify_time=NOW()
 		WHERE id=#{id}
 	</update>
-<!--id删除用户	-->
-	<delete id="deleteById" parameterType="long">
+    <!--id删除用户	-->
+    <delete id="deleteById" parameterType="long">
 		DELETE FROM
 		tb_user
 		WHERE id=#{id}
 	</delete>
-<!--	学号/教师工号查询用户-->
-	<select id="getUserDOByNumber" parameterType="String" resultMap="UserDO">
+    <!--	学号/教师工号查询用户-->
+    <select id="getUserDOByNumber" parameterType="String" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -146,8 +146,8 @@
 		FROM tb_user WHERE
 			number=#{number}
 	</select>
-<!--邮箱查找用户	-->
-	<select id="getUserDOByMail" parameterType="String" resultMap="UserDO">
+    <!--邮箱查找用户	-->
+    <select id="getUserDOByMail" parameterType="String" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -167,8 +167,8 @@
 		FROM tb_user WHERE
 			mail=#{mail}
 	</select>
-<!--	面部查找用户-->
-	<select id="getUserDOByFaceToken" parameterType="String" resultMap="UserDO">
+    <!--	面部查找用户-->
+    <select id="getUserDOByFaceToken" parameterType="String" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -188,8 +188,8 @@
 		FROM tb_user WHERE
 			face_token=#{faceToken}
 	</select>
-<!--	phone查找用户-->
-	<select id="getUserDOByPhone" parameterType="String" resultMap="UserDO">
+    <!--	phone查找用户-->
+    <select id="getUserDOByPhone" parameterType="String" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -209,8 +209,8 @@
 		FROM tb_user WHERE
 			phone=#{phone}
 	</select>
-<!--通过学院返回教师集	-->
-	<select id="getTeacherDOByAcademyId" resultMap="UserDO">
+    <!--通过学院返回教师集	-->
+    <select id="getTeacherDOByAcademyId" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -230,19 +230,19 @@
 		FROM tb_user WHERE
 			academy_id=#{academyId} AND type=1
 	</select>
-<!--返回库中学院id集	-->
-	<select id="getAcademies" resultType="long">
+    <!--返回库中学院id集	-->
+    <select id="getAcademies" resultType="long">
 		SELECT DISTINCT academy_id
 		FROM tb_user
 	</select>
-<!--	通过学院id返回班级集-->
-	<select id="getClassIdsByAcademyId" resultType="long">
+    <!--	通过学院id返回班级集-->
+    <select id="getClassIdsByAcademyId" resultType="long">
 		SELECT DISTINCT class_id
 		FROM tb_user WHERE
 		academy_id=#{academyId} AND type=2
 	</select>
-<!--通过学院和班级返回学生集	-->
-	<select id="getStudentDOByAcademyIdAndClassId" resultMap="UserDO">
+    <!--通过学院和班级返回学生集	-->
+    <select id="getStudentDOByAcademyIdAndClassId" resultMap="UserDO">
 		SELECT
 			id,
 			academy_id,
@@ -262,30 +262,30 @@
 		FROM tb_user WHERE
 			academy_id=#{academyId} AND class_id=#{classId} AND type=2
 	</select>
-<!--返回库中班级id集	-->
-	<select id="getClasses" resultType="long">
+    <!--返回库中班级id集	-->
+    <select id="getClasses" resultType="long">
 		SELECT DISTINCT class_id
 		FROM tb_user WhERE
 			type=1
 	</select>
-<!--通过userNumber查询userId	-->
-	<select id="getIdByNumber" parameterType="String" resultType="long">
+    <!--通过userNumber查询userId	-->
+    <select id="getIdByNumber" parameterType="String" resultType="long">
 		SELECT
 			id
 		FROM tb_user WHERE
 			number=#{number}
 	</select>
-<!--通过userDO返回学院id	-->
-	<select id="getAcademyIdByUserDO" parameterType="com.altersoftware.hotel.entity.UserDO" resultType="long">
+    <!--通过userDO返回学院id	-->
+    <select id="getAcademyIdByUserDO" parameterType="com.altersoftware.hotel.entity.UserDO" resultType="long">
 		SELECT academy_id
 		FROM tb_user
 		WHERE id=#{id}
 	</select>
-<!--判断classId是否存在	-->
-	<select id="checkByClassId" parameterType="long" resultType="Long">
+    <!--判断classId是否存在	-->
+    <select id="checkByClassId" parameterType="long" resultType="Long">
 		SELECT DISTINCT class_id
 		FROM tb_user
 		WHERE class_id = #{classId}
 	</select>
-	
+
 </mapper>

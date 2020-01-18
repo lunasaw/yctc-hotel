@@ -7,6 +7,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.constant.entity.news.NewsState;
 import com.altersoftware.hotel.controller.rest.NewsRestController;
@@ -16,14 +25,6 @@ import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.service.NewsIService;
 import com.altersoftware.hotel.vo.NewsDOAndUrlVO;
 import com.altersoftware.hotel.vo.SendNewsVO;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -50,6 +51,7 @@ public class NewsRestControllerImpl implements NewsRestController {
             return new ResultDO<Map<Integer, List<NewsDOAndUrlVO>>>(false, resultDO.getCode(), resultDO.getMsg(), null);
         }
         Map<Integer, List<NewsDO>> newsMap = resultDO.getModule();
+        System.out.println(newsMap.toString());
         Map<Integer, List<NewsDOAndUrlVO>> newsDOAndUrlVOMap = new HashMap<>();
         // 已读通知集
         List<NewsDO> readedNewsList = newsMap.get(NewsState.READED);

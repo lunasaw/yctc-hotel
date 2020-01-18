@@ -9,26 +9,26 @@
 		<result column="create_time" property="createTime"/>
 		<result column="modify_time" property="modifyTime"/>
 	</resultMap>
-<!--插入一条消息	-->
+	<!--插入一条消息	-->
 	<insert id="insert" parameterType="com.altersoftware.hotel.entity.UserNewsDO">
 		<selectKey keyProperty="id" order="AFTER" resultType="long">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO tb_user_news(
-			user_id,
-			news_id,
-			state,
-			create_time,
-			modify_time
+		user_id,
+		news_id,
+		state,
+		create_time,
+		modify_time
 		) VALUES(
-			#{userId},
-			#{newsId},
-			#{state},
-			NOW(),
-			NOW()
+		#{userId},
+		#{newsId},
+		#{state},
+		NOW(),
+		NOW()
 		);
 	</insert>
-<!--通过id得到用户消息-->
+	<!--通过id得到用户消息-->
 	<select id="getUserNewsDOById" parameterType="long" resultMap="UserNewsDO">
 		SELECT
 			id,
@@ -40,7 +40,7 @@
 		FROM tb_user_news WHERE
 			id=#{id}
 	</select>
-<!--更新一条用户消息-->
+	<!--更新一条用户消息-->
 	<update id="update" parameterType="com.altersoftware.hotel.entity.UserNewsDO">
 		UPDATE tb_user_news
 			SET user_id=#{userId},
@@ -49,26 +49,26 @@
 				modify_time=NOW()
 			WHERE id=#{id}
 	</update>
-<!--通过id删除一条消息-->
+	<!--通过id删除一条消息-->
 	<delete id="deleteById" parameterType="long">
 		DELETE FROM
 		tb_user_news
 		WHERE id=#{id}
 	</delete>
-<!--通过用户id得到用户消息-->
+	<!--通过用户id得到用户消息-->
 	<select id="getNewsIdByUserId" parameterType="long" resultType="long">
 		SELECT
 			news_id
 		FROM tb_user_news WHERE
 			user_id=#{userId}
 	</select>
-<!--通过用户id和消息id得到tUserNewsDO-->
+	<!--通过用户id和消息id得到tUserNewsDO-->
 	<select id="getUserNewsDOByUserIdAndNewsId" resultMap="UserNewsDO">
 		SELECT *
 			FROM tb_user_news
 			WHERE user_id = #{userId} AND news_id = #{newsId}
 	</select>
-<!--通过用户id得到用户未读信息的id-->
+	<!--通过用户id得到用户未读信息的id-->
 	<select id="getNoReadNewsIdByUserId" parameterType="long" resultType="long">
 		SELECT
 			news_id
@@ -77,7 +77,7 @@
 			state=0
 		ORDER BY create_time DESC
 	</select>
-<!--通过用户id和消息id更新消息查看状态-->
+	<!--通过用户id和消息id更新消息查看状态-->
 	<update id="updateStateByUserIdAndNewsId">
 		UPDATE tb_user_news
 			SET state=#{state},
@@ -86,7 +86,7 @@
 			user_id=#{userId} AND
 			news_id=#{newsId}
 	</update>
-<!--通过用户id得到用户已读信息的id-->
+	<!--通过用户id得到用户已读信息的id-->
 	<select id="getReadedNewsIdByUserId" parameterType="long" resultType="long">
 		SELECT
 			news_id
@@ -95,13 +95,13 @@
 			state=1
 		ORDER BY create_time DESC
 	</select>
-<!--通过用户id和信息id删除一条记录-->
+	<!--通过用户id和信息id删除一条记录-->
 	<delete id="deletByUserIdAndNewsId">
 		DELETE FROM
 		tb_user_news
 		WHERE user_id=#{userId} AND news_id=#{newsId}
 	</delete>
-<!--删除所有已读通知-->
+	<!--删除所有已读通知-->
 	<delete id="deleteAllReadedNewsByUserId" parameterType="long">
 		DELETE FROM
 		tb_user_news

@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.altersoftware.hotel.dao.UserDAO">
-	<resultMap id="UserDO" type="com.altersoftware.hotel.entity.UserDO">
-		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="username" property="username" />
-		<result column="password" property="password" />
-		<result column="gmt_created" property="gmtCreated" />
-		<result column="gmt_modified" property="gmtModified" />
-	</resultMap>
+    <resultMap id="UserDO" type="com.altersoftware.hotel.entity.UserDO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
 
-	<insert id="insert" parameterType="com.altersoftware.hotel.entity.UserDO">
+    <insert id="insert" parameterType="com.altersoftware.hotel.entity.UserDO">
 		INSERT INTO tb_user(
 			username,
 			password,
@@ -24,7 +24,7 @@
 		);
 	</insert>
 
-	<select id="getUserById" parameterType="long" resultMap="UserDO">
+    <select id="getUserById" parameterType="long" resultMap="UserDO">
 		SELECT
 			id,
 			username,
@@ -35,7 +35,7 @@
 			id=#{id}
 	</select>
 
-	<select id="getUserByUsernameAndPassword" resultMap="UserDO">
+    <select id="getUserByUsernameAndPassword" resultMap="UserDO">
 		SELECT
 			id,
 			username,

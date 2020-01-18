@@ -8,24 +8,24 @@
 		<result column="modify_time" property="modifyTime"/>
 		<result column="resource" property="resource"/>
 	</resultMap>
-<!--插入一个权限	-->
+	<!--插入一个权限	-->
 	<insert id="insert" parameterType="com.altersoftware.hotel.entity.PermissionDO">
 		<selectKey keyProperty="id" order="AFTER" resultType="long">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		INSERT INTO tb_permission(
-			name,
-			create_time,
-			modify_time,
-			resource
+		name,
+		create_time,
+		modify_time,
+		resource
 		)VALUES(
-			#{name},
-			NOW(),
-			NOW(),
-			#{resource}
+		#{name},
+		NOW(),
+		NOW(),
+		#{resource}
 		);
 	</insert>
-<!--权限id查找权限	-->
+	<!--权限id查找权限	-->
 	<select id="getPermissionDOById" parameterType="long" resultMap="PermissionDO">
 		SELECT
 			id,
@@ -36,7 +36,7 @@
 		FROM tb_permission WHERE
 			id = #{id}
 	</select>
-<!--权限name查找权限-->
+	<!--权限name查找权限-->
 	<select id="getPermissionDOByName" parameterType="String" resultMap="PermissionDO">
 		SELECT
 			id,
@@ -47,7 +47,7 @@
 		FROM tb_permission WHERE
 			name = #{name}
 	</select>
-<!--更新权限	-->
+	<!--更新权限	-->
 	<update id="update" parameterType="com.altersoftware.hotel.entity.PermissionDO">
 		UPDATE tb_permission
 		SET name=#{name},
@@ -55,16 +55,16 @@
 			resource=#{resource}
 		WHERE id=#{id}
 	</update>
-<!-- id删除权限	-->
+	<!-- id删除权限	-->
 	<delete id="deleteById" parameterType="long">
 		DELETE FROM
 		tb_permission
 		WHERE id=#{id}
 	</delete>
-<!--展示所用权限	-->
+	<!--展示所用权限	-->
 	<select id="showAllPermissions" resultMap="PermissionDO">
 		SELECT *
 		FROM tb_permission
 	</select>
-	
+
 </mapper>
