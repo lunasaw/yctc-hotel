@@ -13,7 +13,7 @@ public class UserNewsDO {
     /** 消息id */
     private long newsId;
 
-    /** 阅读状态 ，{@link edu.yctc.hotel.constant.entity.news.NewsState} */
+    /** 阅读状态 */
     private int state;
 
     /** 创建时间 */
