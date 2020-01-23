@@ -2,14 +2,6 @@ package com.altersoftware.hotel.controller.impl;
 
 import javax.servlet.http.HttpSession;
 
-import com.altersoftware.hotel.constant.ErrorText;
-import com.altersoftware.hotel.constant.StaticPath;
-import com.altersoftware.hotel.constant.TemplatePath;
-import com.altersoftware.hotel.controller.ManagerController;
-import com.altersoftware.hotel.controller.session.SessionContentHolder;
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.service.UserIService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.altersoftware.hotel.constant.ErrorText;
+import com.altersoftware.hotel.constant.StaticPath;
+import com.altersoftware.hotel.constant.TemplatePath;
+import com.altersoftware.hotel.controller.ManagerController;
+import com.altersoftware.hotel.controller.session.SessionContentHolder;
+import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.service.UserIService;
 
 
 @Controller
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/manage")
 /**
  * managerController接口实现

@@ -2,6 +2,13 @@ package com.altersoftware.hotel.service.impl;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.dao.UserDAO;
 import com.altersoftware.hotel.entity.ResultDO;
@@ -9,12 +16,6 @@ import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.UserIService;
 import com.altersoftware.hotel.util.SHA256Util;
 import com.altersoftware.hotel.warpper.MailWarpper;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
 
 
 @ComponentScan({"com.altersoftware.hotel.dao"})
@@ -28,25 +29,21 @@ public class UserServiceImpl implements UserIService {
 
     private final static Logger LOG = LoggerFactory.getLogger("serviceLogger");
 
-    @Resource
-    private UserDAO userDAO;//用户
-
     @Autowired
-    MailWarpper mailWarpper;//邮箱
+    MailWarpper                 mailWarpper;
+    @Resource
+    private UserDAO             userDAO;
 
-
-
-      /*
-           isBlank
-           @param str 字符串
-          @return 如果字符串为空或者长度为0，返回true，否则返回false
-            */
+    /**
+     * @param userDO
+     * @return
+     */
     @Override
     public ResultDO<Void> signup(UserDO userDO) {
 
         // 0. 参数校验 //u=isBlank  空格也为true
 
-        if (StringUtils.isBlank(userDO.getNumber()) || StringUtils.isBlank(userDO.getPassword())) {
+        if (StringUtils.isBlank(userDO.getContactPhone()) || StringUtils.isBlank(userDO.getPassword())) {
             LOG.info("sign up fail, parameter invalid, userDO={}", userDO);
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
@@ -65,13 +62,13 @@ public class UserServiceImpl implements UserIService {
 
     @Override
     public ResultDO<Long> signin(UserDO userDO) {
-        if (StringUtils.isBlank(userDO.getNumber()) || StringUtils.isBlank(userDO.getPassword())) {
+        if (StringUtils.isBlank(userDO.getContactPhone()) || StringUtils.isBlank(userDO.getPassword())) {
             LOG.error("sign in fail, parameter illegal, userDO={}", userDO);
             return new ResultDO<Long>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         try {
             userDO.setPassword(SHA256Util.SHA256(userDO.getPassword()));
-            UserDO userDOTemp = userDAO.getUserDOByNumberAndPassword(userDO.getNumber(), userDO.getPassword());
+            UserDO userDOTemp = userDAO.getUserDOByMobileAndPassword(userDO.getContactPhone(), userDO.getPassword());
             if (userDOTemp == null) {
                 LOG.error("sign in failed, userDO={}" + userDOTemp);
                 return new ResultDO<Long>(false, ResultCode.INCORRECT_NUMBER_OR_PASSWORD,
@@ -86,11 +83,18 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //更新密码
+    /**
+     * 更新密码
+     * 
+     * @param userDO
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     @Override
     public ResultDO<Void> updatePassword(UserDO userDO, String oldPassword, String newPassword) {
         try {
-            UserDO userDOTemp = userDAO.getUserDOByNumberAndPassword(userDO.getNumber(),
+            UserDO userDOTemp = userDAO.getUserDOByMobileAndPassword(userDO.getContactPhone(),
                 SHA256Util.SHA256(oldPassword));
             //通过账户  旧密码查询用户
             if (userDOTemp == null) {
@@ -109,7 +113,12 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //通过用户id获取用户
+    /**
+     * 通过用户id获取用户
+     * 
+     * @param userId
+     * @return
+     */
     @Override
     public ResultDO<UserDO> getUserDOById(long userId) {
         try {
@@ -127,9 +136,14 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //通过邮箱查询用户
+    /**
+     * 通过邮箱查询用户
+     * 
+     * @param mail
+     * @return
+     */
     @Override
-    public ResultDO<UserDO> getUserDOByMail(String mail) {
+    public ResultDO<UserDO> getUserDOByEmail(String mail) {
         try {
             UserDO userDO = userDAO.getUserDOByMail(mail);
             if (userDO == null) {
@@ -145,9 +159,14 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //通过手机找到userDO
+    /**
+     * 通过手机找到userDO
+     * 
+     * @param phone
+     * @return
+     */
     @Override
-    public ResultDO<UserDO> getUserDOByPhone(String phone) {
+    public ResultDO<UserDO> getUserDOByMobile(String phone) {
         try {
             UserDO userDO = userDAO.getUserDOByPhone(phone);
             if (userDO == null) {
@@ -163,7 +182,13 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //通过 email修改密码
+    /**
+     * 通过 email修改密码
+     * 
+     * @param mail
+     * @param newPassword
+     * @return
+     */
     @Override
     public ResultDO<Void> retrievePasswordByMail(String mail, String newPassword) {
         try {
@@ -185,7 +210,13 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //手机找密
+    /**
+     * 手机找密
+     * 
+     * @param phone
+     * @param newPasssword
+     * @return
+     */
     @Override
     public ResultDO<Void> retrievePasswordByPhone(String phone, String newPasssword) {
         try {
@@ -207,7 +238,13 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //修改邮箱
+    /**
+     * 修改邮箱
+     * 
+     * @param userDO
+     * @param mail
+     * @return
+     */
     @Override
     public ResultDO<Void> updateMail(UserDO userDO, String mail) {
         try {
@@ -216,7 +253,7 @@ public class UserServiceImpl implements UserIService {
                 LOG.info("user wrong, userDO={}, Mail={}", userDO, mail);
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
             }
-            userDOTemp.setMail(mail);
+            userDOTemp.setEmail(mail);
             userDAO.update(userDOTemp);
             LOG.info("update mail success,userDO={}, Mail={}", userDO, mail);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
@@ -227,7 +264,13 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    //修改手机
+    /**
+     * 修改手机
+     * 
+     * @param userDO
+     * @param mobile
+     * @return
+     */
     @Override
     public ResultDO<Void> updateMobile(UserDO userDO, String mobile) {
         try {
@@ -236,7 +279,7 @@ public class UserServiceImpl implements UserIService {
                 LOG.info("user wrong, userDO={}, mobile={}", userDO, mobile);
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
             }
-            userDOTemp.setPhone(mobile);
+            userDOTemp.setContactPhone(mobile);
             userDAO.update(userDOTemp);
             LOG.info("update mobile success, userDO={}, mobile={}", userDO, mobile);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
@@ -246,25 +289,12 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    // 通过学号/工号找到userDO
-    @Override
-    public ResultDO<UserDO> getUserDOByNumber(String number) {
-        try {
-            UserDO userDO = userDAO.getUserDOByNumber(number);
-            if (userDO == null) {
-                LOG.error("get userDO by number fail, no such number, number={}", number);
-                return new ResultDO<UserDO>(false, ResultCode.NO_SUCH_USER, ResultCode.MSG_NO_SUCH_USER, null);
-            }
-            LOG.info("get userDO by number success, number={}", number);
-            return new ResultDO<UserDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userDO);
-        } catch (Exception e) {
-            LOG.error("get userDO by number error, number={}", number, e);
-            return new ResultDO<UserDO>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION,
-                null);
-        }
-    }
-
-    //通过faceToken返回userDO
+    /**
+     * 通过faceToken返回userDO
+     * 
+     * @param faceToken
+     * @return
+     */
     @Override
     public ResultDO<UserDO> getUserDOByFaceToken(String faceToken) {
         if (StringUtils.isBlank(faceToken)) {
@@ -282,7 +312,12 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    // 更新userDO信息
+    /**
+     * 更新userDO信息
+     * 
+     * @param userDO
+     * @return
+     */
     @Override
     public ResultDO<Void> updateUserDO(UserDO userDO) {
         if (userDO == null) {

@@ -5,11 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.altersoftware.hotel.cache.permission.UserPermissionCache;
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.dao.*;
-import com.altersoftware.hotel.entity.*;
-import com.altersoftware.hotel.service.PermissionIService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -21,6 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import com.altersoftware.hotel.cache.permission.UserPermissionCache;
+import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.dao.*;
+import com.altersoftware.hotel.entity.*;
+import com.altersoftware.hotel.service.PermissionIService;
 
 /**
  * permissionService接口实现
@@ -74,7 +74,7 @@ public class PermissionServiceImpl implements PermissionIService {
             LOG.error("shiro authentication get user by id is null, parameter illegal, userId={}", userId);
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        UsernamePasswordToken token = new UsernamePasswordToken(userDO.getNumber(), userDO.getPassword());
+        UsernamePasswordToken token = new UsernamePasswordToken(userDO.getContactPhone(), userDO.getPassword());
         // 3.执行登录方法
         try {
             subject.login(token);
@@ -126,7 +126,7 @@ public class PermissionServiceImpl implements PermissionIService {
                     ResultCode.MSG_NO_SUCH_PERMISSION_GROUNP);
             }
             for (int i = 0; i < permissionIdlist.size(); i++) {
-                Long permissionId = (Long)permissionIdlist.get(i);
+                Long permissionId = permissionIdlist.get(i);
                 PermissionUserDO permissionUserDO = new PermissionUserDO();
                 permissionUserDO.setUserId(userId);
                 permissionUserDO.setPermissionId(permissionId);
@@ -250,7 +250,7 @@ public class PermissionServiceImpl implements PermissionIService {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         try {
-            UserDO userDO = userDAO.getUserDOByNumber(userNumber);
+            UserDO userDO = userDAO.getUserDOByPhone(userNumber);
             if (userDO == null) {
                 LOG.error("userDO is null, get userDO by number error, parameter illegal, userDO={}, userNumber={}",
                     userDO, userNumber);
@@ -276,7 +276,7 @@ public class PermissionServiceImpl implements PermissionIService {
                     ResultCode.MSG_NO_SUCH_PERMISSION_GROUNP);
             }
             for (int i = 0; i < permissionIdlist.size(); i++) {
-                Long permissionIdTemp = (Long)permissionIdlist.get(i);
+                Long permissionIdTemp = permissionIdlist.get(i);
                 if (permissionIdTemp == permissionId) {// 若该权限是管理员权限组中有的权限
                     LOG.error(
                         "Admin permissionGroup is null, parameter illegal, userNumber={}, permissionName={}, permissionId={}",
@@ -323,7 +323,7 @@ public class PermissionServiceImpl implements PermissionIService {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         try {
-            UserDO userDO = userDAO.getUserDOByNumber(userNumber);
+            UserDO userDO = userDAO.getUserDOByPhone(userNumber);
             if (userDO == null) {
                 LOG.error("userDO is null, get userDO by number error, parameter illegal, userDO={}, userNumber={}",
                     userDO, userNumber);
@@ -349,7 +349,7 @@ public class PermissionServiceImpl implements PermissionIService {
                     ResultCode.MSG_NO_SUCH_PERMISSION_GROUNP);
             }
             for (int i = 0; i < permissionIdlist.size(); i++) {
-                Long permissionIdTemp = (Long)permissionIdlist.get(i);
+                Long permissionIdTemp = permissionIdlist.get(i);
                 if (permissionIdTemp == permissionId) {// 若该权限是管理员权限组中有的权限
                     LOG.error(
                         "Admin permissionGroup is null, parameter illegal, userNumber={}, permissionName={}, permissionId={}",
@@ -393,7 +393,7 @@ public class PermissionServiceImpl implements PermissionIService {
         }
         List<PermissionDO> permissions;
         try {
-            UserDO userDO = userDAO.getUserDOByNumber(userNumber);
+            UserDO userDO = userDAO.getUserDOByPhone(userNumber);
             if (userDO == null) {
                 LOG.error("userDO is null, get userId by number error, parameter illegal, userDO={}, userNumber={}",
                     userDO, userNumber);

@@ -1,135 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:noNamespaceSchemaLocation="http://www.padual.com/java/logback.xsd"
-		debug="false" scan="true" scanPeriod="30 second">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+<configuration>
+    <property name="LOG_HOME" value="log"/>
 
-	<property name="PROJECT" value="iorder" />
-	<property name="ROOT" value="logs/${PROJECT}/" />
-	<property name="FILESIZE" value="50MB" />
-	<property name="MAXHISTORY" value="100" />
-	<timestamp key="DATETIME" datePattern="yyyy-MM-dd HH:mm:ss" />
-	<!-- 控制台打印 -->
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder charset="utf-8">
-			<pattern>[%-5level] %d{${DATETIME}} [%thread] %logger{36} - %m%n
-			</pattern>
-		</encoder>
-	</appender>
-	<!-- ERROR 输入到文件，按日期和文件大小 -->
-	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<encoder charset="utf-8">
-			<pattern>[%-5level] %d{${DATETIME}} [%thread] %logger{36} - %m%n
-			</pattern>
-		</encoder>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>ERROR</level>
-			<onMatch>ACCEPT</onMatch>
-			<onMismatch>DENY</onMismatch>
-		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${ROOT}%d/error.%i.log</fileNamePattern>
-			<maxHistory>${MAXHISTORY}</maxHistory>
-			<timeBasedFileNamingAndTriggeringPolicy
-					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>${FILESIZE}</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-	</appender>
+    <!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,%i索引【从数字0开始递增】 -->
 
-	<!-- WARN 输入到文件，按日期和文件大小 -->
-	<appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<encoder charset="utf-8">
-			<pattern>[%-5level] %d{${DATETIME}} [%thread] %logger{36} - %m%n
-			</pattern>
-		</encoder>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>WARN</level>
-			<onMatch>ACCEPT</onMatch>
-			<onMismatch>DENY</onMismatch>
-		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${ROOT}%d/warn.%i.log</fileNamePattern>
-			<maxHistory>${MAXHISTORY}</maxHistory>
-			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>${FILESIZE}</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-	</appender>
+    <!-- ConsoleAppender：把日志输出到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %X{traceId} %p (%file:%line\) - %m %X{uri}%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-	<!-- INFO 输入到文件，按日期和文件大小 -->
-	<appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<encoder charset="utf-8">
-			<pattern>[%-5level] %d{${DATETIME}} [%thread] %logger{36} - %m%n
-			</pattern>
-		</encoder>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>INFO</level>
-			<onMatch>ACCEPT</onMatch>
-			<onMismatch>DENY</onMismatch>
-		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${ROOT}%d/info.%i.log</fileNamePattern>
-			<maxHistory>${MAXHISTORY}</maxHistory>
-			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>${FILESIZE}</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-	</appender>
-	<!-- DEBUG 输入到文件，按日期和文件大小 -->
-	<appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<encoder charset="utf-8">
-			<pattern>[%-5level] %d{${DATETIME}} [%thread] %logger{36} - %m%n
-			</pattern>
-		</encoder>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>DEBUG</level>
-			<onMatch>ACCEPT</onMatch>
-			<onMismatch>DENY</onMismatch>
-		</filter>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${ROOT}%d/debug.%i.log</fileNamePattern>
-			<maxHistory>${MAXHISTORY}</maxHistory>
-			<timeBasedFileNamingAndTriggeringPolicy
-					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>${FILESIZE}</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-	</appender>
-	<!-- TRACE 输入到文件，按日期和文件大小 -->
-	<appender name="TRACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<encoder charset="utf-8">
-			<pattern>[%-5level] %d{${DATETIME}} [%thread] %logger{36} - %m%n
-			</pattern>
-		</encoder>
-		<filter class="ch.qos.logback.classic.filter.LevelFilter">
-			<level>TRACE</level>
-			<onMatch>ACCEPT</onMatch>
-			<onMismatch>DENY</onMismatch>
-		</filter>
-		<rollingPolicy
-				class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${ROOT}%d/trace.%i.log</fileNamePattern>
-			<maxHistory>${MAXHISTORY}</maxHistory>
-			<timeBasedFileNamingAndTriggeringPolicy
-					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>${FILESIZE}</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-	</appender>
+    <appender name="serverLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/server.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/server.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d %X{traceId} %p (%file:%line\) - %m %X{uri}%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-	<!-- SQL相关日志输出-->
-	<logger name="org.apache.ibatis" level="INFO" additivity="false" />
-	<logger name="org.mybatis.spring" level="INFO" additivity="false" />
-	<logger name="com.github.miemiedev.mybatis.paginator" level="INFO" additivity="false" />
+    <!-- 方便开发输出到控制台
+    <logger name="com.iteknical.fusion.staff" additivity="false" level="INFO">
+        <appender-ref ref="serverLog"/>
+    </logger>
+    -->
 
-	<!-- Logger 根目录 -->
-	<root level="DEBUG">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="DEBUG" />
-		<appender-ref ref="ERROR" />
-		<appender-ref ref="WARN" />
-		<appender-ref ref="INFO" />
-		<appender-ref ref="TRACE" />
-	</root>
+    <!-- 控制台输出日志 -->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
 </configuration>

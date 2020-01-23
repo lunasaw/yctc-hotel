@@ -2,38 +2,54 @@ package com.altersoftware.hotel.entity;
 
 import java.util.Date;
 
+import com.altersoftware.hotel.constant.entity.user.UserType;
+
 public class UserDO {
 
-    /** 用户id */
-    private long id;
-    /** 学院 */
-    private long academyId;
-    /** 班级 */
-    private long classId;
-    /** 学号/工号 */
-    private String number;
-    /** 密码 */
+    /** 主键用户号 */
+    private long   id;
+
+    /** 部门号码 */
+    private long   departmentId;
+
+    /** 用户账户余额 */
+    private Double account;
+
+    /** 用户年龄 */
+    private int    age;
+
+    /** 用户密码 */
     private String password;
-    /** 姓名 */
+
+    /** 用户姓名 */
     private String name;
-    /** user类型，见{@link edu.yctc.hotel.constant.UserType}} */
-    private int type;
-    /** 性别 */
+
+    /** 权限组id 见{@link UserType}} */
+    private long   type;
+
+    /** 用户性别 */
     private String sex;
+
     /** 身份证 */
     private String idCardNumber;
-    /** 手机号 */
-    private String phone;
-    /** 邮箱 */
-    private String mail;
-    /** 人脸照url */
-    private String picture;
+
+    /** 用户联系方式 */
+    private String contactPhone;
+
+    /** 用户邮箱 */
+    private String email;
+
+    /** 面部资料 */
+    private String faceId;
+
     /** 人脸标识 */
     private String faceToken;
+
     /** 创建时间 */
-    private Date createTime;
+    private Date   createTime;
+
     /** 修改时间 */
-    private Date modifyTime;
+    private Date   modifyTime;
 
     public long getId() {
         return id;
@@ -43,12 +59,28 @@ public class UserDO {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
+    public long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setDepartmentId(long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public Double getAccount() {
+        return account;
+    }
+
+    public void setAccount(Double account) {
+        this.account = account;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getPassword() {
@@ -67,11 +99,11 @@ public class UserDO {
         this.name = name;
     }
 
-    public int getType() {
+    public long getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(long type) {
         this.type = type;
     }
 
@@ -91,28 +123,28 @@ public class UserDO {
         this.idCardNumber = idCardNumber;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getContactPhone() {
+        return contactPhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getFaceId() {
+        return faceId;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setFaceId(String faceId) {
+        this.faceId = faceId;
     }
 
     public String getFaceToken() {
@@ -139,57 +171,24 @@ public class UserDO {
         this.modifyTime = modifyTime;
     }
 
-    public long getAcademyId() {
-        return academyId;
-    }
-
-    public void setAcademyId(long academyId) {
-        this.academyId = academyId;
-    }
-
-    public long getClassId() {
-        return classId;
-    }
-
-    public void setClassId(long classId) {
-        this.classId = classId;
-    }
-
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("UserDO [id=");
-        builder.append(id);
-        builder.append(", academyId=");
-        builder.append(academyId);
-        builder.append(", classId=");
-        builder.append(classId);
-        builder.append(", number=");
-        builder.append(number);
-        builder.append(", password=");
-        builder.append(password);
-        builder.append(", name=");
-        builder.append(name);
-        builder.append(", type=");
-        builder.append(type);
-        builder.append(", sex=");
-        builder.append(sex);
-        builder.append(", idCardNumber=");
-        builder.append(idCardNumber);
-        builder.append(", phone=");
-        builder.append(phone);
-        builder.append(", mail=");
-        builder.append(mail);
-        builder.append(", picture=");
-        builder.append(picture);
-        builder.append(", faceToken=");
-        builder.append(faceToken);
-        builder.append(", createTime=");
-        builder.append(createTime);
-        builder.append(", modifyTime=");
-        builder.append(modifyTime);
-        builder.append("]");
-        return builder.toString();
+        return "UserDO{" +
+            "id=" + id +
+            ", departmentId=" + departmentId +
+            ", account=" + account +
+            ", age=" + age +
+            ", password='" + password + '\'' +
+            ", name='" + name + '\'' +
+            ", type=" + type +
+            ", sex='" + sex + '\'' +
+            ", idCardNumber='" + idCardNumber + '\'' +
+            ", contactPhone='" + contactPhone + '\'' +
+            ", email='" + email + '\'' +
+            ", faceId='" + faceId + '\'' +
+            ", faceToken='" + faceToken + '\'' +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
+            '}';
     }
-
 }
