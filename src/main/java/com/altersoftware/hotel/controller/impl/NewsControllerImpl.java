@@ -1,15 +1,15 @@
 package com.altersoftware.hotel.controller.impl;
 
-import com.altersoftware.hotel.constant.TemplatePath;
-import com.altersoftware.hotel.controller.NewsController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.altersoftware.hotel.constant.TemplatePath;
+import com.altersoftware.hotel.controller.NewsController;
 
 @Controller
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"ecom.altersoftware.hotel.service"})
 @RequestMapping("/news")
 /**
  * newsController接口实现

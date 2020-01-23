@@ -1,11 +1,11 @@
 package com.altersoftware.hotel.dao;
 
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.PermissionGroupDO;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 
 @Mapper
@@ -16,7 +16,11 @@ public interface PermissionGroupDAO {
      * 
      * @param permissionGroupDO
      */
-    public void insert(PermissionGroupDO permissionGroupDO);
+    @Insert(" INSERT INTO tb_permission_group (id, name, create_time, modify_time ) "
+        +
+        "VALUES(#{id},  #{name},  NOW(), NOW()) ")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void insert(PermissionGroupDO permissionGroupDO);
 
     /**
      * 权限组id查询权限组
@@ -24,21 +28,30 @@ public interface PermissionGroupDAO {
      * @param id
      * @return
      */
-    public PermissionGroupDO getPermissionGroupDOById(long id);
+    @Select("select id, name, create_time, modify_time  from tb_permission_group where id=#{id} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    PermissionGroupDO getPermissionGroupDOById(@Param("id") long id);
 
     /**
      * 更新权限组
      * 
      * @param permissionGroupDO
      */
-    public void update(PermissionGroupDO permissionGroupDO);
+    @Update("update tb_permission_group  set name=#{name}, modify_time=now() where id=#{id}")
+    int update(PermissionGroupDO permissionGroupDO);
 
     /**
      * id删除权限组
      * 
      * @param id
      */
-    public void deleteById(long id);
+    @Delete("DELETE FROM tb_permission_group WHERE id=#{id}")
+    void deleteById(@Param("id") long id);
 
     /**
      * 通过权限组的name获取权限组的id
@@ -46,7 +59,8 @@ public interface PermissionGroupDAO {
      * @param name
      * @return
      */
-    public long getPermissionGroupIdByName(String name);
+    @Select("select id from tb_permission_group where name=#{name} ")
+    long getPermissionGroupIdByName(@Param("name") String name);
 
     /**
      * 通过权限组的id获取权限组的name
@@ -54,7 +68,8 @@ public interface PermissionGroupDAO {
      * @param id
      * @return
      */
-    public String getPermissionGroupNameById(long id);
+    @Select("select name from tb_permission_group where id=#{id} ")
+    String getPermissionGroupNameById(@Param("id") long id);
 
     /**
      * 展示所有的权限组
@@ -62,7 +77,14 @@ public interface PermissionGroupDAO {
      * @param
      * @return
      */
-    public List<PermissionGroupDO> showALLPermissionGroups();
+    @Select("select id, name, create_time, modify_time from tb_permission_group   ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<PermissionGroupDO> showALLPermissionGroups();
 
     /**
      * 通过权限组的name删除权限组
@@ -70,6 +92,7 @@ public interface PermissionGroupDAO {
      * @param name
      * @return
      */
-    public long deletePermissionGroupByName(String name);
+    @Delete("DELETE FROM tb_permission_group WHERE name=#{name}")
+    long deletePermissionGroupByName(String name);
 
 }

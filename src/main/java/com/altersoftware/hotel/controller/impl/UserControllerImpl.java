@@ -2,17 +2,6 @@ package com.altersoftware.hotel.controller.impl;
 
 import javax.servlet.http.HttpSession;
 
-import com.altersoftware.hotel.constant.ErrorText;
-import com.altersoftware.hotel.constant.StaticPath;
-import com.altersoftware.hotel.constant.TemplatePath;
-import com.altersoftware.hotel.controller.UserController;
-import com.altersoftware.hotel.controller.session.SessionContentHolder;
-import com.altersoftware.hotel.controller.verification.VerificationCodeHolder;
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.service.PermissionIService;
-import com.altersoftware.hotel.service.UserIService;
-import com.altersoftware.hotel.vo.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +14,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.altersoftware.hotel.constant.ErrorText;
+import com.altersoftware.hotel.constant.StaticPath;
+import com.altersoftware.hotel.constant.TemplatePath;
+import com.altersoftware.hotel.controller.UserController;
+import com.altersoftware.hotel.controller.session.SessionContentHolder;
+import com.altersoftware.hotel.controller.verification.VerificationCodeHolder;
+import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.service.PermissionIService;
+import com.altersoftware.hotel.service.UserIService;
+import com.altersoftware.hotel.vo.*;
 
 @Controller
 @ComponentScan({"com.altersoftware.hotel.service"})
@@ -94,7 +95,7 @@ public class UserControllerImpl implements UserController {
     public String signin(@ModelAttribute UserDO userDO, HttpSession httpSession, Model model) {
         try {
             // 参数检查
-            if (StringUtils.isEmpty(userDO.getNumber()) || StringUtils.isEmpty(userDO.getPassword())) {
+            if (StringUtils.isEmpty(userDO.getContactPhone()) || StringUtils.isEmpty(userDO.getPassword())) {
                 LOG.error("sign in fail, parameter illegal, userDO={}, sessionId={}", userDO, httpSession.getId());
                 return "redirect:/" + StaticPath.COMMON_ERROR + "?" + ErrorText.PARAMETER_INVALID;
             }
@@ -330,7 +331,7 @@ public class UserControllerImpl implements UserController {
             // 如果是邮箱找密
             if (!StringUtils.isBlank(mail)) {
                 // 验证邮箱是否是刚才填的邮箱
-                ResultDO<UserDO> resultDO = userService.getUserDOByMail(mail); // 返回结果判断
+                ResultDO<UserDO> resultDO = userService.getUserDOByEmail(mail); // 返回结果判断
                 if (resultDO.isSuccess() == false) {
                     LOG.error("get userDO by mail fail, resultDO={}, updatePasswordVO={}, sessionId={}", resultDO,
                         updatePasswordVO, httpSession.getId());
@@ -340,7 +341,7 @@ public class UserControllerImpl implements UserController {
             } // 如果是手机找密
             else if (!StringUtils.isBlank(phone)) {
                 // 验证手机是否是刚才填的手机
-                ResultDO<UserDO> resultDO = userService.getUserDOByPhone(phone);
+                ResultDO<UserDO> resultDO = userService.getUserDOByMobile(phone);
                 if (resultDO.isSuccess() == false) {
                     LOG.error("get userDO by phone fail, resultDO={}, updatePasswordVO={}, sessionId={}", resultDO,
                         updatePasswordVO, httpSession.getId());
@@ -459,7 +460,7 @@ public class UserControllerImpl implements UserController {
         String mail = null;
         String getCaptchaFromFront = null;
         try {
-            mail = userDO.getMail();
+            mail = userDO.getEmail();
             getCaptchaFromFront = mailCaptchaVO.getCaptchaFromFront();
         } catch (Exception e) {
             LOG.error("mail authentication mail or getCaptchaFromFront error, mail={}, getCaptchaFromFront={}", mail,
@@ -475,7 +476,7 @@ public class UserControllerImpl implements UserController {
         }
         LOG.info("mail authentication captcha match success, mail={}, getCaptchaFromFront={}", mail,
             getCaptchaFromFront);
-        SessionContentHolder.addMail(httpSession.getId(), userDO.getMail());
+        SessionContentHolder.addMail(httpSession.getId(), userDO.getEmail());
         return TemplatePath.USER_UPDATE_MAIL;
     }
 
@@ -609,7 +610,7 @@ public class UserControllerImpl implements UserController {
         String mobile = null;
         String getCaptchaFromFront = null;
         try {
-            mobile = userDO.getPhone();
+            mobile = userDO.getContactPhone();
             getCaptchaFromFront = mobileCaptchaVO.getCaptchaFromFront();
         } catch (Exception e) {
             LOG.error("mobile authentication mobile or getCaptchaFromFront error, mobile={}, getCaptchaFromFront={}",
@@ -625,7 +626,7 @@ public class UserControllerImpl implements UserController {
         }
         LOG.info("mobile authentication captcha match success, mobile={}, getCaptchaFromFront={}", mobile,
             getCaptchaFromFront);
-        SessionContentHolder.addPhone(httpSession.getId(), userDO.getPhone());
+        SessionContentHolder.addPhone(httpSession.getId(), userDO.getContactPhone());
         return TemplatePath.USER_UPDATE_MOBILE;
     }
 

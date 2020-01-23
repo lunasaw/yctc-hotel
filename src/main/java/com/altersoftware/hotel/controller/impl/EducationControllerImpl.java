@@ -2,11 +2,6 @@ package com.altersoftware.hotel.controller.impl;
 
 import java.util.List;
 
-import com.altersoftware.hotel.constant.TemplatePath;
-import com.altersoftware.hotel.controller.EducationController;
-import com.altersoftware.hotel.entity.PermissionDO;
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.service.PermissionIService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.altersoftware.hotel.constant.TemplatePath;
+import com.altersoftware.hotel.controller.EducationController;
+import com.altersoftware.hotel.entity.PermissionDO;
+import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.service.PermissionIService;
 
 @Controller
-@ComponentScan({"edu.yctc.genesis.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/education")
 /**
  * educationController接口实现

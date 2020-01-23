@@ -2,11 +2,6 @@ package com.altersoftware.hotel.config.shiro;
 
 import java.util.List;
 
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.service.PermissionIService;
-import com.altersoftware.hotel.service.UserIService;
-import com.altersoftware.hotel.util.EnvUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -17,6 +12,12 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.service.PermissionIService;
+import com.altersoftware.hotel.service.UserIService;
+import com.altersoftware.hotel.util.EnvUtil;
 
 
 
@@ -112,7 +113,7 @@ public class UserRealm extends AuthorizingRealm {
                 LOG.error("token is null, authenticationToken={}, token={}", authenticationToken, token);
                 return null;
             }
-            ResultDO<UserDO> getUserDOByNumberResultDO = userService.getUserDOByNumber(token.getUsername());
+            ResultDO<UserDO> getUserDOByNumberResultDO = userService.getUserDOByMobile(token.getUsername());
             if (getUserDOByNumberResultDO.isSuccess() == false) {
                 // 用户名不存在
                 return null; // shiro底层会抛出UnknowAccountException

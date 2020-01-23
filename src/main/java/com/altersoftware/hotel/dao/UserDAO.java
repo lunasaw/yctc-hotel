@@ -2,10 +2,9 @@ package com.altersoftware.hotel.dao;
 
 import java.util.List;
 
-import com.altersoftware.hotel.entity.UserDO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
+import com.altersoftware.hotel.entity.UserDO;
 
 
 @Mapper
@@ -16,7 +15,11 @@ public interface UserDAO {
      *
      * @param userDO
      */
-    public void insert(UserDO userDO);
+    @Insert(" INSERT INTO tb_user (id, department_id, account, age, password, name, type, sex, id_card_number, phone, mail, picture, face_token, create_time, modify_time ) "
+        +
+        "VALUES(#{id}, #{departmentId}, #{account}, #{age}, #{password}, #{name}, #{type}, #{sex},  #{idCardNumber}, #{contactPhone}, #{email}, #{faceId}, #{faceToken},  NOW(), NOW()) ")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void insert(UserDO userDO);
 
     /**
      * id查询用户
@@ -24,30 +27,98 @@ public interface UserDAO {
      * @param id
      * @return
      */
-    public UserDO getUserDOById(long id);
+
+    @Select(" select id, department_id, face_token , name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where id=#{id} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOById(long id);
 
     /**
-     * 用户名和密码验证用户
+     * 通过手机和密码验证用户
      *
-     * @param name
+     * @param contactPhone
      * @param password
      * @return
      */
-    public UserDO getUserDOByNumberAndPassword(@Param("number") String number, @Param("password") String password);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where phone=#{contactPhone} and password=#{password}")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOByMobileAndPassword(@Param("contactPhone") String contactPhone, @Param("password") String password);
 
     /**
-     * 更新用户信息
-     *
-     * @param userDO
+     * 通过邮箱和密码验证用户
      */
-    public void update(UserDO userDO);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where mail=#{email} and password=#{password} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
     /**
-     * id删除用户
+     * 更新用户
+     * 
+     * @param staffDO
+     * @return
+     */
+    @Update("update tb_user  set name=#{name}, department_id=#{departmentId}, type=#{type}, id_card_number=#{idCardNumber}, sex=#{sex}, age=#{age}, phone=#{contactPhone}, account=#{account}, password=#{password}, picture=#{faceId},face_token=#{faceToken},  mail=#{email}, modify_time=now()"
+        +
+        "where id=#{id}")
+    int update(UserDO staffDO);
+
+    /**
+     * 删除用户
      *
      * @param id
      */
-    public void deleteById(long id);
+    @Delete("DELETE FROM tb_user WHERE id=#{id}")
+    void deleteById(long id);
 
     /**
      * 学号/教师工号查询用户
@@ -55,7 +126,7 @@ public interface UserDAO {
      * @param number
      * @return
      */
-    public UserDO getUserDOByNumber(String number);
+    UserDO getUserDOByNumber(String number);
 
     /**
      * 邮箱查找用户
@@ -63,15 +134,53 @@ public interface UserDAO {
      * @param mail
      * @return
      */
-    public UserDO getUserDOByMail(String mail);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where mail=#{email} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOByMail(String mail);
 
     /**
-     * faceToken查找学生
+     * faceToken查找用户
      *
      * @param faceToken
      * @return
      */
-    public UserDO getUserDOByFaceToken(String faceToken);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where face_token=#{faceToken} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOByFaceToken(String faceToken);
 
     /**
      * phone查找用户
@@ -79,69 +188,182 @@ public interface UserDAO {
      * @param phone
      * @return
      */
-    public UserDO getUserDOByPhone(String phone);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where phone=#{contactPhone} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOByPhone(String phone);
 
     /**
-     * 通过学院返回教师集
+     * 通过部门返回员工集
      *
-     * @param academyId
+     * @param departmentId
      * @return
      */
-    public List<UserDO> getTeacherDOByAcademyId(long academyId);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where face_token=#{faceToken} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<UserDO> getStaffDOBydepartmentId(long departmentId);
 
     /**
-     * 返回库中学院id集
+     * 返回库中前台集
      *
      * @return
      */
-    public List<Long> getAcademies();
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where type=100002 ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<UserDO> getReception();
 
     /**
-     * 通过学院返回班级集
+     * 返回库中保洁集
      *
-     * @param academyId
      * @return
      */
-    public List<Long> getClassIdsByAcademyId(long academyId);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where type=100003 ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<UserDO> getClean();
 
     /**
-     * 通过学院和班级返回学生集
+     * 返回库中保安集
      *
-     * @param academyId
-     * @param classId
      * @return
      */
-    public List<UserDO> getStudentDOByAcademyIdAndClassId(@Param("academyId") long academyId, @Param("classId") long classId);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where type=100004 ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<UserDO> getRroctect();
 
     /**
-     * 返回库中班级id集
+     * 返回库中客户集
      *
      * @return
      */
-    public List<Long> getClasses();
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where type=100000 ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<UserDO> getCustomer();
 
     /**
-     * 通过userNumber查询userId
+     * 通过faceId查找用户
      *
-     * @param userNumber
-     * @return
+     * @param faceId
      */
-    public long getIdByNumber(String userNumber);
-
-    /**
-     * 通过userDO返回学院id
-     * 
-     * @param userDO
-     * @return
-     */
-    public long getAcademyIdByUserDO(UserDO userDO);
-
-    /**
-     * 判断classId是否存在
-     * 
-     * @param classId
-     * @return
-     */
-    public Long checkByClassId(long classId);
+    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where picture=#{faceId} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOByfaceId(@Param("faceId") String faceId);
 
 }

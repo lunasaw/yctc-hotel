@@ -1,11 +1,5 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.controller.rest.WarpperRestController;
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.service.MessageIService;
-import com.altersoftware.hotel.service.UserIService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.controller.rest.WarpperRestController;
+import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.service.MessageIService;
+import com.altersoftware.hotel.service.UserIService;
 
 @RestController
 @ComponentScan({"edu.yctc.hotel.service"})
@@ -39,7 +39,7 @@ public class WarpperRestControllerImpl implements WarpperRestController {
         if (StringUtils.isBlank(mail)) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        ResultDO<UserDO> resultDO = userService.getUserDOByMail(mail);
+        ResultDO<UserDO> resultDO = userService.getUserDOByEmail(mail);
         if (resultDO.isSuccess() == false) {
             return new ResultDO<>(false, resultDO.getCode(), resultDO.getMsg());
         }
@@ -52,7 +52,7 @@ public class WarpperRestControllerImpl implements WarpperRestController {
         if (StringUtils.isBlank(mobile)) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        ResultDO<UserDO> resultDO = userService.getUserDOByPhone(mobile);
+        ResultDO<UserDO> resultDO = userService.getUserDOByMobile(mobile);
         if (resultDO.isSuccess() == false) {
             return new ResultDO<>(false, resultDO.getCode(), resultDO.getMsg());
         }

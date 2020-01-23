@@ -12,7 +12,7 @@ public interface UserIService {
      * @param userId
      * @return
      */
-    public ResultDO<UserDO> getUserDOById(long userId);
+    ResultDO<UserDO> getUserDOById(long userId);
 
     /**
      * 注册
@@ -20,7 +20,7 @@ public interface UserIService {
      * @param userDO
      * @return
      */
-    public ResultDO<Void> signup(UserDO userDO);
+    ResultDO<Void> signup(UserDO userDO);
 
     /**
      * 登陆
@@ -28,7 +28,7 @@ public interface UserIService {
      * @param userDO
      * @return
      */
-    public ResultDO<Long> signin(UserDO userDO);
+    ResultDO<Long> signin(UserDO userDO);
 
     /**
      * 改密
@@ -38,7 +38,7 @@ public interface UserIService {
      * @param newPassword
      * @return
      */
-    public ResultDO<Void> updatePassword(UserDO userDO, String oldPassword, String newPassword);
+    ResultDO<Void> updatePassword(UserDO userDO, String oldPassword, String newPassword);
 
     /**
      * 通过邮箱找到userDO
@@ -46,7 +46,7 @@ public interface UserIService {
      * @param mail
      * @return
      */
-    public ResultDO<UserDO> getUserDOByMail(String mail);
+    ResultDO<UserDO> getUserDOByEmail(String mail);
 
     /**
      * 通过手机找到userDO
@@ -54,7 +54,7 @@ public interface UserIService {
      * @param phone
      * @return
      */
-    public ResultDO<UserDO> getUserDOByPhone(String phone);
+    ResultDO<UserDO> getUserDOByMobile(String phone);
 
     /**
      * 邮箱找密
@@ -63,7 +63,7 @@ public interface UserIService {
      * @param newPassword
      * @return
      */
-    public ResultDO<Void> retrievePasswordByMail(String mail, String newPassword);
+    ResultDO<Void> retrievePasswordByMail(String mail, String newPassword);
 
     /**
      * 手机找密
@@ -72,7 +72,7 @@ public interface UserIService {
      * @param newPasssword
      * @return
      */
-    public ResultDO<Void> retrievePasswordByPhone(String phone, String newPasssword);
+    ResultDO<Void> retrievePasswordByPhone(String phone, String newPasssword);
 
     /**
      * 修改邮箱
@@ -81,7 +81,7 @@ public interface UserIService {
      * @param mail
      * @return
      */
-    public ResultDO<Void> updateMail(UserDO userDO, String mail);
+    ResultDO<Void> updateMail(UserDO userDO, String mail);
 
     /**
      * 修改手机
@@ -90,15 +90,9 @@ public interface UserIService {
      * @param mobile
      * @return
      */
-    public ResultDO<Void> updateMobile(UserDO userDO, String mobile);
+    ResultDO<Void> updateMobile(UserDO userDO, String mobile);
 
-    /**
-     * 通过学号/工号找到userDO
-     *
-     * @param number
-     * @return
-     */
-    public ResultDO<UserDO> getUserDOByNumber(String number);
+
 
     /**
      * 通过faceToken返回userDO
@@ -106,7 +100,7 @@ public interface UserIService {
      * @param faceToken
      * @return
      */
-    public ResultDO<UserDO> getUserDOByFaceToken(String faceToken);
+    ResultDO<UserDO> getUserDOByFaceToken(String faceToken);
 
     /**
      * 更新userDO信息
@@ -114,7 +108,7 @@ public interface UserIService {
      * @param userDO
      * @return
      */
-    public ResultDO<Void> updateUserDO(UserDO userDO);
+    ResultDO<Void> updateUserDO(UserDO userDO);
 
 
 
