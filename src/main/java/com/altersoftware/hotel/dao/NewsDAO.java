@@ -1,7 +1,8 @@
 package com.altersoftware.hotel.dao;
 
+import org.apache.ibatis.annotations.*;
+
 import com.altersoftware.hotel.entity.NewsDO;
-import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface NewsDAO {
@@ -11,26 +12,40 @@ public interface NewsDAO {
      * 
      * @param newsDO
      */
-    public void insert(NewsDO newsDO);
+    @Insert(" INSERT INTO tb_news (id, title, content, create_time, modify_time ) "
+        +
+        "VALUES(#{id}, #{title}, #{content}, NOW(), NOW()) ")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void insert(NewsDO newsDO);
 
     /**
      * id查找消息
      * 
      * @param id
      */
-    public NewsDO getNewsDOById(long id);
+    @Select("select id, title, content, create_time, modify_time from tb_news where id=#{id}  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "title", column = "title"),
+        @Result(property = "content", column = "content"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    NewsDO getNewsDOById(long id);
 
     /**
      * 更新消息
      * 
      * @param newsDO
      */
-    public void update(NewsDO newsDO);
+    @Update("update tb_news  set title=#{title}, content=#{content}, modify_time=now()  where id=#{id}")
+    int update(NewsDO newsDO);
 
     /**
      * 根据id删除一条消息
      * 
      * @param id
      */
-    public void deleteById(long id);
+    @Delete("DELETE FROM tb_news WHERE id=#{id}")
+    void deleteById(long id);
 }
