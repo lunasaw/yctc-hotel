@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.UserDO;
 
-
 @Mapper
 public interface UserDAO {
 
@@ -15,9 +14,9 @@ public interface UserDAO {
      *
      * @param userDO
      */
-    @Insert(" INSERT INTO tb_user (id, department_id, account, age, password, name, type, sex, id_card_number, phone, mail, picture, face_token, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_user (id, number, department_id, account, age, password, name, type, sex, id_card_number, phone, mail, picture, face_token, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{departmentId}, #{account}, #{age}, #{password}, #{name}, #{type}, #{sex},  #{idCardNumber}, #{contactPhone}, #{email}, #{faceId}, #{faceToken},  NOW(), NOW()) ")
+        "VALUES(#{id}, #{number}, #{departmentId}, #{account}, #{age}, #{password}, #{name}, #{type}, #{sex},  #{idCardNumber}, #{contactPhone}, #{email}, #{faceId}, #{faceToken},  NOW(), NOW()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(UserDO userDO);
 
@@ -28,11 +27,12 @@ public interface UserDAO {
      * @return
      */
 
-    @Select(" select id, department_id, face_token , name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token , name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where id=#{id} ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -56,11 +56,12 @@ public interface UserDAO {
      * @param password
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where phone=#{contactPhone} and password=#{password}")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -80,11 +81,12 @@ public interface UserDAO {
     /**
      * 通过邮箱和密码验证用户
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where mail=#{email} and password=#{password} ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -107,13 +109,13 @@ public interface UserDAO {
      * @param staffDO
      * @return
      */
-    @Update("update tb_user  set name=#{name}, department_id=#{departmentId}, type=#{type}, id_card_number=#{idCardNumber}, sex=#{sex}, age=#{age}, phone=#{contactPhone}, account=#{account}, password=#{password}, picture=#{faceId},face_token=#{faceToken},  mail=#{email}, modify_time=now()"
+    @Update("update tb_user  set name=#{name},number=#{number}, department_id=#{departmentId}, type=#{type}, id_card_number=#{idCardNumber}, sex=#{sex}, age=#{age}, phone=#{contactPhone}, account=#{account}, password=#{password}, picture=#{faceId},face_token=#{faceToken},  mail=#{email}, modify_time=now()"
         +
         "where id=#{id}")
     int update(UserDO staffDO);
 
     /**
-     * 删除用户
+     * id删除用户
      *
      * @param id
      */
@@ -121,12 +123,69 @@ public interface UserDAO {
     void deleteById(long id);
 
     /**
-     * 学号/教师工号查询用户
+     * 删除用户
+     *
+     * @param number
+     */
+    @Delete("DELETE FROM tb_user WHERE number=#{number}")
+    void deleteByNumber(long number);
+
+    /**
+     * 会员号/员工工号查询用户
      *
      * @param number
      * @return
      */
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where number=#{number} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
     UserDO getUserDOByNumber(String number);
+
+    /**
+     * 会员号/员工号和密码查询用户
+     *
+     * @param number
+     * @param password
+     * @return UserDO
+     */
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where number=#{number} and password=#{password}")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    UserDO getUserDOByNumberAndPassword(String number, String password);
 
     /**
      * 邮箱查找用户
@@ -134,11 +193,13 @@ public interface UserDAO {
      * @param mail
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where mail=#{email} ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -161,11 +222,13 @@ public interface UserDAO {
      * @param faceToken
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where face_token=#{faceToken} ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -188,11 +251,13 @@ public interface UserDAO {
      * @param phone
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where phone=#{contactPhone} ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -215,11 +280,13 @@ public interface UserDAO {
      * @param departmentId
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where face_token=#{faceToken} ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -241,11 +308,13 @@ public interface UserDAO {
      *
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where type=100002 ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -267,11 +336,13 @@ public interface UserDAO {
      *
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where type=100003 ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -293,11 +364,13 @@ public interface UserDAO {
      *
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where type=100004 ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -319,11 +392,13 @@ public interface UserDAO {
      *
      * @return
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where type=100000 ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),
@@ -345,11 +420,13 @@ public interface UserDAO {
      *
      * @param faceId
      */
-    @Select(" select id, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token ,  name, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where picture=#{faceId} ")
     @Results({
         @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+
         @Result(property = "name", column = "name"),
         @Result(property = "departmentId", column = "department_id"),
         @Result(property = "idCardNumber", column = "id_card_number"),

@@ -11,7 +11,7 @@ public interface MessageIService {
      * @param mail
      * @return
      */
-    public ResultDO<Void> sendVerificationCodeMail(String mail);
+    ResultDO<Void> sendVerificationCodeMail(String mail);
 
     /**
      * 发手机验证码
@@ -19,7 +19,7 @@ public interface MessageIService {
      * @param mobile
      * @return
      */
-    public ResultDO<Void> sendVerificationCodeSms(String mobile);
+    ResultDO<Void> sendVerificationCodeSms(String mobile);
 
     /**
      * 发送短信
@@ -28,6 +28,6 @@ public interface MessageIService {
      * @param content
      * @return
      */
-    public ResultDO<String> sendSms(String mobile, String content);
+    ResultDO<String> sendSms(String mobile, String content);
 
 }

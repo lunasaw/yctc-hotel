@@ -15,6 +15,9 @@ public class UserDO {
     /** 用户账户余额 */
     private Double account;
 
+    /** 会员卡号/员工工号 */
+    private String number;
+
     /** 用户年龄 */
     private int    age;
 
@@ -50,6 +53,14 @@ public class UserDO {
 
     /** 修改时间 */
     private Date   modifyTime;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public long getId() {
         return id;
@@ -177,6 +188,7 @@ public class UserDO {
             "id=" + id +
             ", departmentId=" + departmentId +
             ", account=" + account +
+            ", number=" + number +
             ", age=" + age +
             ", password='" + password + '\'' +
             ", name='" + name + '\'' +

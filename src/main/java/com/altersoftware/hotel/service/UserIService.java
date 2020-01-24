@@ -46,7 +46,7 @@ public interface UserIService {
      * @param mail
      * @return
      */
-    ResultDO<UserDO> getUserDOByEmail(String mail);
+    ResultDO<UserDO> getUserDOByMail(String mail);
 
     /**
      * 通过手机找到userDO
@@ -54,7 +54,7 @@ public interface UserIService {
      * @param phone
      * @return
      */
-    ResultDO<UserDO> getUserDOByMobile(String phone);
+    ResultDO<UserDO> getUserDOByPhone(String phone);
 
     /**
      * 邮箱找密
@@ -92,7 +92,13 @@ public interface UserIService {
      */
     ResultDO<Void> updateMobile(UserDO userDO, String mobile);
 
-
+    /**
+     * 通过会员号/员工号找到userDO
+     *
+     * @param number
+     * @return
+     */
+    ResultDO<UserDO> getUserDOByNumber(String number);
 
     /**
      * 通过faceToken返回userDO

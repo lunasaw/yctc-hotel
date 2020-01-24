@@ -2,11 +2,11 @@ package com.altersoftware.hotel.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.vo.*;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.vo.*;
 
 
 public interface UserController {
@@ -27,9 +27,6 @@ public interface UserController {
      */
     @Deprecated
     String signup(UserDO userDO);
-
-    @GetMapping("sign-up-success")
-    String showSignupsuccess(ModelMap map);
 
     /**
      * 展示登陆页面
@@ -66,7 +63,7 @@ public interface UserController {
      * @param httpSession
      * @return
      */
-    public String updatePassword(UpdatePasswordVO updatePasswordVO, HttpSession httpSession);
+    String updatePassword(UpdatePasswordVO updatePasswordVO, HttpSession httpSession);
 
     /**
      * 注销登陆post

@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.altersoftware.hotel.constant.TemplatePath;
 import com.altersoftware.hotel.controller.CommonController;
 
+
 @Controller
-@ComponentScan({"com.altersoftware.hotel.service"})
+@ComponentScan({"edu.yctc.hotel.service"})
 @RequestMapping("/")
 /**
  * commonController接口实现
