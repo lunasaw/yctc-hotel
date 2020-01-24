@@ -2,6 +2,13 @@ package com.altersoftware.hotel.service.impl;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+
 import com.altersoftware.hotel.constant.ConstantHolder;
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.verification.VerificationCodeHolder;
@@ -11,12 +18,6 @@ import com.altersoftware.hotel.service.MessageIService;
 import com.altersoftware.hotel.util.EnvUtil;
 import com.altersoftware.hotel.warpper.MailWarpper;
 import com.altersoftware.hotel.warpper.SmsWarpper;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
 
 
 

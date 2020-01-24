@@ -24,11 +24,10 @@
         </encoder>
     </appender>
 
-    <!-- 方便开发输出到控制台
-    <logger name="com.iteknical.fusion.staff" additivity="false" level="INFO">
+    <logger name="com.altersoftware.hotel" additivity="false" level="INFO">
         <appender-ref ref="serverLog"/>
     </logger>
-    -->
+
 
     <!-- 控制台输出日志 -->
     <root level="info">

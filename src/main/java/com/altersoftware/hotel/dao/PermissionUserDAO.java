@@ -1,10 +1,10 @@
 package com.altersoftware.hotel.dao;
 
-import com.altersoftware.hotel.entity.PermissionUserDO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+
+import org.apache.ibatis.annotations.*;
+
+import com.altersoftware.hotel.entity.PermissionUserDO;
 
 
 
@@ -16,7 +16,11 @@ public interface PermissionUserDAO {
      * 
      * @param permissionUserDO
      */
-    public void insert(PermissionUserDO permissionUserDO);
+    @Insert(" INSERT INTO tb_permission_user (id, user_id, permission_id, create_time, modify_time ) "
+        +
+        "VALUES(#{id}, #{userId}, #{permissionId}, NOW(), NOW()) ")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void insert(PermissionUserDO permissionUserDO);
 
     /**
      * id查询权限
@@ -24,29 +28,48 @@ public interface PermissionUserDAO {
      * @param id
      * @return
      */
-    public PermissionUserDO getPermissionUserDOById(long id);
+    @Select("select id, user_id, permission_id, create_time, modify_time from tb_permission_user where id=#{id}  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "userId", column = "user_id"),
+        @Result(property = "permissionId", column = "permission_id"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    PermissionUserDO getPermissionUserDOById(long id);
 
     /**
      * 更新用户权限
      * 
      * @param permissionUserDO
      */
-    public void update(PermissionUserDO permissionUserDO);
+    @Update("update tb_permission_user  set user_id=#{userId}, permission_id=#{permissionId}, modify_time=now()  where id=#{id}")
+    int update(PermissionUserDO permissionUserDO);
 
     /**
      * id删除用户权限
      * 
      * @param id
      */
-    public void deleteById(long id);
+    @Delete("DELETE FROM tb_permission_user WHERE id=#{id}")
+    void deleteById(long id);
 
     /**
-     * 用户id返回权限id
+     * 删除用户权限
+     *
+     * @param userId
+     */
+    @Delete("DELETE FROM tb_permission_user WHERE user_id=#{userId}")
+    void deleteByUserId(long userId);
+
+    /**
+     * 用户id返回权限id组
      * 
-     * @param permissionGroupId
+     * @param userId
      * @return
      */
-    public List<Long> getPermissionIdByUserId(long userId);
+    @Select("select permission_id from tb_permission_user where user_id=#{userId}  ")
+    List<Long> getPermissionIdByUserId(long userId);
 
     /**
      * 用户id和权限id查询表中该条记录
@@ -55,6 +78,15 @@ public interface PermissionUserDAO {
      * @param permissionId
      * @return
      */
-    public PermissionUserDO getPermissionUserDOIdByBothId(@Param("userId") long userId, @Param("permissionId") long permissionId);
+    @Select("select id, user_id, permission_id, , create_time, modify_time from tb_permission_user where user_id=#{userId} and permission_id=#{permissionId} ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "userId", column = "user_id"),
+        @Result(property = "permissionId", column = "permission_id"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    PermissionUserDO getPermissionUserDOIdByBothId(@Param("userId") long userId,
+        @Param("permissionId") long permissionId);
 
 }

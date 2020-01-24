@@ -23,7 +23,7 @@ import com.altersoftware.hotel.entity.PermissionDO;
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PermissionDAOTest {
-    private static final long   ID       = 10001;
+    private static final long   ID       = 4;
     private static final String NAME     = "权限管理1.0";
     private static final String RESOURCE = "admin:authorityManagement1";
 

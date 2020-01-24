@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.impl;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,8 +28,9 @@ import com.altersoftware.hotel.service.PermissionIService;
 import com.altersoftware.hotel.service.UserIService;
 import com.altersoftware.hotel.vo.*;
 
+
 @Controller
-@ComponentScan({"com.altersoftware.hotel.service"})
+@ComponentScan({"edu.yctc.hotel.service"})
 @RequestMapping("/user")
 /**
  * userController接口实现
@@ -39,14 +41,14 @@ public class UserControllerImpl implements UserController {
 
     private final static Logger LOG = LoggerFactory.getLogger("controllerLogger");
 
-    @Autowired
+    @Resource
     private UserIService        userService;
 
     @Autowired
     private PermissionIService  permissionService;
 
     @Override
-    @PostMapping("signup")
+    @PostMapping("sign-up")
     @Deprecated
     public String signup(@ModelAttribute UserDO userDO) {
         ResultDO<Void> resultDO = userService.signup(userDO);
@@ -72,13 +74,6 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    @GetMapping("sign-up-success")
-    public String showSignupsuccess(ModelMap map) {
-        map.addAttribute("userDO", new UserDO());
-        return TemplatePath.USER_SIGN_UP_SUCCESS;
-    }
-
-    @Override
     @GetMapping("sign-in")
     public String showSignin(HttpSession httpSession, Model model) {
         ResultDO<Long> resultDO = SessionContentHolder.judgeSignin(httpSession.getId());
@@ -95,7 +90,7 @@ public class UserControllerImpl implements UserController {
     public String signin(@ModelAttribute UserDO userDO, HttpSession httpSession, Model model) {
         try {
             // 参数检查
-            if (StringUtils.isEmpty(userDO.getContactPhone()) || StringUtils.isEmpty(userDO.getPassword())) {
+            if (StringUtils.isEmpty(userDO.getNumber()) || StringUtils.isEmpty(userDO.getPassword())) {
                 LOG.error("sign in fail, parameter illegal, userDO={}, sessionId={}", userDO, httpSession.getId());
                 return "redirect:/" + StaticPath.COMMON_ERROR + "?" + ErrorText.PARAMETER_INVALID;
             }
@@ -331,7 +326,7 @@ public class UserControllerImpl implements UserController {
             // 如果是邮箱找密
             if (!StringUtils.isBlank(mail)) {
                 // 验证邮箱是否是刚才填的邮箱
-                ResultDO<UserDO> resultDO = userService.getUserDOByEmail(mail); // 返回结果判断
+                ResultDO<UserDO> resultDO = userService.getUserDOByMail(mail); // 返回结果判断
                 if (resultDO.isSuccess() == false) {
                     LOG.error("get userDO by mail fail, resultDO={}, updatePasswordVO={}, sessionId={}", resultDO,
                         updatePasswordVO, httpSession.getId());
@@ -341,7 +336,7 @@ public class UserControllerImpl implements UserController {
             } // 如果是手机找密
             else if (!StringUtils.isBlank(phone)) {
                 // 验证手机是否是刚才填的手机
-                ResultDO<UserDO> resultDO = userService.getUserDOByMobile(phone);
+                ResultDO<UserDO> resultDO = userService.getUserDOByPhone(phone);
                 if (resultDO.isSuccess() == false) {
                     LOG.error("get userDO by phone fail, resultDO={}, updatePasswordVO={}, sessionId={}", resultDO,
                         updatePasswordVO, httpSession.getId());

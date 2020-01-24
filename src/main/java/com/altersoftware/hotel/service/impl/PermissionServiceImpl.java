@@ -22,6 +22,7 @@ import com.altersoftware.hotel.dao.*;
 import com.altersoftware.hotel.entity.*;
 import com.altersoftware.hotel.service.PermissionIService;
 
+
 /**
  * permissionService接口实现
  *
@@ -74,7 +75,7 @@ public class PermissionServiceImpl implements PermissionIService {
             LOG.error("shiro authentication get user by id is null, parameter illegal, userId={}", userId);
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        UsernamePasswordToken token = new UsernamePasswordToken(userDO.getContactPhone(), userDO.getPassword());
+        UsernamePasswordToken token = new UsernamePasswordToken(userDO.getNumber(), userDO.getPassword());
         // 3.执行登录方法
         try {
             subject.login(token);
@@ -250,7 +251,7 @@ public class PermissionServiceImpl implements PermissionIService {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         try {
-            UserDO userDO = userDAO.getUserDOByPhone(userNumber);
+            UserDO userDO = userDAO.getUserDOByNumber(userNumber);
             if (userDO == null) {
                 LOG.error("userDO is null, get userDO by number error, parameter illegal, userDO={}, userNumber={}",
                     userDO, userNumber);
@@ -323,7 +324,7 @@ public class PermissionServiceImpl implements PermissionIService {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         try {
-            UserDO userDO = userDAO.getUserDOByPhone(userNumber);
+            UserDO userDO = userDAO.getUserDOByNumber(userNumber);
             if (userDO == null) {
                 LOG.error("userDO is null, get userDO by number error, parameter illegal, userDO={}, userNumber={}",
                     userDO, userNumber);
@@ -393,7 +394,7 @@ public class PermissionServiceImpl implements PermissionIService {
         }
         List<PermissionDO> permissions;
         try {
-            UserDO userDO = userDAO.getUserDOByPhone(userNumber);
+            UserDO userDO = userDAO.getUserDOByNumber(userNumber);
             if (userDO == null) {
                 LOG.error("userDO is null, get userId by number error, parameter illegal, userDO={}, userNumber={}",
                     userDO, userNumber);

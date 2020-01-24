@@ -21,8 +21,9 @@ import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.UserIService;
 
 
+
 @Controller
-@ComponentScan({"com.altersoftware.hotel.service"})
+@ComponentScan({"edu.yctc.hotel.service"})
 @RequestMapping("/manage")
 /**
  * managerController接口实现

@@ -51,7 +51,6 @@ public class NewsRestControllerImpl implements NewsRestController {
             return new ResultDO<Map<Integer, List<NewsDOAndUrlVO>>>(false, resultDO.getCode(), resultDO.getMsg(), null);
         }
         Map<Integer, List<NewsDO>> newsMap = resultDO.getModule();
-        System.out.println(newsMap.toString());
         Map<Integer, List<NewsDOAndUrlVO>> newsDOAndUrlVOMap = new HashMap<>();
         // 已读通知集
         List<NewsDO> readedNewsList = newsMap.get(NewsState.READED);

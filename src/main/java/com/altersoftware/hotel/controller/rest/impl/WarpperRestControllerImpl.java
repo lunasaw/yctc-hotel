@@ -16,8 +16,9 @@ import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.MessageIService;
 import com.altersoftware.hotel.service.UserIService;
 
+
 @RestController
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/restwarpper")
 @Async
 /**
@@ -39,7 +40,7 @@ public class WarpperRestControllerImpl implements WarpperRestController {
         if (StringUtils.isBlank(mail)) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        ResultDO<UserDO> resultDO = userService.getUserDOByEmail(mail);
+        ResultDO<UserDO> resultDO = userService.getUserDOByMail(mail);
         if (resultDO.isSuccess() == false) {
             return new ResultDO<>(false, resultDO.getCode(), resultDO.getMsg());
         }
@@ -52,7 +53,7 @@ public class WarpperRestControllerImpl implements WarpperRestController {
         if (StringUtils.isBlank(mobile)) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        ResultDO<UserDO> resultDO = userService.getUserDOByMobile(mobile);
+        ResultDO<UserDO> resultDO = userService.getUserDOByPhone(mobile);
         if (resultDO.isSuccess() == false) {
             return new ResultDO<>(false, resultDO.getCode(), resultDO.getMsg());
         }

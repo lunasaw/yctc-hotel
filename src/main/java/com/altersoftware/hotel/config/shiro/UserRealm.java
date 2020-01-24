@@ -113,7 +113,7 @@ public class UserRealm extends AuthorizingRealm {
                 LOG.error("token is null, authenticationToken={}, token={}", authenticationToken, token);
                 return null;
             }
-            ResultDO<UserDO> getUserDOByNumberResultDO = userService.getUserDOByMobile(token.getUsername());
+            ResultDO<UserDO> getUserDOByNumberResultDO = userService.getUserDOByNumber(token.getUsername());
             if (getUserDOByNumberResultDO.isSuccess() == false) {
                 // 用户名不存在
                 return null; // shiro底层会抛出UnknowAccountException

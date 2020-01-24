@@ -1,7 +1,17 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.PermissionRestController;
@@ -12,19 +22,12 @@ import com.altersoftware.hotel.service.PermissionIService;
 import com.altersoftware.hotel.vo.AuthorizationVO;
 import com.altersoftware.hotel.vo.PermissionGroupNameAndIdAndPermissionIdsVO;
 import com.altersoftware.hotel.vo.PermissionGroupNameAndPermissionIdsVO;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 
 
 @RestController
-@ComponentScan({"edu.yctc.hotel.service"})
-@ComponentScan({"edu.yctc.hotel.service.message"})
+@ComponentScan({"com.altersoftware.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service.message"})
 @RequestMapping("/restpermission")
 @Async
 /**

@@ -7,6 +7,13 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.constant.entity.news.NewsState;
 import com.altersoftware.hotel.dao.NewsDAO;
@@ -15,12 +22,6 @@ import com.altersoftware.hotel.entity.NewsDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserNewsDO;
 import com.altersoftware.hotel.service.NewsIService;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
 
 
 

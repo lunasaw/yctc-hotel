@@ -1,11 +1,10 @@
 package com.altersoftware.hotel.service;
 
+import java.util.List;
+
 import com.altersoftware.hotel.entity.PermissionDO;
 import com.altersoftware.hotel.entity.PermissionGroupDO;
 import com.altersoftware.hotel.entity.ResultDO;
-
-import java.util.List;
-
 
 
 public interface PermissionIService {
@@ -16,7 +15,7 @@ public interface PermissionIService {
      * @param userId
      * @return
      */
-    public ResultDO<Void> shiroAuthentication(long userId);
+    ResultDO<Void> shiroAuthentication(long userId);
 
     /**
      * 初始化用户权限
@@ -24,7 +23,7 @@ public interface PermissionIService {
      * @param userId
      * @return
      */
-    public ResultDO<Void> initPermissionUserDOsByUserDO(long userId);
+    ResultDO<Void> initPermissionUserDOsByUserDO(long userId);
 
     /**
      * 通过userDO得到其拥有的所有权限的resource
@@ -32,14 +31,14 @@ public interface PermissionIService {
      * @param userId
      * @return
      */
-    public ResultDO<List<String>> getResourceOfPermissionsByUserId(long userId);
+    ResultDO<List<String>> getResourceOfPermissionsByUserId(long userId);
 
     /**
      * 展示所有的权限
      * 
      * @return
      */
-    public ResultDO<List<PermissionDO>> showAllPermissions();
+    ResultDO<List<PermissionDO>> showAllPermissions();
 
     /**
      * 展示用户拥有的权限
@@ -47,7 +46,7 @@ public interface PermissionIService {
      * @param userId
      * @return
      */
-    public ResultDO<List<PermissionDO>> showPermissions(long userId);
+    ResultDO<List<PermissionDO>> showPermissions(long userId);
 
     /**
      * 添加单个权限
@@ -56,7 +55,7 @@ public interface PermissionIService {
      * @param permissionName
      * @return
      */
-    public ResultDO<Void> addPermission(String userNumber, String permissionName);
+    ResultDO<Void> addPermission(String userNumber, String permissionName);
 
     /**
      * 删除单个权限
@@ -65,7 +64,7 @@ public interface PermissionIService {
      * @param permissionName
      * @return
      */
-    public ResultDO<Void> deletePermission(String userNumber, String permissionName);
+    ResultDO<Void> deletePermission(String userNumber, String permissionName);
 
     /**
      * 展示用户拥有的权限
@@ -73,7 +72,7 @@ public interface PermissionIService {
      * @param userNumber
      * @return
      */
-    public ResultDO<List<PermissionDO>> showPermissionsHave(String userNumber);
+    ResultDO<List<PermissionDO>> showPermissionsHave(String userNumber);
 
     /**
      * 展示所有permissionGroup
@@ -81,7 +80,7 @@ public interface PermissionIService {
      * @param
      * @return
      */
-    public ResultDO<List<PermissionGroupDO>> showAllPermissionGroup();
+    ResultDO<List<PermissionGroupDO>> showAllPermissionGroup();
 
     /**
      * 增加单个permissionGroup
@@ -90,7 +89,7 @@ public interface PermissionIService {
      * @param permissionIds
      * @return
      */
-    public ResultDO<Void> addPermissionGroup(String permissionGroupName, List<Long> permissionIds);
+    ResultDO<Void> addPermissionGroup(String permissionGroupName, List<Long> permissionIds);
 
     /**
      * 根据permissionGroupId删除permissionGroup
@@ -98,7 +97,7 @@ public interface PermissionIService {
      * @param permissionGroupId
      * @return
      */
-    public ResultDO<Void> delPermissionGroupByPermissionGroupId(Long permissionGroupId);
+    ResultDO<Void> delPermissionGroupByPermissionGroupId(Long permissionGroupId);
 
     /**
      * 根据permissionGroupId修改其拥有的所有权限
@@ -108,8 +107,8 @@ public interface PermissionIService {
      * @param permissionIds
      * @return
      */
-    public ResultDO<Void> modifyPermissionGroup(String permissionGroupName, Long permissionGroupId,
-                                                List<Long> permissionIds);
+    ResultDO<Void> modifyPermissionGroup(String permissionGroupName, Long permissionGroupId,
+        List<Long> permissionIds);
 
     /**
      * 根据permissionGroupId展示其已拥有的所有权限PermissionDO
@@ -117,7 +116,7 @@ public interface PermissionIService {
      * @param permissionGroupId
      * @return
      */
-    public ResultDO<List<PermissionDO>> getPermissionsByPermissionGroupId(Long permissionGroupId);
+    ResultDO<List<PermissionDO>> getPermissionsByPermissionGroupId(Long permissionGroupId);
 
     /**
      * 根据permissionGroupId获得permissionGroupName
@@ -125,7 +124,7 @@ public interface PermissionIService {
      * @param permissionGroupId
      * @return
      */
-    public ResultDO<String> getPermissionGroupNameByPermissionGroupId(Long permissionGroupId);
+    ResultDO<String> getPermissionGroupNameByPermissionGroupId(Long permissionGroupId);
 
     /**
      * 根据permissionGroupId展示其已拥有的所有PermissionIds
@@ -133,6 +132,6 @@ public interface PermissionIService {
      * @param permissionGroupId
      * @return
      */
-    public ResultDO<List<Long>> getPermissionIdsByPermissionGroupId(Long permissionGroupId);
+    ResultDO<List<Long>> getPermissionIdsByPermissionGroupId(Long permissionGroupId);
 
 }
