@@ -9,7 +9,7 @@ import java.util.Date;
 public class HotelDO {
 
     /** 酒店编号 */
-    private long   hotel;
+    private long   id;
     /** 酒店名称 */
     private String name;
     /** 楼层数量 */
@@ -28,11 +28,11 @@ public class HotelDO {
     private Date   modifyTime;
 
     public long getHotel() {
-        return hotel;
+        return id;
     }
 
-    public void setHotel(long hotel) {
-        this.hotel = hotel;
+    public void setHotel(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -102,7 +102,7 @@ public class HotelDO {
     @Override
     public String toString() {
         return "HotelDO{" +
-            "hotel=" + hotel +
+            "id=" + id +
             ", name='" + name + '\'' +
             ", floorNumbers=" + floorNumbers +
             ", roomNumbers=" + roomNumbers +
