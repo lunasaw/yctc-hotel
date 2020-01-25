@@ -2,6 +2,7 @@ package com.altersoftware.hotel.dao;
 
 import org.apache.ibatis.annotations.*;
 
+import com.altersoftware.hotel.entity.HotelDO;
 import com.altersoftware.hotel.entity.NewsDO;
 
 /**
@@ -13,13 +14,13 @@ public interface HotelDAO {
     /**
      * 插入一条消息
      *
-     * @param newsDO
+     * @param hotelDO
      */
-    @Insert(" INSERT INTO tb_hotel (id, title, content, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_hotel (id, name, floornumbers, roomnumbers, mobile, address, rules, create_time modify_time ) "
         +
-        "VALUES(#{id}, #{title}, #{content}, NOW(), NOW()) ")
+        "VALUES(#{id}, #{name}, #{floornumbers}, #{roomnumbers}, #{address}, #{rules}, NOW(), NOW()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    void insert(NewsDO newsDO);
+    void insert(HotelDO hotelDO);
 
     /**
      * id查找消息
