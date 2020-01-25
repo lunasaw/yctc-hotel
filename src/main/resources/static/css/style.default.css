@@ -1901,7 +1901,7 @@ input.input-material.is-invalid ~ label {
   height: 100%;
   display: block;
   z-index: -1;
-  background: url(../img/bg.jpg);
+    background: url(../img/back1.png);
   background-size: cover;
   -webkit-filter: blur(10px);
   filter: blur(10px);
