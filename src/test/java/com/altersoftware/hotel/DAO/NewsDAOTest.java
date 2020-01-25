@@ -21,6 +21,7 @@ import com.altersoftware.hotel.entity.NewsDO;
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NewsDAOTest {
+
     private static final long   ID      = 1;
     private static final String TITLE   = "测试";
     private static final String CONTENT = "陈章月NewsDAO第一次测试";

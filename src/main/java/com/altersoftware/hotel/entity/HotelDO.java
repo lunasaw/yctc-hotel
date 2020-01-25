@@ -27,11 +27,11 @@ public class HotelDO {
     /** 修改时间 */
     private Date   modifyTime;
 
-    public long getHotel() {
+    public long getId() {
         return id;
     }
 
-    public void setHotel(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

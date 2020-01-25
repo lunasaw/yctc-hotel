@@ -185,7 +185,7 @@ public interface UserDAO {
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    UserDO getUserDOByNumberAndPassword(String number, String password);
+    UserDO getUserDOByNumberAndPassword(@Param("number") String number, @Param("password") String password);
 
     /**
      * 邮箱查找用户
