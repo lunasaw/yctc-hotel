@@ -3,12 +3,12 @@ package com.altersoftware.hotel.dao;
 import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.HotelDO;
-import com.altersoftware.hotel.entity.NewsDO;
 
 /**
  * @author czy@win10
  * @date 2020/1/25 20:04
  */
+@Mapper
 public interface HotelDAO {
 
     /**
@@ -16,9 +16,9 @@ public interface HotelDAO {
      *
      * @param hotelDO
      */
-    @Insert(" INSERT INTO tb_hotel (id, name, floornumbers, roomnumbers, mobile, address, rules, create_time modify_time ) "
+    @Insert(" INSERT INTO tb_hotel (id, name, floornumbers, roomnumbers, mobile, address, rules, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{name}, #{floornumbers}, #{roomnumbers}, #{address}, #{rules}, NOW(), NOW()) ")
+        "VALUES(#{id}, #{name}, #{floorNumbers}, #{roomNumbers}, #{mobile}, #{address}, #{rules}, now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(HotelDO hotelDO);
 
@@ -27,29 +27,33 @@ public interface HotelDAO {
      *
      * @param id
      */
-    @Select("select id, title, content, create_time, modify_time from tb_news where id=#{id}  ")
+    @Select("select id, name, floornumbers, roomnumbers, mobile, address, rules, create_time, modify_time from tb_hotel where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
-        @Result(property = "title", column = "title"),
-        @Result(property = "content", column = "content"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "floorNumbers", column = "floornumbers"),
+        @Result(property = "roomNumbers", column = "roomnumbers"),
+        @Result(property = "mobile", column = "mobile"),
+        @Result(property = "address", column = "address"),
+        @Result(property = "rules", column = "rules"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    NewsDO getNewsDOById(long id);
+    HotelDO getHotelDOById(long id);
 
     /**
      * 更新消息
      *
-     * @param newsDO
+     * @param hotelDO
      */
-    @Update("update tb_news  set title=#{title}, content=#{content}, modify_time=now()  where id=#{id}")
-    int update(NewsDO newsDO);
+    @Update("update tb_hotel  set name=#{name}, floornumbers=#{floorNumbers}, roomnumbers=#{roomNumbers}, mobile=#{mobile}, address=#{address}, rules=#{rules}, modify_time=now()  where id=#{id}")
+    int update(HotelDO hotelDO);
 
     /**
      * 根据id删除一条消息
      *
      * @param id
      */
-    @Delete("DELETE FROM tb_news WHERE id=#{id}")
-    void deleteById(long id);
+    @Delete("DELETE FROM tb_hotel WHERE id=#{id}")
+    int deleteById(long id);
 }
