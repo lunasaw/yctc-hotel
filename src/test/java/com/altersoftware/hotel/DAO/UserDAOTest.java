@@ -74,21 +74,21 @@ public class UserDAOTest {
     }
 
     @Test
-    public void dGetCustomerByEmail() {
+    public void dGetUserByEmail() {
         UserDO userDOByEmail = userDAO.getUserDOByMail(EMAIL);
         System.out.println(userDOByEmail);
         Assert.assertNotNull(userDOByEmail);
     }
 
     @Test
-    public void eGetCustomerByMobile() {
+    public void eGetUserByMobile() {
         UserDO userDOByMobile = userDAO.getUserDOByPhone(MOBILE);
         System.out.println(userDOByMobile);
         Assert.assertNotNull(userDOByMobile);
     }
 
     @Test
-    public void fGetCustomerByMobileAndPassword() {
+    public void fGetUserByMobileAndPassword() {
         UserDO UserDAOUserDOByMobileAndPassword =
             userDAO.getUserDOByMobileAndPassword(MOBILE, PASSWORD);
         System.out.println(UserDAOUserDOByMobileAndPassword);
@@ -97,18 +97,27 @@ public class UserDAOTest {
     }
 
     @Test
-    public void gGetCustomerByEmailAndPassword() {
+    public void gGetUserByEmailAndPassword() {
         UserDO UserDOByEmailAndPassword = userDAO.getUserDOByEmailAndPassword(EMAIL, PASSWORD);
         System.out.println(UserDOByEmailAndPassword);
         Assert.assertNotNull(UserDOByEmailAndPassword);
     }
 
     @Test
-    public void hGetCustomerByFaceId() {
+    public void gGetUserByNumberAndPassword() {
+        UserDO UserDOByNumberAndPassword = userDAO.getUserDOByNumberAndPassword("95002",
+            "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a");
+        System.out.println(UserDOByNumberAndPassword);
+        Assert.assertNotNull(UserDOByNumberAndPassword);
+    }
+
+    @Test
+    public void hGetUserByFaceId() {
         UserDO UserDOByfaceId = userDAO.getUserDOByfaceId(FACEID);
         System.out.println(UserDOByfaceId);
         Assert.assertNotNull(UserDOByfaceId);
     }
+
 
     @Test
     public void iDelete() {
