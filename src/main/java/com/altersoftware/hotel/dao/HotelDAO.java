@@ -12,7 +12,7 @@ import com.altersoftware.hotel.entity.HotelDO;
 public interface HotelDAO {
 
     /**
-     * 插入一条消息
+     * 插入一条酒店消息
      *
      * @param hotelDO
      */
@@ -23,7 +23,7 @@ public interface HotelDAO {
     void insert(HotelDO hotelDO);
 
     /**
-     * id查找消息
+     * id查找酒店消息
      *
      * @param id
      */
@@ -42,7 +42,7 @@ public interface HotelDAO {
     HotelDO getHotelDOById(long id);
 
     /**
-     * 更新消息
+     * 更新酒店消息
      *
      * @param hotelDO
      */
@@ -50,7 +50,7 @@ public interface HotelDAO {
     int update(HotelDO hotelDO);
 
     /**
-     * 根据id删除一条消息
+     * 根据id删除一条酒店消息
      *
      * @param id
      */
