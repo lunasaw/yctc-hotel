@@ -10,8 +10,8 @@ public class FloorDO {
 
     /** 楼层编号 */
     private int    id;
-    /** 楼层编号 */
-    private int    roomId;
+    /** 房间数量编号 */
+    private int    roomNumbers;
     /** 平面图 */
     private String plan;
     /** 消防图 */
@@ -31,12 +31,12 @@ public class FloorDO {
         this.id = id;
     }
 
-    public int getroomId() {
-        return roomId;
+    public int getroomNumbers() {
+        return roomNumbers;
     }
 
-    public void setroomId(int roomId) {
-        this.roomId = roomId;
+    public void setroomNumbers(int roomId) {
+        this.roomNumbers = roomId;
     }
 
     public String getPlan() {
@@ -83,7 +83,7 @@ public class FloorDO {
     public String toString() {
         return "FloorDO{" +
             "id=" + id +
-            ", roomId=" + roomId +
+            ", roomId=" + roomNumbers +
             ", plan='" + plan + '\'' +
             ", fireDiagram='" + fireDiagram + '\'' +
             ", threeDDiagram='" + threeDDiagram + '\'' +

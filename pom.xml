@@ -193,7 +193,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<mainClass>edu.yctc.hotel.Application</mainClass>
+					<mainClass>com.altersoftware.hotel.Application</mainClass>
 					<layout>ZIP</layout>
 
 				</configuration>
