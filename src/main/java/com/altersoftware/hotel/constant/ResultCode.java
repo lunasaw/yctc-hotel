@@ -99,13 +99,6 @@ public class ResultCode {
     public static final int INCORRECT_NUMBER_OR_PASSWORD = 1029;
     public static final String MSG_INCORRECT_NUMBER_OR_PASSWORD = "incorrect number of password";
 
-    /** 无正在上的课 */
-    public static final int NO_TEACHING_LESSON = 1030;
-    public static final String MSG_NO_TEACHING_LESSON = "no teaching lesson";
-
-    /** 无授课 */
-    public static final int NO_TEACHER_LESSON_FOUND = 1031;
-    public static final String MSG_NO_TEACHER_LESSON_FOUND = "no teacher lesson found";
 
     /** 检测状态线程还在运行 */
     public static final int STILL_CHECKING = 1032;
