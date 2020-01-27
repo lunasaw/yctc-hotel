@@ -15,11 +15,11 @@ public class GoodsDO {
     /** 物品名称 */
     private String name;
     /** 物品采购时间 */
-    private Date   dateTime;
+    private String buyTime;
     /** 物品采购价格 */
-    private float  price;
+    private Double price;
     /** 物品损坏赔偿价格 */
-    private float  compensationMoeny;
+    private Double compensationMoeny;
     /** 物品是否使用 */
     private int    state;
     /** 创建时间 */
@@ -51,27 +51,27 @@ public class GoodsDO {
         this.name = name;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public String getbuyTime() {
+        return buyTime;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setbuyTime(String buyTime) {
+        this.buyTime = buyTime;
     }
 
-    public float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public float getCompensationMoeny() {
+    public Double getCompensationMoeny() {
         return compensationMoeny;
     }
 
-    public void setCompensationMoeny(float compensationMoeny) {
+    public void setCompensationMoeny(Double compensationMoeny) {
         this.compensationMoeny = compensationMoeny;
     }
 
@@ -105,7 +105,7 @@ public class GoodsDO {
             "id=" + id +
             ", roomId=" + roomId +
             ", name='" + name + '\'' +
-            ", dateTime=" + dateTime +
+            ", buyTime=" + buyTime +
             ", price=" + price +
             ", compensationMoeny=" + compensationMoeny +
             ", state=" + state +

@@ -193,7 +193,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<mainClass>com.altersoftware.hotel.Application</mainClass>
+                    <mainClass>com.altersoftware.hotel.HotelApplication</mainClass>
 					<layout>ZIP</layout>
 
 				</configuration>
