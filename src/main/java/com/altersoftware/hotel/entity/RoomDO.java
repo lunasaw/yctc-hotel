@@ -8,16 +8,16 @@ public class RoomDO {
     private long   id;
 
     /** 楼层号 */
-    private int    floorID;
+    private int    floorId;
 
     /** 房间类型 */
     private String type;
 
     /** 房间价格 */
-    private float  price;
+    private double price;
 
     /** 房间押金 */
-    private float  deposit;
+    private double deposit;
 
     /** 房间状态 */
     private int    state;
@@ -37,11 +37,11 @@ public class RoomDO {
     }
 
     public int getFloorID() {
-        return floorID;
+        return floorId;
     }
 
-    public void setFloorID(int floorID) {
-        this.floorID = floorID;
+    public void setFloorID(int floorId) {
+        this.floorId = floorId;
     }
 
     public String getType() {
@@ -52,19 +52,19 @@ public class RoomDO {
         this.type = type;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public float getDeposit() {
+    public double getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(float deposit) {
+    public void setDeposit(double deposit) {
         this.deposit = deposit;
     }
 
@@ -96,7 +96,7 @@ public class RoomDO {
     public String toString() {
         return "RoomDO{" +
             "id=" + id +
-            ", floorID=" + floorID +
+            ", floorId=" + floorId +
             ", type='" + type + '\'' +
             ", price=" + price +
             ", deposit=" + deposit +
