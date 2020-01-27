@@ -22,7 +22,7 @@ public interface FloorDAO {
     void insert(FloorDO floorDO);
 
     /**
-     * id查找酒店消息
+     * id查找楼层消息
      *
      * @param id
      */
@@ -39,7 +39,7 @@ public interface FloorDAO {
     FloorDO getFloorDOById(long id);
 
     /**
-     * 更新酒店消息
+     * 更新楼层消息
      *
      * @param floorDO
      */
@@ -47,7 +47,7 @@ public interface FloorDAO {
     int update(FloorDO floorDO);
 
     /**
-     * 根据id删除一条酒店消息
+     * 根据id删除一条楼层消息
      *
      * @param id
      */
