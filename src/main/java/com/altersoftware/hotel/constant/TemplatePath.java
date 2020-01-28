@@ -90,4 +90,7 @@ public class TemplatePath {
     public static final String USER_MANAGE = "manage/user-manage";
                                                                    // 此为测试页面，不上线
 
+    /** 楼层信息页面 */
+    public static final String FLOOR                                      = "hotel/floor";
+
 }

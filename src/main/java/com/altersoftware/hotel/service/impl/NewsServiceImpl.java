@@ -30,7 +30,7 @@ import com.altersoftware.hotel.service.NewsIService;
  *
  * @author 15272
  */
-@ComponentScan({"edu.yctc.hotel.dao"})
+@ComponentScan({"com.altersoftware.hotel.dao"})
 @Service("newsService")
 public class NewsServiceImpl implements NewsIService {
 

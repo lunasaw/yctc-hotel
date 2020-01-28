@@ -21,7 +21,7 @@ import com.altersoftware.hotel.warpper.SmsWarpper;
 
 
 
-@ComponentScan({"edu.yctc.hotel.dao"})
+@ComponentScan({"com.altersoftware.hotel.dao"})
 @Service("messageService")
 public class MessageServiceImpl implements MessageIService {
 
