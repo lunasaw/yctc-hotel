@@ -1,11 +1,14 @@
 package com.altersoftware.hotel.controller.rest;
 
+import org.springframework.stereotype.Controller;
+
 import com.altersoftware.hotel.entity.ResultDO;
 
 /**
  * @author czy@win10
  * @date 2020/1/28 21:11
  */
+@Controller
 public interface FloorRestController {
 
     /**

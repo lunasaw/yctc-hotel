@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.DAO;
+package com.altersoftware.hotel.dao;
 
 import javax.annotation.Resource;
 
@@ -10,7 +10,6 @@ import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.altersoftware.hotel.dao.NewsDAO;
 import com.altersoftware.hotel.entity.NewsDO;
 
 /**

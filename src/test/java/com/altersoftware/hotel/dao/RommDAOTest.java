@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.DAO;
+package com.altersoftware.hotel.dao;
 
 import javax.annotation.Resource;
 
@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.altersoftware.hotel.constant.entity.room.RoomState;
 import com.altersoftware.hotel.constant.entity.room.RoomType;
-import com.altersoftware.hotel.dao.RoomDAO;
 import com.altersoftware.hotel.entity.RoomDO;
 
 /**

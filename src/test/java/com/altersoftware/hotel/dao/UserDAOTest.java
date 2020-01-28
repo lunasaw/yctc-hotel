@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.DAO;
+package com.altersoftware.hotel.dao;
 
 import javax.annotation.Resource;
 
@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.altersoftware.hotel.constant.entity.user.UserType;
-import com.altersoftware.hotel.dao.UserDAO;
 import com.altersoftware.hotel.entity.UserDO;
 
 /**

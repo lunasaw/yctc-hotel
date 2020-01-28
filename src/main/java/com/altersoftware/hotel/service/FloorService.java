@@ -1,11 +1,14 @@
 package com.altersoftware.hotel.service;
 
+import org.springframework.stereotype.Service;
+
 import com.altersoftware.hotel.entity.ResultDO;
 
 /**
  * @author czy@win10
  * @date 2020/1/28 21:19
  */
+@Service
 public interface FloorService {
 
     /**
