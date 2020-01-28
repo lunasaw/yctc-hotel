@@ -24,7 +24,7 @@ import com.altersoftware.hotel.entity.PermissionUserDO;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PermissionUserDAOTest {
 
-    private static final long ID            = 5;
+    private static final long ID            = 2;
     private static final long USER_ID       = 10004;
     private static final long PERMISSION_ID = 2;
 

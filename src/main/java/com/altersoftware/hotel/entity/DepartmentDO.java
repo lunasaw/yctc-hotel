@@ -13,9 +13,9 @@ public class DepartmentDO {
     /** 部门名称 */
     private String name;
     /** 部门人数 */
-    private int    peopleNumber;
+    private int    staffNumbers;
     /** 部门负责人编号 */
-    private int    staffNumber;
+    private long   staffId;
     /** 创建时间 */
     private Date   createTime;
     /** 修改时间 */
@@ -37,19 +37,47 @@ public class DepartmentDO {
         this.name = name;
     }
 
-    public int getPeopleNumber() {
-        return peopleNumber;
+    public int getStaffNumbers() {
+        return staffNumbers;
     }
 
-    public void setPeopleNumber(int peopleNumber) {
-        this.peopleNumber = peopleNumber;
+    public void setStaffNumbers(int staffNumbers) {
+        this.staffNumbers = staffNumbers;
     }
 
-    public int getStaffNumber() {
-        return staffNumber;
+    public long getStaffId() {
+        return staffId;
     }
 
-    public void setStaffNumber(int staffNumber) {
-        this.staffNumber = staffNumber;
+    public void setStaffId(long staffId) {
+        this.staffId = staffId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    @Override
+    public String toString() {
+        return "DepartmentDO{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", staffNumbers=" + staffNumbers +
+            ", staffId=" + staffId +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
+            '}';
     }
 }

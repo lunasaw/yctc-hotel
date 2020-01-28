@@ -7,5 +7,5 @@ public class StaticPath {
     public static final String USER_SIGNUP_SUCCESS = "user/sign-up-success";
 
     /** 统一错误页 */
-    public static final String COMMON_ERROR = "error/common-error.html";
+    public static final String COMMON_ERROR        = "error/common-error";
 }
