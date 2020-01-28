@@ -3,14 +3,15 @@ package com.altersoftware.hotel.config.shiro;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.altersoftware.hotel.constant.RestPath;
-import com.altersoftware.hotel.constant.StaticPath;
-import com.altersoftware.hotel.constant.TemplatePath;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.altersoftware.hotel.constant.RestPath;
+import com.altersoftware.hotel.constant.StaticPath;
+import com.altersoftware.hotel.constant.TemplatePath;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
@@ -60,7 +61,7 @@ public class ShiroConfig {
             // 登录
             filterMap.put("/" + TemplatePath.USER_SIGNUP, "anon");
             // 注册
-            filterMap.put("/" + StaticPath.USER_SIGNUP_SUCCESS, "anon");
+            filterMap.put("/" + TemplatePath.USER_SIGN_UP_SUCCESS, "anon");
             // 注册成功
             filterMap.put("/" + TemplatePath.USER_RETRIEVE_PASSWORDB_START, "anon");
             // 找密界面

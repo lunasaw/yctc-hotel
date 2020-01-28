@@ -92,7 +92,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
-    //初始化用户权限
+    // 注册初始化用户权限
     @Override
     public ResultDO<Void> initPermissionUserDOsByUserDO(long userId) {
         // 参数检验
@@ -141,7 +141,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
-    //初始化用户权限
+    // 登陆初始化用户权限
     @Override
     public ResultDO<List<String>> getResourceOfPermissionsByUserId(long userId) {
         // 参数检验
