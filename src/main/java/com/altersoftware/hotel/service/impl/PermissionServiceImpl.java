@@ -28,7 +28,7 @@ import com.altersoftware.hotel.service.PermissionIService;
  *
  * @author wlt
  */
-@ComponentScan({"edu.yctc.hotel.dao"})
+@ComponentScan({"com.altersoftware.hotel.dao"})
 @Service("permissionService")
 public class PermissionServiceImpl implements PermissionIService {
 
