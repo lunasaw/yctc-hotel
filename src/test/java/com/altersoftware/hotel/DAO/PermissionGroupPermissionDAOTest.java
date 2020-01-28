@@ -24,9 +24,9 @@ import com.altersoftware.hotel.entity.PermissionGroupPermissionDO;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PermissionGroupPermissionDAOTest {
 
-    private static final long            ID                  = 3;
+    private static final long            ID                  = 2;
     private static final long            PERMISSION_GROUP_ID = 10001;
-    private static final long            PERMISSION_ID       = 3;
+    private static final long            PERMISSION_ID       = 2;
 
     @Resource
     private PermissionGroupPermissionDAO permissionGroupPermissionDAO;

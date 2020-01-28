@@ -10,7 +10,7 @@ import com.altersoftware.hotel.controller.CommonController;
 
 
 @Controller
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/")
 /**
  * commonController接口实现

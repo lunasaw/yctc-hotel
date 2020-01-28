@@ -30,7 +30,7 @@ import com.altersoftware.hotel.vo.*;
 
 
 @Controller
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/user")
 /**
  * userController接口实现
@@ -48,7 +48,7 @@ public class UserControllerImpl implements UserController {
     private PermissionIService  permissionService;
 
     @Override
-    @PostMapping("sign-up")
+    @PostMapping("signup")
     @Deprecated
     public String signup(@ModelAttribute UserDO userDO) {
         ResultDO<Void> resultDO = userService.signup(userDO);

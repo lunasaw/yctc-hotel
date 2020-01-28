@@ -9,7 +9,7 @@ import com.altersoftware.hotel.constant.TemplatePath;
 import com.altersoftware.hotel.controller.NewsController;
 
 @Controller
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/news")
 /**
  * newsController接口实现
