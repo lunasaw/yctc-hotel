@@ -23,7 +23,7 @@ import com.altersoftware.hotel.service.UserIService;
 
 
 @Controller
-@ComponentScan({"edu.yctc.hotel.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/manage")
 /**
  * managerController接口实现

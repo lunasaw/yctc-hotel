@@ -19,7 +19,7 @@ import com.altersoftware.hotel.service.PermissionIService;
 
 
 @Controller
-@ComponentScan({"edu.yctc.genesis.service"})
+@ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/education")
 /**
  * educationController接口实现

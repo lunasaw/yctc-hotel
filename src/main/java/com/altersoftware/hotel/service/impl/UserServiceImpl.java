@@ -18,7 +18,7 @@ import com.altersoftware.hotel.util.SHA256Util;
 import com.altersoftware.hotel.warpper.MailWarpper;
 
 
-@ComponentScan({"edu.yctc.hotel.dao"})
+@ComponentScan({"com.altersoftware.hotel.dao"})
 @Service("userService")
 /**
  * service接口实现
