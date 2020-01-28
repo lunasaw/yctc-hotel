@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.DAO;
+package com.altersoftware.hotel.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.altersoftware.hotel.constant.entity.goods.GoodsState;
-import com.altersoftware.hotel.dao.GoodsDAO;
 import com.altersoftware.hotel.entity.GoodsDO;
 
 /**

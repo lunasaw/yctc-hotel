@@ -2,6 +2,9 @@ package com.altersoftware.hotel.service.impl;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.dao.FloorDAO;
 import com.altersoftware.hotel.entity.FloorDO;
@@ -14,6 +17,8 @@ import com.altersoftware.hotel.service.FloorService;
  * @author czy@win10
  * @date 2020/1/28 21:20
  */
+@ComponentScan({"com.altersoftware.hotel.dao"})
+@Service("floorService")
 public class FloorServiceImpl implements FloorService {
 
     @Resource
