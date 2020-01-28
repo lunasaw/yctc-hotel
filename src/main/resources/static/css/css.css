@@ -1,0 +1,194 @@
+body {
+    min-width: 1280px;
+    min-height: 1994px;
+
+}
+
+html {
+    min-height: 1994px;
+
+}
+
+/*kuang jia */
+
+.footer {
+    position: abosulte;
+    top: 100%;
+    width: 100%;
+    height: 60px;
+    background-color: #333333;
+    z-index: 9999;
+
+}
+
+.navbar-brand-1 {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    color: tomato;
+    margin-left: -30px;
+}
+
+.navbar-brand-1:focus,
+.navbar-brand-1:hover {
+    text-decoration: none
+}
+
+.navbar-brand-1 > img {
+    display: block
+}
+
+.header {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+}
+
+.navbar-2 {
+    position: absolute;
+    top: 140px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+
+}
+
+/* 主体内容 */
+
+.div-picture {
+    position: absolute;
+    top: 190px;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    line-height: 600px;
+    text-align: center;
+}
+
+.shade {
+    position: absolute;
+    top: 0%;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    opacity: 0.2;
+}
+
+.div-picture-text {
+    position: absolute;
+    top: 370px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    line-height: 50px;
+    text-align: center;
+
+}
+
+.div-main-one {
+    position: absolute;
+    top: 790px;
+    left: 0;
+    height: 720px;
+    width: 100%;
+}
+
+.text-one {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    height: 108px;
+    width: 100%;
+    line-height: 108px;
+    font-size: 28px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.mode-one {
+    position: absolute;
+    top: 170px;
+    left: 0;
+    height: 484px;
+    width: 100%;
+}
+
+.introduction-one {
+    position: absolute;
+    top: 50px;
+    left: 760px;
+}
+
+.div-main-two {
+    position: absolute;
+    top: 1510px;
+    left: 0;
+    height: 484px;
+    width: 100%;
+    background-color: rgb(243, 243, 243);
+}
+
+.introduction-two {
+    position: absolute;
+    top: 50px;
+    right: 760px;
+}
+
+.bottom-div {
+    position: absolute;
+    top: 1994px;
+    left: 0;
+    height: 300px;
+    width: 100%;
+    background-color: rgb(41, 41, 41);
+}
+
+.ul-bottom {
+    list-style: none;
+    line-height: 40px;
+    height: 200px;
+    width: 14%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 9%;
+    padding-top: 50px;
+    font-size: 16px;
+
+}
+
+.div-picture-list {
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    top: 702px;
+    left: 0;
+    background-color: white;
+
+}
+
+.block-flat {
+    width: 15%;
+    height: 175px;
+    text-align: center;
+    line-height: 30px;
+    top: -80px;
+    position: absolute;
+    font-weight: bolder;
+    background-color: white;
+    transition-duration: 0.8s;
+    transition-property: all;
+
+}
+
+.block-flat:hover {
+    background-color: rgb(127, 106, 202);
+    color: white;
+    top: -100px;
+}
