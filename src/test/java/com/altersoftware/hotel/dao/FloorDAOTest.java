@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Assert;
@@ -26,7 +28,7 @@ public class FloorDAOTest {
     private static final String FIRE_DIAGRAM  =
         "http://g.search.alicdn.com/img/bao/uploaded/i4/i3/TB1HbD9HXXXXXahXpXXXXXXXXXX_!!0-item_pic.jpg";
     private static final String PLAN_DIAGRAM  =
-        "101.jpg";
+        "http://img5.imgtn.bdimg.com/it/u=1035415831,1465727770&fm=26&gp=0.jpg";
     private static final String THREED_DAGRAM =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaOdo98dbzDKaRlQnRNaTqHrEgfI0MKg_vxV83YWzSDpPO3GnjaQ&s";
 
@@ -61,7 +63,14 @@ public class FloorDAOTest {
     }
 
     @Test
-    public void dDeleteById() {
+    public void dGetIdList() {
+        List<Long> floorIdList = floorDAO.getFloorIdList();
+        System.out.println(floorIdList);
+        Assert.assertNotNull(floorIdList);
+    }
+
+    @Test
+    public void eDeleteById() {
         int i = floorDAO.deleteById(ID);
         Assert.assertEquals(1, i);
         FloorDO floorDOById = floorDAO.getFloorDOById(ID);
