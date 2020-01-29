@@ -1,6 +1,8 @@
 package com.altersoftware.hotel.service;
 
 
+import java.util.List;
+
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 
@@ -116,6 +118,18 @@ public interface UserIService {
      */
     ResultDO<Void> updateUserDO(UserDO userDO);
 
+    /**
+     * 删除客户
+     *
+     * @param userId
+     */
+    ResultDO<Void> deleteUserDO(Long userId);
 
+    /**
+     * 查询所有客户
+     *
+     *
+     */
+    ResultDO<List<UserDO>> getAllCustomer();
 
 }

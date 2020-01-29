@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.RoomDO;
@@ -56,5 +58,44 @@ public interface RoomDAO {
      */
     @Delete("DELETE FROM tb_room WHERE id=#{id}")
     int deleteById(long id);
+
+    /**
+     * 获取全部房间信息
+     *
+     * @return
+     */
+    @Select("select id, floor_id, room_number,  type, price, deposit, state,  create_time, modify_time from tb_room ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "floorId", column = "floor_id"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "type", column = "type"),
+        @Result(property = "price", column = "price"),
+        @Result(property = "deposit", column = "deposit"),
+        @Result(property = "state", column = "state"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<RoomDO> getAllRoomDo();
+
+    /**
+     * 通过房间号查询房间信息
+     * 
+     * @param roomNumber
+     * @return
+     */
+    @Select("select id, floor_id, room_number,  type, price, deposit, state,  create_time, modify_time from tb_room where room_number=#{roomNumber}  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "floorId", column = "floor_id"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "type", column = "type"),
+        @Result(property = "price", column = "price"),
+        @Result(property = "deposit", column = "deposit"),
+        @Result(property = "state", column = "state"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    RoomDO getRoomDOByNumber(int roomNumber);
 
 }

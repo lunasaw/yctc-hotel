@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -297,7 +299,35 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
+    // 删除客户
+    @Override
+    public ResultDO<Void> deleteUserDO(Long userId) {
+        if (userId == 0) {
+            LOG.error("update userDO fail, parameter invalid, userDO={}", userId);
+            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+        }
+        try {
+            userDAO.deleteById(userId);
+            LOG.info("delete userDO success, userId={}", userId);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("update userDO fail, userId={}", userId, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
 
-
+    // 查询所有客户信息
+    @Override
+    public ResultDO<List<UserDO>> getAllCustomer() {
+        List<UserDO> customers = null;
+        try {
+            customers = userDAO.getCustomer();
+            LOG.info("delete userDOList success, userId={}", customers);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("update userDO fail, userDOList={}", customers, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
 
 }

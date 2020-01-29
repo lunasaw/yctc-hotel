@@ -83,9 +83,9 @@ public class ResultCode {
     public static final Integer NO_PERMISSION_CACHE = 1026;
     public static final String MSG_NO_PERMISSION_CACHE = "no permission cache";
 
-    /** 数据库中已有楼宇信息 */
-    public static final int ALREADY_EXIST_BUILDINGFLOORDO = 1026;
-    public static final String MSG_ALREADY_EXIST_BUILDINGFLOORDO = "already exist buildingFloorDO";
+    /** 数据库中更新失败 */
+    public static final int     UPDATE_FAILD                           = 1026;
+    public static final String  MSG_UPDATE_FAILD                       = "update faild";
 
     /** 数据库中已有班级信息 */
     public static final int ALREADY_EXIST_CLASSDO = 1027;
