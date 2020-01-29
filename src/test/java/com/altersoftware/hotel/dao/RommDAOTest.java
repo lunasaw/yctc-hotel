@@ -37,7 +37,7 @@ public class RommDAOTest {
     public void aInsert() {
         RoomDO roomDO = new RoomDO();
         roomDO.setId(ID);
-        roomDO.setId(FLOOR_ID);
+        roomDO.setFloorId(FLOOR_ID);
         roomDO.setType(TYPE);
         roomDO.setRoomNumber(ROOOM_NUMBER);
         roomDO.setPrice(PRICE);
