@@ -1,6 +1,10 @@
 package com.altersoftware.hotel.controller.impl;
 
+import com.altersoftware.hotel.service.FloorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.altersoftware.hotel.constant.TemplatePath;
@@ -20,8 +24,6 @@ public class FloorControllerImpl implements FloorController {
      */
     @Override
     @PostMapping("show-foller")
-    public String showFlloor() {
-        return TemplatePath.FLOOR;
-    }
+    public String showFlloor() { return TemplatePath.FLOOR; }
 
 }

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>前台服务中心</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}" href="css/left-side-menu.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="fonts/iconfont.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/monent.css}" href="css/monent.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/chart.css}" href="css/chart.css">
+  <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}" src="js/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="js/left-side-menu.js"></script>
+  <script type="text/javascript" th:src="@{/js/footposition.js}" src="js/footposition.js"></script>
+
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" s></script>
+
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" th:fragment="commonHeader">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
+
+    <ul class="navbar-nav " style="left: 82%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 87%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 90%;position: absolute;">
+      <li>
+        <a class="nav-link" href="user/sign-out">
+          注销&nbsp&nbsp
+          <img src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128" style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <div class="left-side-menu col-sm-3 col-md-2 mr-0" style="float: left;position: fixed;" th:fragment="commonMenu">
+    <div class="lsm-expand-btn">
+      <div class="lsm-mini-btn">
+        <label>
+          <input type="checkbox" checked="checked">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" />
+            <path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
+            <path class="line--2" d="M0 50h80" />
+            <path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
+          </svg>
+        </label>
+
+      </div>
+      <!--        <input type="text"/>-->
+
+    </div>
+    <div class="lsm-container" >
+      <div class="lsm-scroll">
+        <div class="lsm-sidebar" >
+          <ul>
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>入住管理</span><i
+                  class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li><a href="javascript:;"><span>人员登记信息管理</span></a></li>
+                <li><a href="javascript:;"><span>入住人员类别管理</span></a></li>
+                <li><a href="javascript:;"><span>房间管理</span></a></li>
+                <li><a href="javascript:;"><span>查看用户留言</span></a></li>
+              </ul>
+            </li>
+
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>餐饮管理</span><i
+                  class="my-icon lsm-sidebar-more"></i></a>
+                  <ul>
+                  <li><a href="javascript:;"><span>预订用餐管理</span></a></li>
+                  <li><a href="javascript:;"><span>送餐服务管理</span></a></li>
+                  </ul>
+            </li>
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>会员服务管理</span><i
+                  class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li><a href="javascript:;"><span>会员办理服务</span></a></li>
+                <li><a href="javascript:;"><span>会员信息查询</span></a></li>
+
+              </ul>
+            </li>
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>退房结账管理</span><i
+                  class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li class="1sm-sidebar-item">
+                  <a href="javascript:;"><span>客房管理</span><i class="my-icon lsm-sidebar-more"></i></a>
+                  <ul>              
+                  <li><a href="javascript:;"><span>退房审核查看</span></a></li>
+                  <li><a href="javascript:;"><span>反馈退房信息</span></a></li>
+                  </ul>
+                </li>
+
+                <li class="1sm-sidebar-item">
+                  <a href="javascript:;"><span>账户管理</span></a>
+                  <ul>              
+                  <li><a href="javascript:;"><span>结账消费项目</span></a></li>
+                  <li><a href="javascript:;"><span>发票记录</span></a></li>
+                  </ul>
+                </li>        
+              </ul>
+            </li>
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>面板管理</span><i
+                  class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li class="1sm-sidebar-item">
+                  <a href="javascript:;"><span>房间状态统计</span><i class="my-icon lsm-sidebar-more"></i></a>
+                  <ul>              
+                  <li><a href="javascript:;"><span>当前出租率</span></a></li>
+                  <li><a href="javascript:;"><span>当前空房统计</span></a></li>
+                  <li><a href="javascript:;"><span>当前在住住房统计</span></a></li>
+                  <li><a href="javascript:;"><span>维修或自留房间统计</span></a></li>
+                  <li><a href="javascript:;"><span>预订房间统计</span></a></li>
+                  <li><a href="javascript:;"><span>预离房间统计</span></a></li>
+                  </ul>
+                </li>        
+                
+                <li class="1sm-sidebar-item">
+                  <a href="javascript:;"><span>物品租界</span><i class="my-icon lsm-sidebar-more"></i></a>
+                  <ul>             
+                  <li><a href="javascript:;"><span>物品租用</span></a></li>  
+                  <li><a href="javascript:;"><span>床位添加</span></a></li>
+                  <li><a href="javascript:;"><span>欠费提醒</span></a></li>
+                                 
+                  </ul>
+                </li>      
+                <li><a href="javascript:;"><span>客户留言</span></a></li>
+                  
+               
+              </ul>
+            </li>
+
+             <li class="lsm-sidebar-item">
+                  <a href="javascript:;"><span>交接班统计</span><i
+                      class="my-icon lsm-sidebar-more"></i></a>
+                </li>
+
+                <li class="lsm-sidebar-item">
+                  <a href="javascript:;"><span>打印账单详细统计</span><i
+                      class="my-icon lsm-sidebar-more"></i></a>
+                </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;z-index: 9999;text-align: center;line-height: 50px;" th:fragment="commonFooter">
+
+    <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
+
+  </footer>
+
+
+
+</body>
+
+</html>
