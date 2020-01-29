@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.util.List;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,12 @@ public class FloorRestControllerImpl implements FloorRestController {
     @Override
     @PostMapping("show3d")
     public ResultDO<String> show3D(long id) {
+        return null;
+    }
+
+    @Override
+    @PostMapping("showIdList")
+    public ResultDO<List<Long>> showIdList() {
         return null;
     }
 }

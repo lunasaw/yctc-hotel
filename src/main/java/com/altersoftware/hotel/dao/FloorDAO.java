@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.FloorDO;
@@ -53,4 +55,12 @@ public interface FloorDAO {
      */
     @Delete("DELETE FROM tb_floor WHERE id=#{id}")
     int deleteById(long id);
+
+    /**
+     * 返回楼层list
+     *
+     * @return
+     */
+    @Select("select id  from tb_floor ")
+    List<Long> getFloorIdList();
 }

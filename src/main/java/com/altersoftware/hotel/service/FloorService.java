@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.altersoftware.hotel.entity.ResultDO;
@@ -31,5 +33,12 @@ public interface FloorService {
      * @param id
      */
     ResultDO<String> show3D(long id);
+
+    /**
+     * 返回所有楼层list
+     *
+     * @return
+     */
+    ResultDO<List<Long>> showFloorId();
 
 }

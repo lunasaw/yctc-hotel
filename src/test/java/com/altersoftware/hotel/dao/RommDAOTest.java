@@ -24,6 +24,7 @@ import com.altersoftware.hotel.entity.RoomDO;
 public class RommDAOTest {
     private static final int    ID       = 1;
     private static final int    FLOOR_ID = 1;
+    private static final int    ROOOM_NUMBER = 101;
     private static final String TYPE     = RoomType.BIG_BEDROOM;
     private static final double PRICE    = RoomType.BIG_BEDROOM_PRICE;
     private static final double DEPOSIT  = RoomType.BIG_BEDROOM_DEPOSIT;
@@ -36,8 +37,9 @@ public class RommDAOTest {
     public void aInsert() {
         RoomDO roomDO = new RoomDO();
         roomDO.setId(ID);
-        roomDO.setFloorID(FLOOR_ID);
+        roomDO.setId(FLOOR_ID);
         roomDO.setType(TYPE);
+        roomDO.setRoomNumber(ROOOM_NUMBER);
         roomDO.setPrice(PRICE);
         roomDO.setDeposit(DEPOSIT);
         roomDO.setState(state);
