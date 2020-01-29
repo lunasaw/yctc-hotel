@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -40,5 +42,11 @@ public class FloorServiceImpl implements FloorService {
     public ResultDO<String> show3D(long id) {
         FloorDO floorDOById = floorDAO.getFloorDOById(id);
         return new ResultDO<String>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById.getThreeDDiagram());
+    }
+
+    @Override
+    public ResultDO<List<Long>> showFloorId() {
+        List<Long> floorIdList = floorDAO.getFloorIdList();
+        return new ResultDO<List<Long>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorIdList);
     }
 }

@@ -16,9 +16,9 @@ public interface RoomDAO {
      *
      *
      */
-    @Insert(" INSERT INTO tb_room (id, floor_id, type, price, deposit, state, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_room (id, floor_id, room_number,  type, price, deposit, state, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{floorId}, #{type}, #{price}, #{deposit}, #{state},  now(), now()) ")
+        "VALUES(#{id}, #{floorId}, #{roomNumber},  #{type}, #{price}, #{deposit}, #{state},  now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(RoomDO roomDO);
 
@@ -27,10 +27,11 @@ public interface RoomDAO {
      *
      * @param id
      */
-    @Select("select id, floor_id, type, price, deposit, state,  create_time, modify_time from tb_room where id=#{id}  ")
+    @Select("select id, floor_id, room_number,  type, price, deposit, state,  create_time, modify_time from tb_room where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "floorId", column = "floor_id"),
+        @Result(property = "roomNumber", column = "room_number"),
         @Result(property = "type", column = "type"),
         @Result(property = "price", column = "price"),
         @Result(property = "deposit", column = "deposit"),
@@ -45,7 +46,7 @@ public interface RoomDAO {
      *
      * @param roomDO
      */
-    @Update("update tb_room  set floor_id=#{floorId}, type=#{type}, price=#{price}, deposit=#{deposit}, state=#{state},  modify_time=now()  where id=#{id}")
+    @Update("update tb_room  set floor_id=#{floorId}, room_number=#{roomNumber},  type=#{type}, price=#{price}, deposit=#{deposit}, state=#{state},  modify_time=now()  where id=#{id}")
     int update(RoomDO roomDO);
 
     /**

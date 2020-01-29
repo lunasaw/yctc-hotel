@@ -10,6 +10,9 @@ public class RoomDO {
     /** 楼层号 */
     private int    floorId;
 
+    /** 房间门牌号 */
+    private int    roomNumber;
+
     /** 房间类型 */
     private String type;
 
@@ -36,12 +39,20 @@ public class RoomDO {
         this.id = id;
     }
 
-    public int getFloorID() {
+    public int getFloorId() {
         return floorId;
     }
 
-    public void setFloorID(int floorId) {
+    public void setFloorId(int floorId) {
         this.floorId = floorId;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public String getType() {
@@ -97,6 +108,7 @@ public class RoomDO {
         return "RoomDO{" +
             "id=" + id +
             ", floorId=" + floorId +
+            ", roomNumber=" + roomNumber +
             ", type='" + type + '\'' +
             ", price=" + price +
             ", deposit=" + deposit +

@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.controller.rest;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 
 import com.altersoftware.hotel.entity.ResultDO;
@@ -31,4 +33,9 @@ public interface FloorRestController {
      * @param id
      */
     ResultDO<String> show3D(long id);
+
+    /**
+     * 返回floorId 集合
+     */
+    ResultDO<List<Long>> showIdList();
 }
