@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
@@ -22,31 +24,64 @@ import com.altersoftware.hotel.service.FloorService;
 @ComponentScan({"com.altersoftware.hotel.dao"})
 @Service("floorService")
 public class FloorServiceImpl implements FloorService {
+    private final static Logger LOG = LoggerFactory.getLogger("serviceLog");
 
     @Resource
-    private FloorDAO floorDAO;
+    private FloorDAO            floorDAO;
 
     @Override
     public ResultDO<String> show2D(long id) {
-        FloorDO floorDOById = floorDAO.getFloorDOById(id);
-        return new ResultDO<String>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById.getPlan());
+        FloorDO floorDOById = null;
+        try {
+            floorDOById = floorDAO.getFloorDOById(id);
+            LOG.info("getfloorDOById success, floorDO={}", floorDOById);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById.getPlan());
+        } catch (Exception e) {
+            LOG.error("getfloorDOById error, floorDO={}", floorDOById, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
     }
 
     @Override
     public ResultDO<String> showFire(long id) {
-        FloorDO floorDOById = floorDAO.getFloorDOById(id);
-        return new ResultDO<String>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById.getFireDiagram());
+        FloorDO floorDOById = null;
+        try {
+            floorDOById = floorDAO.getFloorDOById(id);
+            LOG.info("getfloorDOById success, floorDO={}", floorDOById);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById.getFireDiagram());
+        } catch (Exception e) {
+            LOG.error("getfloorDOById error, floorDO={}", floorDOById, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
     }
 
     @Override
     public ResultDO<String> show3D(long id) {
-        FloorDO floorDOById = floorDAO.getFloorDOById(id);
-        return new ResultDO<String>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById.getThreeDDiagram());
+        FloorDO floorDOById = null;
+        try {
+            floorDOById = floorDAO.getFloorDOById(id);
+            LOG.info("getfloorDOById success, floorDO={}", floorDOById);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById.getThreeDDiagram());
+        } catch (Exception e) {
+            LOG.error("getfloorDOById error, mail={}", floorDOById, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
     }
 
     @Override
     public ResultDO<List<Long>> showFloorId() {
-        List<Long> floorIdList = floorDAO.getFloorIdList();
-        return new ResultDO<List<Long>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorIdList);
+        List<Long> floorIdList = null;
+        try {
+            floorIdList = floorDAO.getFloorIdList();
+            LOG.info("get floorIdList success, floorIdList={}", floorIdList);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorIdList);
+        } catch (Exception e) {
+            LOG.error("getfloorDOById error, floorIdList={}", floorIdList, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
     }
 }
