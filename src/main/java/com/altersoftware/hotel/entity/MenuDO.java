@@ -11,7 +11,10 @@ public class MenuDO {
     private String name;
 
     /** 菜品价格 */
-    private float  price;
+    private Double price;
+
+    /** 菜品图片 */
+    private String picture;
 
     /** 创建时间 */
     private Date   createTime;
@@ -35,11 +38,11 @@ public class MenuDO {
         this.name = name;
     }
 
-    public float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -59,14 +62,24 @@ public class MenuDO {
         this.modifyTime = modifyTime;
     }
 
+    public String getPictrue() {
+        return picture;
+    }
+
+    public void setPictrue(String picture) {
+        this.picture = picture;
+    }
+
     @Override
     public String toString() {
         return "MenuDO{" +
             "id=" + id +
             ", name='" + name + '\'' +
             ", price=" + price +
+            ", picture='" + picture + '\'' +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
             '}';
     }
+
 }
