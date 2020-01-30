@@ -10,17 +10,20 @@ import com.google.common.collect.ImmutableList;
  */
 public class GoodsState {
 
-    /** 未借出 */
-    public static final int           UNLEND    = 0;
+    /** 关 */
+    public static final String       UNLEND      = "0";
 
-    /** 已借出 */
-    public static final int           LENDED    = 1;
+    /** 开 */
+    public static final String       LENDED      = "1";
 
-    public static final List<Integer> ALL_STATE = ImmutableList.of(UNLEND, LENDED);
+    /** 温度 */
+    public static final String       TEMPERATURE = "";
 
-    public static boolean isLegal(int state) {
-        for (Integer integer : ALL_STATE) {
-            if (integer == state) {
+    public static final List<String> ALL_STATE   = ImmutableList.of(UNLEND, LENDED, TEMPERATURE);
+
+    public static boolean isLegal(String state) {
+        for (String integer : ALL_STATE) {
+            if (integer.equals(state)) {
                 return true;
             }
         }
