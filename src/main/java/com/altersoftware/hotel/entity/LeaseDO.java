@@ -15,7 +15,7 @@ public class LeaseDO {
     /** 租赁顾客编号 */
     private long customerId;
     /** 租赁约定时长 */
-    private Date rentalTime;
+    private String rentalTime;
     /** 出租归还时间 */
     private Date returnTime;
     /** 创建时间 */
@@ -47,11 +47,11 @@ public class LeaseDO {
         this.customerId = customerId;
     }
 
-    public Date getRentalTime() {
+    public String getRentalTime() {
         return rentalTime;
     }
 
-    public void setRentalTime(Date rentalTime) {
+    public void setRentalTime(String rentalTime) {
         this.rentalTime = rentalTime;
     }
 
