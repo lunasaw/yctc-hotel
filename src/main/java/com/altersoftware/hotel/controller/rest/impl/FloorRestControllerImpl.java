@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Override
     @PostMapping("show2d")
-    public ResultDO<String> show2D(long id) {
+    public ResultDO<String> show2D(@RequestBody long id) {
 
         ResultDO<String> resultDO = null;
 
@@ -46,7 +47,7 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Override
     @PostMapping("showfire")
-    public ResultDO<String> showFire(long id) {
+    public ResultDO<String> showFire(@RequestBody long id) {
         ResultDO<String> resultDO = floorService.showFire(id);
 
         if (resultDO.isSuccess() == false) {
@@ -60,7 +61,7 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Override
     @PostMapping("show3d")
-    public ResultDO<String> show3D(long id) {
+    public ResultDO<String> show3D(@RequestBody long id) {
         ResultDO<String> resultDO = floorService.show3D(id);
 
         if (resultDO.isSuccess() == false) {
