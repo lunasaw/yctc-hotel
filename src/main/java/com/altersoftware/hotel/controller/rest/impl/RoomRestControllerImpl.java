@@ -70,8 +70,8 @@ public class RoomRestControllerImpl implements RoomRestController {
             roomDO.setDeposit(roomVO.getDeposit());
             roomDO.setType(roomVO.getType());
             ResultDO<Void> voidResultDO = roomService.updateRoom(roomDO);
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }
-        return null;
     }
 
     /**
