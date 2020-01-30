@@ -1,9 +1,9 @@
 package com.altersoftware.hotel.controller.rest;
 
+import java.util.List;
 
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.vo.UserInformationVO;
 
 public interface UserRestController {
 
@@ -12,22 +12,30 @@ public interface UserRestController {
      *
      * @return
      */
-    ResultDO<Void> getAllCustomer();
+    ResultDO<List<UserDO>> getAllCustomer();
 
     /**
-     * signin的rest方法
+     * 修改客户信息
      *
-     * @param userDO
+     * @param userId
      * @return
      */
-    ResultDO<Long> signin(UserDO userDO);
+    ResultDO<Void> updateUserDO(Long userId);
 
     /**
-     * getUserInformationById的rest方法
+     * 删除指定客户信息
      *
-     * @param id
+     * @param userId
      * @return
      */
-    ResultDO<UserInformationVO> getUserInformationById(long id);
+    ResultDO<Void> deleteByUserId(Long userId);
+
+    /**
+     * 会员号搜索客户/员工
+     *
+     * @param number
+     * @return
+     */
+    ResultDO<UserDO> getByNumber(String number);
 
 }

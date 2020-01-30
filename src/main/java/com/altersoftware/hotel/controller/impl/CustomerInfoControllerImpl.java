@@ -6,26 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.altersoftware.hotel.constant.TemplatePath;
-import com.altersoftware.hotel.controller.FloorController;
+import com.altersoftware.hotel.controller.CustomerInfoController;
 
 /**
  * @author czy@win10
- * @date 2020/1/28 21:07
+ * @date 2020/1/30 20:11
  */
 @Controller
 @ComponentScan({"com.altersoftware.hotel.service"})
-@RequestMapping("/floor")
-public class FloorControllerImpl implements FloorController {
+@RequestMapping("/customer")
+public class CustomerInfoControllerImpl implements CustomerInfoController {
 
-    /**
-     * 楼层信息页面
-     *
-     * @return
-     */
     @Override
-    @GetMapping("show-floor")
-    public String showFloor() {
-        return TemplatePath.FLOOR;
+    @GetMapping("show-customerinfo")
+    public String showCustomers() {
+        return TemplatePath.CUSTOMER_INFO;
     }
-
 }

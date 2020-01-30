@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <title>用户服务中心</title>
+
+
+</head>
+
+<body>
+
+<header th:replace="component/fram :: commonHeader"></header>
+
+<div class="container" th:replace="component/fram :: commonMenu"></div>
+
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
+    <div class="chartjs-size-monitor"
+         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+        </div>
+    </div>
+
+
+    <h2>
+        <small>房间预览</small>
+    </h2>
+    <hr align="left" color="lightgrey" width="50%">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">楼层</span>
+        </div>
+        <select autocomplete="off" class="custom-select col-md-3 col-sm-3" id="inputGroupSelect-building"
+                onclick="selectBuilding();">
+            <option disabled="disabled" selected="selected">请选择...</option><!-- 动态追加楼号 -->
+        </select>
+    </div>
+    <hr align="left" color="lightgrey">
+
+
+    <table class="table table-striped " id="listTable">
+        <thead>
+        <tr>
+            <th scope="col">编号</th>
+            <th scope="col">楼层</th>
+            <th scope="col">详情</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <hr align="left" color="grey" style="height: 0.8px;">
+    <table id=“here”>
+
+    </table>
+
+</main>
+
+<footer th:replace="component/fram :: commonFooter"></footer>
+<script>
+    function getBuilding() {
+        //获取数据库中的楼号
+        $.ajax({
+            url: "/hotel/floor/showIdList",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            async: true,
+            success: function (result) {
+                if (result.success == false) {
+                    if (result.code == 9002) {
+                        alert("参数错误");
+                    } else if (result.code == 9999) {
+                        alert("系统错误");
+                    }
+                } else {
+                    //得到楼号list
+                    var list = result.module;
+                    //清空build(除第一个)
+                    $('#inputGroupSelect-building option').not(":first").remove();
+                    for (var i = 0; i < list.length; i++) {
+                        document.getElementById("inputGroupSelect-building").options.add(new Option(list[i], i));
+                    }
+                }
+            },
+            error: function (e) {
+                alert("异常");
+            }
+        });
+    }
+
+    function selectBuilding() {
+        //获取select选中的text。
+        var building = $("#inputGroupSelect-building option:selected").text();
+        if (building == '请选择...')
+            return;
+        $.ajax({
+            url: "/genesis/restmetadata/get-buildingfloorandurlvo-by-building",
+            type: "POST",
+            data: building,
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            async: true,
+            success: function (result) {
+                console.log(result);
+                if (result.success == false) {
+                    if (result.code == 9002) {
+                        alert("参数错误");
+                    } else if (result.code == 9999) {
+                        alert("系统错误");
+                    }
+                } else {
+                    //得到楼层list
+                    var list = result.module;
+                    //清空floors(除第一个)
+                    $("#listTable tbody").empty();
+                    for (var i = 0; i < list.length; i++) {
+                        var id = list[i].buildingFloorDO.id;
+                        var building = list[i].buildingFloorDO.building;
+                        var floor = list[i].buildingFloorDO.floor;
+                        var detailUrl = list[i].url;
+                        var listId = i + 1;
+                        $("#listTable tbody").append("<tr><th scope=\"row\">" + listId + "</th><td scope=\"row\">" + building +
+                            "</td><td>" +
+                            floor + "</td><td><a href=" + detailUrl + ">详情</a></td></tr>");
+                    }
+                }
+            },
+            error: function (e) {
+                alert("异常");
+            }
+        });
+    }</script>
+
+
+</body>
+
+</html>
