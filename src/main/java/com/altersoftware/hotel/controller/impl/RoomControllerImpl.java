@@ -27,11 +27,7 @@ public class RoomControllerImpl implements RoomController {
         return TemplatePath.ROOMS;
     }
 
-    /**
-     * TODO 实现类跳转请求和转发
-     * 
-     * @return
-     */
+
     @Override
     @GetMapping("rooms-update")
     public String showUpdate() { return TemplatePath.ROOMS_UPDATE; }
