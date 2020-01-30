@@ -1,14 +1,18 @@
 package com.altersoftware.hotel.vo;
 
-import java.util.Date;
-
 /**
  * @author czy@win10
  * @date 2020/1/29 22:04
  */
 public class RoomVO {
+    /** 楼层号 */
+    private int    floorId;
+
     /** 房间门牌号 */
     private int    roomNumber;
+
+    /** 房间类型 */
+    private String type;
 
     /** 房间价格 */
     private double price;
@@ -19,34 +23,12 @@ public class RoomVO {
     /** 房间状态 */
     private int    state;
 
-    /** 房间类型 */
-    private String type;
-
-    /** 修改时间 */
-    private Date modifyTime;
-
-    public int getState() {
-        return state;
+    public int getFloorId() {
+        return floorId;
     }
 
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setFloorId(int floorId) {
+        this.floorId = floorId;
     }
 
     public int getRoomNumber() {
@@ -55,6 +37,14 @@ public class RoomVO {
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getPrice() {
@@ -73,15 +63,11 @@ public class RoomVO {
         this.deposit = deposit;
     }
 
-    @Override
-    public String toString() {
-        return "RoomVO{" +
-                "roomNumber=" + roomNumber +
-                ", price=" + price +
-                ", deposit=" + deposit +
-                ", state=" + state +
-                ", type='" + type + '\'' +
-                ", modifyTime=" + modifyTime +
-                '}';
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

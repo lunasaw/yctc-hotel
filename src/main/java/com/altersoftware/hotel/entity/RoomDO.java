@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class RoomDO {
 
-    /** 房间号 */
+    /** 房间编号 */
     private long   id;
 
     /** 楼层号 */
