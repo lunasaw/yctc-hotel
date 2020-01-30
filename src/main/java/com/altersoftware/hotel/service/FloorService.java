@@ -1,8 +1,8 @@
 package com.altersoftware.hotel.service;
 
-import com.altersoftware.hotel.entity.ResultDO;
-
 import java.util.List;
+
+import com.altersoftware.hotel.entity.ResultDO;
 
 /**
  * @author czy@win10
@@ -31,5 +31,10 @@ public interface FloorService {
      */
     ResultDO<String> show3D(long id);
 
+    /**
+     * 返回idList
+     * 
+     * @return
+     */
     ResultDO<List<Long>> showFloorId();
 }

@@ -6,5 +6,10 @@ package com.altersoftware.hotel.controller;
  */
 public interface HotelController {
 
-    void showHotel(long hotelId);
+    /**
+     * 查看酒店信息页面
+     *
+     */
+    String showHotel();
+
 }
