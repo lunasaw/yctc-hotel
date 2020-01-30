@@ -16,19 +16,16 @@ public interface RoomService {
 
     /**
      * 查询所有房间信息
-     *
      */
     ResultDO<List<RoomDO>> getRooms();
 
     /**
      * 更新房间状态
-     *
      */
     ResultDO<Void> updateRoom(RoomDO roomDO);
 
     /**
      * 返回指定房间数据
-     *
      */
     ResultDO<RoomDO> getRoomDO(long id);
 
