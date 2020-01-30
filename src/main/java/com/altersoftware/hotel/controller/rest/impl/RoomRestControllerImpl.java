@@ -84,9 +84,9 @@ public class RoomRestControllerImpl implements RoomRestController {
      */
     @Override
     @PostMapping("get-byNumber")
-    public ResultDO<RoomDO> getRoomByNumber( long id ,int roomNumber ) {
+    public ResultDO<RoomDO> getRoomByNumber( int roomNumber ) {
         //参数校验
-        if ( id <= 0 || roomNumber <= 0 ){
+        if ( roomNumber <= 0 ){
             return new ResultDO<RoomDO>(false, ResultCode.PARAMETER_INVALID,
                     ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -97,9 +97,8 @@ public class RoomRestControllerImpl implements RoomRestController {
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         }
         else{
-            ResultDO<RoomDO> roomDO = roomService.getRoomDO(id);
-            RoomDO roomDOModule = roomDO.getModule();
-            return new ResultDO<RoomDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, roomDOModule);
+            RoomDO doByNumberModule = roomDOByNumber.getModule();
+            return new ResultDO<RoomDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, doByNumberModule);
         }
 
     }

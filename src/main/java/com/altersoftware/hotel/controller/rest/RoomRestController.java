@@ -26,5 +26,5 @@ public interface RoomRestController {
     /**
      * 通过房间号搜索房间
      */
-    ResultDO<RoomDO> getRoomByNumber(long id,int roomNumber);
+    ResultDO<RoomDO> getRoomByNumber(int roomNumber);
 }
