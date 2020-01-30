@@ -32,8 +32,8 @@ public class GoodsDAOTest {
     private static final Double PRICE              = 33.0;
     private static final Double COMPENSATION_MONEY = 33.0;
     private static final String BUY_TIME           = "2020-1-1";
-    private static final int    STATE              = GoodsState.UNLEND;
-    private static final int    NEW_STATE          = GoodsState.LENDED;
+    private static final String STATE              = GoodsState.UNLEND;
+    private static final String NEW_STATE          = GoodsState.LENDED;
 
     @Resource
     private GoodsDAO            goodsDAO;

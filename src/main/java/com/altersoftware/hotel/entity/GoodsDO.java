@@ -20,8 +20,8 @@ public class GoodsDO {
     private Double price;
     /** 物品损坏赔偿价格 */
     private Double compensationMoeny;
-    /** 物品是否使用 */
-    private int    state;
+    /** 物品状态 */
+    private String state;
     /** 创建时间 */
     private Date   createTime;
     /** 修改时间 */
@@ -75,11 +75,11 @@ public class GoodsDO {
         this.compensationMoeny = compensationMoeny;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 
