@@ -27,4 +27,9 @@ public class RoomControllerImpl implements RoomController {
         return TemplatePath.ROOMS;
     }
 
+    @Override
+    public String showUpdate() {
+        return null;
+    }
+
 }
