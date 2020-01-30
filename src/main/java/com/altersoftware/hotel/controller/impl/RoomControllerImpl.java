@@ -33,8 +33,7 @@ public class RoomControllerImpl implements RoomController {
      * @return
      */
     @Override
-    public String showUpdate() {
-        return null;
-    }
+    @GetMapping("rooms-update")
+    public String showUpdate() { return TemplatePath.ROOMS_UPDATE; }
 
 }
