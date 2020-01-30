@@ -1,12 +1,15 @@
-package com.altersoftware.hotel.controller.rest;
+package com.altersoftware.hotel.service;
 
 import java.util.List;
 
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 
-public interface UserRestController {
-
+/**
+ * @author czy@win10
+ * @date 2020/1/30 20:39
+ */
+public interface CustomerService {
     /**
      * 获取所有客户信息
      *
@@ -17,18 +20,18 @@ public interface UserRestController {
     /**
      * 修改客户信息
      *
-     * @param userId
+     * @param userDO
      * @return
      */
-    ResultDO<Void> updateUserDO(Long userId);
+    ResultDO<Void> updateUserDO(UserDO userDO);
 
     /**
      * 删除指定客户信息
      *
-     * @param userId
+     * @param number
      * @return
      */
-    ResultDO<Void> deleteByUserId(Long userId);
+    ResultDO<Void> deleteByUserId(String number);
 
     /**
      * 会员号搜索客户/员工
@@ -37,5 +40,4 @@ public interface UserRestController {
      * @return
      */
     ResultDO<UserDO> getByNumber(String number);
-
 }

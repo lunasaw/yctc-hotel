@@ -126,12 +126,12 @@ public interface UserDAO {
     void deleteById(long id);
 
     /**
-     * 删除用户
+     * id删除用户
      *
-     * @param number
+     * @param userNumber
      */
-    @Delete("DELETE FROM tb_user WHERE number=#{number}")
-    void deleteByNumber(long number);
+    @Delete("DELETE FROM tb_user WHERE number=#{userNumberid}")
+    void deleteByuserNumber(String userNumber);
 
     /**
      * 会员号/员工工号查询用户
