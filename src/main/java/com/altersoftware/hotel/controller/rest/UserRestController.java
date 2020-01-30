@@ -8,12 +8,11 @@ import com.altersoftware.hotel.vo.UserInformationVO;
 public interface UserRestController {
 
     /**
-     * signup的rest方法
+     * 获取所有客户信息
      *
-     * @param userDO
      * @return
      */
-    ResultDO<Void> signup(UserDO userDO);
+    ResultDO<Void> getAllCustomer();
 
     /**
      * signin的rest方法

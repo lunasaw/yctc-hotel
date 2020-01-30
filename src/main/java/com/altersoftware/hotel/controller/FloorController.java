@@ -6,5 +6,10 @@ package com.altersoftware.hotel.controller;
  */
 public interface FloorController {
 
-    String showFlloor();
+    /**
+     * 来到房间页面
+     * 
+     * @return
+     */
+    String showFloor();
 }
