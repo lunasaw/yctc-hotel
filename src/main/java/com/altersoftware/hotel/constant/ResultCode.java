@@ -87,6 +87,10 @@ public class ResultCode {
     public static final int     UPDATE_FAILD                           = 1026;
     public static final String  MSG_UPDATE_FAILD                       = "update faild";
 
+    /** 数据库中删除失败 */
+    public static final int     DELETE_FAILD                           = 2026;
+    public static final String  MSG_DELETE_FAILD                       = "delete faild";
+
     /** 数据库中已有班级信息 */
     public static final int ALREADY_EXIST_CLASSDO = 1027;
     public static final String MSG_ALREADY_EXIST_CLASSDO = "already exist classDO";

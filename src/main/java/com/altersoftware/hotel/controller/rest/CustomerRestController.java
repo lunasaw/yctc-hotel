@@ -25,7 +25,7 @@ public interface CustomerRestController {
     /**
      * 删除指定客户信息
      *
-     * @param userId
+     * @param number
      * @return
      */
     ResultDO<Void> deleteByUserId(String number);
