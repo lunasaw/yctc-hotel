@@ -26,13 +26,13 @@ public class HotelServiceImpl implements HotelService {
     private HotelDAO            hotelDAO;
 
     @Override
-    public ResultDO<HotelDO> showHotel(long Id) {
+    public ResultDO<HotelDO> showHotel(long id) {
         try {
-            HotelDO hotelDOById = hotelDAO.getHotelDOById(Id);
+            HotelDO hotelDOById = hotelDAO.getHotelDOById(id);
             LOG.info("getHotelDOById success, hotelDOById={}", hotelDOById);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, hotelDOById);
         } catch (Exception e) {
-            LOG.error("getHotelDOById error, Id={}", Id, e);
+            LOG.error("getHotelDOById error, Id={}", id, e);
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
         }

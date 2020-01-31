@@ -17,10 +17,10 @@ public interface CustomerRestController {
     /**
      * 修改客户信息
      *
-     * @param userId
+     * @param userDO
      * @return
      */
-    ResultDO<Void> updateUserDO(Long userId);
+    ResultDO<Void> updateUserDO(UserDO userDO);
 
     /**
      * 删除指定客户信息
@@ -28,7 +28,7 @@ public interface CustomerRestController {
      * @param userId
      * @return
      */
-    ResultDO<Void> deleteByUserId(Long userId);
+    ResultDO<Void> deleteByUserId(String number);
 
     /**
      * 会员号搜索客户/员工
