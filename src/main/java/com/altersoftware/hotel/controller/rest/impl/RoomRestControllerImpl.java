@@ -69,6 +69,7 @@ public class RoomRestControllerImpl implements RoomRestController {
             roomDO.setPrice(roomVO.getPrice());
             roomDO.setDeposit(roomVO.getDeposit());
             roomDO.setType(roomVO.getType());
+            // TODO success 检验
             ResultDO<Void> voidResultDO = roomService.updateRoom(roomDO);
             return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }

@@ -26,8 +26,6 @@ public class RommDAOTest {
     private static final int    FLOOR_ID = 1;
     private static final int    ROOOM_NUMBER = 101;
     private static final String TYPE     = RoomType.BIG_BEDROOM;
-    private static final double PRICE    = RoomType.BIG_BEDROOM_PRICE;
-    private static final double DEPOSIT  = RoomType.BIG_BEDROOM_DEPOSIT;
     private static final int    state    = RoomState.CHECK_IN;
 
     @Resource
@@ -40,8 +38,8 @@ public class RommDAOTest {
         roomDO.setFloorId(FLOOR_ID);
         roomDO.setType(TYPE);
         roomDO.setRoomNumber(ROOOM_NUMBER);
-        roomDO.setPrice(PRICE);
-        roomDO.setDeposit(DEPOSIT);
+        roomDO.setPrice(250);
+        roomDO.setDeposit(260);
         roomDO.setState(state);
         roomDAO.insert(roomDO);
     }

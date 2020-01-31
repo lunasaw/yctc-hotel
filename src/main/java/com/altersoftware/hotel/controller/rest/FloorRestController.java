@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 
+import com.altersoftware.hotel.entity.FloorDO;
 import com.altersoftware.hotel.entity.ResultDO;
 
 /**
@@ -12,6 +13,13 @@ import com.altersoftware.hotel.entity.ResultDO;
  */
 @Controller
 public interface FloorRestController {
+    /**
+     * 插入一条楼层信息
+     * 
+     * @param floorDO
+     * @return
+     */
+    ResultDO<Void> insert(FloorDO floorDO);
 
     /**
      * 展示平面图
@@ -38,4 +46,11 @@ public interface FloorRestController {
      * 返回floorId 集合
      */
     ResultDO<List<Long>> showIdList();
+
+    /**
+     * 删除指定楼层信息
+     * 
+     * @param id
+     */
+    ResultDO<Void> delete(long id);
 }
