@@ -2,9 +2,6 @@ package com.altersoftware.hotel.controller.rest.impl;
 
 import java.util.List;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.HotelDO;
-import com.altersoftware.hotel.service.CustomerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.CustomerRestController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.service.CustomerService;
 
 /**
  * @author czy@win10
@@ -72,12 +71,19 @@ public class CustomerRestControllerImpl implements CustomerRestController {
             UserDO userDO1 = byNumber.getModule();
             userDO1.setAge(userDO.getAge());
             userDO1.setContactPhone(userDO.getContactPhone());
+            // TODO 用户余额,所有的客户信息都是可以修改的
+            userDO1.setAccount(userDO.getAccount());
             userDO1.setEmail(userDO.getEmail());
             userDO1.setIdCardNumber(userDO.getIdCardNumber());
             userDO1.setName(userDO.getName());
             userDO1.setSex(userDO.getSex());
             ResultDO<Void> voidResultDO = customerService.updateUserDO(userDO1);
-            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            if (voidResultDO.isSuccess()) {
+                return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            } else {
+                return new ResultDO<Void>(false, ResultCode.UPDATE_FAILD,
+                    ResultCode.MSG_UPDATE_FAILD, null);
+            }
         }
 
     }
@@ -104,8 +110,12 @@ public class CustomerRestControllerImpl implements CustomerRestController {
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         }
         else {
-            customerService.deleteByUserId(number);
-            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            ResultDO<Void> voidResultDO = customerService.deleteByUserId(number);
+            if (voidResultDO.isSuccess()) {
+                return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            } else {
+                return new ResultDO<Void>(false, ResultCode.DELETE_FAILD, ResultCode.MSG_DELETE_FAILD);
+            }
         }
 
     }
