@@ -51,9 +51,9 @@ public class ResultCode {
     public static final int PERMISSION_REPETITION = 1009;
     public static final String MSG_PERMISSION_REPETITION = "permission is repetitive";
 
-    /** 无当前课程 */
-    public static final int NO_SUCH_COURSE = 1010;
-    public static final String MSG_NO_SUCH_COURSE = "no such course";
+    /** 无当前数据 */
+    public static final int     NO_SUCH_INFO                           = 1010;
+    public static final String  MSG_NO_SUCH_INFO                       = "no such course";
 
     /** 无赋权记录 */
     public static final int NO_SUCH_AUTHORIZATION_RECORD = 1020;

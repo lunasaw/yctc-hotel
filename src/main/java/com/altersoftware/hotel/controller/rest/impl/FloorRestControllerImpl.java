@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.FloorRestController;
+import com.altersoftware.hotel.entity.FloorDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.service.FloorService;
 
@@ -26,6 +26,12 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Autowired
     FloorService                floorService;
+
+    @Override
+    @PostMapping("add-floor")
+    public ResultDO<Void> insert(FloorDO floorDO) {
+        return null;
+    }
 
     @Override
     @PostMapping("show2d")
@@ -87,5 +93,11 @@ public class FloorRestControllerImpl implements FloorRestController {
             return new ResultDO<List<Long>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, module);
 
         }
+    }
+
+    @Override
+    @PostMapping("delete-floor")
+    public ResultDO<Void> delete(long id) {
+        return null;
     }
 }

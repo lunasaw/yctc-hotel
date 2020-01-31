@@ -17,7 +17,7 @@ public class GoodsState {
     public static final String       LENDED      = "1";
 
     /** 温度 */
-    public static final String       TEMPERATURE = "";
+    public static final String       TEMPERATURE = "30";
 
     public static final List<String> ALL_STATE   = ImmutableList.of(UNLEND, LENDED, TEMPERATURE);
 

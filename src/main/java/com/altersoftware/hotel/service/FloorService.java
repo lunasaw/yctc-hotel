@@ -2,6 +2,7 @@ package com.altersoftware.hotel.service;
 
 import java.util.List;
 
+import com.altersoftware.hotel.entity.FloorDO;
 import com.altersoftware.hotel.entity.ResultDO;
 
 /**
@@ -9,6 +10,13 @@ import com.altersoftware.hotel.entity.ResultDO;
  * @date 2020/1/28 21:19
  */
 public interface FloorService {
+    /**
+     * 插入一条楼层信息
+     * 
+     * @param floorDO
+     * @return
+     */
+    ResultDO<Void> insert(FloorDO floorDO);
 
     /**
      * 展示平面图
@@ -37,4 +45,11 @@ public interface FloorService {
      * @return
      */
     ResultDO<List<Long>> showFloorId();
+
+    /**
+     * 删除指定楼层信息
+     * 
+     * @param id
+     */
+    ResultDO<Void> delete(long id);
 }

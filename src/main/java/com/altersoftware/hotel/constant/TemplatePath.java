@@ -34,17 +34,22 @@ public class TemplatePath {
 
     /** 找密界面 */
     public static final String USER_RETRIEVE_PASSWORDB_START              = "user/verify-identity-step-a";
+
     /** 手机找密 */
     public static final String USER_RETRIEVE_PASSWORD_BY_PHONE            = "user/verify-identity-step-b-mobile";
+
     /** 邮箱找密 */
     public static final String USER_RETRIEVE_PASSWORD_BY_MAIL             = "user/verify-identity-step-b-email";
+
     /** 找密步骤三改密 */
     public static final String USER_RETRIEVE_PASSWORDB                    = "user/verify-identity-step-c";
+
     /** 找密成功 */
     public static final String USER_RETRIEVE_PASSWORD_SUCCESS             = "user/verify-identity-success";
 
     /** 修改密码 */
     public static final String USER_UPDATE_PASSWORD                       = "user/update-password";
+
     /** 改密成功 */
     public static final String USER_UPDATE_PASSWORD_SUCCESS               = "user/update-password-success";
 
@@ -98,5 +103,8 @@ public class TemplatePath {
     /** 客户信息页面 */
     public static final String CUSTOMER_INFO                              = "customer/customer-info";
     /** 酒店信息页面 */
-    public static final String HOTEL                                        = "hotel/hotels";
+    public static final String HOTEL                                      = "hotel/hotels";
+    /** 物品信息页面 */
+    public static final String GOODS                                      = "hotel/goods";
+
 }

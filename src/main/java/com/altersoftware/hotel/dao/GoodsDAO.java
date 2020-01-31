@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.GoodsDO;
@@ -42,6 +44,26 @@ public interface GoodsDAO {
     GoodsDO getGoodsDOById(long id);
 
     /**
+     * 查询所有物品信息
+     *
+     *
+     * @return
+     */
+    @Select("select id, room_id, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "roomId", column = "room_id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "buyTime", column = "buy_time"),
+        @Result(property = "price", column = "price"),
+        @Result(property = "compensationMoeny", column = "compensation_money"),
+        @Result(property = "state", column = "state"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<GoodsDO> getAll();
+
+    /**
      * 更新物品消息
      *
      * @param floorDO
@@ -60,10 +82,10 @@ public interface GoodsDAO {
     /**
      * 根据房间Id查询所属物品
      *
-     * @param room_id
+     * @param roomId
      * @return
      */
-    @Select("select id, room_id, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods where id=#{id}  ")
+    @Select("select id, room_id, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods where room_id=#{roomId}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomId", column = "room_id"),
@@ -75,5 +97,5 @@ public interface GoodsDAO {
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    GoodsDO getGoodsDOByRoomId(long room_id);
+    List<GoodsDO> getGoodsDOByRoomId(long roomId);
 }

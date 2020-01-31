@@ -40,12 +40,18 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public ResultDO<Void> updateHotel(HotelDO hotelDO) {
-        int update = hotelDAO.update(hotelDO);
-        if (update == 1) {
-            LOG.info("updateHotel success, hotelDO={}", hotelDO);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
-        } else {
-            LOG.error("updateHotel error, updateHotel={}", hotelDO);
+        try {
+            int update = hotelDAO.update(hotelDO);
+            if (update == 1) {
+                LOG.info("updateHotel success, hotelDO={}", hotelDO);
+                return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            } else {
+                LOG.error("updateHotel success, updateHotel={}", hotelDO);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+            }
+        } catch (Exception e) {
+            LOG.error("updateHotel error, hotelDO={}", hotelDO, e);
             return new ResultDO<>(false, ResultCode.UPDATE_FAILD,
                 ResultCode.MSG_UPDATE_FAILD);
         }

@@ -10,6 +10,7 @@ import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.altersoftware.hotel.entity.FloorDO;
 import com.altersoftware.hotel.entity.ResultDO;
 
 /**
@@ -43,5 +44,21 @@ public class FloorServiceTest {
         ResultDO<String> stringResultDO = floorService.showFire(1);
         System.out.println(stringResultDO);
         Assert.assertNotNull(stringResultDO.getModule());
+    }
+
+    @Test
+    public void dInsert() {
+        FloorDO floorDO = new FloorDO();
+        floorDO.setPlan("1.jpg");
+        floorDO.setFireDiagram("2.jpg");
+        floorDO.setThreeDDiagram("3.jpg");
+        floorDO.setroomNumbers(1);
+        floorDO.setId(2);
+        ResultDO<Void> insert = floorService.insert(floorDO);
+    }
+
+    @Test
+    public void eDelete() {
+        ResultDO<Void> delete = floorService.delete(2);
     }
 }

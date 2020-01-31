@@ -30,6 +30,19 @@ public class FloorServiceImpl implements FloorService {
     private FloorDAO            floorDAO;
 
     @Override
+    public ResultDO<Void> insert(FloorDO floorDO) {
+        try {
+            floorDAO.insert(floorDO);
+            LOG.info("insert success, floorDO={}", floorDO);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("insert error, floorDO={}", floorDO, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
     public ResultDO<String> show2D(long id) {
         FloorDO floorDOById = null;
         try {
@@ -82,6 +95,19 @@ public class FloorServiceImpl implements FloorService {
             LOG.error("getfloorDOById error, floorIdList={}", floorIdList, e);
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
+    public ResultDO<Void> delete(long id) {
+        try {
+            int i = floorDAO.deleteById(id);
+            LOG.info("delete floorDO success, id={}", id);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("delete floorDO success, id={}", id, e);
+            return new ResultDO<>(false, ResultCode.DELETE_FAILD,
+                ResultCode.MSG_DELETE_FAILD);
         }
     }
 }
