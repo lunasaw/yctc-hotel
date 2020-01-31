@@ -96,6 +96,8 @@ public class ShiroConfig {
             // 注销登陆
             filterMap.put("/" + TemplatePath.USER_SIGN_OUT_SUCCESS, "authc");
             // 注销成功
+            filterMap.put("/" + TemplatePath.FLOOR, "authc");
+            //楼层信息
         }
         // 需要资源权限的页面   授权过滤器
         {

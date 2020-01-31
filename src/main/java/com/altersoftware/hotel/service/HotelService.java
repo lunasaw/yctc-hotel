@@ -14,7 +14,7 @@ public interface HotelService {
      * 
      * @return
      */
-    ResultDO<HotelDO> showHotel(long Id);
+    ResultDO<HotelDO> showHotel(long id);
 
     /**
      * 修改酒店信息

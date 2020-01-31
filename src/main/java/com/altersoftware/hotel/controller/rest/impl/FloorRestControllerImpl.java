@@ -29,7 +29,7 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Override
     @PostMapping("show2d")
-    public ResultDO<String> show2D(@RequestBody long id) {
+    public ResultDO<String> show2D(long id) {
 
         ResultDO<String> resultDO = null;
 
@@ -47,7 +47,7 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Override
     @PostMapping("showfire")
-    public ResultDO<String> showFire(@RequestBody long id) {
+    public ResultDO<String> showFire(long id) {
         ResultDO<String> resultDO = floorService.showFire(id);
 
         if (resultDO.isSuccess() == false) {
@@ -61,7 +61,7 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Override
     @PostMapping("show3d")
-    public ResultDO<String> show3D(@RequestBody long id) {
+    public ResultDO<String> show3D(long id) {
         ResultDO<String> resultDO = floorService.show3D(id);
 
         if (resultDO.isSuccess() == false) {

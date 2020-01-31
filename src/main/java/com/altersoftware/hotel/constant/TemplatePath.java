@@ -97,5 +97,6 @@ public class TemplatePath {
     public static final String ROOMS_UPDATE                               = "hotel/rooms-update";
     /** 客户信息页面 */
     public static final String CUSTOMER_INFO                              = "customer/customer-info";
-
+    /** 酒店信息页面 */
+    public static final String HOTEL                                        = "hotel/hotels";
 }
