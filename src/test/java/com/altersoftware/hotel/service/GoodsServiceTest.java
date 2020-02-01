@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,11 +31,14 @@ public class GoodsServiceTest {
     @Test
     public void aShowGoods() {
         ResultDO<GoodsDO> goodsDOResultDO = goodsService.showGoods(1);
+        Assert.assertEquals(true, goodsDOResultDO.isSuccess());
     }
 
     @Test
     public void bGetAll() {
         ResultDO<List<GoodsDO>> all = goodsService.getAll();
+        Assert.assertEquals(true, all.isSuccess());
+
     }
 
     @Test
@@ -43,11 +47,13 @@ public class GoodsServiceTest {
         GoodsDO module = goodsDOResultDO.getModule();
         module.setState(GoodsState.LENDED);
         ResultDO<Void> voidResultDO = goodsService.updateGoods(module);
+        Assert.assertEquals(true, voidResultDO.isSuccess());
     }
 
     @Test
     public void eShowByRoom() {
         ResultDO<List<GoodsDO>> listResultDO = goodsService.showGoodsByRoom(1);
+        Assert.assertEquals(true, listResultDO.isSuccess());
     }
 
     @Test
@@ -61,5 +67,6 @@ public class GoodsServiceTest {
     @Test
     public void gDelete() {
         ResultDO<Void> voidResultDO = goodsService.deleteById(3);
+        Assert.assertEquals(true, voidResultDO.isSuccess());
     }
 }

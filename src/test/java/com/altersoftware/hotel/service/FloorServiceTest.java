@@ -29,21 +29,21 @@ public class FloorServiceTest {
     public void aGet2d() {
         ResultDO<String> stringResultDO = floorService.show2D(1);
         System.out.println(stringResultDO);
-        Assert.assertNotNull(stringResultDO);
+        Assert.assertEquals(true, stringResultDO.isSuccess());
     }
 
     @Test
     public void bGet3D() {
         ResultDO<String> stringResultDO = floorService.show3D(1);
         System.out.println(stringResultDO);
-        Assert.assertNotNull(stringResultDO.getModule());
+        Assert.assertEquals(true, stringResultDO.isSuccess());
     }
 
     @Test
     public void cGetFire() {
         ResultDO<String> stringResultDO = floorService.showFire(1);
         System.out.println(stringResultDO);
-        Assert.assertNotNull(stringResultDO.getModule());
+        Assert.assertEquals(true, stringResultDO.isSuccess());
     }
 
     @Test
@@ -55,10 +55,12 @@ public class FloorServiceTest {
         floorDO.setroomNumbers(1);
         floorDO.setId(2);
         ResultDO<Void> insert = floorService.insert(floorDO);
+        Assert.assertEquals(true, insert.isSuccess());
     }
 
     @Test
     public void eDelete() {
         ResultDO<Void> delete = floorService.delete(2);
+        Assert.assertEquals(true, delete.isSuccess());
     }
 }

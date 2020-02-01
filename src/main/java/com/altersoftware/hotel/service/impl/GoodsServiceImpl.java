@@ -83,15 +83,9 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public ResultDO<Void> deleteById(long id) {
         try {
-            int i = goodsDAO.deleteById(id);
-            if (i == 1) {
-                LOG.info("deleteById success, goodsDO={}", id);
-                return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
-            } else {
-                LOG.error("getGoodsDOByRoomId success, goodsId={}", id);
-                return new ResultDO<>(false, ResultCode.NO_SUCH_INFO,
-                    ResultCode.MSG_NO_SUCH_INFO);
-            }
+            goodsDAO.deleteById(id);
+            LOG.info("deleteById success, goodsDO={}", id);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         } catch (Exception e) {
             LOG.error("getGoodsDOByRoomId error, goodsId={}", id, e);
             return new ResultDO<>(false, ResultCode.DELETE_FAILD,

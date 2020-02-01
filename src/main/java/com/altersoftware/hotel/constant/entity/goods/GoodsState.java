@@ -10,10 +10,10 @@ import com.google.common.collect.ImmutableList;
  */
 public class GoodsState {
 
-    /** 关 */
+    /** 关 未借出 */
     public static final String       UNLEND      = "0";
 
-    /** 开 */
+    /** 开 已借出 */
     public static final String       LENDED      = "1";
 
     /** 温度 */

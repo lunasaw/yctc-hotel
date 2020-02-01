@@ -28,7 +28,7 @@ public class HotelServiceTest {
     @Test
     public void aGetHotel() {
         ResultDO<HotelDO> hotelDOResultDO = hotelService.showHotel(1);
-        Assert.assertNotNull(hotelDOResultDO);
+        Assert.assertEquals(true, hotelDOResultDO.isSuccess());
     }
 
     @Test
@@ -36,6 +36,8 @@ public class HotelServiceTest {
         ResultDO<HotelDO> hotelDOResultDO = hotelService.showHotel(1);
         hotelDOResultDO.getModule().setRoomNumbers(600);
         ResultDO<Void> voidResultDO = hotelService.updateHotel(hotelDOResultDO.getModule());
+        Assert.assertEquals(true, voidResultDO.isSuccess());
+
     }
 
     @Test
@@ -45,5 +47,6 @@ public class HotelServiceTest {
         HotelDO module = hotelDOResultDO.getModule();
         module.setId(id + 1);
         ResultDO<Void> voidResultDO = hotelService.insertHotel(module);
+        Assert.assertEquals(true, voidResultDO.isSuccess());
     }
 }

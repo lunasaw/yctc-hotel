@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ public class RoomServiceTest {
     @Test
     public void aGetAllRooms() {
         ResultDO<List<RoomDO>> rooms = roomService.getRooms();
+        Assert.assertEquals(true, rooms.isSuccess());
     }
 
     @Test
@@ -36,17 +38,20 @@ public class RoomServiceTest {
         ResultDO<RoomDO> roomDO = roomService.getRoomDO(1);
         RoomDO module = roomDO.getModule();
         module.setPrice(190);
-        roomService.updateRoom(module);
+        ResultDO<Void> voidResultDO = roomService.updateRoom(module);
+        Assert.assertEquals(true, voidResultDO.isSuccess());
     }
 
     @Test
     public void cGetByNumber() {
         ResultDO<RoomDO> roomDOByNumber = roomService.getRoomDOByNumber(101);
         RoomDO roomDO = roomDOByNumber.getModule();
+        Assert.assertEquals(true, roomDOByNumber.isSuccess());
     }
 
     @Test
     public void dGetById() {
         ResultDO<RoomDO> roomDO = roomService.getRoomDO(1);
+        Assert.assertEquals(true, roomDO.isSuccess());
     }
 }
