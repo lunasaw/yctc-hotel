@@ -22,7 +22,7 @@ import com.altersoftware.hotel.service.HotelService;
 @RequestMapping("/hotelinfo")
 public class HotelRestControllerImpl implements HotelRestController {
 
-    // TODO 注意代码格式化
+
 
     @Autowired
     HotelService hotelService;
@@ -52,6 +52,11 @@ public class HotelRestControllerImpl implements HotelRestController {
         }
     }
 
+    /**
+     * 更新酒店信息
+     * @param hotelDO
+     * @return
+     */
     @Override
     @PostMapping("update")
     public ResultDO<Void> updateHotel(@RequestBody HotelDO hotelDO) {
@@ -72,13 +77,25 @@ public class HotelRestControllerImpl implements HotelRestController {
             hotelDOResultDOModule.setMobile(hotelDO.getMobile());
             hotelDOResultDOModule.setName(hotelDO.getName());
             hotelDOResultDOModule.setRules(hotelDO.getRules());
-            // TODO 校验
+
             ResultDO<Void> voidResultDO = hotelService.updateHotel(hotelDOResultDOModule);
-            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            if ( voidResultDO.isSuccess() == false ){
+                return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
+            else {
+                return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            }
+
         }
 
     }
 
+    /**
+     * 插入一条酒店信息
+     * @param hotelDO
+     * @return
+     */
     @Override
     @PostMapping("add-hotel")
     public ResultDO<Void> insertHotel(@RequestBody HotelDO hotelDO) {
@@ -89,7 +106,13 @@ public class HotelRestControllerImpl implements HotelRestController {
         }
 
         ResultDO<Void> voidResultDO = hotelService.insertHotel(hotelDO);
-        // TODO 校验
-        return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        if ( voidResultDO.isSuccess() == false ){
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+    }
+    else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
+
     }
 }
