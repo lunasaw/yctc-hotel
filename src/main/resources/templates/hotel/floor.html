@@ -14,7 +14,7 @@
 
 </head>
 
-<body onload="getBuilding()">
+<body>
 
 <header th:replace="component/fram :: commonHeader"></header>
 
@@ -42,10 +42,9 @@
         <div class="input-group-prepend">
             <span class="input-group-text">楼层</span>
         </div>
-        <select autocomplete="off" class="custom-select col-md-3 col-sm-3" id="inputGroupSelect-building"
-                onclick="selectBuilding();">
-            <option disabled="disabled" selected="selected">请选择...</option><!-- 动态追加楼号 -->
-        </select>
+            <select autocomplete="off" class="custom-select col-md-3 col-sm-3" id="inputGroupSelect-building">
+                <option disabled="disabled" selected="selected">请选择...</option><!-- 动态追加楼号 -->
+            </select>
     </div>
     <hr align="left" color="lightgrey">
 
@@ -70,80 +69,80 @@
 </main>
 
 <footer th:replace="component/fram :: commonFooter"></footer>
-<script>
-    function getBuilding() {
-        //获取数据库中的楼号
-        $.ajax({
-            url: "/hotel/floor/showIdList",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                if (result.success == false) {
-                    if (result.code == 9002) {
-                        alert("参数错误");
-                    } else if (result.code == 9999) {
-                        alert("系统错误");
-                    }
-                } else {
-                    //得到楼号list
-                    var list = result.module;
-                    //清空build(除第一个)
-                    $('#inputGroupSelect-building option').not(":first").remove();
-                    for (var i = 0; i < list.length; i++) {
-                        document.getElementById("inputGroupSelect-building").options.add(new Option(list[i], i));
-                    }
-                }
-            },
-            error: function (e) {
-                alert("异常");
-            }
-        });
-    }
+<!--<script>-->
+    <!--function getBuilding() {-->
+        <!--//获取数据库中的楼号-->
+        <!--$.ajax({-->
+            <!--url: "/hotel/floor/showIdList",-->
+            <!--type: "POST",-->
+            <!--contentType: "application/json; charset=utf-8",-->
+            <!--dataType: 'json',-->
+            <!--async: true,-->
+            <!--success: function (result) {-->
+                <!--if (result.success == false) {-->
+                    <!--if (result.code == 9002) {-->
+                        <!--alert("参数错误");-->
+                    <!--} else if (result.code == 9999) {-->
+                        <!--alert("系统错误");-->
+                    <!--}-->
+                <!--} else {-->
+                    <!--//得到楼号list-->
+                    <!--var list = result.module;-->
+                    <!--//清空build(除第一个)-->
+                    <!--$('#inputGroupSelect-building option').not(":first").remove();-->
+                    <!--for (var i = 0; i < list.length; i++) {-->
+                        <!--document.getElementById("inputGroupSelect-building").options.add(new Option(list[i], i));-->
+                    <!--}-->
+                <!--}-->
+            <!--},-->
+            <!--error: function (e) {-->
+                <!--alert("异常");-->
+            <!--}-->
+        <!--});-->
+    <!--}-->
 
-    function selectBuilding() {
-        //获取select选中的text。
-        var building = $("#inputGroupSelect-building option:selected").text();
-        if (building == '请选择...')
-            return;
-        $.ajax({
-            url: "/genesis/restmetadata/get-buildingfloorandurlvo-by-building",
-            type: "POST",
-            data: building,
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                console.log(result);
-                if (result.success == false) {
-                    if (result.code == 9002) {
-                        alert("参数错误");
-                    } else if (result.code == 9999) {
-                        alert("系统错误");
-                    }
-                } else {
-                    //得到楼层list
-                    var list = result.module;
-                    //清空floors(除第一个)
-                    $("#listTable tbody").empty();
-                    for (var i = 0; i < list.length; i++) {
-                        var id = list[i].buildingFloorDO.id;
-                        var building = list[i].buildingFloorDO.building;
-                        var floor = list[i].buildingFloorDO.floor;
-                        var detailUrl = list[i].url;
-                        var listId = i + 1;
-                        $("#listTable tbody").append("<tr><th scope=\"row\">" + listId + "</th><td scope=\"row\">" + building +
-                            "</td><td>" +
-                            floor + "</td><td><a href=" + detailUrl + ">详情</a></td></tr>");
-                    }
-                }
-            },
-            error: function (e) {
-                alert("异常");
-            }
-        });
-    }</script>
+    <!--function selectBuilding() {-->
+        <!--//获取select选中的text。-->
+        <!--var building = $("#inputGroupSelect-building option:selected").text();-->
+        <!--if (building == '请选择...')-->
+            <!--return;-->
+        <!--$.ajax({-->
+            <!--url: "/genesis/restmetadata/get-buildingfloorandurlvo-by-building",-->
+            <!--type: "POST",-->
+            <!--data: building,-->
+            <!--contentType: "application/json; charset=utf-8",-->
+            <!--dataType: 'json',-->
+            <!--async: true,-->
+            <!--success: function (result) {-->
+                <!--console.log(result);-->
+                <!--if (result.success == false) {-->
+                    <!--if (result.code == 9002) {-->
+                        <!--alert("参数错误");-->
+                    <!--} else if (result.code == 9999) {-->
+                        <!--alert("系统错误");-->
+                    <!--}-->
+                <!--} else {-->
+                    <!--//得到楼层list-->
+                    <!--var list = result.module;-->
+                    <!--//清空floors(除第一个)-->
+                    <!--$("#listTable tbody").empty();-->
+                    <!--for (var i = 0; i < list.length; i++) {-->
+                        <!--var id = list[i].buildingFloorDO.id;-->
+                        <!--var building = list[i].buildingFloorDO.building;-->
+                        <!--var floor = list[i].buildingFloorDO.floor;-->
+                        <!--var detailUrl = list[i].url;-->
+                        <!--var listId = i + 1;-->
+                        <!--$("#listTable tbody").append("<tr><th scope=\"row\">" + listId + "</th><td scope=\"row\">" + building +-->
+                            <!--"</td><td>" +-->
+                            <!--floor + "</td><td><a href=" + detailUrl + ">详情</a></td></tr>");-->
+                    <!--}-->
+                <!--}-->
+            <!--},-->
+            <!--error: function (e) {-->
+                <!--alert("异常");-->
+            <!--}-->
+        <!--});-->
+    <!--}</script>-->
 
 
 </body>
