@@ -17,9 +17,9 @@ public interface MealdistributionDAO {
      *
      *
      */
-    @Insert(" INSERT INTO tb_mealdistribution (id, room_id, staff_id, menu_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_mealdistribution (id, room_id, staff_id, order_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{roomId}, #{staffId}, #{menuId}, #{inTime}, #{outTime}, now(), now()) ")
+        "VALUES(#{id}, #{roomId}, #{staffId}, #{orderId}, #{inTime}, #{outTime}, now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(MealdistributionDO mealdistributionDO);
 
@@ -28,12 +28,12 @@ public interface MealdistributionDAO {
      *
      * @param id
      */
-    @Select("select id, room_id, staff_id, menu_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where id=#{id}  ")
+    @Select("select id, room_id, staff_id, order_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomId", column = "room_id"),
         @Result(property = "staffId", column = "staff_id"),
-        @Result(property = "menuId", column = "menu_id"),
+        @Result(property = "orderId", column = "order_id"),
         @Result(property = "inTime", column = "mealdistribution_intime"),
         @Result(property = "outTime", column = "mealdistribution_outtime"),
         @Result(property = "createTime", column = "create_time"),
@@ -46,12 +46,12 @@ public interface MealdistributionDAO {
      *
      * @param roomId
      */
-    @Select("select id, room_id, staff_id, menu_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where room_id=#{roomId}  ")
+    @Select("select id, room_id, staff_id, order_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where room_id=#{roomId}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomId", column = "room_id"),
         @Result(property = "staffId", column = "staff_id"),
-        @Result(property = "menuId", column = "menu_id"),
+        @Result(property = "orderId", column = "order_id"),
         @Result(property = "inTime", column = "mealdistribution_intime"),
         @Result(property = "outTime", column = "mealdistribution_outtime"),
         @Result(property = "createTime", column = "create_time"),
@@ -64,12 +64,12 @@ public interface MealdistributionDAO {
      *
      * @param staffId
      */
-    @Select("select id, room_id, staff_id, menu_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where staff_id=#{staffId}  ")
+    @Select("select id, room_id, staff_id, order_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where staff_id=#{staffId}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomId", column = "room_id"),
         @Result(property = "staffId", column = "staff_id"),
-        @Result(property = "menuId", column = "menu_id"),
+        @Result(property = "orderId", column = "order_id"),
         @Result(property = "inTime", column = "mealdistribution_intime"),
         @Result(property = "outTime", column = "mealdistribution_outtime"),
         @Result(property = "createTime", column = "create_time"),
@@ -80,27 +80,27 @@ public interface MealdistributionDAO {
     /**
      * 菜单Id查找配送订单消息
      *
-     * @param menuId
+     * @param orderId
      */
-    @Select("select id, room_id, staff_id, menu_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where menu_id=#{menuId}  ")
+    @Select("select id, room_id, staff_id, order_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution where order_id=#{orderId}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomId", column = "room_id"),
         @Result(property = "staffId", column = "staff_id"),
-        @Result(property = "menuId", column = "menu_id"),
+        @Result(property = "orderId", column = "order_id"),
         @Result(property = "inTime", column = "mealdistribution_intime"),
         @Result(property = "outTime", column = "mealdistribution_outtime"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    MealdistributionDO getMealdistributionDOByMenuId(long menuId);
+    MealdistributionDO getMealdistributionDOByMenuId(long orderId);
 
     /**
      * 更新配送订单消息
      *
      * @param mealdistributionDO
      */
-    @Update("update tb_mealdistribution  set room_id=#{roomId}, staff_id=#{staffId}, menu_id=#{menuId}, mealdistribution_intime=#{inTime}, mealdistribution_outtime=#{outTime}, modify_time=now()  where id=#{id}")
+    @Update("update tb_mealdistribution  set room_id=#{roomId}, staff_id=#{staffId}, order_id=#{orderId}, mealdistribution_intime=#{inTime}, mealdistribution_outtime=#{outTime}, modify_time=now()  where id=#{id}")
     int update(MealdistributionDO mealdistributionDO);
 
     /**
