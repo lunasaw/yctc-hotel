@@ -53,7 +53,7 @@ public class ResultCode {
 
     /** 无当前数据 */
     public static final int     NO_SUCH_INFO                           = 1010;
-    public static final String  MSG_NO_SUCH_INFO                       = "no such course";
+    public static final String  MSG_NO_SUCH_INFO                       = "no such info";
 
     /** 无赋权记录 */
     public static final int NO_SUCH_AUTHORIZATION_RECORD = 1020;
