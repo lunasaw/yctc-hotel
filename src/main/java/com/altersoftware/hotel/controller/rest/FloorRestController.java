@@ -22,6 +22,14 @@ public interface FloorRestController {
     ResultDO<Void> insert(FloorDO floorDO);
 
     /**
+     * id查询楼层信息
+     *
+     * @param id
+     * @return
+     */
+    ResultDO<FloorDO> showFloorDO(long id);
+
+    /**
      * 展示平面图
      *
      * @param id

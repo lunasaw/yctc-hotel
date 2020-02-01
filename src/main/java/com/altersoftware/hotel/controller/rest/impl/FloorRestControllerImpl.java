@@ -34,6 +34,12 @@ public class FloorRestControllerImpl implements FloorRestController {
     }
 
     @Override
+    @PostMapping("show-floor")
+    public ResultDO<FloorDO> showFloorDO(long id) {
+        return null;
+    }
+
+    @Override
     @PostMapping("show2d")
     public ResultDO<String> show2D(long id) {
 
