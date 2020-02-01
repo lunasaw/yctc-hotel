@@ -22,8 +22,6 @@ import com.altersoftware.hotel.service.HotelService;
 @RequestMapping("/hotelinfo")
 public class HotelRestControllerImpl implements HotelRestController {
 
-
-
     @Autowired
     HotelService hotelService;
 
@@ -54,6 +52,7 @@ public class HotelRestControllerImpl implements HotelRestController {
 
     /**
      * 更新酒店信息
+     * 
      * @param hotelDO
      * @return
      */
@@ -79,11 +78,10 @@ public class HotelRestControllerImpl implements HotelRestController {
             hotelDOResultDOModule.setRules(hotelDO.getRules());
 
             ResultDO<Void> voidResultDO = hotelService.updateHotel(hotelDOResultDOModule);
-            if ( voidResultDO.isSuccess() == false ){
+            if (voidResultDO.isSuccess() == false) {
                 return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
-            }
-            else {
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            } else {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             }
 
@@ -93,6 +91,7 @@ public class HotelRestControllerImpl implements HotelRestController {
 
     /**
      * 插入一条酒店信息
+     * 
      * @param hotelDO
      * @return
      */
@@ -106,11 +105,10 @@ public class HotelRestControllerImpl implements HotelRestController {
         }
 
         ResultDO<Void> voidResultDO = hotelService.insertHotel(hotelDO);
-        if ( voidResultDO.isSuccess() == false ){
+        if (voidResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
-    }
-    else {
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
             return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }
 
