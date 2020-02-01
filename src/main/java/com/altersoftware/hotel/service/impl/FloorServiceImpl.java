@@ -43,6 +43,19 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
+    public ResultDO<FloorDO> showFloorDO(long id) {
+        try {
+            FloorDO floorDOById = floorDAO.getFloorDOById(id);
+            LOG.info("showFloorDO success, floorDOById={}", floorDOById);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, floorDOById);
+        } catch (Exception e) {
+            LOG.error("showFloorDO error, id={}", id, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
     public ResultDO<String> show2D(long id) {
         FloorDO floorDOById = null;
         try {

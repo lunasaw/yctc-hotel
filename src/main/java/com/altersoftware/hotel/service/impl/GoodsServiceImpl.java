@@ -84,7 +84,7 @@ public class GoodsServiceImpl implements GoodsService {
     public ResultDO<Void> deleteById(long id) {
         try {
             int i = goodsDAO.deleteById(id);
-            if (1 == 1) {
+            if (i == 1) {
                 LOG.info("deleteById success, goodsDO={}", id);
                 return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             } else {
