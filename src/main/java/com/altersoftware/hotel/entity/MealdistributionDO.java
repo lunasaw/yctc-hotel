@@ -8,13 +8,13 @@ public class MealdistributionDO {
     private long id;
 
     /** 房间编号 */
-    private long roomID;
+    private long roomId;
 
     /** 员工编号 */
-    private long staffID;
+    private long staffId;
 
     /** 菜品编号 */
-    private long menuID;
+    private long menuId;
 
     /** 下单时间 */
     private Date inTime;
@@ -37,27 +37,27 @@ public class MealdistributionDO {
     }
 
     public long getRoomID() {
-        return roomID;
+        return roomId;
     }
 
-    public void setRoomID(long roomID) {
-        this.roomID = roomID;
+    public void setRoomID(long roomId) {
+        this.roomId = roomId;
     }
 
     public long getStaffID() {
-        return staffID;
+        return staffId;
     }
 
-    public void setStaffID(long staffID) {
-        this.staffID = staffID;
+    public void setStaffID(long staffId) {
+        this.staffId = staffId;
     }
 
     public long getMenuID() {
-        return menuID;
+        return menuId;
     }
 
-    public void setMenuID(long menuID) {
-        this.menuID = menuID;
+    public void setMenuID(long menuId) {
+        this.menuId = menuId;
     }
 
     public Date getInTime() {
@@ -96,9 +96,9 @@ public class MealdistributionDO {
     public String toString() {
         return "MealdistributionDO{" +
             "id=" + id +
-            ", roomID=" + roomID +
-            ", staffID=" + staffID +
-            ", menuID=" + menuID +
+            ", roomId=" + roomId +
+            ", staffId=" + staffId +
+            ", menuId=" + menuId +
             ", inTime=" + inTime +
             ", outTime=" + outTime +
             ", createTime=" + createTime +
