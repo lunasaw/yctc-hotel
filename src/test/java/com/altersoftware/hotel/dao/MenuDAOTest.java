@@ -26,6 +26,7 @@ public class MenuDAOTest {
     private static final long   ID      = 2;
     private static final String NAME    = "红烧肉";
     private static final Double PRICE   = 23.0;
+    private static final int    NUMBERS = 20;
     private static final String PICTURE =
         "https://i8.meishichina.com/attachment/recipe/201112/13/201112131158155.jpg?x-oss-process=style/p800";
 
@@ -38,7 +39,8 @@ public class MenuDAOTest {
         menuDO.setId(ID);
         menuDO.setName(NAME);
         menuDO.setPrice(PRICE);
-        menuDO.setPictrue(PICTURE);
+        menuDO.setNumbers(NUMBERS);
+        menuDO.setPicture(PICTURE);
         menuDAO.insert(menuDO);
     }
 

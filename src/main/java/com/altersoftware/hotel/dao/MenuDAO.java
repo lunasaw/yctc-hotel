@@ -17,9 +17,9 @@ public interface MenuDAO {
      *
      *
      */
-    @Insert(" INSERT INTO tb_menu (id, name, picture, price,  create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_menu (id, name, picture, numbers,  price,  create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{name}, #{picture}, #{price},  now(), now()) ")
+        "VALUES(#{id}, #{name}, #{picture}, #{numbers}, #{price},  now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(MenuDO menuDO);
 
@@ -28,11 +28,12 @@ public interface MenuDAO {
      *
      * @param id
      */
-    @Select("select id, name, picture, price,  create_time, modify_time from tb_menu where id=#{id}  ")
+    @Select("select id, name, picture, numbers,  price,  create_time, modify_time from tb_menu where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "name", column = "name"),
         @Result(property = "picture", column = "picture"),
+        @Result(property = "numbers", column = "numbers"),
         @Result(property = "price", column = "price"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
@@ -44,7 +45,7 @@ public interface MenuDAO {
      *
      * @param menuDO
      */
-    @Update("update tb_menu  set name=#{name}, picture=#{picture}, price=#{price} where id=#{id}")
+    @Update("update tb_menu  set name=#{name}, picture=#{picture}, numbers=#{numbers}, price=#{price} where id=#{id}")
     int update(MenuDO menuDO);
 
     /**
@@ -60,11 +61,12 @@ public interface MenuDAO {
      *
      * @return
      */
-    @Select("select id, name, picture, price,  create_time, modify_time from tb_menu  ")
+    @Select("select id, name, picture, numbers,  price,  create_time, modify_time from tb_menu  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "name", column = "name"),
         @Result(property = "picture", column = "picture"),
+        @Result(property = "numbers", column = "numbers"),
         @Result(property = "price", column = "price"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")

@@ -26,7 +26,7 @@ public class MealdistributionDAOTest {
     private static final long   ID       = 1;
     private static final long   ROOOM_ID = 1;
     private static final long   STAFF_ID = 10005;
-    private static final long   MENU_ID  = 1;
+    private static final long   ORDER_ID = 1;
 
     @Resource
     private MealdistributionDAO mealdistributionDAO;
@@ -37,7 +37,7 @@ public class MealdistributionDAOTest {
         mealdistributionDO.setId(ID);
         mealdistributionDO.setRoomID(ROOOM_ID);
         mealdistributionDO.setStaffID(STAFF_ID);
-        mealdistributionDO.setMenuID(MENU_ID);
+        mealdistributionDO.setMenuID(ORDER_ID);
         mealdistributionDAO.insert(mealdistributionDO);
     }
 

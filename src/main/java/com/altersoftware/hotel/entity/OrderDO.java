@@ -2,28 +2,24 @@ package com.altersoftware.hotel.entity;
 
 import java.util.Date;
 
-public class MenuDO {
-
-    /** 菜品编号 */
-    private long   id;
-
-    /** 菜品名称 */
-    private String name;
-
-    /** 菜品价格 */
-    private Double price;
-
-    /** 菜品图片 */
-    private String picture;
-
-    /** 菜品数量 */
-    private int    numbers;
+/**
+ * @author czy@win10
+ * @date 2020/2/1 20:29
+ */
+public class OrderDO {
 
     /** 创建时间 */
-    private Date   createTime;
-
+    Date         createTime;
     /** 修改时间 */
-    private Date   modifyTime;
+    Date         modifyTime;
+    /** 订单编号 */
+    private long id;
+    /** 菜品编号 */
+    private long menuId;
+    /** 菜品分数 */
+    private int  numbers;
+    /** 客户编号 */
+    private long customerId;
 
     public long getId() {
         return id;
@@ -33,28 +29,12 @@ public class MenuDO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public long getMenuId() {
+        return menuId;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setMenuId(long menuId) {
+        this.menuId = menuId;
     }
 
     public int getNumbers() {
@@ -63,6 +43,14 @@ public class MenuDO {
 
     public void setNumbers(int numbers) {
         this.numbers = numbers;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public Date getCreateTime() {
@@ -83,12 +71,11 @@ public class MenuDO {
 
     @Override
     public String toString() {
-        return "MenuDO{" +
+        return "OrderDO{" +
             "id=" + id +
-            ", name='" + name + '\'' +
-            ", price=" + price +
-            ", picture='" + picture + '\'' +
+            ", menuId=" + menuId +
             ", numbers=" + numbers +
+            ", customerId=" + customerId +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
             '}';
