@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,19 @@ public class FloorRestControllerImpl implements FloorRestController {
     @Override
     @PostMapping("show-floor")
     public ResultDO<FloorDO> showFloorDO(long id) {
-        return null;
+        if (id <= 0) {
+            return new ResultDO<FloorDO>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        ResultDO<FloorDO> floorDOResultDO = floorService.showFloorDO(id);
+        if ( floorDOResultDO.isSuccess() == false ){
+            return new ResultDO<FloorDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        }
+        else {
+            FloorDO doResultDOModule = floorDOResultDO.getModule();
+            return new ResultDO<FloorDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, doResultDOModule);
+        }
     }
 
     @Override
