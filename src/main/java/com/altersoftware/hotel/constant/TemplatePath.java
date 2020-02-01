@@ -55,15 +55,19 @@ public class TemplatePath {
 
     /** 修改邮箱身份验证 */
     public static final String USER_MAIL_AUTHENTICATION                   = "user/mail-authentication";
+
     /** 修改邮箱 */
     public static final String USER_UPDATE_MAIL                           = "user/update-email";
+
     /** 修改邮箱成功 */
     public static final String USER_UPDATE_MAIL_SUCCESS                   = "user/update-mail-success";
 
     /** 修改手机身份验证 */
     public static final String USER_MOBILE_AUTHENTICATION                 = "user/mobile-authentication";
+
     /** 修改手机 */
     public static final String USER_UPDATE_MOBILE                         = "user/update-mobile";
+
     /** 修改手机成功 */
     public static final String USER_UPDATE_MOBILE_SUCCESS                 = "user/update-mobile-success";
 
@@ -106,5 +110,7 @@ public class TemplatePath {
     public static final String HOTEL                                      = "hotel/hotels";
     /** 物品信息页面 */
     public static final String GOODS                                      = "hotel/goods";
+    /** 菜品信息页面 */
+    public static final String MENUS                                      = "hotel/menus";
 
 }
