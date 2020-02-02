@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.altersoftware.hotel.constant.entity.room.RoomState;
-import com.altersoftware.hotel.constant.entity.room.RoomType;
 import com.altersoftware.hotel.entity.RoomDO;
 
 /**
@@ -21,12 +20,12 @@ import com.altersoftware.hotel.entity.RoomDO;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RommDAOTest {
-    private static final int    ID       = 1;
-    private static final int    FLOOR_ID = 1;
+public class RoomDAOTest {
+    private static final int    ID           = 1;
+    private static final int    FLOOR_ID     = 1;
     private static final int    ROOOM_NUMBER = 101;
-    private static final String TYPE     = RoomType.BIG_BEDROOM;
-    private static final int    state    = RoomState.CHECK_IN;
+    private static final String TYPE         = "501";
+    private static final int    state        = RoomState.CHECK_IN;
 
     @Resource
     private RoomDAO             roomDAO;

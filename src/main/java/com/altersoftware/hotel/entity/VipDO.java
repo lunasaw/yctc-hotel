@@ -4,10 +4,6 @@ import java.util.Date;
 
 public class VipDO {
 
-    /** 创建时间 */
-    Date           createTime;
-    /** 修改时间 */
-    Date           modifyTime;
     /** 主键 */
     private long   id;
     /** 用户编号 */
@@ -18,6 +14,10 @@ public class VipDO {
     private double amount;
     /** 折扣 */
     private float  discount;
+    /** 创建时间 */
+    Date           createTime;
+    /** 修改时间 */
+    Date           modifyTime;
 
     public long getId() {
         return id;

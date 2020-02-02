@@ -49,16 +49,19 @@ public class EducationControllerImpl implements EducationController {
 
 
 
+    @Override
     @RequestMapping("authority-role-management")
     public String showAuthorityRoleManagement(Model model) {
         return TemplatePath.EDUCATION_AUTHORITY_ROLE_MANAGEMENT;
     }
 
+    @Override
     @RequestMapping("authority-role-management-add")
     public String showAuthorityRoleManagementAdd(Model model) {
         return TemplatePath.EDUCATION_AUTHORITY_ROLE_MANAGEMENT_ADD;
     }
 
+    @Override
     @RequestMapping("authority-role-management-modify")
     public String showAuthorityRoleManagementModify(Model model) {
         return TemplatePath.EDUCATION_AUTHORITY_ROLE_MANAGEMENT_MODIFY;
