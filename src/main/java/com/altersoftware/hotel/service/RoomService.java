@@ -13,7 +13,12 @@ import com.altersoftware.hotel.entity.RoomDO;
  */
 @Service
 public interface RoomService {
-
+    /**
+     * 插入一个房间信息
+     * 
+     * @return
+     */
+    ResultDO<Void> insert(RoomDO roomDO);
     /**
      * 查询所有房间信息
      */
@@ -33,5 +38,13 @@ public interface RoomService {
      * 房间号查询房间信息
      */
     ResultDO<RoomDO> getRoomDOByNumber(int roomNumber);
+
+    /**
+     * id删除房间信息
+     * 
+     * @param id
+     * @return
+     */
+    ResultDO<Void> deleteById(long id);
 
 }

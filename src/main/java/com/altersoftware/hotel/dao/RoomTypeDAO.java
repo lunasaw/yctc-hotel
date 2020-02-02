@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.RoomTypeDO;
@@ -9,7 +11,7 @@ import com.altersoftware.hotel.entity.RoomTypeDO;
  * @date 2020/2/2 13:49
  */
 @Mapper
-public interface RoomTyoeDAO {
+public interface RoomTypeDAO {
     /**
      * 插入一条房间类别信息
      * 
@@ -55,5 +57,24 @@ public interface RoomTyoeDAO {
      */
     @Delete("DELETE FROM tb_room_type WHERE id=#{id}")
     int deleteById(long id);
+
+    /**
+     * id查找房间类别消息
+     *
+     * @return
+     */
+    @Select("select id, room_Type, type_name, user_number, description,  wide, add_bed, create_time, modify_time from tb_room_type ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "roomType", column = "room_Type"),
+        @Result(property = "name", column = "type_name"),
+        @Result(property = "userNumber", column = "user_number"),
+        @Result(property = "description", column = "description"),
+        @Result(property = "wide", column = "wide"),
+        @Result(property = "addBed", column = "add_bed"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<RoomTypeDO> getRoomTypeDOList();
 
 }

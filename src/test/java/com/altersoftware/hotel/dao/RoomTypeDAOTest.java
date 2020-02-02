@@ -30,7 +30,7 @@ public class RoomTypeDAOTest {
     private static final String ADD_BED          = "是";
 
     @Resource
-    private RoomTyoeDAO         roomTyoeDAO;
+    private RoomTypeDAO         roomTypeDAO;
 
     @Test
     public void aInsert() {
@@ -42,28 +42,28 @@ public class RoomTypeDAOTest {
         roomTypeDO.setDescribe(DESCRIPTION);
         roomTypeDO.setWide(WIDE);
         roomTypeDO.setAddBed(ADD_BED);
-        roomTyoeDAO.insert(roomTypeDO);
+        roomTypeDAO.insert(roomTypeDO);
     }
 
     @Test
     public void bGetById() {
-        RoomTypeDO roomTypeDOById = roomTyoeDAO.getRoomTypeDOById(ID);
+        RoomTypeDO roomTypeDOById = roomTypeDAO.getRoomTypeDOById(ID);
         System.out.println(roomTypeDOById);
         Assert.assertNotNull(roomTypeDOById);
     }
 
     @Test
     public void cUpdat() {
-        RoomTypeDO roomTypeDOById = roomTyoeDAO.getRoomTypeDOById(ID);
+        RoomTypeDO roomTypeDOById = roomTypeDAO.getRoomTypeDOById(ID);
         roomTypeDOById.setAddBed("是");
-        int update = roomTyoeDAO.update(roomTypeDOById);
+        int update = roomTypeDAO.update(roomTypeDOById);
         Assert.assertEquals(1, update);
     }
 
     @Test
     public void dDelete() {
-        int i = roomTyoeDAO.deleteById(ID);
-        RoomTypeDO roomTypeDOById = roomTyoeDAO.getRoomTypeDOById(ID);
+        int i = roomTypeDAO.deleteById(ID);
+        RoomTypeDO roomTypeDOById = roomTypeDAO.getRoomTypeDOById(ID);
         Assert.assertNull(roomTypeDOById);
     }
 
