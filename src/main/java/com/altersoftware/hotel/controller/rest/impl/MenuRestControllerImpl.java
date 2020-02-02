@@ -34,7 +34,7 @@ public class MenuRestControllerImpl implements MenuRestController {
      * @return
      */
     @Override
-    @PostMapping("insert-menu")
+    @PostMapping("add-menu")
     public ResultDO<Void> insert(@RequestBody MenuDO menuDO) {
         // 参数校验
         if (menuDO.getId() <= 0 || menuDO.getNumbers() <= 0 || menuDO.getPrice() <= 0) {
@@ -58,7 +58,7 @@ public class MenuRestControllerImpl implements MenuRestController {
      * @return
      */
     @Override
-    @PostMapping("show-menu")
+    @PostMapping("get-byid")
     public ResultDO<MenuDO> showById(long id) {
         // 参数校验
         if (id <= 0) {
@@ -120,7 +120,7 @@ public class MenuRestControllerImpl implements MenuRestController {
      * @return
      */
     @Override
-    @PostMapping("delete-menu")
+    @PostMapping("delete-byid")
     public ResultDO<Void> delete(long id) {
         // 参数校验
         if (id <= 0) {
@@ -143,7 +143,7 @@ public class MenuRestControllerImpl implements MenuRestController {
      * @return
      */
     @Override
-    @PostMapping("show-listmenu")
+    @PostMapping("get-listmenu")
     public ResultDO<List<MenuDO>> showAll() {
         ResultDO<List<MenuDO>> listResultDO = menuService.showAll();
         if (listResultDO.isSuccess() == false) {

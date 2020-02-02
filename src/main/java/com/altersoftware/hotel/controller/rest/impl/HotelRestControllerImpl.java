@@ -32,7 +32,7 @@ public class HotelRestControllerImpl implements HotelRestController {
      * @return
      */
     @Override
-    @PostMapping("show-hotel")
+    @PostMapping("get-hotel")
     public ResultDO<HotelDO> showHotel(long id) {
         // 参数校验
         if (id <= 0) {

@@ -49,7 +49,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
      * @return
      */
     @Override
-    @PostMapping("updateone")
+    @PostMapping("update-userdo")
     public ResultDO<Void> updateUserDO(@RequestBody UserDO userDO) {
         // 参数校验
         if (userDO.getId() <= 0 || userDO.getDepartmentId() <= 0
@@ -92,7 +92,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
      * @return
      */
     @Override
-    @PostMapping("deletebyUserid")
+    @PostMapping("delete-byid")
     public ResultDO<Void> deleteByUserId(@RequestParam(name = "number") String number) {
         // 参数校验
         if (StringUtils.isBlank(number)) {
@@ -122,7 +122,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
      * @return
      */
     @Override
-    @PostMapping("getbynumber")
+    @PostMapping("get-bynumber")
     public ResultDO<UserDO> getByNumber(@RequestParam(name = "number") String number) {
         // 参数校验
         if (StringUtils.isBlank(number)) {

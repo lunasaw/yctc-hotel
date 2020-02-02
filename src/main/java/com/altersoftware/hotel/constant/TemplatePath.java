@@ -100,16 +100,25 @@ public class TemplatePath {
 
     /** 楼层信息页面 */
     public static final String FLOOR                                      = "hotel/floor";
+
     /** 房间信息页面 */
     public static final String ROOMS                                      = "hotel/rooms";
+
     /** 房间修改页面 */
     public static final String ROOMS_UPDATE                               = "hotel/rooms-update";
+
+    /** 房间类别信息页面 */
+    public static final String ROOM_TYPE                                  = "hotel/roomType";
+
     /** 客户信息页面 */
     public static final String CUSTOMER_INFO                              = "customer/customer-info";
+
     /** 酒店信息页面 */
     public static final String HOTEL                                      = "hotel/hotels";
+
     /** 物品信息页面 */
     public static final String GOODS                                      = "hotel/goods";
+
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
 

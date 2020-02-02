@@ -53,7 +53,7 @@ public class FloorRestControllerImpl implements FloorRestController {
     }
 
     @Override
-    @PostMapping("show-floor")
+    @PostMapping("get-byid")
     public ResultDO<FloorDO> showFloorDO(long id) {
         if (id <= 0) {
             return new ResultDO<FloorDO>(false, ResultCode.PARAMETER_INVALID,
@@ -129,7 +129,7 @@ public class FloorRestControllerImpl implements FloorRestController {
     }
 
     @Override
-    @PostMapping("showIdList")
+    @PostMapping("get-list")
     public ResultDO<List<Long>> showIdList() {
         ResultDO<List<Long>> listResultDO = floorService.showFloorId();
         if (listResultDO.isSuccess() == false) {
