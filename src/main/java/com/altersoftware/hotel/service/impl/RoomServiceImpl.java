@@ -29,6 +29,19 @@ public class RoomServiceImpl implements RoomService {
     private RoomDAO             roomDAO;
 
     @Override
+    public ResultDO<Void> insert(RoomDO roomDO) {
+        try {
+            roomDAO.insert(roomDO);
+            LOG.info("insert success, roomDO={}", roomDO);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("insert error, roomDO={}", roomDO, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
     public ResultDO<List<RoomDO>> getRooms() {
         List<RoomDO> allRoomDo = null;
         try {
@@ -78,6 +91,19 @@ public class RoomServiceImpl implements RoomService {
             LOG.error("getallRoomDo error", e);
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
+    public ResultDO<Void> deleteById(long id) {
+        try {
+            int i = roomDAO.deleteById(id);
+            LOG.info("deleteById success, id={}", id);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("getallRoomDo error", e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
     }
 }
