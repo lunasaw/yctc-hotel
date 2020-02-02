@@ -34,7 +34,7 @@ public interface RoomTyoeDAO {
         @Result(property = "userNumber", column = "user_number"),
         @Result(property = "description", column = "description"),
         @Result(property = "wide", column = "wide"),
-        @Result(property = "add_bed", column = "add_bed"),
+        @Result(property = "addBed", column = "add_bed"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
@@ -45,7 +45,7 @@ public interface RoomTyoeDAO {
      *
      * @param roomTypeDO
      */
-    @Update("update tb_room_type  set room_Type, type_name, user_number=#{roomType}, description=#{name},  wide=#{roomType}, add_bed=#{description}, type_name=#{wide}, room_Type=#{addBed},  modify_time=now()  where id=#{id}")
+    @Update("update tb_room_type  set room_Type=#{roomType}, type_name=#{name}, user_number=#{userNumber}, description=#{description},  wide=#{wide}, add_bed=#{addBed}, modify_time=now()  where id=#{id}")
     int update(RoomTypeDO roomTypeDO);
 
     /**
