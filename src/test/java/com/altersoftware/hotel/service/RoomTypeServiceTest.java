@@ -23,15 +23,17 @@ import com.altersoftware.hotel.entity.RoomTypeDO;
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RoomTypeServiceTest {
-    private static final int ID = 3;
+    private static final int    ID                = 3;
+    private static final String GOOD_BEDROOM_TYPE = "500";
 
     @Resource
-    private RoomTypeService  roomTypeService;
+    private RoomTypeService     roomTypeService;
 
     @Test
     public void aInsert() {
         RoomTypeDO roomTypeDO = new RoomTypeDO();
         roomTypeDO.setId(ID);
+        roomTypeDO.setRoomType(GOOD_BEDROOM_TYPE);
         ResultDO<Void> insert = roomTypeService.insert(roomTypeDO);
         Assert.assertEquals(true, insert.isSuccess());
     }

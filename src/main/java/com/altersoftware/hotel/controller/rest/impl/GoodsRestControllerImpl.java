@@ -54,7 +54,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
      * @param id
      */
     @Override
-    @PostMapping("show-goods")
+    @PostMapping("get-byid")
     public ResultDO<GoodsDO> showGoods(long id) {
         // 参数校验
         if (id <= 0) {
@@ -117,7 +117,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
      * @param roomId
      */
     @Override
-    @PostMapping("show-goodsbyroomid")
+    @PostMapping("get-listbyroomid")
     public ResultDO<List<GoodsDO>> showGoodsByRoom(@RequestParam(name = "roomId") long roomId) {
         // 参数校验
         if (roomId <= 0) {
@@ -165,7 +165,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
      * @return
      */
     @Override
-    @PostMapping("show-goodslist")
+    @PostMapping("get-goodslist")
     public ResultDO<List<GoodsDO>> getAll() {
         ResultDO<List<GoodsDO>> goodsServiceAll = goodsService.getAll();
         if (goodsServiceAll.isSuccess() == false) {

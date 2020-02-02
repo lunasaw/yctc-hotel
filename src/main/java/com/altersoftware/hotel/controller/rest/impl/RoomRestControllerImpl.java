@@ -31,7 +31,7 @@ public class RoomRestControllerImpl implements RoomRestController {
      * @return
      */
     @Override
-    @PostMapping("show-listRoom")
+    @PostMapping("get-list")
     public ResultDO<List<RoomDO>> showRoomList() {
         ResultDO<List<RoomDO>> resultDO = roomService.getRooms();
         if (resultDO.isSuccess() == false) {
@@ -70,15 +70,20 @@ public class RoomRestControllerImpl implements RoomRestController {
             roomDO.setDeposit(roomVO.getDeposit());
             roomDO.setType(roomVO.getType());
             ResultDO<Void> voidResultDO = roomService.updateRoom(roomDO);
-            if ( voidResultDO.isSuccess() == false ){
+            if (voidResultDO.isSuccess() == false) {
                 return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
-            }
-            else {
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            } else {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             }
 
         }
+    }
+
+    @Override
+    @PostMapping("get-byid")
+    public ResultDO<RoomDO> getRoomDO(long id) {
+        return null;
     }
 
     /**
@@ -104,5 +109,17 @@ public class RoomRestControllerImpl implements RoomRestController {
             return new ResultDO<RoomDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, roomDOByNumber.getModule());
         }
 
+    }
+
+    @Override
+    @PostMapping("add-room")
+    public ResultDO<Void> insert(RoomDO roomDO) {
+        return null;
+    }
+
+    @Override
+    @PostMapping("delete-byid")
+    public ResultDO<Void> deleteById(long id) {
+        return null;
     }
 }
