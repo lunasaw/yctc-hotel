@@ -23,7 +23,7 @@ import com.altersoftware.hotel.entity.OrderDO;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OrderDAOTest {
 
-    private static final long ID          = 2;
+    private static final long ID          = 1;
     private static final long MENU_ID     = 2;
     private static final long CUSTOMER_ID = 10004;
     private static final int  NUMBERS     = 2;

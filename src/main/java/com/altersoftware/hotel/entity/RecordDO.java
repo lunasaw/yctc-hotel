@@ -8,22 +8,22 @@ public class RecordDO {
     private long   id;
 
     /** 房间号 */
-    private long   roomID;
+    private long   roomId;
 
     /** 客户编号 */
-    private long   customerID;
+    private long   customerId;
 
-    /** 员工编号 */
-    private long   staffID;
+    /** 处理员工编号 */
+    private long   staffId;
+
+    /** 预计入住时间间隔 */
+    private String precheckInTime;
 
     /** 入住时间 */
     private Date   checkInTime;
 
     /** 退房时间 */
     private Date   checkOutTime;
-
-    /** 房间押金 */
-    private float  deposit;
 
     /** 评价 */
     private String evaluate;
@@ -42,28 +42,36 @@ public class RecordDO {
         this.id = id;
     }
 
-    public long getRoomID() {
-        return roomID;
+    public long getRoomId() {
+        return roomId;
     }
 
-    public void setRoomID(long roomID) {
-        this.roomID = roomID;
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
     }
 
-    public long getCustomerID() {
-        return customerID;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerID(long customerID) {
-        this.customerID = customerID;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
-    public long getStaffID() {
-        return staffID;
+    public long getStaffId() {
+        return staffId;
     }
 
-    public void setStaffID(long staffID) {
-        this.staffID = staffID;
+    public void setStaffId(long staffId) {
+        this.staffId = staffId;
+    }
+
+    public String getPrecheckInTime() {
+        return precheckInTime;
+    }
+
+    public void setPrecheckInTime(String precheckInTime) {
+        this.precheckInTime = precheckInTime;
     }
 
     public Date getCheckInTime() {
@@ -80,14 +88,6 @@ public class RecordDO {
 
     public void setCheckOutTime(Date checkOutTime) {
         this.checkOutTime = checkOutTime;
-    }
-
-    public float getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(float deposit) {
-        this.deposit = deposit;
     }
 
     public String getEvaluate() {
@@ -118,12 +118,12 @@ public class RecordDO {
     public String toString() {
         return "RecordDO{" +
             "id=" + id +
-            ", roomID=" + roomID +
-            ", customerID=" + customerID +
-            ", staffID=" + staffID +
+            ", roomId=" + roomId +
+            ", customerId=" + customerId +
+            ", staffId=" + staffId +
+            ", precheckInTime='" + precheckInTime + '\'' +
             ", checkInTime=" + checkInTime +
             ", checkOutTime=" + checkOutTime +
-            ", deposit=" + deposit +
             ", evaluate='" + evaluate + '\'' +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +

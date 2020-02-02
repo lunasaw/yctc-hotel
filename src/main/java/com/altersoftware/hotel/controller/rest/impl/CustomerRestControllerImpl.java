@@ -64,18 +64,18 @@ public class CustomerRestControllerImpl implements CustomerRestController {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
-            UserDO userDO1 = byNumber.getModule();
-            userDO1.setAge(userDO.getAge());
-            userDO1.setContactPhone(userDO.getContactPhone());
-            userDO1.setAccount(userDO.getAccount());
-            userDO1.setEmail(userDO.getEmail());
-            userDO1.setIdCardNumber(userDO.getIdCardNumber());
-            userDO1.setName(userDO.getName());
-            userDO1.setSex(userDO.getSex());
-            userDO1.setType(userDO.getType());
-            userDO1.setFaceId(userDO.getFaceId());
-            userDO1.setDepartmentId(userDO.getDepartmentId());
-            ResultDO<Void> voidResultDO = customerService.updateUserDO(userDO1);
+            UserDO userDObyNumber = byNumber.getModule();
+            userDObyNumber.setAge(userDO.getAge());
+            userDObyNumber.setContactPhone(userDO.getContactPhone());
+            userDObyNumber.setAccount(userDO.getAccount());
+            userDObyNumber.setEmail(userDO.getEmail());
+            userDObyNumber.setIdCardNumber(userDO.getIdCardNumber());
+            userDObyNumber.setName(userDO.getName());
+            userDObyNumber.setSex(userDO.getSex());
+            userDObyNumber.setType(userDO.getType());
+            userDObyNumber.setFaceId(userDO.getFaceId());
+            userDObyNumber.setDepartmentId(userDO.getDepartmentId());
+            ResultDO<Void> voidResultDO = customerService.updateUserDO(userDObyNumber);
             if (voidResultDO.isSuccess()) {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             } else {
