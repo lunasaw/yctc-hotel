@@ -122,4 +122,7 @@ public class TemplatePath {
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
 
+    /** 部门信息页面 */
+    public static final String DEPARTMENT                                 = "hotel/depatment";
+
 }
