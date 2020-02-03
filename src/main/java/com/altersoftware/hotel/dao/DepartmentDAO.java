@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.*;
 
 import com.altersoftware.hotel.entity.DepartmentDO;
@@ -69,5 +71,21 @@ public interface DepartmentDAO {
         @Result(property = "modifyTime", column = "modify_time")
     })
     DepartmentDO getDepartmentDOByStaffId(long staffId);
+
+    /**
+     * 查询所有部门信息
+     *
+     * @return
+     */
+    @Select("select id, name, staff_numbers, staff_id,  create_time, modify_time from tb_department   ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "staffNumbers", column = "staff_numbers"),
+        @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<DepartmentDO> getDepartmentDOList();
 
 }

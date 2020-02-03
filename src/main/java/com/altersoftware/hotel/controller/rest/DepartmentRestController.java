@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.service;
+package com.altersoftware.hotel.controller.rest;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import com.altersoftware.hotel.entity.ResultDO;
 
 /**
  * @author czy@win10
- * @date 2020/2/3 19:40
+ * @date 2020/2/3 21:20
  */
-public interface DepartmentService {
+public interface DepartmentRestController {
 
     /**
      * 插入一条部门信息
@@ -34,7 +34,7 @@ public interface DepartmentService {
     ResultDO<Void> updateDepartmentDO(DepartmentDO departmentDO);
 
     /**
-     * 根据负责人id查询部门信息
+     * 根据房间查询部门信息
      *
      * @param staffId
      */
@@ -53,4 +53,5 @@ public interface DepartmentService {
      * @return
      */
     ResultDO<List<DepartmentDO>> getAll();
+
 }
