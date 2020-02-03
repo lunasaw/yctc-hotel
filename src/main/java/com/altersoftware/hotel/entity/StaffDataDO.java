@@ -6,24 +6,26 @@ import java.util.Date;
  * @author czy@win10
  * @date 2020/1/20 15:25
  */
-public class DataDO {
+public class StaffDataDO {
 
     /** 资料编号 */
-    private long  id;
+    private long   id;
     /** 员工编号 */
-    private long  staffId;
+    private long   staffId;
     /** 工资金额 */
-    private float rais;
+    private double salary;
     /** 工资发放时间 */
-    private Date  salaryTime;
-    /** 出勤天数 */
-    private int   dayTime;
+    private String salaryTime;
+    /** 请假天数 */
+    private int    dayTime;
     /** 工龄 */
-    private int   year;
+    private int    StaffTears;
+    /** 员工住址 */
+    private String staffAddress;
     /** 创建时间 */
-    private Date  createTime;
+    private Date   createTime;
     /** 修改时间 */
-    private Date  modifyTime;
+    private Date   modifyTime;
 
     public long getId() {
         return id;
@@ -33,27 +35,27 @@ public class DataDO {
         this.id = id;
     }
 
-    public long getstaffId() {
+    public long getStaffId() {
         return staffId;
     }
 
-    public void setstaffId(long staffId) {
+    public void setStaffId(long staffId) {
         this.staffId = staffId;
     }
 
-    public float getRais() {
-        return rais;
+    public double getSalary() {
+        return salary;
     }
 
-    public void setRais(float rais) {
-        this.rais = rais;
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
-    public Date getSalaryTime() {
+    public String getSalaryTime() {
         return salaryTime;
     }
 
-    public void setSalaryTime(Date salaryTime) {
+    public void setSalaryTime(String salaryTime) {
         this.salaryTime = salaryTime;
     }
 
@@ -65,12 +67,20 @@ public class DataDO {
         this.dayTime = dayTime;
     }
 
-    public int getYear() {
-        return year;
+    public int getStaffTears() {
+        return StaffTears;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setStaffTears(int staffTears) {
+        StaffTears = staffTears;
+    }
+
+    public String getStaffAddress() {
+        return staffAddress;
+    }
+
+    public void setStaffAddress(String staffAddress) {
+        this.staffAddress = staffAddress;
     }
 
     public Date getCreateTime() {
@@ -91,13 +101,14 @@ public class DataDO {
 
     @Override
     public String toString() {
-        return "DataDO{" +
+        return "StaffDataDO{" +
             "id=" + id +
             ", staffId=" + staffId +
-            ", rais=" + rais +
+            ", salary=" + salary +
             ", salaryTime=" + salaryTime +
             ", dayTime=" + dayTime +
-            ", year=" + year +
+            ", StaffTears=" + StaffTears +
+            ", staffAddress='" + staffAddress + '\'' +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
             '}';
