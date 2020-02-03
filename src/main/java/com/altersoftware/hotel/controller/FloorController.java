@@ -1,7 +1,9 @@
 package com.altersoftware.hotel.controller;
 
+import org.springframework.ui.Model;
+
 /**
- * @author czy@win10
+ * @author hzx
  * @date 2020/1/28 21:06
  */
 public interface FloorController {
@@ -11,5 +13,5 @@ public interface FloorController {
      * 
      * @return
      */
-    String showFloor();
+    String showFloor(Model model);
 }

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+  <style>
+    .floor-list {
+      display: none;
+    }
+
+    .floor-wrapper {
+      width: 100%;
+      height: auto;
+      padding: 10px 10px;
+      margin-bottom: 10px;
+      background-image: url(http://file02.16sucai.com/d/file/2014/0915/66ef3139fe4ffdf756025ba3fe4ae500.jpg);
+      display: block;
+      filter: brightness(1.1);
+    }
+
+    .floor-item {
+      width: 99.8%;
+      height: 524px;
+      background-color: white;
+
+    }
+
+
+
+    .floor-img1 .floor-img2 .floor-img3>img {
+      width: 280px;
+      height: 140px;
+      margin: auto;
+    }
+
+    .room-list {
+      width: 65%;
+      height: 450px;
+      top: 80px;
+      background-color: rgb(161, 161, 161);
+      position: absolute;
+      left: 30px;
+
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- begining here -->
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+
+    <h2><small>楼层预览</small></h2>
+    <hr color="lightgrey" width="50%" align="left">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">楼层</span>
+      </div>
+      <select class="custom-select col-md-3 col-sm-3" id="selectun" onchange="selectuns();">
+        <option disabled="disabled" selected="selected">请选择...</option>
+
+      </select>
+    </div>
+    <hr color="lightgrey">
+
+    <div class="floor-list" id="floorlist">
+      <div class="floor-wrapper">
+        <div class="floor-item">
+          <table class="table table-bordered col-md-6" style="margin-left: 25px;">
+            <thead>
+              <tr>
+                <td>
+                  <p style="float: left;">楼层号:</p>
+                  <p id="text1" style="float: left;"></p>
+                </td>
+                <td>
+                  <p style="float: left;">房间数:</p>
+                  <p id="text2" style="float: left;"></p>
+                </td>
+                <td>
+                  <p style="float: left;"><a href="">房间预览详情</a>
+                </td>
+              </tr>
+            </thead>
+          </table>
+          <table class="p-container" style="width: 100%;text-align: center;">
+            <tr>
+              <td><img id="p1" style="width: 200px;display: inline-block;height: 220px;">
+                <p>平面图</p>
+              </td>
+              <td><img id="p2" style="width: 200px;display: inline-block;height: 220px;">
+                <p>消防疏散图</p>
+              </td>
+              <td><img id="p3" style="width: 200px;display: inline-block;height: 220px;">
+                <p>3D图像</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+
+  <script>
+    function selectuns() {
+      $("#floorlist").css("display", "block");
+      $("#text1").text(re.id);
+      $("#text2").text(re.roomNumbers);
+      $("#p1").attr({
+        src: "",
+        alt: "平面图读取失败",
+        title: "平面图"
+      });
+      $("#p2").attr({
+        src: "",
+        alt: "消防疏散图读取失败",
+        title: "消防疏散图"
+      });
+      $("#p3").attr({
+        src: "",
+        alt: "3D图像读取失败",
+        title: "3D图像"
+      });
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "/hotel/floor/get-byid",
+      data: "data",
+      dataType: "application/json; charset=utf-8",
+      async: true,
+      success: function (result) {
+        var re1 = result.module;
+        alert(re1.id)
+      }
+    });
+
+    $.ajax({
+      type: "POST",
+      url: "/hotel/floor/show2d",
+      data: "data",
+      dataType: "application/json; charset=utf-8",
+      async: true,
+      success: function (result) {
+        var re2 = result.module;
+      }
+    });
+
+    $.ajax({
+      type: "POST",
+      url: "/hotel/floor/showfire",
+      data: "data",
+      dataType: "application/json; charset=utf-8",
+      async: true,
+      success: function (result) {
+        var re2 = result.module;
+      }
+    });
+
+    $.ajax({
+      type: "POST",
+      url: "/hotel/floor/show3d",
+      data: "data",
+      dataType: "application/json; charset=utf-8",
+      async: true,
+      success: function (result) {
+        var re2 = result.module;
+      }
+    });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      let data = [{
+        "lch": "一楼"
+      }, {
+        "lch": "二楼"
+      }];
+
+      let selectun = $("#selectun");
+      data.forEach(item => {
+        selectun.append('<option value="' + item.lch + '">' + item.lch + '</option>');
+      });
+
+    })
+  </script>
+
+</body>
+
+</html>
