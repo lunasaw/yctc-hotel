@@ -52,9 +52,14 @@ public class FloorRestControllerImpl implements FloorRestController {
         }
     }
 
+    /**
+     * 根据id查楼层信息
+     * @param id
+     * @return
+     */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<FloorDO> showFloorDO(long id) {
+    public ResultDO<FloorDO> showFloorDO(@RequestBody long id) {
         if (id <= 0) {
             return new ResultDO<FloorDO>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
@@ -69,9 +74,14 @@ public class FloorRestControllerImpl implements FloorRestController {
         }
     }
 
+    /**
+     * 显示2d平面图
+     * @param id
+     * @return
+     */
     @Override
     @PostMapping("show2d")
-    public ResultDO<String> show2D(long id) {
+    public ResultDO<String> show2D(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<String>(false, ResultCode.PARAMETER_INVALID,
@@ -91,9 +101,14 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     }
 
+    /**
+     * 显示消防图
+     * @param id
+     * @return
+     */
     @Override
     @PostMapping("showfire")
-    public ResultDO<String> showFire(long id) {
+    public ResultDO<String> showFire(@RequestBody long id) {
         if (id <= 0) {
             return new ResultDO<String>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
@@ -111,7 +126,7 @@ public class FloorRestControllerImpl implements FloorRestController {
 
     @Override
     @PostMapping("show3d")
-    public ResultDO<String> show3D(long id) {
+    public ResultDO<String> show3D(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<String>(false, ResultCode.PARAMETER_INVALID,
