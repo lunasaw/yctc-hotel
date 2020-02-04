@@ -125,4 +125,7 @@ public class TemplatePath {
     /** 部门信息页面 */
     public static final String DEPARTMENT                                 = "hotel/depatment";
 
+    /** 会员信息页面 */
+    public static final String VIP_INFO                                   = "vip/vipinfo";
+
 }

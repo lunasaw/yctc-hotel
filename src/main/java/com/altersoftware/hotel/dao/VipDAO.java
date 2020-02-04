@@ -40,6 +40,22 @@ public interface VipDAO {
     VipDO getVipDOById(long id);
 
     /**
+     * id查找所有VIP会员消息
+     *
+     * @param
+     */
+    @Select("select id, customer_id, grade, pay_amount, create_time, modify_time from tb_vip ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "customerNumber", column = "customer_id"),
+        @Result(property = "grade", column = "grade"),
+        @Result(property = "amount", column = "pay_amount"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<VipDO> getVipDOList();
+
+    /**
      * 更新VIP会员消息
      *
      * @param vipDO
