@@ -2,16 +2,20 @@ package com.altersoftware.hotel.entity;
 
 import java.util.Date;
 
-public class VipDO {
+/**
+ * @author czy@win10
+ * @date 2020/2/4 14:05
+ */
+public class VipGradeDO {
 
     /** 主键 */
     private long   id;
-    /** 客户编号 */
-    private long   customerNumber;
-    /** 会员等级 */
+    /** 等级 */
     private String grade;
-    /** 消费金额 */
-    private double amount;
+    /** 权益 */
+    private String equity;
+    /** 折扣 */
+    private Double discount;
     /** 创建时间 */
     private Date   createTime;
     /** 修改时间 */
@@ -25,14 +29,6 @@ public class VipDO {
         this.id = id;
     }
 
-    public long getNumber() {
-        return customerNumber;
-    }
-
-    public void setNumber(long customerNumber) {
-        this.customerNumber = customerNumber;
-    }
-
     public String getGrade() {
         return grade;
     }
@@ -41,12 +37,20 @@ public class VipDO {
         this.grade = grade;
     }
 
-    public double getAmount() {
-        return amount;
+    public String getEquity() {
+        return equity;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setEquity(String equity) {
+        this.equity = equity;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public Date getCreateTime() {
@@ -67,11 +71,11 @@ public class VipDO {
 
     @Override
     public String toString() {
-        return "VipDO{" +
+        return "VipGradeDO{" +
             "id=" + id +
-            ", customerNumber=" + customerNumber +
             ", grade='" + grade + '\'' +
-            ", amount=" + amount +
+            ", equity='" + equity + '\'' +
+            ", discount='" + discount + '\'' +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
             '}';
