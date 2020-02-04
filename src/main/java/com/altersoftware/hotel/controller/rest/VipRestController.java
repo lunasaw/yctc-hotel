@@ -52,6 +52,6 @@ public interface VipRestController {
      *
      * @return <List<VipDO>>
      */
-    ResultDO<List<Long>> getAllNumber();
+    ResultDO<List<Long>> getAllNumberList();
 
 }

@@ -52,6 +52,6 @@ public interface VipService {
      *
      * @return <List<VipDO>>
      */
-    ResultDO<List<Long>> getAllNumber();
+    ResultDO<List<Long>> getAllNumberList();
 
 }

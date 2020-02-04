@@ -76,7 +76,7 @@ public interface VipDAO {
      *
      * @return
      */
-    @Select("select customerNumber  from tb_vip ")
+    @Select("select customer_id  from tb_vip ")
     List<Long> getVipIdList();
 
 }
