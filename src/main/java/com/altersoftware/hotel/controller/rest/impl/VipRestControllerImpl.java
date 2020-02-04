@@ -52,7 +52,7 @@ public class VipRestControllerImpl implements VipRestController {
 
     @Override
     @PostMapping("get-bynumber")
-    public ResultDO<List<Long>> getAllNumber() {
+    public ResultDO<List<Long>> getAllNumberList() {
         return null;
     }
 }

@@ -24,7 +24,7 @@ import com.altersoftware.hotel.entity.VipDO;
 public class VipDAOTest {
 
     private static final long   ID              = 1;
-    private static final long   CUSTOMER_NUMBER = 30;
+    private static final long   CUSTOMER_NUMBER = 95002;
     private static final String GRADE           = "普通会员";
     private static final Double PAY_AMOUNT      = 35800.0;
 
@@ -35,7 +35,7 @@ public class VipDAOTest {
     public void aInsert() {
         VipDO vipDO = new VipDO();
         vipDO.setId(ID);
-        vipDO.setNumber(CUSTOMER_NUMBER);
+        vipDO.setCustomerNumber(CUSTOMER_NUMBER);
         vipDO.setGrade(GRADE);
         vipDO.setAmount(PAY_AMOUNT);
         vipDAO.insert(vipDO);

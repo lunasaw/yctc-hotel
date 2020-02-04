@@ -25,11 +25,11 @@ public class VipDO {
         this.id = id;
     }
 
-    public long getNumber() {
+    public long getCustomerNumber() {
         return customerNumber;
     }
 
-    public void setNumber(long customerNumber) {
+    public void setCustomerNumber(long customerNumber) {
         this.customerNumber = customerNumber;
     }
 

@@ -45,7 +45,7 @@ public class VipServiceImpl implements VipService {
     public ResultDO<VipDO> showVip(long id) {
         try {
             VipDO vipDOById = vipDAO.getVipDOById(id);
-            LOG.info("getVipDOById success, vipDOById={}", vipDOById);
+            LOG.info("getVipDOById success, id={}", id);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, vipDOById);
         } catch (Exception e) {
             LOG.error("getVipDOById error, id={}", id, e);
@@ -94,7 +94,7 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public ResultDO<List<Long>> getAllNumber() {
+    public ResultDO<List<Long>> getAllNumberList() {
         try {
             List<Long> all = vipDAO.getVipIdList();
             LOG.info("getAll success, vipDO list={}", all);
