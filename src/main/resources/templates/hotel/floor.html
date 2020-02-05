@@ -11,9 +11,12 @@
     <title>用户服务中心</title>
 
     <link th:href="@{/css/floor.css}" rel="stylesheet" href="css/floor.css">
+    <div>
+
+    </div>
 </head>
 
-<body onload="getdate()">
+<body onload="getidlist()">
 
     <header th:replace="component/fram :: commonHeader"></header>
 
@@ -43,9 +46,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">楼层</span>
             </div>
-            <select class="custom-select col-md-3 col-sm-3" id="selectun" onchange="selectuns();">
-                <option disabled="disabled" selected="selected" th:each="floor:${floors}" th:text="${floor}">请选择...</option>
-
+            <select class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getdate()">
+                <option disabled="disabled" selected="selected">请选择...</option>
             </select>
         </div>
         <hr color="lightgrey">
@@ -91,7 +93,7 @@
     <script>
         function getdate() {
             // alert("aaa");
-            var id = 1;
+            var id=$("#selectun option:selected").text();
             $.ajax({
                 url:"/hotel/floor/get-byid",
                 type:"POST",
@@ -100,24 +102,42 @@
                 contentType: "application/json; charset=utf-8",
                 async: true,
                 success: function (result) {
-                    var re = result.module;
-                    $("#text1").text(re.id);
-                    $("#text2").text(re.roomNumbers);
-                    $("#p1").attr({
-                        src: "",
-                        alt: "平面图读取失败",
-                        title: "平面图"
-                    });
-                    $("#p2").attr({
-                        src: "",
-                        alt: "消防疏散图读取失败",
-                        title: "消防疏散图"
-                    });
-                    $("#p3").attr({
-                        src: "",
-                        alt: "3D图像读取失败",
-                        title: "3D图像"
-                    });
+
+                            var re = result.module;
+                            $("#text1").text(re.id);
+                            $("#text2").text(re.roomNumbers);
+                            $("#p1").attr({
+                                src: re.plan,
+                                alt: "平面图读取失败",
+                                title: "平面图"
+                            });
+                            $("#p2").attr({
+                                src: re.fireDiagram,
+                                alt: "消防疏散图读取失败",
+                                title: "消防疏散图"
+                            });
+                            $("#p3").attr({
+                                src: re.threeDDiagram,
+                                alt: "3D图像读取失败",
+                                title: "3D图像"
+                            });
+
+                    }
+
+            })
+        }
+
+        function getidlist(){
+            $.ajax({
+                url:"/hotel/floor/get-list",
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                success: function (result){
+                    var list = result.module;
+                    for (var i = 0; i < list.length; i++) {
+                        document.getElementById("selectun").options.add(new Option(list[i], i));
+                    }
                 }
             })
         }
