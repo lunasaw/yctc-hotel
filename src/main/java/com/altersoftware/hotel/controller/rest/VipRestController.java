@@ -6,8 +6,8 @@ import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.VipDO;
 
 /**
- * @author Iszychen@win10
- * @date 2020/2/4 15:41
+ * @author hzx
+ * @date
  */
 public interface VipRestController {
 

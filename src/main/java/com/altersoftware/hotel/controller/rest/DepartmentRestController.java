@@ -6,7 +6,7 @@ import com.altersoftware.hotel.entity.DepartmentDO;
 import com.altersoftware.hotel.entity.ResultDO;
 
 /**
- * @author czy@win10
+ * @author hzx
  * @date 2020/2/3 21:20
  */
 public interface DepartmentRestController {
