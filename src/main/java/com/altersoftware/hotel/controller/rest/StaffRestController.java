@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.service;
+package com.altersoftware.hotel.controller.rest;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 
 /**
- * @author czy@win10
- * @date 2020/2/3 19:41
+ * @author Iszychen@win10
+ * @date 2020/2/6 17:28
  */
-public interface StaffService {
+public interface StaffRestController {
 
     /**
      * 部门编号返回员工信息
@@ -49,5 +49,4 @@ public interface StaffService {
      * @return
      */
     ResultDO<UserDO> getByNumber(String number);
-
 }

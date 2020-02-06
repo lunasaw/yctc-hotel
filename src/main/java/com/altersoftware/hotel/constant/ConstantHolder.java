@@ -6,8 +6,8 @@ public class ConstantHolder {
     public static final String PRODUCT_NAME      = "智慧酒店";
 
     /** 短信提示短信标题 */
-    public static final String STATE_SMS_TITLE   = "";
+    public static final String STATE_SMS_TITLE   = "ALter SoftWare";
 
     /** 短信提示正文 */
-    public static final String STATE_SMS_CONTENT = "";
+    public static final String STATE_SMS_CONTENT = "您的手机验证码为";
 }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailWarpper {
 
-    private final static Logger LOG = LoggerFactory.getLogger("serviceLogger");
+    private final static Logger LOG       = LoggerFactory.getLogger("MailWarpper");
 
     /** 发送方邮件地址 */
     private static final String FROM_MAIL = "2980253435@qq.com";

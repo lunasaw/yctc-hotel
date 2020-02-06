@@ -1,8 +1,6 @@
 package com.altersoftware.hotel.service;
 
 
-import java.util.List;
-
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 
@@ -95,14 +93,6 @@ public interface UserIService {
     ResultDO<Void> updateMobile(UserDO userDO, String mobile);
 
     /**
-     * 通过会员号/员工号找到userDO
-     *
-     * @param number
-     * @return
-     */
-    ResultDO<UserDO> getUserDOByNumber(String number);
-
-    /**
      * 通过faceToken返回userDO
      * 
      * @param faceToken
@@ -110,26 +100,5 @@ public interface UserIService {
      */
     ResultDO<UserDO> getUserDOByFaceToken(String faceToken);
 
-    /**
-     * 更新userDO信息
-     * 
-     * @param userDO
-     * @return
-     */
-    ResultDO<Void> updateUserDO(UserDO userDO);
-
-    /**
-     * 删除客户
-     *
-     * @param userId
-     */
-    ResultDO<Void> deleteUserDO(Long userId);
-
-    /**
-     * 查询所有客户
-     *
-     *
-     */
-    ResultDO<List<UserDO>> getAllCustomer();
 
 }
