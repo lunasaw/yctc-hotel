@@ -3,12 +3,13 @@ package com.altersoftware.hotel.controller.rest.impl;
 import java.util.List;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.altersoftware.hotel.controller.rest.VipGradeRestController;
 import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.VipDO;
+import com.altersoftware.hotel.entity.VipGradeDO;
 
 /**
  * @author Iszychen@win10
@@ -20,32 +21,33 @@ import com.altersoftware.hotel.entity.VipDO;
 public class VipGradeRestControllerImpl implements VipGradeRestController {
 
     @Override
-    public ResultDO<Void> insert(VipDO vipDO) {
+    @PostMapping("add-vipgrade")
+    public ResultDO<Void> insert(VipGradeDO vipGrade) {
         return null;
     }
 
     @Override
-    public ResultDO<VipDO> showVip(long id) {
+    @PostMapping("get-byid")
+    public ResultDO<VipGradeDO> showVipGrade(long id) {
         return null;
     }
 
     @Override
-    public ResultDO<Void> updateVip(VipDO vipDO) {
+    @PostMapping("update-vipgrade")
+    public ResultDO<Void> updateVipGrade(VipGradeDO vipGrade) {
         return null;
     }
 
     @Override
-    public ResultDO<List<VipDO>> showVipList() {
+    @PostMapping("getlist-bygrade")
+    public ResultDO<List<VipGradeDO>> showVipGradeByGrade(String grade) {
         return null;
     }
 
     @Override
+    @PostMapping("delete-byid")
     public ResultDO<Void> deleteById(long id) {
         return null;
     }
 
-    @Override
-    public ResultDO<List<Long>> getAllNumberList() {
-        return null;
-    }
 }

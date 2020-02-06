@@ -3,7 +3,7 @@ package com.altersoftware.hotel.controller.rest;
 import java.util.List;
 
 import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.VipDO;
+import com.altersoftware.hotel.entity.VipGradeDO;
 
 /**
  * @author Iszychen@win10
@@ -11,46 +11,39 @@ import com.altersoftware.hotel.entity.VipDO;
  */
 public interface VipGradeRestController {
     /**
-     * 插入一条会员信息
+     * 插入一条等级信息
      *
-     * @param vipDO
+     * @param vipGradeDO
      * @return
      */
-    ResultDO<Void> insert(VipDO vipDO);
+    ResultDO<Void> insert(VipGradeDO vipGradeDO);
 
     /**
-     * 展示会员信息
+     * 展示等级信息
      *
      * @param id
      */
-    ResultDO<VipDO> showVip(long id);
+    ResultDO<VipGradeDO> showVipGrade(long id);
 
     /**
-     * 修改会员信息
+     * 修改等级信息
      *
-     * @param vipDO
+     * @param vipGradeDO
      */
-    ResultDO<Void> updateVip(VipDO vipDO);
+    ResultDO<Void> updateVipGrade(VipGradeDO vipGradeDO);
 
     /**
-     * 根据房间查询会员信息
+     * 根据等级查询信息信息
      *
-     * @return <List<VipDO>>
+     * @param grade
      */
-    ResultDO<List<VipDO>> showVipList();
+    ResultDO<List<VipGradeDO>> showVipGradeByGrade(String grade);
 
     /**
-     * 删除会员信息
+     * 删除等级信息
      *
      * @return
      */
     ResultDO<Void> deleteById(long id);
-
-    /**
-     * 查询所有会员编号
-     *
-     * @return <List<VipDO>>
-     */
-    ResultDO<List<Long>> getAllNumberList();
 
 }
