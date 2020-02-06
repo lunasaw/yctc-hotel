@@ -116,6 +116,9 @@ public class TemplatePath {
     /** 会员信息页面 */
     public static final String VIP_INFO                                   = "vip/vipinfo";
 
+    /** 会员等级信息页面 */
+    public static final String VIP_GRADE_INFO                             = "vip/vipGrade";
+
     /** 酒店信息页面 */
     public static final String HOTEL                                      = "hotel/hotels";
 

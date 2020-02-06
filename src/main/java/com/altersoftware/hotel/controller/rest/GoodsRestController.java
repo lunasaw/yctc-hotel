@@ -12,7 +12,7 @@ import com.altersoftware.hotel.entity.ResultDO;
 public interface GoodsRestController {
     /**
      * 插入一条物品信息
-     * 
+     *
      * @param goodsDO
      * @return
      */

@@ -2,9 +2,6 @@ package com.altersoftware.hotel.controller.rest.impl;
 
 import java.util.List;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.DepartmentDO;
-import com.altersoftware.hotel.service.VipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.VipRestController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.VipDO;
+import com.altersoftware.hotel.service.VipService;
 
 /**
  * @author hzx
