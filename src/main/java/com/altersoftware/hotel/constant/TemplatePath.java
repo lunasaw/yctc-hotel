@@ -113,6 +113,9 @@ public class TemplatePath {
     /** 客户信息页面 */
     public static final String CUSTOMER_INFO                              = "customer/customer-info";
 
+    /** 会员信息页面 */
+    public static final String VIP_INFO                                   = "vip/vipinfo";
+
     /** 酒店信息页面 */
     public static final String HOTEL                                      = "hotel/hotels";
 
@@ -125,7 +128,7 @@ public class TemplatePath {
     /** 部门信息页面 */
     public static final String DEPARTMENT                                 = "hotel/depatment";
 
-    /** 会员信息页面 */
-    public static final String VIP_INFO                                   = "vip/vipinfo";
+    /** 员工信息页面 */
+    public static final String STAFF_INFO                                 = "vip/staffinfo";
 
 }

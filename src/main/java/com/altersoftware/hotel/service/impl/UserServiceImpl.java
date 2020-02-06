@@ -1,7 +1,5 @@
 package com.altersoftware.hotel.service.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -246,24 +244,6 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
-    // 通过会员号/员工号找到userDO
-    @Override
-    public ResultDO<UserDO> getUserDOByNumber(String number) {
-        try {
-            UserDO userDO = userDAO.getUserDOByNumber(number);
-            if (userDO == null) {
-                LOG.error("get userDO by number fail, no such number, number={}", number);
-                return new ResultDO<UserDO>(false, ResultCode.NO_SUCH_USER, ResultCode.MSG_NO_SUCH_USER, null);
-            }
-            LOG.info("get userDO by number success, number={}", number);
-            return new ResultDO<UserDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userDO);
-        } catch (Exception e) {
-            LOG.error("get userDO by number error, number={}", number, e);
-            return new ResultDO<UserDO>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION,
-                null);
-        }
-    }
-
     // 通过faceToken返回userDO
     @Override
     public ResultDO<UserDO> getUserDOByFaceToken(String faceToken) {
@@ -279,54 +259,6 @@ public class UserServiceImpl implements UserIService {
             LOG.error("get userDO by faceToken error, faceToken={}", faceToken, e);
             return new ResultDO<UserDO>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION,
                 null);
-        }
-    }
-
-    // 更新userDO信息
-    @Override
-    public ResultDO<Void> updateUserDO(UserDO userDO) {
-        if (userDO == null) {
-            LOG.error("update userDO fail, parameter invalid, userDO={}", userDO);
-            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            userDAO.update(userDO);
-            LOG.info("update userDO success, userDO={}", userDO);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
-        } catch (Exception e) {
-            LOG.error("update userDO fail, userDO={}", userDO, e);
-            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
-        }
-    }
-
-    // 删除客户
-    @Override
-    public ResultDO<Void> deleteUserDO(Long userId) {
-        if (userId == 0) {
-            LOG.error("update userDO fail, parameter invalid, userDO={}", userId);
-            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            userDAO.deleteById(userId);
-            LOG.info("delete userDO success, userId={}", userId);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
-        } catch (Exception e) {
-            LOG.error("update userDO fail, userId={}", userId, e);
-            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
-        }
-    }
-
-    // 查询所有客户信息
-    @Override
-    public ResultDO<List<UserDO>> getAllCustomer() {
-        List<UserDO> customers = null;
-        try {
-            customers = userDAO.getCustomer();
-            LOG.info("delete userDOList success, userId={}", customers);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
-        } catch (Exception e) {
-            LOG.error("update userDO fail, userDOList={}", customers, e);
-            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
     }
 
