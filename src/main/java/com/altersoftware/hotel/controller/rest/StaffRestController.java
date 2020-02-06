@@ -24,7 +24,7 @@ public interface StaffRestController {
      *
      * @return
      */
-    ResultDO<List<UserDO>> getAllCustomer();
+    ResultDO<List<UserDO>> getAllStaff();
 
     /**
      * 修改客户信息

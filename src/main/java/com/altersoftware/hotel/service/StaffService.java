@@ -10,7 +10,6 @@ import com.altersoftware.hotel.entity.UserDO;
  * @date 2020/2/3 19:41
  */
 public interface StaffService {
-
     /**
      * 部门编号返回员工信息
      *
@@ -20,14 +19,14 @@ public interface StaffService {
     ResultDO<List<UserDO>> getStaffByDepartmentId(long departmentId);
 
     /**
-     * 获取所有客户信息
+     * 获取所有员工信息
      *
      * @return
      */
-    ResultDO<List<UserDO>> getAllCustomer();
+    ResultDO<List<UserDO>> getAllStaff();
 
     /**
-     * 修改客户信息
+     * 修改员工信息
      *
      * @param userDO
      * @return
@@ -35,7 +34,7 @@ public interface StaffService {
     ResultDO<Void> updateUserDO(UserDO userDO);
 
     /**
-     * 删除指定客户信息
+     * 删除指定员工信息
      *
      * @param number
      * @return
@@ -43,7 +42,7 @@ public interface StaffService {
     ResultDO<Void> deleteByUserId(String number);
 
     /**
-     * 会员号搜索客户/员工
+     * 会员号搜索员工/员工
      *
      * @param number
      * @return
