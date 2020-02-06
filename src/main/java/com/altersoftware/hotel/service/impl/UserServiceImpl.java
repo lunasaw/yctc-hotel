@@ -244,6 +244,24 @@ public class UserServiceImpl implements UserIService {
         }
     }
 
+    // 通过会员号/员工号找到userDO
+    @Override
+    public ResultDO<UserDO> getUserDOByNumber(String number) {
+        try {
+            UserDO userDO = userDAO.getUserDOByNumber(number);
+            if (userDO == null) {
+                LOG.error("get userDO by number fail, no such number, number={}", number);
+                return new ResultDO<UserDO>(false, ResultCode.NO_SUCH_USER, ResultCode.MSG_NO_SUCH_USER, null);
+            }
+            LOG.info("get userDO by number success, number={}", number);
+            return new ResultDO<UserDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userDO);
+        } catch (Exception e) {
+            LOG.error("get userDO by number error, number={}", number, e);
+            return new ResultDO<UserDO>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION,
+                null);
+        }
+    }
+
     // 通过faceToken返回userDO
     @Override
     public ResultDO<UserDO> getUserDOByFaceToken(String faceToken) {

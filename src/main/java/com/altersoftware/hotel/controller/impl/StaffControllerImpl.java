@@ -11,6 +11,6 @@ public class StaffControllerImpl implements StaffController {
 
     @Override
 	public String showStaff() {
-		return TemplatePath.;
+        return TemplatePath.STAFF_INFO;
 	}
 }

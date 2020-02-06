@@ -44,7 +44,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public ResultDO<List<UserDO>> getAllCustomer() {
+    public ResultDO<List<UserDO>> getAllStaff() {
         List<UserDO> customer = new ArrayList();
         try {
             customer = userDAO.getCustomer();

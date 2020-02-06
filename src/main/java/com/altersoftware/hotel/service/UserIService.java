@@ -32,7 +32,7 @@ public interface UserIService {
 
     /**
      * 改密
-     * 
+     *
      * @param userDO
      * @param oldPassword
      * @param newPassword
@@ -93,8 +93,16 @@ public interface UserIService {
     ResultDO<Void> updateMobile(UserDO userDO, String mobile);
 
     /**
+     * 通过会员号/员工号找到userDO
+     *
+     * @param number
+     * @return
+     */
+    ResultDO<UserDO> getUserDOByNumber(String number);
+
+    /**
      * 通过faceToken返回userDO
-     * 
+     *
      * @param faceToken
      * @return
      */
