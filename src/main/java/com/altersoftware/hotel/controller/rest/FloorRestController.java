@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import com.altersoftware.hotel.entity.FloorDO;
 import com.altersoftware.hotel.entity.ResultDO;
-import org.springframework.ui.Model;
 
 /**
  * @author czy@win10
