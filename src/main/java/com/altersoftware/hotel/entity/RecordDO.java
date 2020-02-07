@@ -8,7 +8,7 @@ public class RecordDO {
     private long   id;
 
     /** 房间号 */
-    private long   roomId;
+    private int    roomNumber;
 
     /** 客户编号 */
     private long   customerId;
@@ -20,10 +20,10 @@ public class RecordDO {
     private String precheckInTime;
 
     /** 入住时间 */
-    private Date   checkInTime;
+    private String checkInTime;
 
     /** 退房时间 */
-    private Date   checkOutTime;
+    private String checkOutTime;
 
     /** 评价 */
     private String evaluate;
@@ -42,12 +42,12 @@ public class RecordDO {
         this.id = id;
     }
 
-    public long getRoomId() {
-        return roomId;
+    public int getRoomId() {
+        return roomNumber;
     }
 
-    public void setRoomId(long roomId) {
-        this.roomId = roomId;
+    public void setRoomId(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public long getCustomerId() {
@@ -74,19 +74,19 @@ public class RecordDO {
         this.precheckInTime = precheckInTime;
     }
 
-    public Date getCheckInTime() {
+    public String getCheckInTime() {
         return checkInTime;
     }
 
-    public void setCheckInTime(Date checkInTime) {
+    public void setCheckInTime(String checkInTime) {
         this.checkInTime = checkInTime;
     }
 
-    public Date getCheckOutTime() {
+    public String getCheckOutTime() {
         return checkOutTime;
     }
 
-    public void setCheckOutTime(Date checkOutTime) {
+    public void setCheckOutTime(String checkOutTime) {
         this.checkOutTime = checkOutTime;
     }
 
@@ -118,12 +118,12 @@ public class RecordDO {
     public String toString() {
         return "RecordDO{" +
             "id=" + id +
-            ", roomId=" + roomId +
+            ", roomNumber=" + roomNumber +
             ", customerId=" + customerId +
             ", staffId=" + staffId +
             ", precheckInTime='" + precheckInTime + '\'' +
-            ", checkInTime=" + checkInTime +
-            ", checkOutTime=" + checkOutTime +
+            ", checkInTime='" + checkInTime + '\'' +
+            ", checkOutTime='" + checkOutTime + '\'' +
             ", evaluate='" + evaluate + '\'' +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
