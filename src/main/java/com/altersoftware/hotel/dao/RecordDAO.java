@@ -102,4 +102,50 @@ public interface RecordDAO {
         @Result(property = "modifyTime", column = "modify_time")
     })
     List<RecordDO> getRecordDOByRoomNumber(int roomNumber);
+
+    /**
+     * 根据处理订单员工查询所属订单
+     *
+     * @param staffId
+     * @return
+     */
+    @Select("select id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime,  pre_checkintime, "
+        +
+        "record_evaluate,  create_time, modify_time from tb_record where staff_id=#{staffId}")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "customerId", column = "customer_id"),
+        @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "checkInTime", column = "record_checkintime"),
+        @Result(property = "checkOutTime", column = "record_checkouttime"),
+        @Result(property = "precheckInTime", column = "pre_checkintime"),
+        @Result(property = "evaluate", column = "record_evaluate"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<RecordDO> getRecordDOByStaffId(long staffId);
+
+    /**
+     * 根据客户会员号查询所属订单
+     *
+     * @param customerId
+     * @return
+     */
+    @Select("select id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime,  pre_checkintime, "
+        +
+        "record_evaluate,  create_time, modify_time from tb_record where customer_id=#{customerId}")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "customerId", column = "customer_id"),
+        @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "checkInTime", column = "record_checkintime"),
+        @Result(property = "checkOutTime", column = "record_checkouttime"),
+        @Result(property = "precheckInTime", column = "pre_checkintime"),
+        @Result(property = "evaluate", column = "record_evaluate"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<RecordDO> getRecordDOByCustomerId(long customerId);
 }

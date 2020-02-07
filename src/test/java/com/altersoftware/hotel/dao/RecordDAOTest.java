@@ -79,6 +79,20 @@ public class RecordDAOTest {
     }
 
     @Test
+    public void dGetByStaff() {
+        List<RecordDO> recordDOByCustomerId = recordDAO.getRecordDOByCustomerId(CUSTOMER_ID);
+        System.out.println(recordDOByCustomerId);
+        Assert.assertNotNull(recordDOByCustomerId);
+    }
+
+    @Test
+    public void dGetByCustomer() {
+        List<RecordDO> recordDOByStaffId = recordDAO.getRecordDOByStaffId(STAFF_ID);
+        System.out.println(recordDOByStaffId);
+        Assert.assertNotNull(recordDOByStaffId);
+    }
+
+    @Test
     public void zDelete() {
         int i = recordDAO.deleteById(ID);
         Assert.assertEquals(1, i);
