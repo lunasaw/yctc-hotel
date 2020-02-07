@@ -8,10 +8,7 @@ import java.util.Date;
  */
 public class OrderDO {
 
-    /** 创建时间 */
-    Date         createTime;
-    /** 修改时间 */
-    Date         modifyTime;
+
     /** 订单编号 */
     private long id;
     /** 菜品编号 */
@@ -20,6 +17,10 @@ public class OrderDO {
     private int  numbers;
     /** 客户编号 */
     private long customerId;
+    /** 创建时间 */
+    Date         createTime;
+    /** 修改时间 */
+    Date         modifyTime;
 
     public long getId() {
         return id;
