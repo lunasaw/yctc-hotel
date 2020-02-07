@@ -2,7 +2,7 @@
 
 body,html{height: 100%;background: #E2E2E2}
 body,ul{margin:0;padding:0}
-body{font:14px "微软雅黑","宋体","Arial Narrow",HELVETICA;-webkit-text-size-adjust:100%;}
+body{font:14px ,HELVETICA;-webkit-text-size-adjust:100%;}
 li{list-style:none}
 a{text-decoration:none;}
 
@@ -21,9 +21,9 @@ a{text-decoration:none;}
 .lsm-container li>a.active{ background: #c55b03; color: #fff; }
 
 
-.lsm-sidebar a{display: block;overflow: hidden;padding-left: 20px;line-height: 40px;max-height: 40px;color: #b2b8be;transition: all .3s;}
-.lsm-container ul:first-child > li> a, .lsm-container ul:first-child > li> a span{ line-height: 55px;max-height: 55px; }
-.lsm-sidebar a span{margin-left: 30px;}
+.lsm-sidebar a{display: block;overflow: hidden;padding-left: 10px;line-height: 40px;max-height: 40px;color: #b2b8be;transition: all .3s;}
+.lsm-container ul:first-child > li> a, .lsm-container ul:first-child > li> a span{ line-height: 65px;max-height: 65px; }
+.lsm-sidebar a span{margin-left: 20px;}
 .lsm-sidebar .lsm-sidebar-item .lsm-sidebar-item >ul>li a span{margin-left: 60px;}
 .lsm-sidebar-item{position: relative;}
 .lsm-sidebar-item.lsm-sidebar-show{border-bottom: none;}
@@ -74,7 +74,7 @@ a{text-decoration:none;}
 .lsm-mini-btn input:checked+svg .line--1, .lsm-mini-btn input:checked+svg .line--3 {--offset: -109.1770175568;}
 
 .lsm-mini .lsm-container, .lsm-mini .lsm-container{width: 60px;}
-.lsm-container.lsm-mini .lsm-sidebar .lsm-sidebar-icon{/* margin-left:-2px; */}
+
 .left-side-menu.lsm-mini ul:first-child>li.lsm-sidebar-item>a span{display: none;}
 .left-side-menu.lsm-mini ul:first-child>li.lsm-sidebar-item>a> i.lsm-sidebar-more{margin-right: -20px;}
 

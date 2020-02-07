@@ -2,6 +2,7 @@ package com.altersoftware.hotel.controller.rest.impl;
 
 import java.util.List;
 
+import com.altersoftware.hotel.service.StaffService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +15,7 @@ import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.CustomerService;
 
 /**
- * @author Iszychen@win10
+ * @author hzx
  * @date 2020/2/6 17:28
  */
 @RestController
@@ -25,10 +26,30 @@ public class StaffRestControllerImpl implements StaffRestController {
     @Autowired
     CustomerService customerService;
 
-    // TODO 员工比客户多一个通过部门编号查找员工信息 补一下 其他和客户是一样的
+    @Autowired
+    StaffService staffService;
+
+    /**
+     * 获取通过部门号
+     *
+     * @return
+     */
     @Override
-    public ResultDO<List<UserDO>> getStaffByDepartmentId(long departmentId) {
-        return null;
+    @PostMapping("get-bydepartmentId")
+    public ResultDO<List<UserDO>> getStaffByDepartmentId(@RequestParam(name = "departmentId")long departmentId) {
+        //参数校验
+        if(departmentId <= 0){
+            return new ResultDO<List<UserDO>>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        ResultDO<List<UserDO>> staffByDepartmentId = staffService.getStaffByDepartmentId(departmentId);
+        if (staffByDepartmentId.isSuccess() == false) {
+            return new ResultDO<List<UserDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            List<UserDO> allCustomerModule = staffByDepartmentId.getModule();
+            return new ResultDO<List<UserDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, allCustomerModule);
+        }
     }
 
     /**

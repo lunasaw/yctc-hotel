@@ -35,7 +35,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
         ResultDO<List<UserDO>> allCustomer = customerService.getAllCustomer();
         if (allCustomer.isSuccess() == false) {
             return new ResultDO<List<UserDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             List<UserDO> allCustomerModule = allCustomer.getModule();
             return new ResultDO<List<UserDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, allCustomerModule);
@@ -53,16 +53,16 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     public ResultDO<Void> updateUserDO(@RequestBody UserDO userDO) {
         // 参数校验
         if (userDO.getId() <= 0 || userDO.getDepartmentId() <= 0
-            || StringUtils.isBlank(userDO.getNumber())
-            || StringUtils.isBlank(userDO.getIdCardNumber())) {
+                || StringUtils.isBlank(userDO.getNumber())
+                || StringUtils.isBlank(userDO.getIdCardNumber())) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
-                ResultCode.MSG_PARAMETER_INVALID, null);
+                    ResultCode.MSG_PARAMETER_INVALID, null);
         }
 
         ResultDO<UserDO> byNumber = customerService.getByNumber(userDO.getNumber());
         if (byNumber.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             UserDO userDObyNumber = byNumber.getModule();
             userDObyNumber.setAge(userDO.getAge());
@@ -80,7 +80,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             } else {
                 return new ResultDO<Void>(false, ResultCode.UPDATE_FAILD,
-                    ResultCode.MSG_UPDATE_FAILD, null);
+                        ResultCode.MSG_UPDATE_FAILD, null);
             }
         }
     }
@@ -97,13 +97,13 @@ public class CustomerRestControllerImpl implements CustomerRestController {
         // 参数校验
         if (StringUtils.isBlank(number)) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
-                ResultCode.MSG_PARAMETER_INVALID, null);
+                    ResultCode.MSG_PARAMETER_INVALID, null);
         }
 
         ResultDO<UserDO> byNumber = customerService.getByNumber(number);
         if (byNumber.isSuccess()) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             ResultDO<Void> voidResultDO = customerService.deleteByUserId(number);
             if (voidResultDO.isSuccess() == false) {
@@ -127,12 +127,12 @@ public class CustomerRestControllerImpl implements CustomerRestController {
         // 参数校验
         if (StringUtils.isBlank(number)) {
             return new ResultDO<UserDO>(false, ResultCode.PARAMETER_INVALID,
-                ResultCode.MSG_PARAMETER_INVALID, null);
+                    ResultCode.MSG_PARAMETER_INVALID, null);
         }
         ResultDO<UserDO> byNumber = customerService.getByNumber(number);
         if (byNumber.isSuccess() == false) {
             return new ResultDO<UserDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             UserDO byNumberModule = byNumber.getModule();
             return new ResultDO<UserDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, byNumberModule);
