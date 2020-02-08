@@ -1,8 +1,16 @@
 package com.altersoftware.hotel.AliPay;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.altersoftware.hotel.constant.ResultCode;
@@ -17,34 +26,53 @@ import com.altersoftware.hotel.entity.ResultDO;
 
 /**
  * 支付宝
- * 
- * @author lcc
- * @data :2018年6月4日 上午10:55:46
+ *
+ * @author Iszychen@win10
+ * @date 2020/2/7 14:23
  */
 @RestController
 public class AlipayController {
 
+    private final static Logger LOG = LoggerFactory.getLogger("serviceLog");
     @Autowired
     @Qualifier("alipayService")
-    private AlipayService alipayService;
+    private AlipayService       alipayService;
 
     /**
      * web 订单支付
      */
-    @GetMapping("getPagePay")
-    public Map<Object, Object> getPagePay() throws Exception {
-        /** 模仿数据库，从后台调数据 */
-        String outTradeNo = "19960310621211";
-        Integer totalAmount = 1;
-        String subject = "苹果28";
+    @PostMapping("getPagePay")
+    public void getUnSignData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            // 这里拿到支付宝通知数据
+            Map<String, String[]> requestParams = request.getParameterMap();
+            Map<String, String> params = new HashMap<>();
+            for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+                String name = iter.next();
+                String[] values = requestParams.get(name);
+                String valueStr = "";
+                for (int i = 0; i < values.length; i++) {
+                    valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+                }
 
-        String pay = alipayService.webPagePay(outTradeNo, totalAmount, subject);
-        System.out.println(pay);
+                // 乱码解决，这段代码在出现乱码时使用
+                // valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+                params.put(name, valueStr);
+            }
+            // 打印数据看看
+            LOG.debug("数据：" + JSON.toJSONString(requestParams));
+            // 获取其中一个值看看
+            String notifyType = params.get("notify_type");
+        } catch (Exception e) {
+            LOG.error("error", e);
+        }
+        // 支付宝要求必须返回success，不然就会一直给你回调
+        PrintWriter writer = null;
+        writer = response.getWriter();
+        writer.write("success"); // 一定要打印success
+        writer.flush();
+        return;
 
-        Map<Object, Object> pays = new HashMap<>();
-        pays.put("pay", pay);
-
-        return pays;
     }
 
     /**

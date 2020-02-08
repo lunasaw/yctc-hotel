@@ -9,10 +9,10 @@ import com.alipay.api.domain.AlipayTradeWapPayModel;
 import com.alipay.api.request.*;
 
 /**
- * 支付实现类
- * 
- * @author lcc
- * @data :2018年6月4日 上午10:18:07
+ * 支付宝实现类
+ *
+ * @author Iszychen@win10
+ * @date 2020/2/7 14:23
  */
 @Service("alipayService")
 public class AlipayServiceImpl implements AlipayService {
