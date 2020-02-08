@@ -5,8 +5,8 @@ import com.alipay.api.AlipayApiException;
 /**
  * 支付接口
  * 
- * @author lcc
- * @data :2018年6月4日 上午10:18:39
+ * @author Iszychen@win10
+ * @date 2020/2/7 14:23
  */
 public interface AlipayService {
 
