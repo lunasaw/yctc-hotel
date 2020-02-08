@@ -8,4 +8,5 @@ public interface CommonController {
      * @return
      */
     String showIndex();
+
 }
