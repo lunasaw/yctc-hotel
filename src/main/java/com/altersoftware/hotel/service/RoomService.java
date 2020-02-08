@@ -60,4 +60,12 @@ public interface RoomService {
      */
     ResultDO<Void> deleteById(long id);
 
+    /**
+     * 根据类别找出一个房间
+     *
+     * @param roomTypeName
+     * @return
+     */
+    ResultDO<RoomDO> getRoomDOByRoomType(String roomTypeName);
+
 }

@@ -134,4 +134,10 @@ public class TemplatePath {
     /** 员工信息页面 */
     public static final String STAFF_INFO                                 = "vip/staffinfo";
 
+    /** 订单信息页面 */
+    public static final String RECORD_INFO                                = "vip/record";
+
+    /** 填写订单页面 */
+    public static final String PLACE_AN_ORDER                             = "order/placeanorder";
+
 }
