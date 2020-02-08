@@ -22,7 +22,10 @@ public class RoomDO {
     /** 房间押金 */
     private double deposit;
 
-    /** 房间状态 */
+    /**
+     * 房间状态
+     * {@link com.altersoftware.hotel.constant.entity.room.RoomState}
+     */
     private int    state;
 
     /** 创建时间 */

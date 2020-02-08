@@ -16,7 +16,7 @@ public class RoomState {
     public static final int           UNCHECKED = 20001;
     /** 已退房未打扫 */
     public static final int           CHECK_OUT = 20002;
-    /** 已打扫 */
+    /** 已打扫未检查 */
     public static final int           CLEANED   = 20003;
 
     public static final List<Integer> ALL_STATE = ImmutableList.of(CHECK_IN, UNCHECKED, CHECK_OUT, CLEANED);

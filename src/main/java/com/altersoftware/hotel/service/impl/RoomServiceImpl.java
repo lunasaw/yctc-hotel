@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.constant.entity.room.RoomState;
 import com.altersoftware.hotel.dao.RoomDAO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.RoomDO;
@@ -100,6 +101,27 @@ public class RoomServiceImpl implements RoomService {
             int i = roomDAO.deleteById(id);
             LOG.info("deleteById success, id={}", id);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("getallRoomDo error", e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
+    public ResultDO<RoomDO> getRoomDOByRoomType(String roomTypeName) {
+        try {
+
+            List<RoomDO> roomDOByRoomType = roomDAO.getRoomDOByRoomType(roomTypeName);
+            for (int i = 0; i < roomDOByRoomType.size(); i++) {
+                if (roomDOByRoomType.get(i).getState() == RoomState.UNCHECKED) {
+                    LOG.info("getRoomDOByRoomType success, roomTypeName={}", roomDOByRoomType.get(i));
+                    return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, roomDOByRoomType.get(i));
+                }
+            }
+            LOG.info("getRoomDOByRoomType warning, roomTypeName={}", roomDOByRoomType);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } catch (Exception e) {
             LOG.error("getallRoomDo error", e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,

@@ -98,4 +98,23 @@ public interface RoomDAO {
     })
     RoomDO getRoomDOByNumber(int roomNumber);
 
+    /**
+     * 类别查找房间List
+     *
+     * @param roomTypeName
+     */
+    @Select("select id, floor_id, room_number,  type, price, deposit, state,  create_time, modify_time from tb_room where type=#{roomTypeName}  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "floorId", column = "floor_id"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "type", column = "type"),
+        @Result(property = "price", column = "price"),
+        @Result(property = "deposit", column = "deposit"),
+        @Result(property = "state", column = "state"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<RoomDO> getRoomDOByRoomType(String roomTypeName);
+
 }
