@@ -17,6 +17,9 @@ public class RoomTypeDO {
     /** 房间类别名称 */
     private String name;
 
+    /** 房间类别图片 */
+    private String picture;
+
     /** 预计入住人数 */
     private int    userNumber;
 
@@ -34,6 +37,22 @@ public class RoomTypeDO {
 
     /** 修改时间 */
     private Date   modifyTime;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public String getRoomType() {
         return roomType;
@@ -113,6 +132,7 @@ public class RoomTypeDO {
             "id=" + id +
             ", roomType='" + roomType + '\'' +
             ", name='" + name + '\'' +
+            ", picture='" + picture + '\'' +
             ", userNumber=" + userNumber +
             ", description='" + description + '\'' +
             ", wide='" + wide + '\'' +
