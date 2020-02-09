@@ -7,7 +7,7 @@ package com.altersoftware.hotel.vo;
 public class RecordVO {
 
     /** 客户编号 */
-    private long   customerId;
+    private long   customerId; //vip
 
     /** 处理员工编号 */
     private long   staffId;
@@ -20,9 +20,6 @@ public class RecordVO {
 
     /** 退房时间 */
     private String checkOutTime;
-
-    /** 预定房间 */
-    private int    roomNumber;
 
     /** 房间类别名称 */
     private String roomTypeName;
@@ -75,11 +72,4 @@ public class RecordVO {
         this.checkOutTime = checkOutTime;
     }
 
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
 }

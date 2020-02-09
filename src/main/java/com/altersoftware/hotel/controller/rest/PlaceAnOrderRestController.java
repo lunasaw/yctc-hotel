@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.rest;
 
+import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.vo.RecordVO;
 
@@ -14,5 +15,5 @@ public interface PlaceAnOrderRestController {
      * @param recordVO
      * @return
      */
-    ResultDO<RecordVO> acceptOrder(RecordVO recordVO);
+    ResultDO<RecordDO> acceptOrder(RecordVO recordVO);
 }
