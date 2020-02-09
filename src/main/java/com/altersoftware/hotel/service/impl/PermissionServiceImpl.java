@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 
 import com.altersoftware.hotel.cache.permission.UserPermissionCache;
 import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.constant.entity.user.UserType;
 import com.altersoftware.hotel.dao.*;
 import com.altersoftware.hotel.entity.*;
 import com.altersoftware.hotel.service.PermissionIService;
-
 
 /**
  * permissionService接口实现
@@ -32,30 +32,28 @@ import com.altersoftware.hotel.service.PermissionIService;
 @Service("permissionService")
 public class PermissionServiceImpl implements PermissionIService {
 
-    private final static Logger LOG = LoggerFactory.getLogger("serviceLogger");
-
-    @Resource
-    private UserDAO userDAO;//用户
-    @Resource
-    private PermissionDAO permissionDAO;//权限
-    @Resource
-    private PermissionUserDAO permissionUserDAO;//权限信息
-    @Resource
-    private PermissionGroupDAO permissionGroupDAO;//权限组
-    @Resource
-    private PermissionGroupPermissionDAO permissionGroupPermissionDAO;//权限组信息
-
+    private final static Logger          LOG                      = LoggerFactory.getLogger("serviceLogger");
     /** 权限组 */
-    private static final String          TEACHER_GROUP_NAME       = "";
-    private static final long TEACHER_GROUP_ID = 1;
-    /** 前台权限组 */
+    private static final String          TEACHER_GROUP_NAME       = "customer";
+    private static final long            TEACHER_GROUP_ID         = UserType.CUSTOMER;
+    /** 员工权限组 */
     private static final String          STAFF_GROUP_NAME         = "staff";
-    private static final long STUDENT_GROUP_ID = 2;
+    private static final long            STUDENT_GROUP_ID         = UserType.STAFF;
+    private static final long            ADMINISTRATOR_GROUP_ID   = UserType.MANAGEMENT;
+    @Resource
+    private UserDAO                      userDAO;                                                            // 用户
+    @Resource
+    private PermissionDAO                permissionDAO;                                                      // 权限
+    @Resource
+    private PermissionUserDAO            permissionUserDAO;                                                  // 权限信息
+    @Resource
+    private PermissionGroupDAO           permissionGroupDAO;                                                 // 权限组
     /** 管理员权限组 */
     private static final String          ADMINISTRATOR_GROUP_NAME = "administrator";
-    private static final long            ADMINISTRATOR_GROUP_ID   = 90001;
+    @Resource
+    private PermissionGroupPermissionDAO permissionGroupPermissionDAO;                                       // 权限组信息
 
-    //Shiro用户认证
+    // Shiro用户认证
     @Override
     public ResultDO<Void> shiroAuthentication(long userId) {
         // 参数检验
@@ -187,7 +185,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<List<String>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, permissions);
     }
 
-    //通过userDO得到其拥有的所有权限的resource
+    // 通过userDO得到其拥有的所有权限的resource
     @Override
     public ResultDO<List<PermissionDO>> showPermissions(long userId) {
         // 参数检验
@@ -225,7 +223,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<List<PermissionDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, permissions);
     }
 
-    //展示所有的权限
+    // 展示所有的权限
     @Override
     public ResultDO<List<PermissionDO>> showAllPermissions() {
         List<PermissionDO> permissions;
@@ -314,7 +312,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
-    //删除单个权限
+    // 删除单个权限
     @Override
     public ResultDO<Void> deletePermission(String userNumber, String permissionName) {
         if (StringUtils.isBlank(userNumber) || StringUtils.isBlank(permissionName)) {
@@ -383,7 +381,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
-    //展示用户拥有的权限
+    // 展示用户拥有的权限
     @Override
     public ResultDO<List<PermissionDO>> showPermissionsHave(String userNumber) {
         // 参数检验
@@ -428,7 +426,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<List<PermissionDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, permissions);
     }
 
-    //展示所有permissionGroup
+    // 展示所有permissionGroup
     @Override
     public ResultDO<List<PermissionGroupDO>> showAllPermissionGroup() {
         List<PermissionGroupDO> permissionGroups = new ArrayList<PermissionGroupDO>();
@@ -443,7 +441,7 @@ public class PermissionServiceImpl implements PermissionIService {
             permissionGroups);
     }
 
-    //增加单个permissionGroup
+    // 增加单个permissionGroup
     @Override
     public ResultDO<Void> addPermissionGroup(String permissionGroupName, List<Long> permissionIds) {
         // 参数检验
@@ -475,7 +473,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
-    //根据permissionGroupId删除permissionGroup
+    // 根据permissionGroupId删除permissionGroup
     @Override
     public ResultDO<Void> delPermissionGroupByPermissionGroupId(Long permissionGroupId) {
         // 参数检验
@@ -502,10 +500,10 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
-    //根据permissionGroupId修改其拥有的所有权限
+    // 根据permissionGroupId修改其拥有的所有权限
     @Override
     public ResultDO<Void> modifyPermissionGroup(String permissionGroupName, Long permissionGroupId,
-                                                List<Long> permissionIds) {
+        List<Long> permissionIds) {
         // 参数检验
         if (StringUtils.isBlank(permissionGroupName) || permissionIds.size() == 0) {
             LOG.error("addPermissionGroup error, parameter illegal, permissionGroupName={}, permissionIds={}",
@@ -544,7 +542,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
-    //根据permissionGroupId展示其已拥有的所有权限PermissionDO
+    // 根据permissionGroupId展示其已拥有的所有权限PermissionDO
     @Override
     public ResultDO<List<PermissionDO>> getPermissionsByPermissionGroupId(Long permissionGroupId) {
         // 参数检验
@@ -574,7 +572,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<List<PermissionDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, permissionDOList);
     }
 
-    //根据permissionGroupId获得permissionGroupName
+    // 根据permissionGroupId获得permissionGroupName
     @Override
     public ResultDO<String> getPermissionGroupNameByPermissionGroupId(Long permissionGroupId) {
         // 参数检验
@@ -595,7 +593,7 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<String>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, permissionGroupName);
     }
 
-    //根据permissionGroupId展示其已拥有的所有PermissionIds
+    // 根据permissionGroupId展示其已拥有的所有PermissionIds
     @Override
     public ResultDO<List<Long>> getPermissionIdsByPermissionGroupId(Long permissionGroupId) {
         // 参数检验
