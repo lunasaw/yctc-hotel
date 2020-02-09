@@ -125,10 +125,10 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             // 参数校验
             if (trade_status.equals("TRADE_SUCCESS") == true) {
                 ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
-                if (recordDOResultDO.isSuccess()) {
-                    RecordDO module = recordDOResultDO.getModule();
-                    module.setState(1);
-                    recordService.updateRecord(module);
+                RecordDO recordDO = recordDOResultDO.getModule();
+                if (recordDOResultDO.isSuccess() || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
+                    recordDO.setState(1);
+                    recordService.updateRecord(recordDO);
                 }
             }
         } catch (Exception e) {
