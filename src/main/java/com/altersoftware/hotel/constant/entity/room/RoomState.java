@@ -18,8 +18,10 @@ public class RoomState {
     public static final int           CHECK_OUT = 20002;
     /** 已打扫未检查 */
     public static final int           CLEANED   = 20003;
+    /** 公共设施 */
+    public static final int           PUBIC     = 29999;
 
-    public static final List<Integer> ALL_STATE = ImmutableList.of(CHECK_IN, UNCHECKED, CHECK_OUT, CLEANED);
+    public static final List<Integer> ALL_STATE = ImmutableList.of(CHECK_IN, UNCHECKED, CHECK_OUT, CLEANED, PUBIC);
 
     public static boolean isLegal(int state) {
         for (Integer integer : ALL_STATE) {
