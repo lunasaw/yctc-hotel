@@ -3,145 +3,133 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="component/head :: head">
-    <div></div>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>用户服务中心</title>
+  <title>用户服务中心</title>
 
-    <link th:href="@{/css/floor.css}" rel="stylesheet" href="css/floor.css">
-    <div>
 
-    </div>
 </head>
 
 <body onload="getidlist()">
 
-    <header th:replace="component/fram :: commonHeader"></header>
-
-    <div class="container" th:replace="component/fram :: commonMenu"></div>
-
-    <!-- begining here -->
-
-    <!-- begining here -->
-
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="chartjs-size-monitor"
-             style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-            <div class="chartjs-size-monitor-expand"
-                 style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-            </div>
-            <div class="chartjs-size-monitor-shrink"
-                 style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-            </div>
-        </div>
+  <header th:replace="component/fram :: commonHeader"></header>
 
 
-        <h2><small>楼层预览</small></h2>
-        <hr color="lightgrey" width="50%" align="left">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">楼层</span>
-            </div>
-            <select class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getdate()">
-                <option disabled="disabled" selected="selected">请选择...</option>
-            </select>
-        </div>
-        <hr color="lightgrey">
+  <div class="container" th:replace="component/fram :: commonMenu"></div>
 
-        <div class="floor-list" id="floorlist">
-            <div class="floor-wrapper">
-                <div class="floor-item">
-                    <table class="table table-bordered col-md-6" style="margin-left: 25px;">
-                        <thead>
-                        <tr>
-                            <td>
-                                <p style="float: left;">楼层号:</p>
-                                <p id="text1" style="float: left;"></p>
-                            </td>
-                            <td>
-                                <p style="float: left;">房间数:</p>
-                                <p id="text2" style="float: left;"></p>
-                            </td>
-                            <td>
-                                <p style="float: left;"><a href="">房间预览详情</a>
-                            </td>
-                        </tr>
-                        </thead>
-                    </table>
-                    <table class="p-container" style="width: 100%;text-align: center;">
-                        <tr>
-                            <td><img id="p1" style="width: 200px;display: inline-block;height: 220px;">
-                                <p>平面图</p>
-                            </td>
-                            <td><img id="p2" style="width: 200px;display: inline-block;height: 220px;">
-                                <p>消防疏散图</p>
-                            </td>
-                            <td><img id="p3" style="width: 200px;display: inline-block;height: 220px;">
-                                <p>3D图像</p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer th:replace="component/fram :: commonFooter"></footer>
-    <script>
-        function getdate() {
-            // alert("aaa");
-            var id=$("#selectun option:selected").text();
-            $.ajax({
-                url:"/hotel/floor/get-byid",
-                type:"POST",
-                data:JSON.stringify(id),
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                async: true,
-                success: function (result) {
+  <!-- begining here -->
 
-                            var re = result.module;
-                            $("#text1").text(re.id);
-                            $("#text2").text(re.roomNumbers);
-                            $("#p1").attr({
-                                src: re.plan,
-                                alt: "平面图读取失败",
-                                title: "平面图"
-                            });
-                            $("#p2").attr({
-                                src: re.fireDiagram,
-                                alt: "消防疏散图读取失败",
-                                title: "消防疏散图"
-                            });
-                            $("#p3").attr({
-                                src: re.threeDDiagram,
-                                alt: "3D图像读取失败",
-                                title: "3D图像"
-                            });
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
 
-                    }
+    
+    <h2><small>楼层预览</small></h2>
+    <hr color="lightgrey" width="50%" align="left">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">楼层</span>
+      </div>
+      <select class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getdate()";>
+        <option  disabled="disabled" selected="selected">请选择...</option>
+        
+      </select>
+    </div>
+    <hr color="lightgrey"  >
 
-            })
-        }
+    <div class="floor-list"  id="floorlist">
+      <div class="floor-wrapper">
+        <div class="floor-item">
+          <table class="table table-bordered col-md-6" style="margin-left: 25px;"> 
+            <thead>
+            <tr>
+              <td><p style="float: left;">楼层号:</p><p id="text1" style="float: left;"></p></td>
+              <td><p style="float: left;">房间数:</p><p id="text2" style="float: left;"></p></td>
+              <td><p style="float: left;"><a href="">房间预览详情</a></td>
+          </tr>
+        </thead>
+          </table>
+          <table class="p-container" style="width: 100%;text-align: center;" >
+            <tr>
+              <img id="p1"  style=" width: 800px;display: inline-block;height: 250px;margin-left: 50px;"><span style="margin-left: 100px;">平面图</span>
+              <br>
+              <img id="p2" style="width: 800px;display: inline-block;height: 250px;margin-left: 50px;margin-top: 35px;"><span style="margin-left: 100px;">消防疏散图</span>
+              <br>
+              <img id="p3" style="width: 800px;display: inline-block;height: 250px;margin-left: 50px;margin-top: 35px;"><span style="margin-left: 100px;">3D图像</span>
+            </tr>            
+          </table>
+          </div>
+          </div>
+          </div>
+    
 
-        function getidlist(){
-            $.ajax({
-                url:"/hotel/floor/get-list",
-                type:"POST",
-                contentType: "application/json; charset=utf-8",
-                async: true,
-                success: function (result){
-                    var list = result.module;
-                    for (var i = 0; i < list.length; i++) {
-                        document.getElementById("selectun").options.add(new Option(list[i], i));
-                    }
-                }
-            })
-        }
-    </script>
+  </main>
+
+  <footer th:replace="component/fram :: commonFooter"></footer>
+
+  <script>
+      function getdate() {
+          // alert("aaa");
+          var id=$("#selectun option:selected").text();
+          $.ajax({
+              url:"/hotel/floor/get-byid",
+              type:"POST",
+              data:JSON.stringify(id),
+              dataType: 'json',
+              contentType: "application/json; charset=utf-8",
+              async: true,
+              success: function (result) {
+
+                  var re = result.module;
+                  $("#text1").text(re.id);
+                  $("#text2").text(re.roomNumbers);
+                  $("#p1").attr({
+                      src: re.plan,
+                      alt: "平面图读取失败",
+                      title: "平面图"
+                  });
+                  $("#p2").attr({
+                      src: re.fireDiagram,
+                      alt: "消防疏散图读取失败",
+                      title: "消防疏散图"
+                  });
+                  $("#p3").attr({
+                      src: re.threeDDiagram,
+                      alt: "3D图像读取失败",
+                      title: "3D图像"
+                  });
+
+              }
+
+          })
+      }
+
+      function getidlist(){
+          $.ajax({
+              url:"/hotel/floor/get-list",
+              type:"POST",
+              contentType: "application/json; charset=utf-8",
+              async: true,
+              success: function (result){
+                  var list = result.module;
+                  for (var i = 0; i < list.length; i++) {
+                      document.getElementById("selectun").options.add(new Option(list[i], i));
+                  }
+              }
+          })
+      }
+  </script>
 
 </body>
 

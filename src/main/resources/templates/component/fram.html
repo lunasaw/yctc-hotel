@@ -7,63 +7,61 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>前台服务中心</title>
+  <title>用户服务中心</title>
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}" href="css/left-side-menu.css">
   <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="fonts/iconfont.css">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/monent.css}" href="css/monent.css">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/chart.css}" href="css/chart.css">
+  <link rel="stylesheet" type="text/css" href="css/head.css" th:href="@{/css/head.css}">
   <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
   <script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}" src="js/jquery.slimscroll.min.js"></script>
   <script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="js/left-side-menu.js"></script>
-  <script type="text/javascript" th:src="@{/js/footposition.js}" src="js/footposition.js"></script>
-
   <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" s></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
 
 
 </head>
 
 <body>
 
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" th:fragment="commonHeader">
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" style="position: fixed;" th:fragment="commonHeader">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
 
     <ul class="navbar-nav " style="left: 82%;position: absolute;">
       <li>
         <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
-                                          style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
       </li>
     </ul>
 
     <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
       <li>
         <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
-                                          style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
       </li>
     </ul>
 
     <ul class="navbar-nav " style="left: 87%;position: absolute;">
       <li>
         <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
-                                          style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
       </li>
     </ul>
 
     <ul class="navbar-nav " style="left: 90%;position: absolute;">
       <li>
         <a class="nav-link" href="#">注销&nbsp&nbsp<img
-                src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
-                style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
+            src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
         </a>
       </li>
     </ul>
   </nav>
 
 
-  <div class="left-side-menu col-sm-3 col-md-2 mr-0" style="float: left;position: fixed;" th:fragment="commonMenu">
+  <div class="left-side-menu col-sm-3 col-md-2 mr-0" style="float: left; position: fixed;" th:fragment="commonMenu">
     <div class="lsm-expand-btn">
       <div class="lsm-mini-btn">
         <label>
@@ -87,10 +85,10 @@
           <p>用户</p>
         </div>
         <div class="lsm-sidebar">
-
+          
           <ul>
             <li class="lsm-sidebar-item">
-
+              
               <a href="javascript:;"><span>住房服务</span><i class="my-icon lsm-sidebar-more"></i></a>
               <ul>
                 <li><a href="javascript:;"><span>房间预订</span></a></li>
@@ -145,13 +143,13 @@
 
   </div>
 
-  </div>
-  </div>
 
-  <footer style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;z-index: 9999;text-align: center;line-height: 50px;" th:fragment="commonFooter">
+  <footer
+    style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;z-index: 9999;text-align: center;line-height: 50px;position: fixed;bottom: 0;" th:fragment="commonFooter">
     <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
 
   </footer>
+
 
 
 </body>
