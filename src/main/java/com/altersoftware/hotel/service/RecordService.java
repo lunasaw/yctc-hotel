@@ -59,4 +59,13 @@ public interface RecordService {
      * @return
      */
     ResultDO<List<RecordDO>> getAll();
+
+    /**
+     * 通过客户编号和房间号返回实际需支付金额
+     *
+     * @param customerId
+     * @param roomNumber
+     * @return
+     */
+    ResultDO<Double> getActualMoney(long customerId, int roomNumber);
 }

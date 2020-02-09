@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.service.impl;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.dao.RecordDAO;
-import com.altersoftware.hotel.entity.RecordDO;
-import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.dao.RoomDAO;
+import com.altersoftware.hotel.dao.VipDAO;
+import com.altersoftware.hotel.dao.VipGradeDAO;
+import com.altersoftware.hotel.entity.*;
 import com.altersoftware.hotel.service.RecordService;
 
 /**
@@ -26,6 +29,15 @@ public class RecordServiceImpl implements RecordService {
 
     @Resource
     private RecordDAO           recordDAO;
+
+    @Resource
+    private RoomDAO             roomDAO;
+
+    @Resource
+    private VipGradeDAO         vipGradeDAO;
+
+    @Resource
+    private VipDAO              vipDAO;
 
     @Override
     public ResultDO<Void> createRecord(RecordDO recordDO) {
@@ -119,5 +131,40 @@ public class RecordServiceImpl implements RecordService {
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
+    }
+
+    @Override
+    public ResultDO<Double> getActualMoney(long customerId, int roomNumber) {
+        VipDO vipDOById = null;
+        double actualMoney = 0.0;
+        try {
+            vipDOById = vipDAO.getVipDOByCustomerId(customerId);
+            if (vipDOById != null) {
+                LOG.info("getVipDOById success, vipDOById={}", vipDOById);
+                String grade = vipDOById.getGrade();
+                VipGradeDO vipGradeDOByGrade = null;
+                vipGradeDOByGrade = vipGradeDAO.getVipGradeDOByGrade(grade);
+                if (vipGradeDOByGrade != null) {
+                    LOG.info("getVipGradeDOByGrade success, VipGradeDO={}", vipGradeDOByGrade);
+                    Double discount = vipGradeDOByGrade.getDiscount();
+                    RoomDO roomDOByNumber = null;
+                    roomDOByNumber = roomDAO.getRoomDOByNumber(roomNumber);
+                    if (roomDOByNumber != null) {
+                        LOG.info("getRoomDOByNumber success, roomDO={}", roomDOByNumber);
+                        double price = roomDOByNumber.getPrice();
+                        actualMoney = price * discount + roomDOByNumber.getDeposit();
+                    }
+                }
+            }
+            NumberFormat nf = NumberFormat.getNumberInstance();
+            nf.setMaximumFractionDigits(2);
+            actualMoney = Double.parseDouble(nf.format(actualMoney));
+        } catch (Exception e) {
+            LOG.error("getActualMoney error, customerId={}, roomNumber={}", customerId, roomNumber, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+        LOG.info("getActualMoney success, money={}", actualMoney);
+        return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, actualMoney);
     }
 }
