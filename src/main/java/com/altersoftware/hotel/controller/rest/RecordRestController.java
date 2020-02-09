@@ -6,7 +6,7 @@ import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 
 /**
- * @author Iszychen@win10
+ * @author hzx
  * @date 2020/2/7 22:07
  */
 public interface RecordRestController {
