@@ -146,7 +146,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     @PostMapping("check-pay")
     public ResultDO<RecordDO> returnRecord(long recordId) {
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(recordId);
-        if (recordDOResultDO.isSuccess()) {
+        if (recordDOResultDO.isSuccess() && recordDOResultDO.getModule().getState() == 1) {
             return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
                 recordDOResultDO.getModule());
 
