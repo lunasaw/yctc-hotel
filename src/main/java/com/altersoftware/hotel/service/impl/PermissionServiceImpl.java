@@ -45,15 +45,15 @@ public class PermissionServiceImpl implements PermissionIService {
     @Resource
     private PermissionGroupPermissionDAO permissionGroupPermissionDAO;//权限组信息
 
-    /** 教师权限组 */
-    private static final String TEACHER_GROUP_NAME = "permTeacher";
+    /** 权限组 */
+    private static final String          TEACHER_GROUP_NAME       = "";
     private static final long TEACHER_GROUP_ID = 1;
-    /** 学生权限组 */
-    private static final String STUDENT_GROUP_NAME = "permStudent";
+    /** 前台权限组 */
+    private static final String          STAFF_GROUP_NAME         = "staff";
     private static final long STUDENT_GROUP_ID = 2;
     /** 管理员权限组 */
-    private static final String ADMINISTRATOR_GROUP_NAME = "permAdministrator";
-    private static final long ADMINISTRATOR_GROUP_ID = 3;
+    private static final String          ADMINISTRATOR_GROUP_NAME = "administrator";
+    private static final long            ADMINISTRATOR_GROUP_ID   = 90001;
 
     //Shiro用户认证
     @Override
