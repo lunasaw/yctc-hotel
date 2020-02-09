@@ -5,20 +5,19 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.altersoftware.hotel.util.RandomNumber;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson.JSON;
 import com.altersoftware.hotel.constant.ResultCode;
@@ -50,6 +49,8 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     @Override
     @PostMapping("accept-order")
     public ResultDO<RecordDO> acceptOrder(@RequestBody RecordVO recordVO) {
+        //生成随机数
+        RandomNumber randomNumber = new RandomNumber();
         // 参数校验
         if (recordVO.getCustomerId() <= 0 || StringUtils.isBlank(recordVO.getPrecheckInTime())
             || StringUtils.isBlank(recordVO.getRoomTypeName())
@@ -79,7 +80,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             recordDO.setCheckInTime(recordVO.getCheckInTime());
             recordDO.setCheckOutTime(recordVO.getCheckOutTime());
             recordDO.setPayMoney(actualMoney.getModule());
-
+            recordDO.setId(Long.parseLong(randomNumber.GetRandom()));
             ResultDO<Void> recordServiceRecord = recordService.createRecord(recordDO);
             if (recordServiceRecord.isSuccess() == false) {
                 return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
@@ -144,13 +145,22 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
 
     @Override
     @PostMapping("check-pay")
-    public ResultDO<RecordDO> returnRecord(long recordId) {
+    public ResultDO<RecordDO> returnRecord(@RequestParam(name = "recordId") long recordId) {
+        //参数校验
+        // 参数校验
+        if (recordId <= 0) {
+            return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(recordId);
         if (recordDOResultDO.isSuccess() && recordDOResultDO.getModule().getState() == 1) {
             return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
                 recordDOResultDO.getModule());
 
+        } else {
+            //前端做判断，是否跳转到未付款页面
+            return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         }
-        return null;
     }
 }
