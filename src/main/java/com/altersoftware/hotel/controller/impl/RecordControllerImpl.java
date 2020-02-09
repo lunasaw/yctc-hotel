@@ -26,4 +26,9 @@ public class RecordControllerImpl implements RecordController {
     public String payPage() {
         return "pay/index";
     }
+
+    @GetMapping("checkalipay")
+    public String checkalipay() {
+        return "pay/checkalipay";
+    }
 }
