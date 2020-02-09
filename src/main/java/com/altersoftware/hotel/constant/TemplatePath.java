@@ -140,4 +140,7 @@ public class TemplatePath {
     /** 填写订单页面 */
     public static final String PLACE_AN_ORDER                             = "order/placeanorder";
 
+    /** 支付宝回调/返回是否支付成功页面 */
+    public static final String CHECK_ALI_PAY                              = "pay/checkalipay";
+
 }

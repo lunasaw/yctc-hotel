@@ -24,11 +24,13 @@ public class RecordControllerImpl implements RecordController {
 
     @GetMapping("page")
     public String payPage() {
+        // 支付支付测试页面
         return "pay/index";
     }
 
     @GetMapping("checkalipay")
     public String checkalipay() {
-        return "pay/checkalipay";
+        // 支付宝回调页面
+        return TemplatePath.CHECK_ALI_PAY;
     }
 }
