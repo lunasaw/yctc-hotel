@@ -2,13 +2,13 @@ package com.altersoftware.hotel.controller.rest.impl;
 
 import javax.annotation.Resource;
 
-import com.altersoftware.hotel.constant.ResultCode;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.PlaceAnOrderRestController;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
@@ -16,8 +16,6 @@ import com.altersoftware.hotel.entity.RoomDO;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.RoomService;
 import com.altersoftware.hotel.vo.RecordVO;
-
-import java.util.List;
 
 /**
  * @author hzx
@@ -49,7 +47,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             // 3.将RecordDO构造插入订单
             RecordDO recordDO = new RecordDO();
             recordDO.setStaffId(recordVO.getStaffId());
-            recordDO.setRoomId(recordVO.getRoomNumber());
+            recordDO.setRoomNumber(recordVO.getRoomNumber());
             recordDO.setCustomerId(recordVO.getCustomerId());
             recordDO.setPrecheckInTime(recordVO.getPrecheckInTime());
             ResultDO<Void> recordServiceRecord = recordService.createRecord(recordDO);

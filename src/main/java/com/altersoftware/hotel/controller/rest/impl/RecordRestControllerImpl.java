@@ -2,17 +2,16 @@ package com.altersoftware.hotel.controller.rest.impl;
 
 import java.util.List;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.VipDO;
-import com.altersoftware.hotel.service.RecordService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
+import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.RecordRestController;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.service.RecordService;
 
 /**
  * @author hzx
@@ -81,7 +80,7 @@ public class RecordRestControllerImpl implements RecordRestController {
     @PostMapping("update")
     public ResultDO<Void> updateRecord(@RequestBody RecordDO recordDO) {
         // 参数校验
-        if (recordDO.getId() <= 0 || recordDO.getRoomId() <= 0 || recordDO.getStaffId() <= 0
+        if (recordDO.getId() <= 0 || recordDO.getRoomNumber() <= 0 || recordDO.getStaffId() <= 0
                 || recordDO.getCustomerId() <= 0 || StringUtils.isBlank(recordDO.getEvaluate())) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                     ResultCode.MSG_PARAMETER_INVALID, null);
@@ -98,7 +97,7 @@ public class RecordRestControllerImpl implements RecordRestController {
             doResultDOModule.setEvaluate(recordDO.getEvaluate());
             doResultDOModule.setCustomerId(recordDO.getCustomerId());
             doResultDOModule.setId(recordDO.getId());
-            doResultDOModule.setRoomId(recordDO.getRoomId());
+            doResultDOModule.setRoomNumber(recordDO.getRoomNumber());
             doResultDOModule.setStaffId(recordDO.getStaffId());
 
             ResultDO<Void> voidResultDO = recordService.updateRecord(doResultDOModule);
