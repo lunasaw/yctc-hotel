@@ -23,6 +23,7 @@ public class RoomTypeDAOTest {
 
     private static final long   ID               = 1;
     private static final String NAME             = "大床房";
+    private static final String PICTURE          = "101.jpg";
     private static final String BIG_BEDROOM_TYPE = "501";
     private static final int    USER_NUMBER      = 2;
     private static final String DESCRIPTION      = "真心为您服务，期待与您相识，为您的旅途保驾护航";
@@ -38,6 +39,7 @@ public class RoomTypeDAOTest {
         roomTypeDO.setId(ID);
         roomTypeDO.setRoomType(BIG_BEDROOM_TYPE);
         roomTypeDO.setName(NAME);
+        roomTypeDO.setPicture(PICTURE);
         roomTypeDO.setUserNumber(USER_NUMBER);
         roomTypeDO.setDescribe(DESCRIPTION);
         roomTypeDO.setWide(WIDE);

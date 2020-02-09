@@ -17,9 +17,9 @@ public interface RoomTypeDAO {
      * 
      * @param roomTypeDO
      */
-    @Insert(" INSERT INTO tb_room_type (id, room_Type, type_name, user_number, wide, add_bed, description, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_room_type (id, room_Type, type_picture, type_name, user_number, wide, add_bed, description, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{roomType}, #{name}, #{userNumber}, #{wide}, #{addBed}, #{description}, now(), now()) ")
+        "VALUES(#{id}, #{roomType}, #{picture}, #{name}, #{userNumber}, #{wide}, #{addBed}, #{description}, now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(RoomTypeDO roomTypeDO);
 
@@ -28,11 +28,12 @@ public interface RoomTypeDAO {
      *
      * @param id
      */
-    @Select("select id, room_Type, type_name, user_number, description,  wide, add_bed, create_time, modify_time from tb_room_type where id=#{id}  ")
+    @Select("select id, room_Type, type_name, type_picture, user_number, description,  wide, add_bed, create_time, modify_time from tb_room_type where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomType", column = "room_Type"),
         @Result(property = "name", column = "type_name"),
+        @Result(property = "picture", column = "type_picture"),
         @Result(property = "userNumber", column = "user_number"),
         @Result(property = "description", column = "description"),
         @Result(property = "wide", column = "wide"),
@@ -47,7 +48,7 @@ public interface RoomTypeDAO {
      *
      * @param roomTypeDO
      */
-    @Update("update tb_room_type  set room_Type=#{roomType}, type_name=#{name}, user_number=#{userNumber}, description=#{description},  wide=#{wide}, add_bed=#{addBed}, modify_time=now()  where id=#{id}")
+    @Update("update tb_room_type  set room_Type=#{roomType}, type_name=#{name}, type_picture=#{picture}, user_number=#{userNumber}, description=#{description},  wide=#{wide}, add_bed=#{addBed}, modify_time=now()  where id=#{id}")
     int update(RoomTypeDO roomTypeDO);
 
     /**
@@ -63,11 +64,12 @@ public interface RoomTypeDAO {
      *
      * @return
      */
-    @Select("select id, room_Type, type_name, user_number, description,  wide, add_bed, create_time, modify_time from tb_room_type ")
+    @Select("select id, room_Type, type_name, type_picture, user_number, description,  wide, add_bed, create_time, modify_time from tb_room_type ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomType", column = "room_Type"),
         @Result(property = "name", column = "type_name"),
+        @Result(property = "picture", column = "type_picture"),
         @Result(property = "userNumber", column = "user_number"),
         @Result(property = "description", column = "description"),
         @Result(property = "wide", column = "wide"),
