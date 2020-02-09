@@ -17,9 +17,9 @@ public interface RecordDAO {
      *
      *
      */
-    @Insert(" INSERT INTO tb_record (id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime, pre_checkintime, record_evaluate, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_record (id, room_number, customer_id, staff_id, pay_money, state, record_checkintime, record_checkouttime, pre_checkintime, record_evaluate, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{roomNumber}, #{customerId}, #{staffId}, #{checkInTime}, #{checkOutTime}, #{precheckInTime}, #{evaluate}, now(), now()) ")
+        "VALUES(#{id}, #{roomNumber}, #{customerId}, #{staffId}, #{payMoney}, #{state}, #{checkInTime}, #{checkOutTime}, #{precheckInTime}, #{evaluate}, now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(RecordDO recordDO);
 
@@ -29,12 +29,15 @@ public interface RecordDAO {
      * @param id
      * @return
      */
-    @Select("select id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime,  pre_checkintime, record_evaluate,  create_time, modify_time from tb_record where id=#{id}  ")
+    @Select("select id, room_number, customer_id, staff_id, pay_money, state, record_checkintime, record_checkouttime,  pre_checkintime, record_evaluate,  create_time, modify_time from tb_record where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomNumber", column = "room_number"),
         @Result(property = "customerId", column = "customer_id"),
         @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
+
         @Result(property = "checkInTime", column = "record_checkintime"),
         @Result(property = "checkOutTime", column = "record_checkouttime"),
         @Result(property = "precheckInTime", column = "pre_checkintime"),
@@ -50,12 +53,14 @@ public interface RecordDAO {
      *
      * @return
      */
-    @Select("select id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime,  pre_checkintime, record_evaluate,  create_time, modify_time from tb_record")
+    @Select("select id, room_number, customer_id, staff_id, pay_money, state, record_checkintime, record_checkouttime,  pre_checkintime, record_evaluate,  create_time, modify_time from tb_record")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomNumber", column = "room_number"),
         @Result(property = "customerId", column = "customer_id"),
         @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
         @Result(property = "checkInTime", column = "record_checkintime"),
         @Result(property = "checkOutTime", column = "record_checkouttime"),
         @Result(property = "precheckInTime", column = "pre_checkintime"),
@@ -71,7 +76,7 @@ public interface RecordDAO {
      * @param floorDO
      */
     @Update("update tb_record  set room_number=#{roomNumber}, customer_id=#{customerId}, staff_id=#{staffId}," +
-        " record_checkintime=#{checkInTime}, record_checkouttime=#{checkOutTime}, pre_checkintime=#{precheckInTime}, record_evaluate=#{evaluate}, modify_time=now()  where id=#{id}")
+        "pay_money=#{payMoney}, state=#{state}, record_checkintime=#{checkInTime}, record_checkouttime=#{checkOutTime}, pre_checkintime=#{precheckInTime}, record_evaluate=#{evaluate}, modify_time=now()  where id=#{id}")
     int update(RecordDO floorDO);
 
     /**
@@ -88,12 +93,14 @@ public interface RecordDAO {
      * @param roomNumber
      * @return
      */
-    @Select("select id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime,  pre_checkintime, record_evaluate,  create_time, modify_time from tb_record where room_number=#{room_number}")
+    @Select("select id, room_number, customer_id, staff_id, pay_money, state,  record_checkintime, record_checkouttime,  pre_checkintime, record_evaluate,  create_time, modify_time from tb_record where room_number=#{room_number}")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "roomNumber", column = "room_number"),
         @Result(property = "customerId", column = "customer_id"),
         @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
         @Result(property = "checkInTime", column = "record_checkintime"),
         @Result(property = "checkOutTime", column = "record_checkouttime"),
         @Result(property = "precheckInTime", column = "pre_checkintime"),
@@ -109,7 +116,7 @@ public interface RecordDAO {
      * @param staffId
      * @return
      */
-    @Select("select id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime,  pre_checkintime, "
+    @Select("select id, room_number, customer_id, staff_id, pay_money, state, record_checkintime, record_checkouttime,  pre_checkintime, "
         +
         "record_evaluate,  create_time, modify_time from tb_record where staff_id=#{staffId}")
     @Results({
@@ -117,6 +124,8 @@ public interface RecordDAO {
         @Result(property = "roomNumber", column = "room_number"),
         @Result(property = "customerId", column = "customer_id"),
         @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
         @Result(property = "checkInTime", column = "record_checkintime"),
         @Result(property = "checkOutTime", column = "record_checkouttime"),
         @Result(property = "precheckInTime", column = "pre_checkintime"),
@@ -132,7 +141,7 @@ public interface RecordDAO {
      * @param customerId
      * @return
      */
-    @Select("select id, room_number, customer_id, staff_id, record_checkintime, record_checkouttime,  pre_checkintime, "
+    @Select("select id, room_number, customer_id, staff_id, pay_money, state, record_checkintime, record_checkouttime,  pre_checkintime, "
         +
         "record_evaluate,  create_time, modify_time from tb_record where customer_id=#{customerId}")
     @Results({
@@ -140,6 +149,8 @@ public interface RecordDAO {
         @Result(property = "roomNumber", column = "room_number"),
         @Result(property = "customerId", column = "customer_id"),
         @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
         @Result(property = "checkInTime", column = "record_checkintime"),
         @Result(property = "checkOutTime", column = "record_checkouttime"),
         @Result(property = "precheckInTime", column = "pre_checkintime"),

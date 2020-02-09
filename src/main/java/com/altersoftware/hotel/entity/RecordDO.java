@@ -16,6 +16,12 @@ public class RecordDO {
     /** 处理员工编号 */
     private long   staffId;
 
+    /** 实际付款金额 */
+    private double payMoney;
+
+    /** 状态 暂定为是否付款 */
+    private int    state;
+
     /** 预计入住时间间隔 */
     private String precheckInTime;
 
@@ -34,20 +40,28 @@ public class RecordDO {
     /** 修改时间 */
     private Date   modifyTime;
 
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public double getPayMoney() {
+        return payMoney;
+    }
+
+    public void setPayMoney(double payMoney) {
+        this.payMoney = payMoney;
+    }
+
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getRoomId() {
-        return roomNumber;
-    }
-
-    public void setRoomId(int roomNumber) {
-        this.roomNumber = roomNumber;
     }
 
     public long getCustomerId() {
@@ -64,6 +78,14 @@ public class RecordDO {
 
     public void setStaffId(long staffId) {
         this.staffId = staffId;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getPrecheckInTime() {
@@ -121,6 +143,8 @@ public class RecordDO {
             ", roomNumber=" + roomNumber +
             ", customerId=" + customerId +
             ", staffId=" + staffId +
+            ", payMoney=" + payMoney +
+            ", state=" + state +
             ", precheckInTime='" + precheckInTime + '\'' +
             ", checkInTime='" + checkInTime + '\'' +
             ", checkOutTime='" + checkOutTime + '\'' +
