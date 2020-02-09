@@ -92,7 +92,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
 
     }
 
-    @PostMapping("detal-record")
+    @PostMapping("deal-record")
     public void getUnSignData(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> params = new HashMap<>();
         try {
