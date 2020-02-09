@@ -19,37 +19,31 @@ import com.altersoftware.hotel.util.EnvUtil;
 import com.altersoftware.hotel.warpper.MailWarpper;
 import com.altersoftware.hotel.warpper.SmsWarpper;
 
-
-
 @ComponentScan({"com.altersoftware.hotel.dao"})
 @Service("messageService")
 public class MessageServiceImpl implements MessageIService {
 
-    private final static Logger LOG = LoggerFactory.getLogger("serviceLog");
+    private final static Logger LOG         = LoggerFactory.getLogger("serviceLog");
 
     /** 邮件标题 */
-    private final static String MAIL_TITLE = "【" + ConstantHolder.PRODUCT_NAME + " - 会员】邮箱验证码";
+    private final static String MAIL_TITLE  = "【" + ConstantHolder.PRODUCT_NAME + " - 会员】邮箱验证码";
     /** 邮件验证码模板前缀 */
     private final static String MAIL_PREFIX = "您的验证码是";
     /** 邮件验证码模板后缀 */
     private final static String MAIL_SUBFIX = "。如非本人操作，请忽略本短信。";
 
     /** 短信验证码模板前缀 */
-    private final static String SMS_PREFIX = "【哈沐信息技术】您的验证码是";
+    private final static String SMS_PREFIX  = "【哈沐信息技术】您的验证码是";
     /** 短信验证码模板后缀 */
-    private final static String SMS_SUBFIX = "。如非本人操作，请忽略本短信。";
-
+    private final static String SMS_SUBFIX  = "。如非本人操作，请忽略本短信。";
+    @Autowired
+    MailWarpper                 mailWarpper;
+    @Autowired
+    SmsWarpper                  smsWarpper;
     @Resource
-    private UserDAO userDAO;
-
+    private UserDAO             userDAO;
     @Autowired
-    MailWarpper mailWarpper;
-
-    @Autowired
-    SmsWarpper smsWarpper;
-
-    @Autowired
-    private EnvUtil envUtil;
+    private EnvUtil             envUtil;
 
     @Override
     public ResultDO<Void> sendVerificationCodeMail(String mail) {

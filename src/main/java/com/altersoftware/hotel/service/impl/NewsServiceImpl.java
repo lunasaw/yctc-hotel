@@ -23,8 +23,6 @@ import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserNewsDO;
 import com.altersoftware.hotel.service.NewsIService;
 
-
-
 /**
  * 发送通知业务接口实现
  *
@@ -37,11 +35,11 @@ public class NewsServiceImpl implements NewsIService {
     private final static Logger LOG = LoggerFactory.getLogger("serviceLog");
 
     @Resource
-    NewsDAO newsDAO;//消息
+    NewsDAO                     newsDAO;                                    // 消息
     @Resource
-    UserNewsDAO userNewsDAO;//向用户写入消息
+    UserNewsDAO                 userNewsDAO;                                // 向用户写入消息
 
-    //发送通知给用户
+    // 发送通知给用户
     @Override
     public ResultDO<Void> sendNewsToUser(List<Long> userIdList, List<Long> newsIdList) {
         // 参数核验
@@ -95,7 +93,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //插入信息 到数据库
+    // 插入信息 到数据库
     @Override
     public ResultDO<Long> putNewsToDB(String title, String content) {
         try {
@@ -117,7 +115,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //根据id删除消息
+    // 根据id删除消息
     @Override
     public ResultDO<Void> removeUserNews(List<Long> userIdList, List<Long> newsIdList) {
         if (userIdList.isEmpty() == true || newsIdList.isEmpty() == true) {
@@ -156,7 +154,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //通过id获取用户通知
+    // 通过id获取用户通知
     @Override
     public ResultDO<Map<Integer, List<NewsDO>>> getUserNews(long userId) {
         // 检验参数
@@ -212,7 +210,7 @@ public class NewsServiceImpl implements NewsIService {
 
     }
 
-    //通过id设置消息
+    // 通过id设置消息
     @Override
     public ResultDO<Void> setNewsStateByUserIdAndNewsId(long userId, long newsId, int state) {
         if (userId <= 0 || newsId <= 0 || (state != NewsState.UNREAD && state != NewsState.READED)) {
@@ -229,7 +227,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //发送消息给一类用户
+    // 发送消息给一类用户
     @Override
     public ResultDO<Void> sendNewsTOUserList(List<Long> userIdList, String title, String content) {
         // 参数检验
@@ -286,7 +284,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //设置消息已读
+    // 设置消息已读
     @Override
     public ResultDO<Void> turnTOReaded(long userId, long newsId) {
         if (userId <= 0 || newsId <= 0) {
@@ -303,7 +301,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //设置消息未读
+    // 设置消息未读
     @Override
     public ResultDO<Void> turnToUnread(long userId, long newsId) {
         if (userId <= 0 || newsId <= 0) {
@@ -320,7 +318,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //通过id设置全部已读
+    // 通过id设置全部已读
     @Override
     public ResultDO<Void> turnAllToReaded(long userId) {
         // 入参核验
@@ -401,7 +399,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //通过id查找消息
+    // 通过id查找消息
     @Override
     public ResultDO<NewsDO> getNewsDOById(long id) {
         if (id <= 0) {
@@ -419,7 +417,7 @@ public class NewsServiceImpl implements NewsIService {
         }
     }
 
-    //删除所有已读通知
+    // 删除所有已读通知
     @Override
     public ResultDO<Void> deleteAllReadedNewsByUserId(long userId) {
         if (userId <= 0) {
