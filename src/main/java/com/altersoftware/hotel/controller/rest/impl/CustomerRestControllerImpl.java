@@ -24,6 +24,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     @Autowired
     CustomerService customerService;
 
+
     /**
      * 获取所有客户信息
      *
