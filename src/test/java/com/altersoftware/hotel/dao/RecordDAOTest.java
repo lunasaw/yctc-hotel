@@ -38,7 +38,7 @@ public class RecordDAOTest {
     public void aInsert() {
         RecordDO recordDO = new RecordDO();
         recordDO.setId(ID);
-        recordDO.setRoomId(ROOM_NUMBER);
+        recordDO.setRoomNumber(ROOM_NUMBER);
         recordDO.setCustomerId(CUSTOMER_ID);
         recordDO.setStaffId(STAFF_ID);
         recordDO.setCheckInTime(CHECKIN_TIME);
