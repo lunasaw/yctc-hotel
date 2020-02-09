@@ -40,6 +40,22 @@ public interface VipGradeDAO {
     VipGradeDO getVipGradeDOById(long id);
 
     /**
+     * 名称查找VIP会员权益消息
+     *
+     * @param grade)
+     */
+    @Select("select id, equity, grade, discount, create_time, modify_time from tb_vip_grade where grade=#{grade}  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "equity", column = "equity"),
+        @Result(property = "grade", column = "grade"),
+        @Result(property = "discount", column = "discount"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    VipGradeDO getVipGradeDOByGrade(String grade);
+
+    /**
      * 更新VIP会员权益消息
      *
      * @param vipGradeDO

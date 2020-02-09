@@ -62,6 +62,7 @@ public class GoodsServiceTest {
         goodsDO.setId(3);
         goodsDO.setName("ipda pro 2018");
         ResultDO<Void> insert = goodsService.insert(goodsDO);
+        Assert.assertEquals(true, insert.isSuccess());
     }
 
     @Test
