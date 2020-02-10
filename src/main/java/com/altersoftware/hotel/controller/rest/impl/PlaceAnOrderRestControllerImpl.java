@@ -45,6 +45,11 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     @Resource
     private RoomService         roomService;
 
+    /**
+     * 接收订单
+     * @param recordVO
+     * @return
+     */
     @Override
     @PostMapping("accept-order")
     public ResultDO<RecordDO> acceptOrder(@RequestBody RecordVO recordVO) {
@@ -92,6 +97,13 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
 
     }
 
+    /**
+     * 处理订单
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @Override
     @PostMapping("deal-record")
     public void getUnSignData(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> params = new HashMap<>();
@@ -142,10 +154,14 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
         return;
     }
 
+    /**
+     * 检查订单
+     * @param recordId
+     * @return
+     */
     @Override
     @PostMapping("check-pay")
     public ResultDO<RecordDO> returnRecord(@RequestParam(name = "recordId") long recordId) {
-        //参数校验
         // 参数校验
         if (recordId <= 0) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,

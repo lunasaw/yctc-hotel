@@ -91,8 +91,8 @@
               
               <a href="javascript:;"><span>住房服务</span><i class="my-icon lsm-sidebar-more"></i></a>
               <ul>
-                <li><a href="javascript:;"><span>房间预订</span></a></li>
-                <li><a href="javascript:;"><span>房间预览</span></a></li>
+                <li><a th:href="@{/floor/show-floor}"><span>房间预订</span></a></li>
+                <li><a th:href="@{/room/show-rooms}"><span>房间预览</span></a></li>
 
                 <li class="lsm-sidebar-item">
 
@@ -145,7 +145,7 @@
 
 
   <footer
-    style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;z-index: 9999;text-align: center;line-height: 50px;position: fixed;bottom: 0;" th:fragment="commonFooter">
+    style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;" th:fragment="commonFooter">
     <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
 
   </footer>

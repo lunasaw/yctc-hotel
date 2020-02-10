@@ -48,7 +48,7 @@
       <div class="nav-attribute col-md-12">
         <ul>
           <li>客房类型</li>
-          <li style="margin-left: 350px;">报价方式</li>
+          <li style="margin-left: 350px;">其他</li>
         </ul>
       </div>
 
@@ -56,6 +56,54 @@
 
       </div>
 
+      <!-- 模态框 -->
+      <div class="modal fade" id="payforroom" tabindex="-1" role="dialog" aria-labelledby="payforroomLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(226, 203, 145);">
+              <h5 class="modal-title" id="payforroomLabel">房间预订</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                <Span aria-hidden="true">&times;</Span>
+              </button>
+            </div>
+            <div class="modal-body" style="height: 500px;">
+              <form>
+                <div class="model-condition-div">
+                  <img src="" style="width: 300px;height: 150px;">
+                  <div class="model-text-div">
+                    <Span>房间类型:</Span> <Span id="text1"></Span>
+                    <br>
+                    <Span>预计入住人数:</Span> <Span id="text2"></Span>
+                    <br>
+                    <Span>房间描述:</Span></Span> <Span id="text3"></Span>
+                    <br>
+                    <Span>房间大小:</Span> <Span id="text4"></Span>
+                    <br>
+                    <Span>是否可加床:</Span> <Span id="text5"></Span>
+                    <hr style="width: 700px;margin-top: 13px;">
+                  </div>
+                </div>
+                <div class="form-group" style="margin-left:50px ">
+                  <span style=" float: left;margin-top: 10px; color: rgb(135, 106, 32);">入住日期</span>
+                  <input type="date" class="form-control col-md-4" id="inDate"
+                         style="float: left;margin-left: 50px;margin-bottom: 30px; ">
+                  <span style="margin-left: 50px; float: left;margin-top: 10px; color: rgb(135, 106, 32);">~</span>
+                  <input type="date" class="form-control col-md-4" id="outDate"
+                         style="float: left;margin-left: 50px;margin-bottom: 30px;">
+                </div>
+                <div class="input-group" style="margin-left:50px ;">
+                  <label style=" margin-top: 10px; color: rgb(135, 106, 32);">办理员工</label>
+                  <input type="text" class="form-control col-md-2" id="typeroom" disabled style="margin-left: 50px;">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">提交预订</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -66,7 +114,7 @@
   <script>
     $(document).ready(function () {
         $.ajax({
-            url:"/hotel/room/get-list",
+            url:"/hotel/roomTypeInfo/get-list",
             type:"POST",
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
@@ -75,57 +123,52 @@
                   //div循环渲染
                   var item = result.module;
                   var containerwrapper = $("#container-wrapper");
+
                   for (var i = 0; i < item.length; i++) {
-                      var roomtype = item[i].type;
+                      var roomtype = item[i].name;
+                      var picture = item[i].picture;
+                      var userNumber = item[i].userNumber;
+                      var description = item[i].description;
+                      var wide = item[i].wide;
+                      var addBed = item[i].addBed;
                       var id = item[i].id;
-                      var floorId = item[i].floorId;
-                      var roomNumber = item[i].roomNumber;
-                      var price = item[i].price;
-                      var deposit = item[i].deposit;
 
                       containerwrapper.append('<div class="wrapper-circle" >' + '<div class="wrapper-left">' +
-                          '<div class="wrapper-picture">' + '<img src="" style="width: 300px;height: 150px;">' + '</div>' +
+                          '<div class="wrapper-picture">' + '<img src="picture" style="width: 300px;height: 150px;">' + '</div>' +
                           '<div class="wrapper-title-div">' +
                           '<span>' + '房间类型:' + '</span>' + '<span>' + roomtype + '</span>' + '<br>' +
                           '<span>' + '房间编号:' + '</span>' + '<span>' + id + '</span>' + '<br>' +
-                          '<span>' + '楼层号:' + '</span>' + '<span>' + floorId + '</span>' + '<br>' +
-                          '<span>' + '房间门牌号:' + '</span>' + '<span>' + roomNumber + '</span>' + '<br>' +
+                          '<span>' + '房间大小:' + '</span>' + '<span>' + wide + '</span>' + '<br>' +
+                          '<span>' + '预计入住人数:' + '</span>' + '<span>' + userNumber + '</span>' + '<br>' +
                           '</div>' +
                           '</div>' +
                           '<div class="wrapper-right">' +
                           '<div class="wrapper-deposit-div">' +
-                          '<span>' + '房间押金' + '</span>' + '<span style="margin-left:60%;">' + deposit + '</span>' +
+                          '<span>' + '房间描述' + '</span>' + '<span style="margin-left:60%;">' + description + '</span>' +
                           '<hr>' +
                           '</div>' +
                           '<div class="wrapper-price-div">' +
-                          '<span>' + '房间价格' + '</span>' + '<span style="margin-left:60%;">' + price + '</span>' +
+                          '<span>' + '是否可加床' + '</span>' + '<span style="margin-left:60%;">' + addBed + '</span>' +
                           '<hr>' +
-                          '<button class="btn btn-danger" type="button" id="booknow" style="margin-left: 75%;margin-top: 7%;">' +
+                          '<button class="btn btn-danger" type="button" id="booknow" style="margin-left: 75%;margin-top: 7%;" data-toggle="modal" data-target="#payforroom" >' +
                           '立刻预订' + '</button>' +
                           '</div>' +
                           '</div>' +
                           '</div>');
+
+
                   }
+
             }
         })
     })
   </script>
+<!-- 入住与退房日期默认为本地日期 -->
+<script>
+    document.getElementById('inDate').valueAsDate = new Date();
+    document.getElementById('outDate').valueAsDate = new Date();
+</script>
 
-  <!--<script>-->
-    <!--//动态渲染筛选选项-->
-    <!--let data = [{-->
-      <!--"lch": "大床房"-->
-    <!--}, {-->
-      <!--"lch": "标准套房"-->
-    <!--}];-->
-    <!--let selectun = $("#select-room");-->
-    <!--data.forEach(item => {-->
-      <!--selectun.append('<option value="' + item.lch + '">' + item.lch + '</option>');-->
-    <!--},-->
-
-    <!--);-->
-
-  <!--</script>-->
 </body>
 
 </html>

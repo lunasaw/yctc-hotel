@@ -140,7 +140,7 @@ public class RoomTypeRestControllerImpl implements RoomTypeRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<RoomTypeDO> getRoomTypeDOById(long id) {
+    public ResultDO<RoomTypeDO> getRoomTypeDOById(@RequestBody long id) {
         //参数校验
         if (id <= 0) {
             return new ResultDO<RoomTypeDO>(false, ResultCode.PARAMETER_INVALID,

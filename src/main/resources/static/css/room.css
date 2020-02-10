@@ -1,4 +1,17 @@
+.model-condition-div{
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-family: 黑体;
+    font-weight: 500;
+    color: rgb(135, 106, 32);
+    font-size: 18px
+}
 
+.model-text-div{
+    position: absolute;
+    left: 400px;
+    top: 20px;
+}
 
 .select-un{
     background-color: rgb(255, 255, 255);
