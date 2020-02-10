@@ -12,6 +12,7 @@ import com.altersoftware.hotel.controller.rest.CustomerRestController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.CustomerService;
+import com.altersoftware.hotel.service.GoodsService;
 
 /**
  * @author hzx
@@ -24,7 +25,8 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     @Autowired
     CustomerService customerService;
 
-
+    @Autowired
+    private GoodsService goodsService;
     /**
      * 获取所有客户信息
      *
@@ -139,4 +141,11 @@ public class CustomerRestControllerImpl implements CustomerRestController {
             return new ResultDO<UserDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, byNumberModule);
         }
     }
+
+    @Override
+    @PostMapping("check-time")
+    public ResultDO<Boolean> checkMyRoom() {
+        return null;
+    }
+
 }

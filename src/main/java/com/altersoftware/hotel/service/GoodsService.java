@@ -39,6 +39,7 @@ public interface GoodsService {
      */
     ResultDO<List<GoodsDO>> showGoodsByRoom(long roomId);
 
+
     /**
      * 删除物品信息
      *

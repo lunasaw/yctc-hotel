@@ -5,14 +5,12 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.altersoftware.hotel.util.RandomNumber;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +25,7 @@ import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.RoomDO;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.RoomService;
+import com.altersoftware.hotel.util.RandomNumber;
 import com.altersoftware.hotel.vo.RecordVO;
 
 /**
