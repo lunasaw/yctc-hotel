@@ -132,15 +132,30 @@ public class TemplatePath {
     public static final String DEPARTMENT                                 = "hotel/depatment";
 
     /** 员工信息页面 */
-    public static final String STAFF_INFO                                 = "vip/staffinfo";
+    public static final String STAFF_INFO                                 = "staff/staffinfo";
 
     /** 订单信息页面 */
-    public static final String RECORD_INFO                                = "vip/record";
+    public static final String RECORD_INFO                                = "order/record";
 
-    /** 填写订单页面 */
+    /** 填写订单类型选择页面 */
     public static final String PLACE_AN_ORDER                             = "order/placeanorder";
+
+    /** 填写菜品订单类型选择页面 */
+    public static final String PLACE_AN_ORDER_MENU                        = "order/placeanordermenu";
 
     /** 支付宝回调/返回是否支付成功页面 */
     public static final String CHECK_ALI_PAY                              = "pay/checkalipay";
+
+    /** 客户历史订单页面 */
+    public static final String RECORD_BY_CUSTOMER                         = "customer/recordByCustomer";
+
+    /** 管理员订单统计页面 */
+    public static final String RECORD_BY_ADMIN                            = "order/recordByAdmin";
+
+    /** 客户菜品历史订单页面 */
+    public static final String ORDER_BY_CUSTOMER                          = "customer/orderByCustomer";
+
+    /** 管理员菜品历史订单页面 */
+    public static final String ORDER_BY_ADMIN                             = "order/orderByAdmin";
 
 }

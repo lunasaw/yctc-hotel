@@ -8,19 +8,22 @@ import java.util.Date;
  */
 public class OrderDO {
 
-
-    /** 订单编号 */
-    private long id;
-    /** 菜品编号 */
-    private long menuId;
-    /** 菜品分数 */
-    private int  numbers;
-    /** 客户编号 */
-    private long customerId;
     /** 创建时间 */
-    Date         createTime;
+    Date           createTime;
     /** 修改时间 */
-    Date         modifyTime;
+    Date           modifyTime;
+    /** 订单编号 */
+    private long   id;
+    /** 菜品编号 */
+    private long   menuId;
+    /** 菜品份数 */
+    private int    numbers;
+    /** 客户编号 */
+    private long   customerId;
+    /** 实际付款金额 */
+    private double payMoney;
+    /** 状态 暂定为是否付款 */
+    private int    state;
 
     public long getId() {
         return id;
@@ -54,6 +57,22 @@ public class OrderDO {
         this.customerId = customerId;
     }
 
+    public double getPayMoney() {
+        return payMoney;
+    }
+
+    public void setPayMoney(double payMoney) {
+        this.payMoney = payMoney;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -77,6 +96,8 @@ public class OrderDO {
             ", menuId=" + menuId +
             ", numbers=" + numbers +
             ", customerId=" + customerId +
+            ", payMoney=" + payMoney +
+            ", state=" + state +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
             '}';

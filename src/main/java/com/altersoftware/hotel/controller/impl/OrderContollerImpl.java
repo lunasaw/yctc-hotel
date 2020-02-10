@@ -6,32 +6,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.altersoftware.hotel.constant.TemplatePath;
-import com.altersoftware.hotel.controller.PlaceAnOrderController;
+import com.altersoftware.hotel.controller.OrderContoller;
 
 /**
  * @author Iszychen@win10
- * @date 2020/2/7 22:14
+ * @date 2020/2/10 21:55
  */
 @Controller
 @ComponentScan({"com.altersoftware.hotel.service"})
-@RequestMapping("/order")
-public class PlaceAnOrderControllerImpl implements PlaceAnOrderController {
+@RequestMapping("/placeorder")
+public class OrderContollerImpl implements OrderContoller {
 
     @Override
-    @GetMapping("selete-record")
-    public String placeAnOrder() {
-        return TemplatePath.PLACE_AN_ORDER;
+    @GetMapping("select-order")
+    public String showOrder() {
+        return TemplatePath.PLACE_AN_ORDER_MENU;
     }
 
     @Override
     @GetMapping("order-admin")
-    public String RrcordByAdmin() {
-        return TemplatePath.RECORD_BY_ADMIN;
+    public String OrderByAdmin() {
+        return TemplatePath.ORDER_BY_ADMIN;
     }
 
     @Override
     @GetMapping("order-customer")
-    public String RcordByCustomerId() {
-        return TemplatePath.RECORD_BY_CUSTOMER;
+    public String OrderByCustomer() {
+        return TemplatePath.ORDER_BY_CUSTOMER;
     }
 }
