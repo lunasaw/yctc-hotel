@@ -23,13 +23,15 @@ import com.altersoftware.hotel.entity.OrderDO;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OrderDAOTest {
 
-    private static final long ID          = 1;
-    private static final long MENU_ID     = 2;
-    private static final long CUSTOMER_ID = 10004;
-    private static final int  NUMBERS     = 2;
+    private static final long   ID          = 100;
+    private static final long   MENU_ID     = 2;
+    private static final long   CUSTOMER_ID = 10004;
+    private static final double PAY_MONEY   = 560;
+    private static final int    STATE       = 0;
+    private static final int    NUMBERS     = 2;
 
     @Resource
-    private OrderDAO          orderDAO;
+    private OrderDAO            orderDAO;
 
     @Test
     public void aInsert() {
@@ -38,6 +40,8 @@ public class OrderDAOTest {
         orderDO.setMenuId(MENU_ID);
         orderDO.setCustomerId(CUSTOMER_ID);
         orderDO.setNumbers(NUMBERS);
+        orderDO.setPayMoney(PAY_MONEY);
+        orderDO.setState(STATE);
         orderDAO.insert(orderDO);
     }
 
@@ -58,9 +62,9 @@ public class OrderDAOTest {
 
     @Test
     public void cGetList() {
-        List<Long> floorIdList = orderDAO.getFloorIdList();
-        System.out.println(floorIdList);
-        Assert.assertNotNull(floorIdList);
+        List<Long> OrderIdList = orderDAO.getOrderIdList();
+        System.out.println(OrderIdList);
+        Assert.assertNotNull(OrderIdList);
     }
 
     @Test

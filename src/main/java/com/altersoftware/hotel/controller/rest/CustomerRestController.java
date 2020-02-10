@@ -64,4 +64,13 @@ public interface CustomerRestController {
      *
      */
 
+    /**
+     * TODO 预定餐饮信息
+     * 1.查看所有菜品
+     * 2.加入购物车
+     * 3.提交菜品List
+     * 4.添加订单
+     * 5.返回金额 商品 信息 提交支付
+     */
+
 }

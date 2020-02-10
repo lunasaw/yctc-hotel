@@ -18,9 +18,9 @@ public interface OrderDAO {
      *
      *
      */
-    @Insert(" INSERT INTO tb_order (id, menu_id, numbers, customer_id, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_order (id, menu_id, numbers, customer_id, pay_money, state, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{menuId}, #{numbers}, #{customerId}, now(), now()) ")
+        "VALUES(#{id}, #{menuId}, #{numbers}, #{customerId}, #{payMoney}, #{state}, now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(OrderDO orderDO);
 
@@ -29,23 +29,60 @@ public interface OrderDAO {
      *
      * @param id
      */
-    @Select("select id, menu_id, numbers, customer_id, create_time, modify_time from tb_order where id=#{id}  ")
+    @Select("select id, menu_id, numbers, customer_id, pay_money, state, create_time, modify_time from tb_order where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "menuId", column = "menu_id"),
         @Result(property = "numbers", column = "numbers"),
         @Result(property = "customerId", column = "customer_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
     OrderDO getOrderDOById(long id);
 
     /**
+     * 客户id查找订单消息
+     *
+     * @param customerId
+     */
+    @Select("select id, menu_id, numbers, customer_id, pay_money, state, create_time, modify_time from tb_order where customer_id=#{customerId}  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "menuId", column = "menu_id"),
+        @Result(property = "numbers", column = "numbers"),
+        @Result(property = "customerId", column = "customer_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<OrderDO> getOrderDOByCustomerId(long customerId);
+
+    /**
+     * 所有订单
+     *
+     */
+    @Select("select id, menu_id, numbers, customer_id, pay_money, state, create_time, modify_time from tb_order  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "menuId", column = "menu_id"),
+        @Result(property = "numbers", column = "numbers"),
+        @Result(property = "customerId", column = "customer_id"),
+        @Result(property = "payMoney", column = "pay_money"),
+        @Result(property = "state", column = "state"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<OrderDO> getOrderDOList();
+
+    /**
      * 更新订单消息
      *
      * @param orderDO
      */
-    @Update("update tb_order  set menu_id=#{menuId}, numbers=#{numbers}, customer_id=#{customerId}, modify_time=now() where id=#{id}")
+    @Update("update tb_order  set menu_id=#{menuId}, numbers=#{numbers}, customer_id=#{customerId}, pay_money=#{payMoney}, state=#{state}, modify_time=now() where id=#{id}")
     int update(OrderDO orderDO);
 
     /**
@@ -62,6 +99,6 @@ public interface OrderDAO {
      * @return
      */
     @Select("select id  from tb_order ")
-    List<Long> getFloorIdList();
+    List<Long> getOrderIdList();
 
 }
