@@ -98,4 +98,5 @@ public interface GoodsDAO {
         @Result(property = "modifyTime", column = "modify_time")
     })
     List<GoodsDO> getGoodsDOByRoomId(long roomId);
+
 }
