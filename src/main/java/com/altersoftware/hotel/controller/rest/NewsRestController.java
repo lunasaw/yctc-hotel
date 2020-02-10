@@ -66,6 +66,14 @@ public interface NewsRestController {
     ResultDO<Void> sendNewsToUser(SendNewsVO sendNewsVO);
 
     /**
+     * 给员工推送消息
+     *
+     * @param sendNewsVO
+     * @return
+     */
+    ResultDO<Void> sendNewsToStaff(SendNewsVO sendNewsVO);
+
+    /**
      * 通过id返回newsDO
      *
      * @param id
@@ -80,4 +88,5 @@ public interface NewsRestController {
      * @return
      */
     ResultDO<Void> deleteAllReadedNews(HttpSession httpSession);
+
 }

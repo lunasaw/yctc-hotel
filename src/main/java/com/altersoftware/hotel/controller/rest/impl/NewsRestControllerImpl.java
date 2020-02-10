@@ -140,6 +140,16 @@ public class NewsRestControllerImpl implements NewsRestController {
     }
 
     @Override
+    @PostMapping("send-news-to-staff-list")
+    public ResultDO<Void> sendNewsToStaff(SendNewsVO sendNewsVO) {
+        /**
+         * 查出所有清洁员工的id
+         * 向他们发送消息
+         */
+        return null;
+    }
+
+    @Override
     @PostMapping("get-newsdo-by-id")
     public ResultDO<NewsDO> getNewsDOById(@RequestBody long id) {
         if (id <= 0) {
