@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class RecordDO {
@@ -25,8 +27,10 @@ public class RecordDO {
     /** 预计入住时间间隔 */
     private String precheckInTime;
 
+
     /** 入住时间 */
     private String checkInTime;
+
 
     /** 退房时间 */
     private String checkOutTime;

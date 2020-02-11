@@ -1,5 +1,9 @@
 package com.altersoftware.hotel.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 /**
  * @author Iszychen@win10
  * @date 2020/2/7 21:21
@@ -71,5 +75,4 @@ public class RecordVO {
     public void setCheckOutTime(String checkOutTime) {
         this.checkOutTime = checkOutTime;
     }
-
 }
