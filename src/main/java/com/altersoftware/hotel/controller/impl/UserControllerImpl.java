@@ -1,6 +1,8 @@
 package com.altersoftware.hotel.controller.impl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +29,6 @@ import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.PermissionIService;
 import com.altersoftware.hotel.service.UserIService;
 import com.altersoftware.hotel.vo.*;
-
 
 @Controller
 @ComponentScan({"com.altersoftware.hotel.service"})
@@ -87,7 +88,8 @@ public class UserControllerImpl implements UserController {
 
     @Override
     @PostMapping("sign-in")
-    public String signin(@ModelAttribute UserDO userDO, HttpSession httpSession, Model model) {
+    public String signin(@ModelAttribute UserDO userDO, HttpSession httpSession, Model model,
+        HttpServletResponse response) {
         try {
             // 参数检查
             if (StringUtils.isEmpty(userDO.getNumber()) || StringUtils.isEmpty(userDO.getPassword())) {
@@ -118,8 +120,13 @@ public class UserControllerImpl implements UserController {
             }
             SessionContentHolder.addSignInUserId(httpSession.getId(), resultDO.getModule());
             LOG.info("sign in success, userDO={}, sessionId={}", userDO, httpSession.getId());
-            String name = userService.getUserDOById(resultDO.getModule()).getModule().getName();
+            UserDO module = userService.getUserDOById(resultDO.getModule()).getModule();
+            String name = module.getName();
             model.addAttribute("userName", name);
+            Cookie cookie = new Cookie("userId", Long.toString(module.getId()));
+            cookie.setPath("/");
+            cookie.setMaxAge(Integer.MAX_VALUE);
+            response.addCookie(cookie);
             return TemplatePath.USER_SIGN_IN_SUCCESS;
 
         } catch (Exception e) {

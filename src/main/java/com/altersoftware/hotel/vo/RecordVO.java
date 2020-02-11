@@ -1,8 +1,5 @@
 package com.altersoftware.hotel.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
 
 /**
  * @author Iszychen@win10

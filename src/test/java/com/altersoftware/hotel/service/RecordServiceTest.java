@@ -72,7 +72,7 @@ public class RecordServiceTest {
 
     @Test
     public void gReturnActualMoney() {
-        ResultDO<Double> actualMoney = recordService.getActualMoney(10027, 106);
+        ResultDO<Double> actualMoney = recordService.getActualMoney(10013, 111);
         Assert.assertEquals(true, actualMoney.isSuccess());
     }
 }

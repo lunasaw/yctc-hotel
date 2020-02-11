@@ -2,19 +2,17 @@ package com.altersoftware.hotel.controller.rest.impl;
 
 import java.util.List;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.RecordDO;
-import com.altersoftware.hotel.service.MenuService;
-import com.altersoftware.hotel.service.OrderService;
-import com.altersoftware.hotel.util.MenuOrder;
-import com.altersoftware.hotel.util.RandomNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
+import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.OrderRestController;
 import com.altersoftware.hotel.entity.OrderDO;
 import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.service.MenuService;
+import com.altersoftware.hotel.service.OrderService;
+import com.altersoftware.hotel.util.MenuOrder;
 import com.altersoftware.hotel.vo.OrderVO;
 
 /**
@@ -30,12 +28,7 @@ public class OrderRestControllerImpl implements OrderRestController {
 
     @Autowired
     OrderService orderService;
-    /**
-     * 根据构造的菜品订单存入数据库
-     *
-     * @param orderVO
-     * @return
-     */
+
     @Override
     @PostMapping("add-order")
     public ResultDO<Void> createOrder(@RequestBody OrderVO orderVO) {

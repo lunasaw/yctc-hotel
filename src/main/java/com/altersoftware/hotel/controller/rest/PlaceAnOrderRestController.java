@@ -1,6 +1,7 @@
 package com.altersoftware.hotel.controller.rest;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ public interface PlaceAnOrderRestController {
      * @param recordVO
      * @return
      */
-    ResultDO<RecordDO> acceptOrder(RecordVO recordVO);
+    ResultDO<RecordDO> acceptOrder(RecordVO recordVO) throws ParseException;
 
     /**
      * 支付宝确认是否支付成功

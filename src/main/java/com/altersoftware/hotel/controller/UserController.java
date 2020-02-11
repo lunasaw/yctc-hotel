@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -45,7 +46,7 @@ public interface UserController {
      * @param model
      * @return
      */
-    String signin(UserDO userDO, HttpSession httpSession, Model model);
+    String signin(UserDO userDO, HttpSession httpSession, Model model, HttpServletResponse response);
 
     /**
      * 展示改密界面

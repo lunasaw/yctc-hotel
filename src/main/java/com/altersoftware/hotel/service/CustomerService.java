@@ -40,4 +40,12 @@ public interface CustomerService {
      * @return
      */
     ResultDO<UserDO> getByNumber(String number);
+
+    /**
+     * 会员号搜索客户/员工
+     *
+     * @param customerId
+     * @return
+     */
+    ResultDO<UserDO> getByCustomerId(long customerId);
 }

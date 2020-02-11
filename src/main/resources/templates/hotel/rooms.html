@@ -51,7 +51,7 @@
 
       </div>
 
-
+    </div>
   </main>
 
 <footer th:replace="component/fram :: commonFooter"></footer>
@@ -82,7 +82,7 @@
                       containerwrapper.append('<div class="wrapper-circle" >' + '<div class="wrapper-left">' +
                           '<div class="wrapper-picture">' + '<img id="pic" src="'+picture+'" style="width: 300px;height: 150px;">' + '</div>' +
                           '<div class="wrapper-title-div">' +
-                          '<span>' + '房间类型:' + '</span>' + '<span>' + roomtype + '</span>' + '<br>' +
+                          '<span >' + '房间类型:' + '</span>' + '<span >' + roomtype + '</span>' + '<br>' +
                           '<span>' + '房间编号:' + '</span>' + '<span>' + typeid + '</span>' + '<br>' +
                           '<span>' + '房间大小:' + '</span>' + '<span>' + wide + '</span>' + '<br>' +
                           '<span>' + '预计入住人数:' + '</span>' + '<span>' + userNumber + '</span>' + '<br>' +
@@ -96,7 +96,7 @@
                           '<div class="wrapper-price-div">' +
                           '<span>' + '是否可加床' + '</span>' + '<span style="margin-left:60%;">' + addBed + '</span>' +
                           '<hr>' + '<a th:href="@{/record/page}+">'+
-                          '<input class="btn btn-danger " type="button" id="booknow" style="margin-top: 7%;" value="立刻预订" >' +
+                          '<input class="btn btn-danger " type="button" id="booknow" style="margin-top: 7%;" onclick="reserve()" value="立刻预订" >' +
                         '</a>'+
                           '</div>' +
                           '</div>' +
@@ -113,8 +113,12 @@
 
 <!-- 入住与退房日期默认为本地日期 -->
 <script>
-    document.getElementById('inDate').valueAsDate = new Date();
-    document.getElementById('outDate').valueAsDate = new Date();
+    // document.getElementById('inDate').valueAsDate = new Date();
+    // document.getElementById('outDate').valueAsDate = new Date();
+
+    function reserve() {
+        window.location.href = "/hotel/record/page";
+    }
 </script>
 
 </body>

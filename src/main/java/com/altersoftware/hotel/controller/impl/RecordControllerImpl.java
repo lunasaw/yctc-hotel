@@ -33,4 +33,9 @@ public class RecordControllerImpl implements RecordController {
         // 支付宝回调页面
         return TemplatePath.CHECK_ALI_PAY;
     }
+
+    @GetMapping("pay")
+    public String test() {
+        return "pay/index";
+    }
 }
