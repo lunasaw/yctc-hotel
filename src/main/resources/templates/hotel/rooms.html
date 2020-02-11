@@ -99,7 +99,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">提交预订</button>
+              <button type="button" class="btn btn-primary"><a th:href="@{/record/page}">提交预订</a></button>
             </div>
           </div>
         </div>
@@ -131,13 +131,12 @@
                       var description = item[i].description;
                       var wide = item[i].wide;
                       var addBed = item[i].addBed;
-                      var id = item[i].id;
-
+                      var typeid = item[i].id;
                       containerwrapper.append('<div class="wrapper-circle" >' + '<div class="wrapper-left">' +
                           '<div class="wrapper-picture">' + '<img src="picture" style="width: 300px;height: 150px;">' + '</div>' +
                           '<div class="wrapper-title-div">' +
                           '<span>' + '房间类型:' + '</span>' + '<span>' + roomtype + '</span>' + '<br>' +
-                          '<span>' + '房间编号:' + '</span>' + '<span>' + id + '</span>' + '<br>' +
+                          '<span>' + '房间编号:' + '</span>' + '<span>' + typeid + '</span>' + '<br>' +
                           '<span>' + '房间大小:' + '</span>' + '<span>' + wide + '</span>' + '<br>' +
                           '<span>' + '预计入住人数:' + '</span>' + '<span>' + userNumber + '</span>' + '<br>' +
                           '</div>' +
@@ -150,19 +149,40 @@
                           '<div class="wrapper-price-div">' +
                           '<span>' + '是否可加床' + '</span>' + '<span style="margin-left:60%;">' + addBed + '</span>' +
                           '<hr>' +
-                          '<button class="btn btn-danger" type="button" id="booknow" style="margin-left: 75%;margin-top: 7%;" data-toggle="modal" data-target="#payforroom" >' +
+                          '<button class="btn btn-danger" type="button" id="booknow" style="margin-left: 75%;margin-top: 7%;" data-toggle="modal" data-target="#payforroom"  onclick="getmodel(1);">' +
                           '立刻预订' + '</button>' +
                           '</div>' +
                           '</div>' +
                           '</div>');
-
 
                   }
 
             }
         })
     })
+
+    function getmodel(typeid) {
+
+            $.ajax({
+                url: "/hotel/roomTypeInfo/get-byid",
+                type: "POST",
+                data: JSON.stringify(typeid),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                success: function (result) {
+                    var re = result.module;
+                    $("#text1").text(re.name);
+                    $("#text2").text(re.userNumber);
+                    $("#text3").text(re.description);
+                    $("#text4").text(re.wide);
+                    $("#text5").text(re.addBed);
+                }
+            })
+        }
+
   </script>
+
 <!-- 入住与退房日期默认为本地日期 -->
 <script>
     document.getElementById('inDate').valueAsDate = new Date();
