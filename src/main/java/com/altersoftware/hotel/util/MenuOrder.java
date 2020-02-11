@@ -42,13 +42,13 @@ public class MenuOrder {
                     count = 1;
                 }
                 if (count<10) {
-                    Newnumber = "M" + getNowDateStr()+"000"+count;
+                    Newnumber =  getNowDateStr()+"000"+count;
                 }else if (count<100) {
-                    Newnumber = "M" + getNowDateStr()+"00"+count;
+                    Newnumber =  getNowDateStr()+"00"+count;
                 }else if(count<1000){
-                    Newnumber = "M" + getNowDateStr()+"0"+count;
+                    Newnumber =  getNowDateStr()+"0"+count;
                 }else  {
-                    Newnumber = "M" + getNowDateStr()+count;
+                    Newnumber =  getNowDateStr()+count;
                 }
                 count++;
             } catch (Exception e) {
@@ -64,13 +64,13 @@ public class MenuOrder {
                     count = 1;
                 }
                 if (count<10) {
-                    Newnumber = "M" + getNowDateStr()+"000"+count;
+                    Newnumber = getNowDateStr()+"000"+count;
                 }else if (count<100) {
-                    Newnumber = "M" + getNowDateStr()+"00"+count;
+                    Newnumber =  getNowDateStr()+"00"+count;
                 }else if(count<1000){
-                    Newnumber = "M" + getNowDateStr()+"0"+count;
+                    Newnumber =  getNowDateStr()+"0"+count;
                 }else  {
-                    Newnumber = "M" + getNowDateStr()+count;
+                    Newnumber =  getNowDateStr()+count;
                 }
                 count++;
             } catch (Exception e) {

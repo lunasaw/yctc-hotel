@@ -40,13 +40,13 @@ public class RandomNumber {
                     count = 1;
                 }
                 if (count<10) {
-                    Newnumber = "N" + getNowDateStr()+"000"+count;
+                    Newnumber =  getNowDateStr()+"000"+count;
                 }else if (count<100) {
-                    Newnumber = "N" + getNowDateStr()+"00"+count;
+                    Newnumber =  getNowDateStr()+"00"+count;
                 }else if(count<1000){
-                    Newnumber = "N" + getNowDateStr()+"0"+count;
+                    Newnumber =  getNowDateStr()+"0"+count;
                 }else  {
-                    Newnumber = "N" + getNowDateStr()+count;
+                    Newnumber =  getNowDateStr()+count;
                 }
                 count++;
             } catch (Exception e) {
@@ -62,13 +62,13 @@ public class RandomNumber {
                     count = 1;
                 }
                 if (count<10) {
-                    Newnumber = "N" + getNowDateStr()+"000"+count;
+                    Newnumber =  getNowDateStr()+"000"+count;
                 }else if (count<100) {
-                    Newnumber = "N" + getNowDateStr()+"00"+count;
+                    Newnumber =  getNowDateStr()+"00"+count;
                 }else if(count<1000){
-                    Newnumber = "N" + getNowDateStr()+"0"+count;
+                    Newnumber =  getNowDateStr()+"0"+count;
                 }else  {
-                    Newnumber = "N" + getNowDateStr()+count;
+                    Newnumber =  getNowDateStr()+count;
                 }
                 count++;
             } catch (Exception e) {

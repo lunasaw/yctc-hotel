@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,40 +41,41 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     private final static Logger LOG = LoggerFactory.getLogger("serviceLog");
 
     @Resource
-    private RecordService       recordService;
+    private RecordService recordService;
 
     @Resource
-    private RoomService         roomService;
+    private RoomService roomService;
 
     /**
      * 接收订单
+     *
      * @param recordVO
      * @return
      */
     @Override
     @PostMapping("accept-order")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     public ResultDO<RecordDO> acceptOrder(@RequestBody RecordVO recordVO) {
         //生成随机数
         RandomNumber randomNumber = new RandomNumber();
         // 参数校验
-        if (recordVO.getCustomerId() <= 0 || StringUtils.isBlank(recordVO.getPrecheckInTime())
-            || StringUtils.isBlank(recordVO.getRoomTypeName())
-            || StringUtils.isBlank(recordVO.getCheckOutTime()) || recordVO.getStaffId() <= 0) {
+        if (recordVO.getCustomerId() <= 0 || StringUtils.isBlank(recordVO.getRoomTypeName())
+                || recordVO.getStaffId() <= 0) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,
-                ResultCode.MSG_PARAMETER_INVALID, null);
+                    ResultCode.MSG_PARAMETER_INVALID, null);
         }
         // 1.从前端接受类型名称
         // 2.在roomService中返回一个房间
         ResultDO<RoomDO> roomDOByRoomType1 = roomService.getRoomDOByRoomType(recordVO.getRoomTypeName());
         if (roomDOByRoomType1.isSuccess() == false) {
             return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             ResultDO<Double> actualMoney =
-                recordService.getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber());
+                    recordService.getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber());
             if (actualMoney.isSuccess() == false) {
                 return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             }
             // 3.将RecordDO构造插入订单
             RecordDO recordDO = new RecordDO();
@@ -88,7 +90,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             ResultDO<Void> recordServiceRecord = recordService.createRecord(recordDO);
             if (recordServiceRecord.isSuccess() == false) {
                 return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             } else {
                 return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, recordDO);
             }
@@ -99,6 +101,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
 
     /**
      * 处理订单
+     *
      * @param request
      * @param response
      * @throws IOException
@@ -110,7 +113,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
         try {
             // 这里拿到支付宝通知数据
             Map<String, String[]> requestParams = request.getParameterMap();
-            for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
                 String name = iter.next();
                 String[] values = requestParams.get(name);
                 String valueStr = "";
@@ -156,6 +159,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
 
     /**
      * 检查订单
+     *
      * @param recordId
      * @return
      */
@@ -170,7 +174,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(recordId);
         if (recordDOResultDO.isSuccess() && recordDOResultDO.getModule().getState() == 1) {
             return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
-                recordDOResultDO.getModule());
+                    recordDOResultDO.getModule());
 
         } else {
             //前端做判断，是否跳转到未付款页面

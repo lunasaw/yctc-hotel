@@ -53,7 +53,7 @@ public class OrderRestControllerImpl implements OrderRestController {
         orderDO.setCustomerId(orderVO.getCustomerId());
         orderDO.setId(Long.parseLong(menuOrder.GetRandom()));
         orderDO.setPayMoney(actualMoney.getModule());
-
+        orderDO.setMenuId(orderVO.getMenuId());
         ResultDO<Void> orderServiceOrder = orderService.createOrder(orderDO);
 
         if (orderServiceOrder.isSuccess() == false) {
