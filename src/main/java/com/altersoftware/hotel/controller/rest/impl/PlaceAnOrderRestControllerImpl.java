@@ -1,8 +1,16 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import static org.apache.shiro.util.StringUtils.split;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,7 +19,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +28,11 @@ import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSON;
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.PlaceAnOrderRestController;
+import com.altersoftware.hotel.entity.OrderDO;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.RoomDO;
+import com.altersoftware.hotel.service.OrderService;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.RoomService;
 import com.altersoftware.hotel.util.RandomNumber;
@@ -41,10 +50,13 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     private final static Logger LOG = LoggerFactory.getLogger("serviceLog");
 
     @Resource
-    private RecordService recordService;
+    private RecordService       recordService;
 
     @Resource
-    private RoomService roomService;
+    private RoomService         roomService;
+
+    @Resource
+    private OrderService        orderService;
 
     /**
      * 接收订单
@@ -54,28 +66,33 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
      */
     @Override
     @PostMapping("accept-order")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    public ResultDO<RecordDO> acceptOrder(@RequestBody RecordVO recordVO) {
-        //生成随机数
+    public ResultDO<RecordDO> acceptOrder(@RequestBody RecordVO recordVO) throws ParseException {
+        // 生成随机数
         RandomNumber randomNumber = new RandomNumber();
         // 参数校验
-        if (recordVO.getCustomerId() <= 0 || StringUtils.isBlank(recordVO.getRoomTypeName())
-                || recordVO.getStaffId() <= 0) {
+        if (recordVO.getCustomerId() <= 0 || StringUtils.isBlank(recordVO.getRoomTypeName())) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = simpleDateFormat.parse(recordVO.getCheckInTime());
+        Date parse1 = simpleDateFormat.parse(recordVO.getCheckOutTime());
+        LocalDate localDateIn = parse.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateOut = parse1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        long between = ChronoUnit.DAYS.between(localDateIn, localDateOut);
+        recordVO.setPrecheckInTime(Long.toString(between));
         // 1.从前端接受类型名称
         // 2.在roomService中返回一个房间
         ResultDO<RoomDO> roomDOByRoomType1 = roomService.getRoomDOByRoomType(recordVO.getRoomTypeName());
         if (roomDOByRoomType1.isSuccess() == false) {
             return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             ResultDO<Double> actualMoney =
-                    recordService.getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber());
+                recordService.getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber());
             if (actualMoney.isSuccess() == false) {
                 return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             }
             // 3.将RecordDO构造插入订单
             RecordDO recordDO = new RecordDO();
@@ -85,12 +102,14 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             recordDO.setPrecheckInTime(recordVO.getPrecheckInTime());
             recordDO.setCheckInTime(recordVO.getCheckInTime());
             recordDO.setCheckOutTime(recordVO.getCheckOutTime());
+            recordDO.setPayMoney(recordService
+                .getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber()).getModule());
             recordDO.setPayMoney(actualMoney.getModule());
             recordDO.setId(Long.parseLong(randomNumber.GetRandom()));
             ResultDO<Void> recordServiceRecord = recordService.createRecord(recordDO);
             if (recordServiceRecord.isSuccess() == false) {
                 return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             } else {
                 return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, recordDO);
             }
@@ -113,7 +132,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
         try {
             // 这里拿到支付宝通知数据
             Map<String, String[]> requestParams = request.getParameterMap();
-            for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
+            for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
                 String name = iter.next();
                 String[] values = requestParams.get(name);
                 String valueStr = "";
@@ -137,14 +156,32 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             String receipt_amount = params.get("receipt_amount");
             // 状态 TRADE_SUCCESS
             String trade_status = params.get("trade_status");
-            // 参数校验
-            if (trade_status.equals("TRADE_SUCCESS") == true) {
-                ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
-                RecordDO recordDO = recordDOResultDO.getModule();
-                if (recordDOResultDO.isSuccess() || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
-                    recordDO.setState(1);
-                    recordService.updateRecord(recordDO);
+            String[] split = split(out_trade_no);
+            try {
+                if (trade_status.equals("TRADE_SUCCESS") == true) {
+                    ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
+                    RecordDO recordDO = recordDOResultDO.getModule();
+                    if (recordDOResultDO.isSuccess() && recordDOResultDO.isSuccess()
+                        || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
+                        recordDO.setState(1);
+                        recordService.updateRecord(recordDO);
+                    }
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("该订单不存在");
+            }
+            try {
+                if (trade_status.equals("TRADE_SUCCESS") == true) {
+                    ResultDO<OrderDO> orderDOResultDO = orderService.showOrder(Long.parseLong(out_trade_no));
+                    OrderDO orderDO = orderDOResultDO.getModule();
+                    if (orderDOResultDO.isSuccess() && orderDOResultDO.isSuccess()
+                        || Integer.parseInt(buyer_pay_amount) == orderDO.getPayMoney()) {
+                        orderDO.setState(1);
+                        orderService.updateOrder(orderDO);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("该订单不存在");
             }
         } catch (Exception e) {
             LOG.error("error", e);
@@ -169,17 +206,17 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
         // 参数校验
         if (recordId <= 0) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(recordId);
         if (recordDOResultDO.isSuccess() && recordDOResultDO.getModule().getState() == 1) {
             return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
-                    recordDOResultDO.getModule());
+                recordDOResultDO.getModule());
 
         } else {
-            //前端做判断，是否跳转到未付款页面
+            // 前端做判断，是否跳转到未付款页面
             return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         }
     }
 }

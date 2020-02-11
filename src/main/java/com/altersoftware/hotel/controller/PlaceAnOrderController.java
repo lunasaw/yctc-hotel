@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.controller;
 
+import org.springframework.ui.Model;
+
 /**
  * @author Iszychen@win10
  * @date 2020/2/7 22:13
@@ -12,7 +14,7 @@ public interface PlaceAnOrderController {
      * 
      * @return
      */
-    String placeAnOrder();
+    String placeAnOrder(Model model);
 
     /**
      * 管理员住房订单页面

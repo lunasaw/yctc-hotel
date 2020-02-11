@@ -38,6 +38,14 @@ public interface CustomerRestController {
      */
     ResultDO<UserDO> getByNumber(String number);
 
+    /**
+     * 客户编号搜索客户/员工
+     *
+     * @param customerId
+     * @return
+     */
+    ResultDO<UserDO> getByCustomerId(long customerId);
+
     // 客户个性化页面
 
     /**
