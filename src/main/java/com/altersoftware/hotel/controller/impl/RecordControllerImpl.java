@@ -25,7 +25,7 @@ public class RecordControllerImpl implements RecordController {
     @GetMapping("page")
     public String payPage() {
         // 支付支付测试页面
-        return "pay/index";
+        return TemplatePath.SUBMIT_RECORD;
     }
 
     @GetMapping("checkalipay")

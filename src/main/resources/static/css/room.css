@@ -1,4 +1,120 @@
-.model-condition-div{
+.select-un {
+    background-color: rgb(255, 255, 255);
+    transition-duration: 0.3s;
+    transition-property: all;
+    color: rgb(135, 106, 32);
+    border: darkblue solid 0.8px;
+
+
+
+}
+
+
+
+.select-un option {
+    background-color: white;
+    color: rgb(135, 106, 32);
+}
+
+
+.reset {
+    height: 38px;
+}
+
+.icon-rep {
+
+    margin-left: 800px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    color: rgb(135, 106, 32);
+
+}
+
+.icon-rep a {
+    color: rgb(135, 106, 32);
+
+
+}
+
+.icon-rep a:hover {
+    color: rgb(135, 106, 32);
+}
+
+.nav-attribute {
+    margin-top: 15px;
+    height: 35px;
+    background-color: rgb(216, 216, 216);
+}
+
+.nav-attribute li {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.wrapper-circle {
+    width: 100%;
+    height: 320px;
+    margin-top: 20px;
+    border-bottom: darkgray solid 1px;
+}
+
+.wrapper-picture {
+    height: 150px;
+
+}
+
+.wrapper-title-div {
+    height: 100px;
+    margin-top: 7px;
+    margin-left: 5px;
+    font-family: 黑体;
+    font-weight: 500;
+    color: rgb(135, 106, 32);
+    font-size: 17px
+}
+
+.wrapper-text {
+    height: 50px;
+    margin-top: 5px;
+    line-height: 5px;
+    font-family: 微软黑体;
+}
+
+.wrapper-left,
+.wrapper-right {
+    float: left;
+    display: block;
+}
+
+.wrapper-left {
+    width: 37%;
+}
+
+.wrapper-right {
+    width: 63%;
+
+}
+
+.wrapper-deposit-div {
+    width: 100%;
+    height: 100px;
+    font-size: 16px;
+    font-family: 宋体;
+}
+
+.wrapper-price-div {
+    width: 100%;
+    height: 100px;
+    font-size: 16px;
+    font-family: 宋体;
+}
+
+.model-condition-div {
     margin-bottom: 30px;
     margin-left: 50px;
     font-family: 黑体;
@@ -7,119 +123,48 @@
     font-size: 18px
 }
 
-.model-text-div{
+.model-text-div {
     position: absolute;
     left: 400px;
     top: 20px;
 }
 
-.select-un{
-    background-color: rgb(255, 255, 255);
-    transition-duration: 0.3s;
-    transition-property: all;
-    color: rgb(135, 106, 32);
-    border: darkblue solid 0.8px;
-    
-    
-    
+.div-return {
+    margin-bottom: 25px;
 }
 
-
-
-.select-un option{
-    background-color: white;
-    color:  rgb(135, 106, 32);
+.div-return a:hover {
+    text-decoration: none;
+    color: rgb(204, 160, 50);
 }
 
-
-.reset{
-    height: 38px;
-}
-.icon-rep{
-
-    margin-left: 800px;
-    display: inline-block;
-    text-align: center;
-    vertical-align:middle;
-    font-size: 14px;
-    color:  rgb(135, 106, 32);
-
-}
-.icon-rep a{
-    color: rgb(135, 106, 32);
-    
-
-}
-.icon-rep a:hover{
+.div-return a {
     color: rgb(135, 106, 32);
 }
 
-.nav-attribute{
-    margin-top: 15px;
-    height: 35px;
-    background-color: rgb(216, 216, 216);
-}
+.reserve-condition-div {
 
-.nav-attribute li{
-    float: left;
-    height: 35px;
-    line-height: 35px;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.wrapper-circle{
-    width: 100%;
-    height: 320px;
-    margin-top: 20px;
-    border-bottom: darkgray solid 1px;
-}
-
-.wrapper-picture{
-    height:150px;
+    width: 300px;
+    height: 170px;
+    margin-left: 20px;
 
 }
 
-.wrapper-title-div{
-    height: 100px;
-    margin-top: 7px;
-    margin-left: 5px; 
+.reserve-text-div {
+    float: right;
+    position: relative;
+    top:-156px;
+    left: -240px;
     font-family: 黑体;
     font-weight: 500;
     color: rgb(135, 106, 32);
-    font-size: 17px
+    font-size: 16px
 }
 
-.wrapper-text{
-    height: 50px;
-    margin-top: 5px;
-    line-height: 5px;
-    font-family: 微软黑体;
-}
-
-.wrapper-left,.wrapper-right{
-    float: left;
-    display: block;
-}
-.wrapper-left{
-    width: 37%;
-}
-.wrapper-right{
-    width: 63%;
+.reserve-wrapper {
+    background-color: rgb(245, 245, 245);
+    margin-left: 25px;
+    margin-top: 40px;
+    height: 200px;
 
 }
-
-.wrapper-deposit-div{
-    width: 100%;
-    height: 100px;
-    font-size: 16px;
-    font-family: 宋体;
-}
-
-.wrapper-price-div{
-    width: 100%;
-    height: 100px;
-    font-size: 16px;
-    font-family: 宋体;
-}
-

@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-body,html{height: 100%;background: #E2E2E2}
+body,html{height: 100%;background: white}
 body,ul{margin:0;padding:0}
 body{font:14px ,HELVETICA;-webkit-text-size-adjust:100%;}
 li{list-style:none}
