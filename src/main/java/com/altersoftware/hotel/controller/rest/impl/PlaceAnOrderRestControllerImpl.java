@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import static org.apache.commons.lang3.StringUtils.split;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -20,9 +22,11 @@ import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSON;
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.PlaceAnOrderRestController;
+import com.altersoftware.hotel.entity.OrderDO;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.RoomDO;
+import com.altersoftware.hotel.service.OrderService;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.RoomService;
 import com.altersoftware.hotel.util.RandomNumber;
@@ -45,15 +49,19 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     @Resource
     private RoomService         roomService;
 
+    @Resource
+    private OrderService        orderService;
+
     /**
      * 接收订单
+     * 
      * @param recordVO
      * @return
      */
     @Override
     @PostMapping("accept-order")
     public ResultDO<RecordDO> acceptOrder(@RequestBody RecordVO recordVO) {
-        //生成随机数
+        // 生成随机数
         RandomNumber randomNumber = new RandomNumber();
         // 参数校验
         if (recordVO.getCustomerId() <= 0 || StringUtils.isBlank(recordVO.getPrecheckInTime())
@@ -99,6 +107,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
 
     /**
      * 处理订单
+     * 
      * @param request
      * @param response
      * @throws IOException
@@ -135,12 +144,21 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             // 状态 TRADE_SUCCESS
             String trade_status = params.get("trade_status");
             // 参数校验
-            if (trade_status.equals("TRADE_SUCCESS") == true) {
+            String[] split = split(out_trade_no);
+            if (trade_status.equals("TRADE_SUCCESS") == true && split[0].equals('N')) {
                 ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
                 RecordDO recordDO = recordDOResultDO.getModule();
                 if (recordDOResultDO.isSuccess() || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
                     recordDO.setState(1);
                     recordService.updateRecord(recordDO);
+                }
+            }
+            if (trade_status.equals("TRADE_SUCCESS") == true && split[0].equals('M')) {
+                ResultDO<OrderDO> orderDOResultDO = orderService.showOrder(Long.parseLong(out_trade_no));
+                OrderDO orderDO = orderDOResultDO.getModule();
+                if (orderDOResultDO.isSuccess() || Integer.parseInt(buyer_pay_amount) == orderDO.getPayMoney()) {
+                    orderDO.setState(1);
+                    orderService.updateOrder(orderDO);
                 }
             }
         } catch (Exception e) {
@@ -156,6 +174,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
 
     /**
      * 检查订单
+     * 
      * @param recordId
      * @return
      */
@@ -165,7 +184,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
         // 参数校验
         if (recordId <= 0) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(recordId);
         if (recordDOResultDO.isSuccess() && recordDOResultDO.getModule().getState() == 1) {
@@ -173,9 +192,9 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
                 recordDOResultDO.getModule());
 
         } else {
-            //前端做判断，是否跳转到未付款页面
+            // 前端做判断，是否跳转到未付款页面
             return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         }
     }
 }
