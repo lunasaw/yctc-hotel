@@ -22,11 +22,12 @@ input[type=date]::-webkit-inner-spin-button {
     min-height: 100%;
   }
 
-  body {
-    font-size: .875rem;
-    margin-bottom: 60px;
+body {
+  font-size: .875rem;
+  margin-bottom: 250px;
+  margin-top: 30px;
+}
 
-  }
 
   .footer {
     position: absolute;

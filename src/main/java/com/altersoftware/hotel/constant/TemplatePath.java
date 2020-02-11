@@ -146,6 +146,9 @@ public class TemplatePath {
     /** 支付宝回调/返回是否支付成功页面 */
     public static final String CHECK_ALI_PAY                              = "pay/checkalipay";
 
+    /** 用户订单交付页面*/
+    public static final String SUBMIT_RECORD                              ="pay/roomReserve";
+
     /** 客户历史订单页面 */
     public static final String RECORD_BY_CUSTOMER                         = "customer/recordByCustomer";
 
@@ -157,5 +160,6 @@ public class TemplatePath {
 
     /** 管理员菜品历史订单页面 */
     public static final String ORDER_BY_ADMIN                             = "order/orderByAdmin";
+
 
 }
