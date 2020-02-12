@@ -1,5 +1,7 @@
 package com.altersoftware.hotel.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Assert;
@@ -81,9 +83,15 @@ public class UserDAOTest {
 
     @Test
     public void eGetUserByMobile() {
-        UserDO userDOByMobile = userDAO.getUserDOByPhone(MOBILE);
+        UserDO userDOByMobile = userDAO.getUserDOByPhone("15686756582");
         System.out.println(userDOByMobile);
         Assert.assertNotNull(userDOByMobile);
+    }
+
+    @Test
+    public void getClean() {
+        List<UserDO> staff = userDAO.getStaff();
+        System.out.println(staff);
     }
 
     @Test

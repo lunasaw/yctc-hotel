@@ -253,10 +253,10 @@ public interface UserDAO {
     /**
      * phone查找用户
      *
-     * @param phone
+     * @param contactPhone
      * @return
      */
-    @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+    @Select(" select id, number, department_id, face_token, name, type, id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
         " from tb_user where phone=#{contactPhone} ")
     @Results({
@@ -277,7 +277,7 @@ public interface UserDAO {
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    UserDO getUserDOByPhone(String phone);
+    UserDO getUserDOByPhone(String contactPhone);
 
     /**
      * 通过部门返回员工集
@@ -287,7 +287,7 @@ public interface UserDAO {
      */
     @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
-        " from tb_user where face_token=#{faceToken} ")
+        " from tb_user where department_id=#{departmentId} ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "number", column = "number"),
@@ -315,7 +315,7 @@ public interface UserDAO {
      */
     @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
-        " from tb_user where type=100002 ")
+        " from tb_user where type=90003 ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "number", column = "number"),
@@ -343,7 +343,7 @@ public interface UserDAO {
      */
     @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
-        " from tb_user where type=100003 ")
+        " from tb_user where type=90002 ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "number", column = "number"),
@@ -365,13 +365,13 @@ public interface UserDAO {
     List<UserDO> getClean();
 
     /**
-     * 返回库中保安集
+     * 返回库中员工集
      *
      * @return
      */
     @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
-        " from tb_user where type=100004 ")
+        " from tb_user where type!=90002 ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "number", column = "number"),
@@ -390,7 +390,35 @@ public interface UserDAO {
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    List<UserDO> getRroctect();
+    List<UserDO> getStaff();
+
+    /**
+     * 返回库中保安集
+     *
+     * @return
+     */
+    @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
+        +
+        " from tb_user where type=90003 ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "number", column = "number"),
+        @Result(property = "type", column = "type"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "departmentId", column = "department_id"),
+        @Result(property = "idCardNumber", column = "id_card_number"),
+        @Result(property = "sex", column = "sex"),
+        @Result(property = "age", column = "age"),
+        @Result(property = "contactPhone", column = "phone"),
+        @Result(property = "account", column = "account"),
+        @Result(property = "password", column = "password"),
+        @Result(property = "faceId", column = "picture"),
+        @Result(property = "faceToken", column = "face_token"),
+        @Result(property = "email", column = "mail"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<UserDO> getProctect();
 
     /**
      * 返回库中客户集
@@ -399,7 +427,7 @@ public interface UserDAO {
      */
     @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
-        " from tb_user where type=100000 ")
+        " from tb_user where type=90000 ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "number", column = "number"),
