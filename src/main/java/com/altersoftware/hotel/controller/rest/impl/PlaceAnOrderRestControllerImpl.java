@@ -1,7 +1,5 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
-import static org.apache.shiro.util.StringUtils.split;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -142,6 +140,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
                 // 乱码解决，这段代码在出现乱码时使用
                 valueStr = new String(valueStr.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
                 params.put(name, valueStr);
+                // System.out.println(params);
             }
             // 打印数据看看
             LOG.info("数据：" + JSON.toJSONString(requestParams));
@@ -156,32 +155,25 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             String receipt_amount = params.get("receipt_amount");
             // 状态 TRADE_SUCCESS
             String trade_status = params.get("trade_status");
-            String[] split = split(out_trade_no);
-            try {
-                if (trade_status.equals("TRADE_SUCCESS") == true) {
-                    ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
-                    RecordDO recordDO = recordDOResultDO.getModule();
-                    if (recordDOResultDO.isSuccess() && recordDOResultDO.isSuccess()
-                        || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
-                        recordDO.setState(1);
-                        recordService.updateRecord(recordDO);
-                    }
+            if (trade_status.equals("TRADE_SUCCESS") == true && out_trade_no.length() == 11) {
+                ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
+                RecordDO recordDO = recordDOResultDO.getModule();
+                if (recordDOResultDO.isSuccess() && recordDOResultDO.isSuccess()
+                    || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
+                    recordDO.setState(1);
+                    recordService.updateRecord(recordDO);
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("该订单不存在");
+                LOG.info("该住房订单已经完成付款 id={}", out_trade_no);
             }
-            try {
-                if (trade_status.equals("TRADE_SUCCESS") == true) {
-                    ResultDO<OrderDO> orderDOResultDO = orderService.showOrder(Long.parseLong(out_trade_no));
-                    OrderDO orderDO = orderDOResultDO.getModule();
-                    if (orderDOResultDO.isSuccess() && orderDOResultDO.isSuccess()
-                        || Integer.parseInt(buyer_pay_amount) == orderDO.getPayMoney()) {
-                        orderDO.setState(1);
-                        orderService.updateOrder(orderDO);
-                    }
+            if (trade_status.equals("TRADE_SUCCESS") == true && out_trade_no.length() == 10) {
+                ResultDO<OrderDO> orderDOResultDO = orderService.showOrder(Long.parseLong(out_trade_no));
+                OrderDO orderDO = orderDOResultDO.getModule();
+                if (orderDOResultDO.isSuccess() && orderDOResultDO.isSuccess()
+                    || Integer.parseInt(buyer_pay_amount) == orderDO.getPayMoney()) {
+                    orderDO.setState(1);
+                    orderService.updateOrder(orderDO);
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("该订单不存在");
+                LOG.info("该餐品订单已经完成付款 id={}", out_trade_no);
             }
         } catch (Exception e) {
             LOG.error("error", e);

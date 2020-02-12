@@ -57,7 +57,7 @@ public class RecordServiceImpl implements RecordService {
         RecordDO recordDOById = null;
         try {
             recordDOById = recordDAO.getRecordDOById(id);
-            LOG.info("showRecord success, id={}", id);
+            LOG.info("showRecord success, recordDOById={}", recordDOById);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, recordDOById);
         } catch (Exception e) {
             LOG.error("showRecord error, RecordDO={}", recordDOById, e);

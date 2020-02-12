@@ -29,7 +29,7 @@ public class RecordServiceTest {
 
     @Test
     public void aShowRecord() {
-        ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(1);
+        ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(92073248147L);
         Assert.assertEquals(true, recordDOResultDO.isSuccess());
     }
 
