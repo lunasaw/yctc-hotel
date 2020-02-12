@@ -12,7 +12,7 @@ import com.altersoftware.hotel.entity.OrderDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.service.MenuService;
 import com.altersoftware.hotel.service.OrderService;
-import com.altersoftware.hotel.util.MenuOrder;
+import com.altersoftware.hotel.util.RandomNumber;
 import com.altersoftware.hotel.vo.OrderVO;
 
 /**
@@ -33,7 +33,7 @@ public class OrderRestControllerImpl implements OrderRestController {
     @PostMapping("add-order")
     public ResultDO<Void> createOrder(@RequestBody OrderVO orderVO) {
         //生成随机数
-        MenuOrder menuOrder = new MenuOrder();
+        RandomNumber menuOrder = new RandomNumber();
         //参数校验
         if (orderVO.getNumbers() <= 0 || orderVO.getCustomerId() <= 0){
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
@@ -44,7 +44,7 @@ public class OrderRestControllerImpl implements OrderRestController {
         OrderDO orderDO = new OrderDO();
         orderDO.setNumbers(orderVO.getNumbers());
         orderDO.setCustomerId(orderVO.getCustomerId());
-        orderDO.setId(Long.parseLong(menuOrder.GetRandom()));
+        orderDO.setId(Long.parseLong(menuOrder.GetRandomOrder()));
         orderDO.setPayMoney(actualMoney.getModule());
         orderDO.setMenuId(orderVO.getMenuId());
         ResultDO<Void> orderServiceOrder = orderService.createOrder(orderDO);
