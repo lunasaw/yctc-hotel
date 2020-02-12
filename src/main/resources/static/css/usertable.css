@@ -1,0 +1,45 @@
+.btn-function {
+    height: 30px;
+    padding: 0 15px;
+    font-size: 13px;
+    border: 0.7px solid rgb(211, 211, 211);
+    border-radius: 0px;
+}
+
+.btn-function2 {
+    height: 20px;
+    padding: 0 15px;
+    font-size: 13px;
+    border: 0.7px solid rgb(211, 211, 211);
+    border-radius: 0px;
+}
+
+
+.input-search {
+    margin-left: 41%;
+    height: 28px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 黑体;
+    color: rgb(145, 145, 145);
+}
+
+
+.p-left {
+    float: left;
+    width: 45%;
+}
+
+.p-right {
+    float: left;
+    width: 45%;
+}
+
+.input-margin {
+    margin-top: 50px;
+}
+
+.button-margin {
+    margin-left: 42%;
+    margin-top: 80px;
+}
