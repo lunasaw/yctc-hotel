@@ -1,10 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <title>用户服务中心</title>
+
 </head>
+
 <body>
-客户查看自己信息页面
+
+<header th:replace="component/fram :: commonHeader"></header>
+
+<div class="container" th:replace="component/fram :: commonMenu"></div>
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
+    <div class="chartjs-size-monitor"
+         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+        </div>
+    </div>
+    <div class="content-wrapper" style="margin-bottom: 80px;">
+        <div class="container-fluid">
+            <!-- Example DataTables Card-->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i>用户信息管理系统
+                </div>
+                <div class="card-body" style="padding:0 15px;">
+                    <div class="input-group" style="margin: 15px;">
+                        <button class="btn btn-default btn-function" data-target="#addInformation" data-toggle="modal"
+                                type="button"><span>添加信息</span></button>
+                        <button class="btn btn-default btn-function" onclick="deleteItems()"
+                                type="button"><span>删除</span></button>
+                        <input class="input-search form-control col-md-5" onkeydown="onSearch(this)" placeholder="搜索"
+                               type="search" value="">
+                    </div>
+                    <div class="table-responsive">
+                        <table cellspacing="0" class="table table-bordered" id="dataTable"
+                               style="margin-bottom: 50px; text-align: center;"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th><input disabled type="checkbox"></th>
+                                <th>会员号</th>
+                                <th>用户姓名</th>
+                                <th>用户年龄</th>
+                                <th>用户性别</th>
+                                <th>详细信息</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+
+<!-- 模态框-详情 -->
+<div aria-hidden="true" aria-labelledby="exact" class="modal fade" id="exact" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(226, 203, 145);">
+                <h5 class="modal-title" id="payforroomLabel1">详细信息</h5>
+                <button aria-label="close" class="close" data-dismiss="modal" type="button">
+                    <Span aria-hidden="true">&times;</Span>
+                </button>
+            </div>
+            <div class="modal-body" style="height: 300px;">
+                <div class="container">
+                    <div class="p-left">
+                        <p>会员号：</p><span></span><br>
+                        <p>用户姓名：</p><span></span><br>
+                        <p>用户年龄：</p><span></span><br>
+                        <p>用户性别：</p><span></span><br>
+                        <p>用户账户余额：</p><span></span><br>
+                    </div>
+                    <div class="p-right">
+                        <p>用户联系方式：</p><span></span><br>
+                        <p>用户邮箱：</p><span></span><br>
+                        <p>面部资料：</p><span></span><br>
+                        <p>人脸识别：</p><span></span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- 模态框-增加 -->
+<div aria-hidden="true" aria-labelledby="addInformation" class="modal fade" id="addInformation" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(226, 203, 145);">
+                <h5 class="modal-title" id="payforroomLabel2">增加信息</h5>
+                <button aria-label="close" class="close" data-dismiss="modal" type="button">
+                    <Span aria-hidden="true">&times;</Span>
+                </button>
+            </div>
+            <div class="modal-body" style="height: 800px;">
+                <div class="container col-md-9">
+                    <input class="form-control input-margin" id="" placeholder="请输入会员号" type="text">
+                    <input class="form-control input-margin" id="" placeholder="请输入用户姓名" type="text">
+                    <input class="form-control input-margin" id="" placeholder="请输入用户年龄" type="text">
+                    <input class="form-control input-margin" id="" placeholder="请输入用户性别" type="text">
+                    <input class="form-control input-margin" id="" placeholder="请输入用户账户余额" type="text">
+                    <input class="form-control input-margin" id="" placeholder="请输入用户联系方式" type="text">
+                    <input class="form-control input-margin" id="" placeholder="请输入用户邮箱" type="text">
+                    <button class="btn btn-success button-margin col-md-3" type="submit">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer th:replace="component/fram :: commonFooter"></footer>
+
+<script>
+    $(document).ready(function () {
+        let data = [{
+            "name": "高庆越"
+        },
+            {
+                "name": "李司马"
+            },
+            {
+                "name": "司马锦洋"
+            },
+            {
+                "name": "朱嘉业"
+            },
+            {
+                "name": "王添民"
+            },
+            {
+                "name": "黄子鑫"
+            },
+
+        ];
+        let tbody = $("#tbody");
+        data.forEach(item = > {
+            tbody.append('<tr class="append-tr">' +
+                '<th>' + '<input type="checkbox" class="checkbox">' + '</th>' +
+                '<th>' + item.id + '</th>' +
+                '<th>' + item.name + '</th>' +
+                '<th>' + item.idid + '</th>' +
+                '<th>' + item.idididi + '</th>' +
+                '<th >' + '<a href="" data-toggle="modal" data-target="#exact">' + '详情' + '</a>' + '<a href="">' +
+                '<span style="margin-left:35px">' + '修改' + '</span>' + '</a>' + '</th>' +
+                '</tr>')
+        };
+    )
+    });
+
+    function deleteItems() {
+        var items = $(".checkbox:checked");
+        var len = items.length;
+        var flag = confirm("确定删除？");
+        if (flag == true) {
+            for (var i = 0; i < len; i++) {
+                $(items[i]).parents(".append-tr").remove();
+                flag = 1;
+            }
+        }
+    }
+
+    function onSearch(obj) {
+        setTimeout(function () {
+            var dataTable = $("#dataTable");
+            var rowsLength = dataTable.rows.length;
+            var key = obj.value;
+            var searchCol = 0;
+            for (var i = 1; i < rowsLength; i++) {
+                var searchText = dataTable.rows[i].cells[searchCol].innerHtml;
+                if (searchText = dataTable.match(key)) {
+                    dataTable.rows[i].style.display = '';
+                } else {
+                    dataTable.rows[i].style.display = "none"
+                }
+            }
+        })
+    }
+
+    function add() {
+
+    }
+</script>
+
+
 </body>
+
 </html>
