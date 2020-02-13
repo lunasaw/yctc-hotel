@@ -52,4 +52,11 @@ public interface GoodsRestController {
      * @return
      */
     ResultDO<List<GoodsDO>> getAll();
+
+    /**
+     * 删除部分物品信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(Long[] ids);
 }

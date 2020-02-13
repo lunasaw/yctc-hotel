@@ -113,11 +113,24 @@ public class TemplatePath {
     /** 客户信息页面 */
     public static final String CUSTOMER_INFO                              = "customer/customer-info";
 
+    /** 客户信息页面 */
+    public static final String CUSTOMER_INFO_TABLE                             = "customer/customer-infotable";
+
+
+    /** 客户信息修改页面 */
+    public static final String CUSTOMER_UPDATE                             = "customer/updateByCustomer";
+
     /** 会员信息页面 */
     public static final String VIP_INFO                                   = "vip/vipinfo";
 
+    /** 会员信息页面 */
+    public static final String VIP_TABLE                                  = "vip/viptable";
+
     /** 会员等级信息页面 */
     public static final String VIP_GRADE_INFO                             = "vip/vipGrade";
+
+    /** 会员等级信息子页面 */
+    public static final String VIP_GRADE_INFO_TABLE                            = "vip/vipGradeTable";
 
     /** 酒店信息页面 */
     public static final String HOTEL                                      = "hotel/hotels";
@@ -125,14 +138,23 @@ public class TemplatePath {
     /** 物品信息页面 */
     public static final String GOODS                                      = "hotel/goods";
 
+    /** 物品信息页面 */
+    public static final String GOODS_TABLE                                      = "hotel/goodstable";
+
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
 
     /** 部门信息页面 */
     public static final String DEPARTMENT                                 = "hotel/depatment";
 
+    /** 部门表格页面 */
+    public static final String DEPARTMENT_TABLE                                = "hotel/depatmenttable";
+
     /** 员工信息页面 */
     public static final String STAFF_INFO                                 = "staff/staffinfo";
+
+    /** 员工信息页面 */
+    public static final String STAFF_INFO_TABLE                             = "staff/stafftable";
 
     /** 订单信息页面 */
     public static final String RECORD_INFO                                = "order/record";
@@ -155,11 +177,17 @@ public class TemplatePath {
     /** 管理员订单统计页面 */
     public static final String RECORD_BY_ADMIN                            = "order/recordByAdmin";
 
+    /** 管理员订单统计子页面 */
+    public static final String RECORD_BY_ADMIN_TABLE                            = "order/recordByAdmintable";
+
     /** 客户菜品历史订单页面 */
     public static final String ORDER_BY_CUSTOMER                          = "customer/orderByCustomer";
 
     /** 管理员菜品历史订单页面 */
     public static final String ORDER_BY_ADMIN                             = "order/orderByAdmin";
+
+    /** 管理员菜品历史订单页面 */
+    public static final String ORDER_BY_ADMIN_TABLE                            = "order/orderByAdminTable";
 
 
 }

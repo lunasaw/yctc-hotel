@@ -22,4 +22,10 @@ public class VipControllerImpl implements VipController {
     public String showVipInfo() {
         return TemplatePath.VIP_INFO;
     }
+
+    @Override
+    @GetMapping("show-viptable")
+    public String showVipTable() {
+        return TemplatePath.VIP_TABLE;
+    }
 }

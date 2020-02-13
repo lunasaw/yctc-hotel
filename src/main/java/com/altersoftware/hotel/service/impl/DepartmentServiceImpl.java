@@ -113,7 +113,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         try {
             List<DepartmentDO> all = departmentDAO.getDepartmentDOList();
             LOG.info("getAll success, departmentDO list={}", all);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, all);
         } catch (Exception e) {
             LOG.error("getAll error", e);
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,

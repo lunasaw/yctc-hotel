@@ -22,4 +22,10 @@ public class DepartmentControllerImpl implements DepartmentController {
     public String showDepartment() {
         return TemplatePath.DEPARTMENT;
     }
+
+    @Override
+    @GetMapping("show-departtable")
+    public String showDepartmentTable() {
+        return TemplatePath.DEPARTMENT_TABLE;
+    }
 }

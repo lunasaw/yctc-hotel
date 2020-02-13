@@ -22,4 +22,16 @@ public class CustomerInfoControllerImpl implements CustomerInfoController {
     public String showCustomers() {
         return TemplatePath.CUSTOMER_INFO;
     }
+
+    @Override
+    @GetMapping("show-customerinfotable")
+    public String showCustomersTable() {
+        return TemplatePath.CUSTOMER_INFO_TABLE;
+    }
+
+    @Override
+    @GetMapping("show-customerupdate")
+    public String showCustomersupdate() {
+        return TemplatePath.CUSTOMER_UPDATE;
+    }
 }

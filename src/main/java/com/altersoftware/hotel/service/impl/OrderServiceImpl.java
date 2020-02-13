@@ -140,7 +140,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             all = orderDAO.getOrderDOList();
             LOG.info("getAll success, all={}", all);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,all);
         } catch (Exception e) {
             LOG.error("getAll error, all={}", all, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,

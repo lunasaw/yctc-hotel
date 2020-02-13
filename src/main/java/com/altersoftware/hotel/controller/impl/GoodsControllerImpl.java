@@ -19,7 +19,7 @@ public class GoodsControllerImpl implements GoodsController {
 
     /**
      * 物品信息页面
-     * 
+     *
      * @return
      */
     @Override
@@ -27,4 +27,16 @@ public class GoodsControllerImpl implements GoodsController {
     public String showGoodsInfo() {
         return TemplatePath.GOODS;
     }
+
+    /**
+     * 物品信息页面
+     *
+     * @return
+     */
+    @Override
+    @GetMapping("show-goodstable")
+    public String showGoodsTable() {
+        return TemplatePath.GOODS_TABLE;
+    }
+
 }

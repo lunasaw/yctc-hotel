@@ -13,4 +13,10 @@ public interface VipController {
      */
     String showVipInfo();
 
+    /**
+     * 会员信息子网页
+     * @return
+     */
+     String showVipTable();
+
 }

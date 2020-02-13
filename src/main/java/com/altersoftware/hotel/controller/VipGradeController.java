@@ -8,4 +8,6 @@ public interface VipGradeController {
 
     String showGrade();
 
+    String showGradeTable();
+
 }

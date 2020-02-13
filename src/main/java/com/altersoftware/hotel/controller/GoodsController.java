@@ -10,4 +10,10 @@ public interface GoodsController {
      *
      */
     String showGoodsInfo();
+
+    /**
+     * 转到物品信息页面
+     *
+     */
+    String showGoodsTable();
 }

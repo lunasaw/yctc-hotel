@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,11 +23,9 @@ import com.altersoftware.hotel.service.GoodsService;
 @ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/customer")
 public class CustomerRestControllerImpl implements CustomerRestController {
-    @Autowired
-    CustomerService      customerService;
 
     @Autowired
-    private GoodsService goodsService;
+    CustomerService      customerService;
 
     /**
      * 获取所有客户信息
@@ -56,9 +55,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     @PostMapping("update-userdo")
     public ResultDO<Void> updateUserDO(@RequestBody UserDO userDO) {
         // 参数校验
-        if (userDO.getId() <= 0 || userDO.getDepartmentId() <= 0
-            || StringUtils.isBlank(userDO.getNumber())
-            || StringUtils.isBlank(userDO.getIdCardNumber())) {
+        if (StringUtils.isBlank(userDO.getNumber())) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -97,7 +94,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
      */
     @Override
     @PostMapping("delete-byid")
-    public ResultDO<Void> deleteByUserId(@RequestParam(name = "number") String number) {
+    public ResultDO<Void> deleteByUserId(@RequestBody @RequestParam(name = "number") String number) {
         // 参数校验
         if (StringUtils.isBlank(number)) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
@@ -120,6 +117,32 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     }
 
     /**
+     *删除多条记录
+     * @param numbers
+     * @return
+     */
+    @Override
+    @PostMapping("delete-byidlist")
+    public ResultDO<Void> deleteList(@RequestBody String[] numbers) {
+        //参数校验
+        if (numbers == null || numbers.length == 0){
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        List<String> resultList = new ArrayList<>(numbers.length);
+        for (String s:numbers){
+            resultList.add(s);
+        }
+        ResultDO<Void> voidResultDO = customerService.deleteList(resultList);
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DELETE_FAILD, ResultCode.MSG_DELETE_FAILD);
+        } else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
+
+    }
+
+    /**
      * 会员号搜索客户/员工
      *
      * @param number
@@ -127,7 +150,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
      */
     @Override
     @PostMapping("get-bynumber")
-    public ResultDO<UserDO> getByNumber(@RequestParam(name = "number") String number) {
+    public ResultDO<UserDO> getByNumber(@RequestBody String number) {
         // 参数校验
         if (StringUtils.isBlank(number)) {
             return new ResultDO<UserDO>(false, ResultCode.PARAMETER_INVALID,
@@ -145,7 +168,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
 
     @Override
     @PostMapping("get-byId")
-    public ResultDO<UserDO> getByCustomerId(@RequestParam(name = "customerId") long customerId) {
+    public ResultDO<UserDO> getByCustomerId(@RequestBody long customerId) {
         // 参数校验
         if (customerId < 0) {
             return new ResultDO<UserDO>(false, ResultCode.PARAMETER_INVALID,

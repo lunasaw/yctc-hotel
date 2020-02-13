@@ -20,6 +20,12 @@ public interface OrderContoller {
      * @return
      */
     String OrderByAdmin();
+    /**
+     * 管理员菜品订单子页面
+     *
+     * @return
+     */
+    String OrderByAdminTable();
 
     /**
      * 客户历史菜品订单页面
