@@ -81,10 +81,9 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public ResultDO<Void> deleteById(String id) {
-        long Id = Long.parseLong(id);
+    public ResultDO<Void> deleteById(long id) {
         try {
-            vipDAO.deleteById(Id);
+            vipDAO.deleteById(id);
             LOG.info("deleteById success, vipDO={}", id);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         } catch (Exception e) {
@@ -95,11 +94,10 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public ResultDO<Void> deleteList(List<String> ids) {
+    public ResultDO<Void> deleteList(List<Long> ids) {
         try {
             for (int i = 0; i < ids.size(); i++) {
-                long l = Long.parseLong(ids.get(i));
-                vipDAO.deleteById(l);
+                vipDAO.deleteById(ids.get(i));
             }
             LOG.info("deleteList success, ids={}", ids);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);

@@ -45,14 +45,14 @@ public interface VipService {
      *
      * @return
      */
-    ResultDO<Void> deleteById(String id);
+    ResultDO<Void> deleteById(long id);
 
     /**
      * 删除会员信息
      *
      * @return
      */
-    ResultDO<Void> deleteList(List<String> ids);
+    ResultDO<Void> deleteList(List<Long> ids);
 
     /**
      * 查询所有会员编号
