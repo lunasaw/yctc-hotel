@@ -139,7 +139,7 @@ public class VipRestControllerImpl implements VipRestController {
     @PostMapping("delete-byid")
     public ResultDO<Void> deleteById(long id) {
         // 参数校验
-        if (id <= 0) {
+        if (id < 0) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                     ResultCode.MSG_PARAMETER_INVALID, null);
         }
