@@ -143,6 +143,12 @@ public class CustomerRestControllerImpl implements CustomerRestController {
         }
     }
 
+    /**
+     * 客户编号搜索客户
+     * 
+     * @param customerId
+     * @return
+     */
     @Override
     @PostMapping("get-byId")
     public ResultDO<UserDO> getByCustomerId(@RequestParam(name = "customerId") long customerId) {

@@ -50,7 +50,7 @@ public interface CustomerService {
     ResultDO<UserDO> getByNumber(String number);
 
     /**
-     * 会员号搜索客户/员工
+     * 客户id搜索客户
      *
      * @param customerId
      * @return
