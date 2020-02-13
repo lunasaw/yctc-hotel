@@ -371,7 +371,7 @@ public interface UserDAO {
      */
     @Select(" select id, number, department_id, face_token ,  name, type,  id_card_number, sex, age, phone, account, password, picture, mail, create_time, modify_time"
         +
-        " from tb_user where type!=90002 ")
+        " from tb_user where type!=90000 and type!=90001 ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "number", column = "number"),

@@ -74,6 +74,21 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public ResultDO<Void> deleteList(List<String> numbers) {
+        try {
+            for (int i = 0; i < numbers.size(); i++) {
+                userDAO.deleteByuserNumber(numbers.get(i));
+            }
+            LOG.info("deleteByuserNumber success, numbers={}", numbers);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteByuserNumber error, numbers={}", numbers, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
     public ResultDO<UserDO> getByNumber(String number) {
         UserDO userDOByNumber = null;
         try {

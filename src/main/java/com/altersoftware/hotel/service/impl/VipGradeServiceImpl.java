@@ -80,6 +80,20 @@ public class VipGradeServiceImpl implements VipGradeService {
     }
 
     @Override
+    public ResultDO<List<VipGradeDO>> showVipGradeList() {
+        List<VipGradeDO> showVipGradeList = null;
+        try {
+            showVipGradeList = vipGradeDAO.getVipGradeList();
+            LOG.info("getVipGradeDOByRoomId success, showVipGradeList={}", showVipGradeList);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, showVipGradeList);
+        } catch (Exception e) {
+            LOG.error("showVipGradeByGrade error, showVipGradeList={}", showVipGradeList, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
     public ResultDO<Void> deleteById(long id) {
         try {
             vipGradeDAO.deleteById(id);

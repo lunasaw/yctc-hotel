@@ -83,7 +83,7 @@ public class UserDAOTest {
 
     @Test
     public void eGetUserByMobile() {
-        UserDO userDOByMobile = userDAO.getUserDOByPhone("15686756582");
+        UserDO userDOByMobile = userDAO.getUserDOByPhone("15696756582");
         System.out.println(userDOByMobile);
         Assert.assertNotNull(userDOByMobile);
     }
@@ -91,7 +91,26 @@ public class UserDAOTest {
     @Test
     public void getClean() {
         List<UserDO> staff = userDAO.getStaff();
-        System.out.println(staff);
+        System.out.println(staff.size());
+    }
+
+    @Test
+    public void getProcter() {
+        List<UserDO> proctect = userDAO.getProctect();
+        System.out.println(proctect.size());
+    }
+
+    @Test
+    public void getReception() {
+        List<UserDO> reception = userDAO.getReception();
+        System.out.println(reception.size());
+
+    }
+
+    @Test
+    public void getstaff() {
+        List<UserDO> staff = userDAO.getStaff();
+        System.out.println(staff.size());
     }
 
     @Test
