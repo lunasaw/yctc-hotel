@@ -53,4 +53,10 @@ public interface VipGradeService {
      */
     ResultDO<Void> deleteById(long id);
 
+    /**
+     * 删除部分等级权益信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
 }

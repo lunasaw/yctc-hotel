@@ -61,7 +61,15 @@ public interface RoomService {
     ResultDO<Void> deleteById(long id);
 
     /**
-     * 根据类别找出一个房间
+     * 删除部分房间信息
+     *
+     * @param ids
+     * @return
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
+
+    /**
+     * 根据类别找出一个未入住房间
      *
      * @param roomTypeName
      * @return

@@ -87,7 +87,22 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             LOG.info("deleteRoomTypeDO success, id={}", id);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         } catch (Exception e) {
-            LOG.error("getallRoomDo error", e);
+            LOG.error("deleteRoomTypeDO error", e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
+    public ResultDO<Void> deleteList(List<Long> ids) {
+        try {
+            for (int i = 0; i < ids.size(); i++) {
+                roomTypeDAO.deleteById(ids.get(i));
+            }
+            LOG.info("deleteList success, ids={}", ids);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteList error", e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }

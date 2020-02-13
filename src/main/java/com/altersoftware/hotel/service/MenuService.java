@@ -43,6 +43,14 @@ public interface MenuService {
     ResultDO<Void> delete(long id);
 
     /**
+     * 删除部分菜品信息
+     *
+     * @param ids
+     * @return
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
+
+    /**
      * 返回所有菜品信息
      *
      * @return

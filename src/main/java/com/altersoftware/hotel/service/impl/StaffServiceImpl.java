@@ -45,13 +45,13 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public ResultDO<List<UserDO>> getAllStaff() {
-        List<UserDO> customer = new ArrayList();
+        List<UserDO> Staff = new ArrayList();
         try {
-            customer = userDAO.getCustomer();
-            LOG.info("getcustomers success, customers={}", customer);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, customer);
+            Staff = userDAO.getStaff();
+            LOG.info("getAllStaff success, customers={}", Staff);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, Staff);
         } catch (Exception e) {
-            LOG.error("getcustomers error, customers={}", customer, e);
+            LOG.error("getAllStaff error, customers={}", Staff, e);
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
         }
@@ -89,6 +89,21 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
+    public ResultDO<Void> deleteByList(List<String> numbers) {
+        try {
+            for (int i = 0; i < numbers.size(); i++) {
+                userDAO.deleteByuserNumber(numbers.get(i));
+            }
+            LOG.info("deleteByList success, numbers={}", numbers);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteByList error, numbers={}", numbers, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
     public ResultDO<UserDO> getByNumber(String number) {
         UserDO userDOByNumber = null;
         try {
@@ -101,5 +116,47 @@ public class StaffServiceImpl implements StaffService {
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, userDOByNumber);
         }
 
+    }
+
+    @Override
+    public ResultDO<List<UserDO>> getReception() {
+        List<UserDO> userGetReception = null;
+        try {
+            userGetReception = userDAO.getReception();
+            LOG.info("userGetReception success, userGetReception={}", userGetReception);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userGetReception);
+        } catch (Exception e) {
+            LOG.error("userGetReception error, userGetReception={}", userGetReception, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, userGetReception);
+        }
+    }
+
+    @Override
+    public ResultDO<List<UserDO>> getClean() {
+        List<UserDO> userGetClean = null;
+        try {
+            userGetClean = userDAO.getClean();
+            LOG.info("userGetClean success, userGetClean={}", userGetClean);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userGetClean);
+        } catch (Exception e) {
+            LOG.error("userGetClean error, userGetClean={}", userGetClean, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, userGetClean);
+        }
+    }
+
+    @Override
+    public ResultDO<List<UserDO>> getProcter() {
+        List<UserDO> userGetProctect = null;
+        try {
+            userGetProctect = userDAO.getProctect();
+            LOG.info("userGetProctect success, userGetProctect={}", userGetProctect);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userGetProctect);
+        } catch (Exception e) {
+            LOG.error("userGetProctect error, userGetProctect={}", userGetProctect, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, userGetProctect);
+        }
     }
 }
