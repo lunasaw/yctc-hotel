@@ -120,6 +120,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public ResultDO<Void> deleteList(List<Long> ids) {
+        try {
+            for (int i = 0; i < ids.size(); i++) {
+                orderDAO.deleteById(ids.get(i));
+            }
+            LOG.info("deleteList success, ids={}", ids);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteList error, ids={}", ids, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
     public ResultDO<List<OrderDO>> getAll() {
         List<OrderDO> all = null;
         try {

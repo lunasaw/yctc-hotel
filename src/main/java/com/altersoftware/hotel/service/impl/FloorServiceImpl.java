@@ -123,4 +123,19 @@ public class FloorServiceImpl implements FloorService {
                 ResultCode.MSG_DELETE_FAILD);
         }
     }
+
+    @Override
+    public ResultDO<Void> deleteList(List<Long> ids) {
+        try {
+            for (int i = 0; i < ids.size(); i++) {
+                floorDAO.deleteById(ids.get(i));
+            }
+            LOG.info("deleteList floorDO success, ids={}", ids);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteList floorDO success, ids={}", ids, e);
+            return new ResultDO<>(false, ResultCode.DELETE_FAILD,
+                ResultCode.MSG_DELETE_FAILD);
+        }
+    }
 }

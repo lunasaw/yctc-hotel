@@ -54,6 +54,13 @@ public interface RecordService {
     ResultDO<Void> deleteById(long id);
 
     /**
+     * 删除部分订单信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
+
+    /**
      * 查询所有订单信息
      *
      * @return

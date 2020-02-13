@@ -48,6 +48,13 @@ public interface DepartmentService {
     ResultDO<Void> deleteById(long id);
 
     /**
+     * 删除部分部门信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
+
+    /**
      * 查询所有部门信息
      *
      * @return

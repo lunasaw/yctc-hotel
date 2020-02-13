@@ -48,6 +48,13 @@ public interface GoodsService {
     ResultDO<Void> deleteById(long id);
 
     /**
+     * 删除部分物品信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
+
+    /**
      * 查询所有物品信息
      *
      * @return

@@ -54,6 +54,13 @@ public interface OrderService {
     ResultDO<Void> deleteById(long id);
 
     /**
+     * 删除部分菜品订单信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
+
+    /**
      * 查询所有菜品订单信息
      *
      * @return

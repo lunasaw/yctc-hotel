@@ -42,11 +42,40 @@ public interface StaffService {
     ResultDO<Void> deleteByUserId(String number);
 
     /**
+     * 删除部分指定员工信息
+     *
+     * @param numbers
+     * @return
+     */
+    ResultDO<Void> deleteByList(List<String> numbers);
+
+    /**
      * 会员号搜索员工/员工
      *
      * @param number
      * @return
      */
     ResultDO<UserDO> getByNumber(String number);
+
+    /**
+     * 返回前台员工List
+     * 
+     * @return
+     */
+    ResultDO<List<UserDO>> getReception();
+
+    /**
+     * 返回保洁员工List
+     * 
+     * @return
+     */
+    ResultDO<List<UserDO>> getClean();
+
+    /**
+     * 返回安保员工List
+     * 
+     * @return
+     */
+    ResultDO<List<UserDO>> getProcter();
 
 }

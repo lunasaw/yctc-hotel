@@ -60,4 +60,11 @@ public interface FloorService {
      * @param id
      */
     ResultDO<Void> delete(long id);
+
+    /**
+     * 删除部分指定楼层信息
+     *
+     * @param ids
+     */
+    ResultDO<Void> deleteList(List<Long> ids);
 }
