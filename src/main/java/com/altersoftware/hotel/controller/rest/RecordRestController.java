@@ -47,6 +47,13 @@ public interface RecordRestController {
     ResultDO<Void> deleteById(long id);
 
     /**
+     * 删除部分订单信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(Long[] ids);
+
+    /**
      * 查询所有订单信息
      *
      * @return

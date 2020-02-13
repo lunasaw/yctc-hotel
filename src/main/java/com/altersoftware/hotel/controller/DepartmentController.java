@@ -11,4 +11,11 @@ public interface DepartmentController {
      * @return
      */
     String showDepartment();
+
+    /**
+     * 来到部门信息页面
+     *
+     * @return
+     */
+    String showDepartmentTable();
 }

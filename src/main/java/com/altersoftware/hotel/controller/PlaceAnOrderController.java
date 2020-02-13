@@ -24,6 +24,12 @@ public interface PlaceAnOrderController {
     String RrcordByAdmin();
 
     /**
+     * 管理员住房订单子页面
+     *
+     * @return
+     */
+    String RrcordByAdminTable();
+    /**
      * 客户信息订单页面
      * 
      * @return

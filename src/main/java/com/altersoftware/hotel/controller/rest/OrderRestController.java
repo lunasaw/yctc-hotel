@@ -56,6 +56,13 @@ public interface OrderRestController {
     ResultDO<Void> deleteById(long id);
 
     /**
+     * 删除部分菜品订单信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(Long[] ids);
+
+    /**
      * 查询所有菜品订单信息
      *
      * @return

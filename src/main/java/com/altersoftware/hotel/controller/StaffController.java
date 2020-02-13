@@ -7,4 +7,6 @@ package com.altersoftware.hotel.controller;
 public interface StaffController {
 
     String showStaff();
+
+    String showStaffTable();
 }

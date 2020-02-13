@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -163,7 +164,7 @@ public class OrderRestControllerImpl implements OrderRestController {
      */
     @Override
     @PostMapping("delete-byid")
-    public ResultDO<Void> deleteById(long id) {
+    public ResultDO<Void> deleteById(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
@@ -171,6 +172,32 @@ public class OrderRestControllerImpl implements OrderRestController {
         }
 
         ResultDO<Void> voidResultDO = orderService.deleteById(id);
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
+    }
+
+    /**
+     *删除多条记录
+     * @param ids
+     * @return
+     */
+    @Override
+    @PostMapping("delete-byidlist")
+    public ResultDO<Void> deleteList(@RequestBody Long[] ids) {
+        //参数校验
+        if (ids == null || ids.length == 0) {
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        List<Long> resultList = new ArrayList<>(ids.length);
+        for (Long s : ids) {
+            resultList.add(s);
+        }
+        ResultDO<Void> voidResultDO = orderService.deleteList(resultList);
         if (voidResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);

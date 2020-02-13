@@ -46,4 +46,19 @@ public interface VipGradeRestController {
      */
     ResultDO<Void> deleteById(long id);
 
+    /**
+     * 删除部分客户信息
+     *
+     * @param numbers
+     * @return
+     */
+    ResultDO<Void> deleteList(Long[] numbers);
+
+    /**
+     * 查询所有等级权益信息
+     *
+     * @return
+     */
+    ResultDO<List<VipGradeDO>> showVipGradeList();
+
 }

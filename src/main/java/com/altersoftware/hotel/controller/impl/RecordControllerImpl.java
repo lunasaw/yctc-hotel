@@ -38,4 +38,6 @@ public class RecordControllerImpl implements RecordController {
     public String test() {
         return "pay/index";
     }
+
+
 }

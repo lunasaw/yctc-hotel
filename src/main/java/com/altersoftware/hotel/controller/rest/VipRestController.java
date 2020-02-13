@@ -48,6 +48,13 @@ public interface VipRestController {
     ResultDO<Void> deleteById(long id);
 
     /**
+     * 删除会员信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(Long[] ids);
+
+    /**
      * 查询所有会员编号
      *
      * @return <List<VipDO>>

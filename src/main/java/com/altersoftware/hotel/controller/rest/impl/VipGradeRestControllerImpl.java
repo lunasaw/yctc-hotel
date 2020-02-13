@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.altersoftware.hotel.constant.ResultCode;
@@ -109,7 +110,7 @@ public class VipGradeRestControllerImpl implements VipGradeRestController {
     }
 
     /**
-     * 根据等级查询信息信息
+     * 根据等级查询信息
      *
      * @param grade
      */
@@ -151,5 +152,50 @@ public class VipGradeRestControllerImpl implements VipGradeRestController {
             return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }
     }
+
+    /**
+     *删除多条记录
+     * @param numbers
+     * @return
+     */
+    @Override
+    @PostMapping("delete-byidlist")
+    public ResultDO<Void> deleteList(@RequestBody Long[] numbers) {
+        //参数校验
+        if (numbers == null || numbers.length == 0) {
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        List<Long> resultList = new ArrayList<>(numbers.length);
+        for (Long s : numbers) {
+            resultList.add(s);
+        }
+        ResultDO<Void> voidResultDO = vipGradeService.deleteList(resultList);
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
+    }
+
+    /**
+     * 查询所有会员权益
+     *
+     * @return <List<VipGradeDO>>
+     */
+    @Override
+    @PostMapping("get-list")
+    public ResultDO<List<VipGradeDO>> showVipGradeList() {
+        ResultDO<List<VipGradeDO>> listResultDO = vipGradeService.showVipGradeList();
+        if (listResultDO.isSuccess() == false) {
+            return new ResultDO<List<VipGradeDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+
+            return new ResultDO<List<VipGradeDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, listResultDO.getModule());
+        }
+    }
+
 
 }
