@@ -93,7 +93,7 @@ public class CustomerServiceImpl implements CustomerService {
         UserDO userDOByNumber = null;
         try {
             userDOByNumber = userDAO.getUserDOByNumber(number);
-            LOG.info("getUserDOByNumber success, number={}", number);
+            LOG.info("getUserDOByNumber success, number={}", userDOByNumber);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userDOByNumber);
         } catch (Exception e) {
             LOG.error("deleteByuserNumber error, number={}", number, e);

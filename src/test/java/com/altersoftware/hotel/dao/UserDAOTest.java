@@ -114,6 +114,12 @@ public class UserDAOTest {
     }
 
     @Test
+    public void getByNumber() {
+        UserDO userDOByNumber = userDAO.getUserDOByNumber("95002");
+        System.out.println(userDOByNumber);
+    }
+
+    @Test
     public void fGetUserByMobileAndPassword() {
         UserDO UserDAOUserDOByMobileAndPassword =
             userDAO.getUserDOByMobileAndPassword(MOBILE, PASSWORD);

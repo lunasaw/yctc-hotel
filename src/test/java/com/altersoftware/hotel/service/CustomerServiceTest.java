@@ -22,42 +22,36 @@ import com.altersoftware.hotel.entity.UserDO;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class StaffServiceTest {
+public class CustomerServiceTest {
 
     @Resource
-    private StaffService staffService;
+    private CustomerService customer;
 
     @Test
-    public void aShowStaff() {
-        ResultDO<UserDO> byNumber = staffService.getByNumber("95002");
+    public void aShowCustomer() {
+        ResultDO<UserDO> byNumber = customer.getByNumber("95002");
         Assert.assertEquals(true, byNumber.isSuccess());
     }
 
     @Test
     public void bGetAll() {
-        ResultDO<List<UserDO>> allStaff = staffService.getAllStaff();
-        Assert.assertEquals(true, allStaff.isSuccess());
+        ResultDO<List<UserDO>> allCustomer = customer.getAllCustomer();
+        Assert.assertEquals(true, allCustomer.isSuccess());
 
     }
 
     @Test
     public void cUpdate() {
-        ResultDO<UserDO> staffDOResultDO = staffService.getByNumber("95002");
+        ResultDO<UserDO> staffDOResultDO = customer.getByNumber("95002");
         UserDO module = staffDOResultDO.getModule();
         module.setAccount(999.7);
-        ResultDO<Void> voidResultDO = staffService.updateUserDO(module);
+        ResultDO<Void> voidResultDO = customer.updateUserDO(module);
         Assert.assertEquals(true, voidResultDO.isSuccess());
     }
 
     @Test
-    public void eShowByDepartmentId() {
-        ResultDO<List<UserDO>> listResultDO = staffService.getStaffByDepartmentId(1);
-        Assert.assertEquals(true, listResultDO.isSuccess());
-    }
-
-    @Test
     public void gDelete() {
-        ResultDO<Void> voidResultDO = staffService.deleteByUserId("10038");
+        ResultDO<Void> voidResultDO = customer.deleteByUserId("10038");
         Assert.assertEquals(true, voidResultDO.isSuccess());
     }
 }
