@@ -34,6 +34,14 @@ public interface CustomerService {
     ResultDO<Void> deleteByUserId(String number);
 
     /**
+     * 删除部分客户信息
+     *
+     * @param numbers
+     * @return
+     */
+    ResultDO<Void> deleteList(List<String> numbers);
+
+    /**
      * 会员号搜索客户/员工
      *
      * @param number

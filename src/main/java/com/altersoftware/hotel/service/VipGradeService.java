@@ -40,6 +40,13 @@ public interface VipGradeService {
     ResultDO<List<VipGradeDO>> showVipGradeByGrade(String grade);
 
     /**
+     * 查询所有等级权益信息
+     * 
+     * @return
+     */
+    ResultDO<List<VipGradeDO>> showVipGradeList();
+
+    /**
      * 删除等级信息
      *
      * @return

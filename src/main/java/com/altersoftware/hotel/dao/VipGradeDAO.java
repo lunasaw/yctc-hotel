@@ -78,4 +78,12 @@ public interface VipGradeDAO {
      */
     @Select("select id, equity, grade, discount, create_time, modify_time from tb_vip_grade where grade=#{grade}")
     List<VipGradeDO> getVipIdList(String grade);
+
+    /**
+     * 会员权益list
+     *
+     * @return
+     */
+    @Select("select id, equity, grade, discount, create_time, modify_time from tb_vip_grade ")
+    List<VipGradeDO> getVipGradeList();
 }
