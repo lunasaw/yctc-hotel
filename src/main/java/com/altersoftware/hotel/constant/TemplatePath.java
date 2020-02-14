@@ -114,11 +114,10 @@ public class TemplatePath {
     public static final String CUSTOMER_INFO                              = "customer/customer-info";
 
     /** 客户信息页面 */
-    public static final String CUSTOMER_INFO_TABLE                             = "customer/customer-infotable";
-
+    public static final String CUSTOMER_INFO_TABLE                        = "customer/customer-infotable";
 
     /** 客户信息修改页面 */
-    public static final String CUSTOMER_UPDATE                             = "customer/updateByCustomer";
+    public static final String CUSTOMER_UPDATE                            = "customer/updateByCustomer";
 
     /** 会员信息页面 */
     public static final String VIP_INFO                                   = "vip/vipinfo";
@@ -130,7 +129,7 @@ public class TemplatePath {
     public static final String VIP_GRADE_INFO                             = "vip/vipGrade";
 
     /** 会员等级信息子页面 */
-    public static final String VIP_GRADE_INFO_TABLE                            = "vip/vipGradeTable";
+    public static final String VIP_GRADE_INFO_TABLE                       = "vip/vipGradeTable";
 
     /** 酒店信息页面 */
     public static final String HOTEL                                      = "hotel/hotels";
@@ -139,7 +138,7 @@ public class TemplatePath {
     public static final String GOODS                                      = "hotel/goods";
 
     /** 物品信息页面 */
-    public static final String GOODS_TABLE                                      = "hotel/goodstable";
+    public static final String GOODS_TABLE                                = "hotel/goodstable";
 
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
@@ -148,13 +147,13 @@ public class TemplatePath {
     public static final String DEPARTMENT                                 = "hotel/depatment";
 
     /** 部门表格页面 */
-    public static final String DEPARTMENT_TABLE                                = "hotel/depatmenttable";
+    public static final String DEPARTMENT_TABLE                           = "hotel/depatmenttable";
 
     /** 员工信息页面 */
     public static final String STAFF_INFO                                 = "staff/staffinfo";
 
     /** 员工信息页面 */
-    public static final String STAFF_INFO_TABLE                             = "staff/stafftable";
+    public static final String STAFF_INFO_TABLE                           = "staff/stafftable";
 
     /** 订单信息页面 */
     public static final String RECORD_INFO                                = "order/record";
@@ -168,8 +167,8 @@ public class TemplatePath {
     /** 支付宝回调/返回是否支付成功页面 */
     public static final String CHECK_ALI_PAY                              = "pay/checkalipay";
 
-    /** 用户订单交付页面*/
-    public static final String SUBMIT_RECORD                              ="pay/roomReserve";
+    /** 用户订单交付页面 */
+    public static final String SUBMIT_RECORD                              = "pay/roomReserve";
 
     /** 客户历史订单页面 */
     public static final String RECORD_BY_CUSTOMER                         = "customer/recordByCustomer";
@@ -178,7 +177,7 @@ public class TemplatePath {
     public static final String RECORD_BY_ADMIN                            = "order/recordByAdmin";
 
     /** 管理员订单统计子页面 */
-    public static final String RECORD_BY_ADMIN_TABLE                            = "order/recordByAdmintable";
+    public static final String RECORD_BY_ADMIN_TABLE                      = "order/recordByAdmintable";
 
     /** 客户菜品历史订单页面 */
     public static final String ORDER_BY_CUSTOMER                          = "customer/orderByCustomer";
@@ -187,7 +186,6 @@ public class TemplatePath {
     public static final String ORDER_BY_ADMIN                             = "order/orderByAdmin";
 
     /** 管理员菜品历史订单页面 */
-    public static final String ORDER_BY_ADMIN_TABLE                            = "order/orderByAdminTable";
-
+    public static final String ORDER_BY_ADMIN_TABLE                       = "order/orderByAdminTable";
 
 }
