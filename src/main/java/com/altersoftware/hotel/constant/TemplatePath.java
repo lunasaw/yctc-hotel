@@ -73,6 +73,10 @@ public class TemplatePath {
 
     /** 我的信息 */
     public static final String USER_MY_INFORMATION                        = "user/my-information";
+
+    /** 我的信息 */
+    public static final String USER_MY_INFORMATION_UPDATE                 = "user/my-informationupdate";
+
     // user end
 
     // news start

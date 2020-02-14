@@ -33,7 +33,7 @@ public class RecordRestControllerImpl implements RecordRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<RecordDO> showRecord(long id) {
+    public ResultDO<RecordDO> showRecord(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,

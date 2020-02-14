@@ -721,4 +721,12 @@ public class UserControllerImpl implements UserController {
         return TemplatePath.USER_MY_INFORMATION;
     }
 
+    @Override
+    @GetMapping("my-informationupdate")
+    public String showMyInformationupdate(Model model, HttpSession httpSession) {
+        long userId = SessionContentHolder.getSignInUserIdBySessionId(httpSession.getId());
+        model.addAttribute("userId", userId);
+        return TemplatePath.USER_MY_INFORMATION_UPDATE;
+    }
+
 }

@@ -56,7 +56,7 @@ public class DepartmentRestControllerImpl implements DepartmentRestController {
      */
     @Override
     @PostMapping("get-department")
-    public ResultDO<DepartmentDO> showDepartment(long id) {
+    public ResultDO<DepartmentDO> showDepartment(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<DepartmentDO>(false, ResultCode.PARAMETER_INVALID,
@@ -86,7 +86,6 @@ public class DepartmentRestControllerImpl implements DepartmentRestController {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
-
         ResultDO<DepartmentDO> departmentDOResultDO = departmentService.showDepartment(departmentDO.getId());
         if (departmentDOResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
@@ -98,7 +97,7 @@ public class DepartmentRestControllerImpl implements DepartmentRestController {
             resultDOModule.setStaffId(departmentDO.getStaffId());
             resultDOModule.setStaffNumbers(departmentDO.getStaffNumbers());
 
-            ResultDO<Void> voidResultDO = departmentService.insert(resultDOModule);
+            ResultDO<Void> voidResultDO = departmentService.updateDepartmentDO(resultDOModule);
             if (voidResultDO.isSuccess() == false) {
                 return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);

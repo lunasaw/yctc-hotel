@@ -23,11 +23,177 @@
     <button id="btn_delete" type="button" class="btn btn-default" onclick="deleteAll();">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
     </button>
+
+    <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+    </button>
 </div>
+
 <table id="table">
 
 </table>
+<!-- 模态框（Modal） 新增 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width: 800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title text-center" id="addModalLabel">
+                    新增物品信息
+                </h2>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group has-error">
+                        <label class="col-sm-2 control-label">订单编号</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="add_id">
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-2 control-label">房间号</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="add_roomnum">
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-2 control-label">客户编号</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="add_Customid">
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-2 control-label">处理员工编号</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="add_Staffid">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-2 control-label">入住时间</label>
+                        <div class="col-sm-10">
+                            <input type="Date" class="form-control" id="add_inDtae">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-2 control-label">退房时间</label>
+                        <div class="col-sm-10">
+                            <input type="Date" class="form-control" id="add_outDate">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-2 control-label">预计入住时间间隔</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="add_During">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-2 control-label">实际付款金额</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="add_Tprice">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-2 control-label">评价</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="6" id="add_Eva"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="add_State">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="add();">添加</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 
+<!-- 模态框（Modal） 编辑 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="editModalLabel">
+                    修改房间订单信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group has-success">
+                        <label class="col-sm-4 control-label">订单编号</label>
+                        <div class="col-sm-8">
+                            <input  class="form-control" type="number" id="edit_id">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-4 control-label">房间号</label>
+                        <div class="col-sm-8">
+                            <input  class="form-control" type="number" id="edit_roomnum">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-4 control-label">客户编号</label>
+                        <div class="col-sm-8">
+                            <input  class="form-control" type="number" id="edit_CustomId">
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="col-sm-4 control-label">处理员工编号</label>
+                        <div class="col-sm-8">
+                            <input  class="form-control" type="number" id="edit_Staffid">
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-4 control-label">入住时间</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="Date" id="edit_InDate" >
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-4 control-label">退房时间</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="Date" id="edit_OutDate" >
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-4 control-label">预计入住时间间隔</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" id="edit_During" >
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-4 control-label">实际付款金额</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" id="edit_Tprice" >
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-4 control-label">评价</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="6" id="edit_Eva"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-4 control-label">状态</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" id="edit_State" >
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="edit();">修改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <!-- 模态框-详情 -->
 <div aria-hidden="true" aria-labelledby="exact" class="modal fade" id="exact" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-xl" role="document">
@@ -52,6 +218,7 @@
                         <p >入住时间：</p><span id="text7"></span><br>
                         <p >退房时间：</p><span id="text8"></span><br>
                         <p >评价：</p><span id="text9"></span><br>
+                        <p >状态：</p><span id="text10"></span><br>
                     </div>
                 </div>
             </div>
@@ -128,8 +295,81 @@
         $("#text7").text(rows[index].checkInTime);
         $("#text8").text(rows[index].checkOutTime);
         $("#text9").text(rows[index].evaluate);
+        $("#text10").text(rows[index].state);
     }
 
+    //修改
+    function initEdit(index) {
+        let rows = $("#table").bootstrapTable('getData');
+        $("#edit_id").val(rows[index].id);
+        $("#edit_roomnum").val(rows[index].roomNumber);
+        $("#edit_CustomId").val(rows[index].customerId);
+        $("#edit_Staffid").val(rows[index].staffId);
+        $("#edit_Tprice").val(rows[index].payMoney);
+        $("#edit_During").val(rows[index].precheckInTime);
+        $("#edit_InDate").val(rows[index].checkInTime);
+        $("#edit_OutDate").val(rows[index].checkOutTime);
+        $("#edit_Eva").val(rows[index].evaluate);
+        $("#edit_State").val(rows[index].state);
+        parameterPostRequest("/hotel/record/get-byid", rows[index].id, result => {
+            if (null !== result.module) {
+                editType = rows[index].type;
+            } else {
+                swal("错误", "不存在该用户", "error");
+            }
+        });
+    }
+    function edit() {
+        let data = {
+            "id": $("#edit_id").val(),
+            "roomNumber": $("#edit_roomnum").val(),
+            "customerId": $("#edit_CustomId").val(),
+            "staffId": $("#edit_Staffid").val(),
+            "payMoney": $("#edit_Tprice").val(),
+            "precheckInTime": $("#edit_During").val(),
+            "checkInTime": $("#edit_InDate").val(),
+            "checkOutTime": $("#edit_OutDate").val(),
+            "evaluate": $("#edit_Eva").val(),
+            "state": $("#edit_State").val(),
+        };
+        if  ( data.id <=0 || data.evaluate == null || data.roomNumber <= 0
+            || data.customerId <= 0 ||data.staffId <= 0 ||data.payMoney <= 0 ||data.state < 0 || data.precheckInTime <= 0)  {
+            swal("错误", "请输入必输入项！", "error");
+        }else {
+            parameterPostRequest("/hotel/record/update", data, () => {
+                $('#editModal').modal('hide');
+                swal("正确", "编辑成功", "success");
+                init();
+            });
+        }
+    }
+
+
+    // 添加
+    function add() {
+        let data = {
+            "id": $("#add_id").val(),
+            "roomNumber": $("#add_roomnum").val(),
+            "customerId": $("#add_Customid").val(),
+            "staffId": $("#add_Staffid").val(),
+            "payMoney": $("#add_Tprice").val(),
+            "precheckInTime": $("#add_During").val(),
+            "checkInTime": $("#add_inDtae").val(),
+            "checkOutTime": $("#add_outDate").val(),
+            "evaluate": $("#add_Eva").val(),
+            "state": $("#add_State").val(),
+        };
+        if ( data.id <=0 || data.evaluate == null || data.checkInTime == "" || data.checkOutTime == ""|| data.roomNumber <= 0
+            || data.customerId <= 0 ||data.staffId <= 0 ||data.payMoney <= 0 ||data.state < 0 || data.precheckInTime <= 0) {
+            swal("错误", "请输入必输入项！", "error");
+        } else {
+            parameterPostRequest("/hotel/placeorder/accept-order", data, () => {
+                $('#addModal').modal('hide');
+                swal("正确", "添加成功", "success");
+                init();
+            });
+        }
+    }
 </script>
 </body>
 </html>
