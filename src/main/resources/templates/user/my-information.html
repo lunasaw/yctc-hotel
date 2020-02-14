@@ -1,141 +1,149 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
-	xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="component/head :: head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<head th:replace="component/head :: head"></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body onload="getRequest()">
-	<header th:replace="component/header :: header"></header>
+  <title>用户服务中心</title>
 
-	<!-- Begin page content -->
-	<div class="container">
-		<div class="row">
-			<div th:replace="component/sidebar"></div>
 
-			<div class="col-md-9">
-				<div th:replace="component/page-title::pageTitle('我的信息')"></div>
+</head>
 
-				<div shiro:hasPermission="stu:myPictureAndClassAndFaceTokenShow" class="row" >
-					<div class="col-md-4 offset-md-4 mb-3">
-						<div class="text-center">
-							<img  id="basic-url-picture" src="" alt="用户照片" class="img-thumbnail">
-						</div>
-					</div>
-				</div>
+<body>
 
-				<div class="row">
-					<div class="col-md-8 offset-md-2">
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">学院</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-academy" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div shiro:hasPermission="stu:myPictureAndClassAndFaceTokenShow" class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">班级</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-classes" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">学/工号</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-number" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">姓名</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-name" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">性别</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-sex" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">身份证</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-idCardNumber" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">手机号</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-phone" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">邮箱</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-mail" aria-describedby="basic-addon3" readonly>
-						</div>
-						<div shiro:hasPermission="stu:myPictureAndClassAndFaceTokenShow" class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">Face-token</span>
-							</div>
-							<input type="text" class="form-control" id="basic-url-faceToken" aria-describedby="basic-addon3" readonly>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <header th:replace="component/fram :: commonHeader"></header>
 
-	<footer th:replace="component/footer :: footer"></footer>
+  <div class="container" th:replace="component/fram :: commonMenu"></div>
 
-	<script th:inline="javascript">
-		
-		function getRequest() {
-			//获取id
-			var id = [[${userId}]];
-			id = unescape(id);
-			$.ajax({
-				url: "/hotel/restuser/get-user-information-by-id",
-				type: "POST",
-				data: id,
-				contentType: "application/json; charset=utf-8",
-				dataType: 'json',
-				async: true,
-				success: function (result) {
-					if (result.success == false) {
-						if (result.code == 9002) {
-							alert("参数错误");
-						} else if (result.code == 9999) {
-							alert("系统错误");
-						} else if (result.code == 1025) {
-							alert("数据库查找不到相关数据");
-						}
-					} else {
-						var vo = result.module;
-						document.getElementById('basic-url-academy').value = vo.academyName;
-						document.getElementById('basic-url-number').value = vo.userDO.number;
-						document.getElementById('basic-url-name').value = vo.userDO.name;
-						document.getElementById('basic-url-sex').value = vo.userDO.sex;
-						document.getElementById('basic-url-idCardNumber').value = vo.userDO.idCardNumber;
-						document.getElementById('basic-url-phone').value = vo.userDO.phone;
-						document.getElementById('basic-url-mail').value = vo.userDO.mail;
-						
-						var type = vo.userDO.type;
-						if(type==2){
-							document.getElementById('basic-url-classes').value = vo.className;
-							document.getElementById('basic-url-picture').src = vo.userDO.picture;
-							document.getElementById('basic-url-faceToken').value = vo.userDO.faceToken;
-						} 
-					}
-				},
-				error: function (e) {
-					alert("getRequest异常");
-				}
-			});
-		}	
-	</script>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
 
-	<div th:replace="component/footer-lib"></div>
+    <div id="main-wrapper">
+
+      <div class="page-wrapper">
+
+        <div class="container-fluid">
+          <h3>个人信息</h3>
+          <hr style="margin-bottom: 25px;">
+          <div class="row">
+            <!-- Column -->
+            <div class="col-lg-4 col-xlg-3 col-md-5">
+              <div class="card">
+                <div class="card-body">
+                  <center class="m-t-30"> <img src="" id="userimg" class="img-circle" width="150" />
+                  </center>
+                </div>
+              </div>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-8 col-xlg-9 col-md-7">
+              <div class="card">
+                <div class="card-body">
+                  <form class="form-horizontal form-material">
+                    <div class="form-group">
+                      <label class="col-md-12">会员账号</label>
+                      <div class="col-md-12">
+                        <input type="text" disabled placeholder="" class="form-control form-control-line">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="example-email" class="col-md-12">用户姓名</label>
+                      <div class="col-md-12">
+                        <input type="text" disabled placeholder="" class="form-control form-control-line"
+                          name="example-email" id="example-email">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-12">用户性别</label>
+                      <div class="col-sm-12">
+                        <input type="text" disabled placeholder="" class="form-control form-control-line" id="usersex">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-12">用户年龄 </label>
+                      <div class="col-md-12">
+                        <input type="number" disabled placeholder="" class="form-control form-control-line" id="userage">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-12">联系方式</label>
+                      <div class="col-md-12">
+                        <input type="number" disabled placeholder="" class="form-control form-control-line" id="userphone">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-12">邮箱地址</label>
+                      <div class="col-md-12">
+                        <input type="email" disabled placeholder="" class="form-control form-control-line" id="useremail">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <a th:href="@{/user/my-informationupdate}"><button class="btn btn-success" style="margin-left: 80%;">修改个人信息</button></a>>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+
+  <footer th:replace="component/fram :: commonFooter"></footer>
+
+  <script>
+      function getCookie(objName) {//获取指定名称的cookie的值
+          var arrStr = document.cookie.split("; ");
+          for (var i = 0; i < arrStr.length; i++) {
+              var temp = arrStr[i].split("=");
+              if (temp[0] == objName)
+                  return unescape(temp[1]);
+          }
+      }
+
+      var string = getCookie("userId");
+      console.log(string);
+
+      $(document).ready(function () {
+          console.log("获取用户名");
+          $.ajax({
+              url: "/hotel/customer/get-byId",
+              type: "POST",
+              contentType: "application/x-www-form-urlencoded",
+              data: {
+                  "customerId": string
+              },
+              success:function(result) {
+                  var data = result.module;
+                  console.log(data);
+                  $("#userimg").attr({src: data.faceId,});
+                  $('#example-email').val(data.name);
+                  $('#usersex').val(data.sex);
+                  $('#userage').val(data.age);
+                  $('#userphone').val(data.contactPhone);
+                  $('#useremail').val(data.email);
+              }
+          })
+  </script>
 </body>
 
 </html>

@@ -30,6 +30,11 @@ public class OrderRestControllerImpl implements OrderRestController {
     @Autowired
     OrderService orderService;
 
+    /**
+     *
+     * @param orderVO
+     * @return
+     */
     @Override
     @PostMapping("add-order")
     public ResultDO<Void> createOrder(@RequestBody OrderVO orderVO) {
@@ -65,7 +70,7 @@ public class OrderRestControllerImpl implements OrderRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<OrderDO> showOrder(long id) {
+    public ResultDO<OrderDO> showOrder(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<OrderDO>(false, ResultCode.PARAMETER_INVALID,

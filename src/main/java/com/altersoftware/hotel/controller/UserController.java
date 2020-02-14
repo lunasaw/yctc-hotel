@@ -199,5 +199,11 @@ public interface UserController {
      */
     String showMyInformation(Model model, HttpSession httpSession);
 
+    /**
+     * 修改我的信息页面
+     *
+     * @return
+     */
+    String showMyInformationupdate(Model model, HttpSession httpSession);
 
 }

@@ -56,7 +56,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<GoodsDO> showGoods(long id) {
+    public ResultDO<GoodsDO> showGoods(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<GoodsDO>(false, ResultCode.PARAMETER_INVALID,

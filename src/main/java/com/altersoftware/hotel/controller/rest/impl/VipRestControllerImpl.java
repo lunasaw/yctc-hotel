@@ -58,7 +58,7 @@ public class VipRestControllerImpl implements VipRestController {
      */
     @Override
     @PostMapping("get-vip")
-    public ResultDO<VipDO> showVip(long id) {
+    public ResultDO<VipDO> showVip(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<VipDO>(false, ResultCode.PARAMETER_INVALID,
