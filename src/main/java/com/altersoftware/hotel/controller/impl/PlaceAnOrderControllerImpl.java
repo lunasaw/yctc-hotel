@@ -53,6 +53,7 @@ public class PlaceAnOrderControllerImpl implements PlaceAnOrderController {
     public String RrcordByAdminTable() {
         return TemplatePath.RECORD_BY_ADMIN_TABLE;
     }
+
     /**
      * 客户信息订单页面
      *
