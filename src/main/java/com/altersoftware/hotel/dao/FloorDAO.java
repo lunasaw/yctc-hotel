@@ -41,6 +41,22 @@ public interface FloorDAO {
     FloorDO getFloorDOById(long id);
 
     /**
+     * 查找楼层List消息
+     *
+     */
+    @Select("select id, roomnumbers, plan_diagram, fireevacuation_diagram, three_d_diagram, create_time, modify_time from tb_floor ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "roomNumbers", column = "roomnumbers"),
+        @Result(property = "plan", column = "plan_diagram"),
+        @Result(property = "fireDiagram", column = "fireevacuation_diagram"),
+        @Result(property = "threeDDiagram", column = "three_d_diagram"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<FloorDO> getFloorList();
+
+    /**
      * 更新楼层消息
      *
      * @param floorDO

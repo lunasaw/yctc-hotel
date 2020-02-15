@@ -11,6 +11,12 @@ import com.altersoftware.hotel.entity.ResultDO;
  */
 public interface FloorService {
     /**
+     * 查询所有楼层信息
+     *
+     * @return
+     */
+    ResultDO<List<FloorDO>> getAll();
+    /**
      * 插入一条楼层信息
      * 
      * @param floorDO

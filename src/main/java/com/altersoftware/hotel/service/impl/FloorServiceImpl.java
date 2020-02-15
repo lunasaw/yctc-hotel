@@ -30,6 +30,19 @@ public class FloorServiceImpl implements FloorService {
     private FloorDAO            floorDAO;
 
     @Override
+    public ResultDO<List<FloorDO>> getAll() {
+        try {
+            List<FloorDO> all = floorDAO.getFloorList();
+            LOG.info("getAll success, goodsDO list={}", all);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, all);
+        } catch (Exception e) {
+            LOG.error("getAll error", e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
     public ResultDO<Void> insert(FloorDO floorDO) {
         try {
             floorDAO.insert(floorDO);

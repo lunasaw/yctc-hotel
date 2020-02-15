@@ -68,6 +68,19 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     }
 
     @Override
+    public ResultDO<Void> updatFile(long id, String fileName) {
+        int update = roomTypeDAO.updateFile(fileName, id);
+        if (update == 1) {
+            LOG.info("updateRoom success, update={}", update);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } else {
+            LOG.error("updateRoom error");
+            return new ResultDO<>(false, ResultCode.UPDATE_FAILD,
+                ResultCode.MSG_UPDATE_FAILD);
+        }
+    }
+
+    @Override
     public ResultDO<RoomTypeDO> getRoomTypeDOById(long id) {
         try {
             RoomTypeDO roomTypeDOById = roomTypeDAO.getRoomTypeDOById(id);

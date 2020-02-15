@@ -51,6 +51,7 @@ public interface RoomDAO {
     @Update("update tb_room  set floor_id=#{floorId}, room_number=#{roomNumber},  type=#{type}, price=#{price}, deposit=#{deposit}, state=#{state},  modify_time=now()  where id=#{id}")
     int update(RoomDO roomDO);
 
+
     /**
      * 根据id删除一条房间消息
      *

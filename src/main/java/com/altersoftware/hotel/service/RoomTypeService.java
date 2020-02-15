@@ -28,6 +28,15 @@ public interface RoomTypeService {
     ResultDO<Void> updateRoom(RoomTypeDO roomTypeDO);
 
     /**
+     * 上传文件
+     * 
+     * @param id
+     * @param fileName
+     * @return
+     */
+    ResultDO<Void> updatFile(long id, String fileName);
+
+    /**
      * 删除指定房间类别数据
      */
     ResultDO<Void> deleteRoomTypeDO(long id);
