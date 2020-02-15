@@ -33,7 +33,7 @@ public interface RoomTypeService {
     ResultDO<Void> deleteRoomTypeDO(long id);
 
     /**
-     * 删除指定房间类别数据
+     * 删除部分房间类别数据
      */
     ResultDO<Void> deleteList(List<Long> ids);
 

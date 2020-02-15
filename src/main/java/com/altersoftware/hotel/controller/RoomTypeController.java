@@ -8,4 +8,8 @@ public interface RoomTypeController {
 
     String showRoomType();
 
+    String showRoomTypeAdmin();
+
+    String showRoomTypeAdminTable();
+
 }

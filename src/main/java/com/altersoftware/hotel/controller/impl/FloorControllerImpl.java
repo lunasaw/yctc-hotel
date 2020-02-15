@@ -39,4 +39,26 @@ public class FloorControllerImpl implements FloorController {
         model.addAttribute("floors",module);
         return TemplatePath.FLOOR;
     }
+
+    /**
+     * 管理员楼层信息页面
+     *
+     * @return
+     */
+    @Override
+    @GetMapping("show-flooradmin")
+    public String showFlooradmin() {
+        return TemplatePath.FLOOR_ADMIN;
+    }
+
+    /**
+     * 管理员楼层信息页面
+     *
+     * @return
+     */
+    @Override
+    @GetMapping("show-flooradmintable")
+    public String showFlooradmintable() {
+        return TemplatePath.FLOOR_ADMIN_TABLE;
+    }
 }
