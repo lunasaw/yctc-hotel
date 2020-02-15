@@ -145,4 +145,6 @@ public class ResultCode {
     public static final int ERROR_SYSTEM_EXCEPTION = 9999;
     public static final String MSG_ERROR_SYSTEM_EXCEPTION = "system error";
 
+
+
 }

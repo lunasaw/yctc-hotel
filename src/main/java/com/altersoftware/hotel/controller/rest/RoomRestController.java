@@ -57,4 +57,12 @@ public interface RoomRestController {
      * @return
      */
     ResultDO<Void> deleteById(long id);
+
+    /**
+     * 删除部分房间信息
+     *
+     * @param ids
+     * @return
+     */
+    ResultDO<Void> deleteList(Long[] ids);
 }

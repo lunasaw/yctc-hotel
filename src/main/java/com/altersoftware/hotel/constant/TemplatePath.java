@@ -117,6 +117,12 @@ public class TemplatePath {
     /** 房间修改页面 */
     public static final String ROOMS_UPDATE                               = "hotel/rooms-update";
 
+    /** 房间信息页面 */
+    public static final String ROOM_ADMIN                                      = "hotel/roomAdmin";
+
+    /** 房间信息页面 */
+    public static final String ROOM_ADMIN_TABLE                                      = "hotel/roomAdminTable";
+
     /** 房间类别信息页面 */
     public static final String ROOM_TYPE                                  = "hotel/roomType";
 
@@ -158,6 +164,12 @@ public class TemplatePath {
 
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
+
+    /** 菜品信息页面 */
+    public static final String MENUS_ADMIN                               = "hotel/menuadmin";
+
+    /** 菜品信息页面 */
+    public static final String MENUS_ADMIN_TABLE                         = "hotel/menuadmintable";
 
     /** 部门信息页面 */
     public static final String DEPARTMENT                                 = "hotel/depatment";

@@ -1,7 +1,9 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -113,6 +115,25 @@ public class MenuRestControllerImpl implements MenuRestController {
         }
     }
 
+    @Override
+    @PostMapping("update-roompic")
+    public ResultDO<Void> updatepic(@RequestBody MenuDO menuDO) {
+        //参数校验
+        if (menuDO.getId() <= 0 || StringUtils.isBlank(menuDO.getPicture())){
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+
+        ResultDO<MenuDO> menuDOResultDO = menuService.showById(menuDO.getId());
+        menuDOResultDO.getModule().setId(menuDO.getId());
+        menuDOResultDO.getModule().setPicture(menuDO.getPicture());
+
+        ResultDO<Void> voidResultDO = menuService.update(menuDOResultDO.getModule());
+
+        return voidResultDO;
+    }
+
+
     /**
      * 删除菜品信息
      *
@@ -132,6 +153,32 @@ public class MenuRestControllerImpl implements MenuRestController {
         if (voidResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
+    }
+
+    /**
+     *删除多条记录
+     * @param ids
+     * @return
+     */
+    @Override
+    @PostMapping("delete-byidlist")
+    public ResultDO<Void> deleteList(@RequestBody Long[] ids) {
+        //参数校验
+        if (ids == null || ids.length == 0) {
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        List<Long> resultList = new ArrayList<>(ids.length);
+        for (Long s : ids) {
+            resultList.add(s);
+        }
+        ResultDO<Void> voidResultDO = menuService.deleteList(resultList);
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }

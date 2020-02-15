@@ -3,6 +3,7 @@ package com.altersoftware.hotel.controller.rest.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
@@ -104,6 +105,22 @@ public class RoomTypeRestControllerImpl implements RoomTypeRestController {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             }
         }
+    }
+
+    @Override
+    @PostMapping("update-roompic")
+    public ResultDO<Void> updateRoompic(@RequestBody RoomTypeDO roomTypeDO) {
+        //参数校验
+        if (roomTypeDO.getId() <= 0 || StringUtils.isBlank(roomTypeDO.getPicture())){
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        ResultDO<RoomTypeDO> roomTypeDOById = roomTypeService.getRoomTypeDOById(roomTypeDO.getId());
+        roomTypeDOById.getModule().setId(roomTypeDO.getId());
+        roomTypeDOById.getModule().setPicture(roomTypeDO.getPicture());
+
+
+        return roomTypeService.updateRoom( roomTypeDOById.getModule());
     }
 
     /**
