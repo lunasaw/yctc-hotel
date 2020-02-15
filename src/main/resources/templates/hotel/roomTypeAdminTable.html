@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link th:href="@{/css/bootstrap.min.css}"  href="../../static/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-table.min.css}"  href="../../static/css/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../static/css/file.css" rel="stylesheet" th:href="@{/css/file.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"  src="../../static/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <!--<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../../static/js/lib/bootstrap-table.min.js" th:src="@{/js/lib/bootstrap-table.min.js}" type="text/javascript"></script>
+    <script src="../../static/js/lib/bootstrap-table-zh-CN.min.js" th:src="@{/js/lib/bootstrap-table-zh-CN.min.js}" type="text/javascript"></script>
+    <script src="../../static/js/lib/sweetalert.min.js" th:src="@{/js/lib/sweetalert.min.js}"></script>
+    <script src="../../static/js/lib/es6-promise.auto.min.js" th:src="@{/js/lib/es6-promise.auto.min.js}"></script>
+    <!--<script src="../../static/js/lib/popper.min.js" th:src="@{/js/lib/popper.min.js}"></script>-->
+    <script src="../../static/js/common.js" th:src="@{/js/common.js}" type="text/javascript"></script>
+    <script src="../../static/js/lib/fileinput.min.js" th:src="@{/js/lib/fileinput.min.js}"></script>
+    <script src="../../static/js/lib/fileinput_locale_zh.js" th:src="@{/js/lib/fileinput_locale_zh.js}"></script>
+</head>
+<body onload="init();">
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_delete" type="button" class="btn btn-default" onclick="deleteAll();">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+        <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+    </div>
+
+    <table id="table"></table>
+    <!-- 模态框（Modal） 查看 -->
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="viewModalLabel">
+                        查看房间类别信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <caption>房间类别信息</caption>
+                        <tbody>
+                        <tr>
+                            <td>房间类别编号</td>
+                            <td id="view_id">xxx</td>
+                        </tr>
+                        <tr>
+                            <td>房间类别</td>
+                            <td id="view_type">xxx</td>
+                        </tr>
+                        <tr>
+                            <td>房间类别名称</td>
+                            <td id="view_typename">xxx</td>
+                        </tr>
+                        <tr>
+                            <td>预计入住人数</td>
+                            <td id="view_prenum">xxx</td>
+                        </tr>
+                        <tr>
+                            <td>房间类别图片</td>
+                            <td>
+                                <img id="view_photo" alt="图片未加载" style="width: 48px; height: 48px; line-height: 48px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>房间描述</td>
+                            <td id="view_des">xxx</td>
+                        </tr>
+                        <tr>
+                            <td>房间大小</td>
+                            <td id="view_wide">xxx</td>
+                        </tr>
+                        <tr>
+                            <td>是否可加床</td>
+                            <td id="view_bool">xxx</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- 模态框（Modal） 编辑 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="editModalLabel">
+                        编辑房间类别信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group has-success">
+                            <label class="col-sm-2 control-label" for="edit_id">房间类别编号</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="edit_id">
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label class="col-sm-2 control-label" for="edit_type">房间类别</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="edit_type">
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label class="col-sm-2 control-label" for="edit_typename">房间类别名称</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="edit_typename">
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label class="col-sm-2 control-label" for="edit_prenum">预计入住人数</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="edit_prenum">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label class="col-sm-2 control-label" for="edit_des">房间描述</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="edit_des">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label class="col-sm-2 control-label" for="edit_wide">房间大小</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="edit_wide">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <label class="col-sm-2 control-label" for="edit_bool">是否可加床</label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="edit_bool">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imgModal">图片上传</button>
+                    <button type="button" class="btn btn-success" onclick="edit();">修改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!-- 模态框（Modal） 图片上传 -->
+    <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="imgModalLabel">
+                        图片上传
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input id="upload" type="file" class="file" name="file">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <script>
+        // 构造表格
+        initTable($('#table'), [10, 25, 100, 100],
+            [{
+                checkbox: true
+            }, {
+                field: 'id',
+                title: '房间类别编号',
+                width: '40px'
+            }, {
+                field: 'roomType',
+                title: '房间类别',
+                width: '40px'
+            }, {
+                field: 'name',
+                title: '房间类别名称',
+                width: '100px'
+            },{
+                field: 'userNumber',
+                title: '预计入住人数',
+                width: '50px'
+            },{
+                field: 'description',
+                title: '房间描述',
+                width: '50px'
+            },{
+                title: '操作',
+                width: '100px',
+                formatter: operateFormatter // 自定义方法，添加操作按钮
+            }]);
+
+        function operateFormatter(value, row, index) {  // 赋予的参数
+            return [
+                '<button class="btn btn-success view" data-toggle="modal" data-target="#viewModal" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
+                '<button class="btn btn-primary view" data-toggle="modal" data-target="#editModal" onclick="initEdit('+ index +');">编辑</button>&nbsp;&nbsp;' +
+                '<button class="btn btn-danger view" onclick="deleteOne('+ index +');">删除</button>&nbsp;&nbsp;'
+            ].join('');
+        }
+
+        // 初始化表格信息
+        function init() {
+            noParameterPostRequest("/hotel/roomTypeInfo/get-list", result => {
+                console.info(result);
+                let data = { total: result.module.length, rows: result.module };
+                $("#table").bootstrapTable("load", data);
+            });
+        }
+
+        // 查看
+        function view(index) {
+            let rows = $("#table").bootstrapTable('getData');
+            $("#view_id").text(rows[index].id);
+            $("#view_type").text(rows[index].roomType);
+            $("#view_typename").text(rows[index].name);
+            $("#view_prenum").text(rows[index].userNumber);
+            $("#view_des").text(rows[index].description);
+            $("#view_wide").text(rows[index].wide);
+            $("#view_bool").text(rows[index].addBed);
+            if (rows[index].picture !== null && rows[index].picture !== "") {
+                $("#view_photo").attr('src', rows[index].picture);
+            }
+        }
+
+        // 删除
+        function deleteAll() {
+            dialog("确定删除吗？", () => {
+                let filNames = $("#table").bootstrapTable('getSelections');
+                parameterPostRequest("/hotel/roomTypeInfo/delete-byidlist", filNames.map(item => item.id), () => {
+                    swal("删除", "文件删除成功", "success");
+                    init();
+                });
+            });
+        }
+
+        //修改
+        function initEdit(index) {
+            let rows = $("#table").bootstrapTable('getData');
+            $("#edit_id").val(rows[index].id);
+            $("#edit_type").val(rows[index].roomType);
+            $("#edit_typename").val(rows[index].name);
+            $("#edit_prenum").val(rows[index].userNumber);
+            $("#edit_des").val(rows[index].description);
+            $("#edit_wide").val(rows[index].wide);
+            $("#edit_bool").val(rows[index].addBed);
+        }
+        function edit() {
+            let data = {
+                "id": $("#edit_id").val(),
+                "roomType": $("#edit_type").val(),
+                "name": $("#edit_typename").val(),
+                "userNumber": $("#edit_prenum").val(),
+                "description":$("#edit_des").val(),
+                "wide":$("#edit_wide").val(),
+                "addBed":$("#edit_bool").val(),
+            };
+            if ( data.id <=0 || data.roomType <= 0 || data.name == null || data.userNumber <= 0 || data.description == null || data.wide <= 0) {
+                swal("错误", "请输入必输入项！", "error");
+            }else {
+                parameterPostRequest("/hotel/roomTypeInfo/update-roomtype", data, () => {
+                    $('#editModal').modal('hide');
+                    swal("正确", "编辑成功", "success");
+                    init();
+                });
+            }
+        }
+
+        // 添加
+        function add() {
+            let data = {
+                "id": $("#add_id").val(),
+                "name": $("#add_name").val(),
+                "staffNumbers": $("#add_num").val(),
+                "staffId": $("#add_staffid").val(),
+            };
+            if (add.id <= 0
+                || data.name == null || data.price <= 0
+                || data.staffNumbers <= 0 || data.staffId <= 0
+            ) {
+                swal("错误", "请输入必输入项！", "error");
+            } else {
+                parameterPostRequest("/hotel/department/add-department", data, () => {
+                    $('#addModal').modal('hide');
+                    swal("正确", "添加成功", "success");
+                    init();
+                });
+            }
+        }
+    </script>
+    <script>
+        // 图片上传
+        $("#upload").fileinput({
+            language: 'zh',     // 设置语言
+            dropZoneTitle: '可以将图片拖放到这里...',
+            uploadUrl: '/file/upload',
+            allowedFileExtensions : ['jpg', 'png'],
+            overwriteInitial: false,
+            minImageWidth: 50,      // 图片的最小宽度
+            minImageHeight: 50,     // 图片的最小高度
+            maxImageWidth: 1000,    // 图片的最大宽度
+            maxImageHeight: 1000,   // 图片的最大高度
+            maxFileSize: 1024,      // 单位为kb，如果为0表示不限制文件大小
+            minFileCount: 1,        // 每次上传允许的最少文件数。如果设置为0，则表示文件数是可选的。默认为0
+            maxFileCount: 1,        // 每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0
+            maxFilesNum: 1,
+            uploadExtraData: function() {
+                return { fileType: "img", fileName: editId + ".jpg" };
+            }
+        }).on("fileuploaded", function(e, data) { // 文件上传成功的回调函数
+            if (data.response === null) {
+                swal("错误", "不支持该文件类型", "success");
+                return;
+            }
+
+            if (data.response.success === false) {
+                switch (data.response.code) {
+                    case 9002: swal("错误", "参数错误", "error");     break;
+                    case 9006: swal("错误", "文件创建错误", "error"); break;
+                }
+            } else {
+                let data = {
+                    id: editId,
+                    photo: editId + ".jpg"
+                };
+
+                parameterPostRequest("/user/updatePhotoById", data, () => {
+                    $('#imgModal').modal('hide');
+                    $('#editModal').modal('hide');
+                    swal("成功", "图片上传成功", "success");
+                    init();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

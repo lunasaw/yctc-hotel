@@ -43,6 +43,11 @@ public interface RoomTypeRestController {
     ResultDO<Void> deleteRoomTypeDO(long id);
 
     /**
+     * 删除部分房间类别数据
+     */
+    ResultDO<Void> deleteList(Long[] ids);
+
+    /**
      * 房间类别id查询房间类别信息
      * 
      * @param id
