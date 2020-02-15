@@ -52,6 +52,16 @@ public interface RoomTypeDAO {
     int update(RoomTypeDO roomTypeDO);
 
     /**
+     * 更新房间类别图片消息
+     * 
+     * @param fileName
+     * @param id
+     * @return
+     */
+    @Update("update tb_room_type  set type_picture=#{picture}, modify_time=now()  where id=#{id}")
+    int updateFile(@Param("fileName") String fileName, @Param("id") long id);
+
+    /**
      * 根据id删除一条房间类别消息
      *
      * @param id
