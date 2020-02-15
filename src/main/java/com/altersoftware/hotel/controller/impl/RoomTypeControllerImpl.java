@@ -22,4 +22,18 @@ public class RoomTypeControllerImpl implements RoomTypeController {
     public String showRoomType() {
         return TemplatePath.ROOM_TYPE;
     }
+
+    @Override
+    @GetMapping("show-roomtypeadmin")
+    public String showRoomTypeAdmin() {
+        return TemplatePath.ROOM_TYPE_ADMIN;
+    }
+
+    @Override
+    @GetMapping("show-roomtypeadmintable")
+    public String showRoomTypeAdminTable() {
+        return TemplatePath.ROOM_TYPE_ADMIN_TABLE;
+    }
+
+
 }
