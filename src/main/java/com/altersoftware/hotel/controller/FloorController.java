@@ -14,4 +14,8 @@ public interface FloorController {
      * @return
      */
     String showFloor(Model model);
+
+    String showFlooradmin();
+
+    String showFlooradmintable();
 }

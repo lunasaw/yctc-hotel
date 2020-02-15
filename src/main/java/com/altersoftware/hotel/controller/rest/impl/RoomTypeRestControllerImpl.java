@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,6 +122,32 @@ public class RoomTypeRestControllerImpl implements RoomTypeRestController {
         }
 
         ResultDO<Void> voidResultDO = roomTypeService.deleteRoomTypeDO(id);
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
+    }
+
+    /**
+     *删除多条记录
+     * @param ids
+     * @return
+     */
+    @Override
+    @PostMapping("delete-byidlist")
+    public ResultDO<Void> deleteList(@RequestBody Long[] ids) {
+        //参数校验
+        if (ids == null || ids.length == 0) {
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        List<Long> resultList = new ArrayList<>(ids.length);
+        for (Long s : ids) {
+            resultList.add(s);
+        }
+        ResultDO<Void> voidResultDO = roomTypeService.deleteList(resultList);
         if (voidResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
