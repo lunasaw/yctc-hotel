@@ -10,4 +10,25 @@ public class ConstantHolder {
 
     /** 短信提示正文 */
     public static final String STATE_SMS_CONTENT = "您的手机验证码为";
+
+    /**
+     * 图片保存路径
+     */
+    public static final String IMG_SAVE_PATH = "C:/ERPSystem/img/";
+
+    /**
+     * 文件类型--图片
+     */
+    public static final String IMG_FILE = "img";
+
+
+    /**
+     * 偏移量
+     */
+    public static final String OFFSET = "offset";
+
+    /**
+     * 步长
+     */
+    public static final String LIMIT = "limit";
 }

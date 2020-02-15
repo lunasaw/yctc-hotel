@@ -18,4 +18,8 @@ public interface RoomController {
      */
     String showUpdate();
 
+    String showUpdateAdmin();
+
+    String showUpdateAdminTable();
+
 }

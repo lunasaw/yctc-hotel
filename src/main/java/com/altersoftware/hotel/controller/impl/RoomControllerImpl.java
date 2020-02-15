@@ -32,4 +32,14 @@ public class RoomControllerImpl implements RoomController {
     @GetMapping("rooms-update")
     public String showUpdate() { return TemplatePath.ROOMS_UPDATE; }
 
+    @Override
+    @GetMapping("rooms-admin")
+    public String showUpdateAdmin() { return TemplatePath.ROOM_ADMIN; }
+
+    @Override
+    @GetMapping("rooms-admintable")
+    public String showUpdateAdminTable() { return TemplatePath.ROOM_ADMIN_TABLE; }
+
+
+
 }

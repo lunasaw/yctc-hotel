@@ -35,6 +35,14 @@ public interface RoomTypeRestController {
     ResultDO<Void> updateRoom(RoomTypeDO roomTypeDO);
 
     /**
+     * 更新房间类别状态
+     *
+     * @param roomTypeDO
+     * @return
+     */
+    ResultDO<Void> updateRoompic(RoomTypeDO roomTypeDO);
+
+    /**
      * 删除指定房间类别数据
      * 
      * @param id

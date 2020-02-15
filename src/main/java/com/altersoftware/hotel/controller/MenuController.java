@@ -11,4 +11,8 @@ public interface MenuController {
      * @return
      */
     String showMenu();
+
+    String showMenuAdmin();
+
+    String showMenuAdminTable();
 }

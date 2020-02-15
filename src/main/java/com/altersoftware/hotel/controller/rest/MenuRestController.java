@@ -35,12 +35,28 @@ public interface MenuRestController {
     ResultDO<Void> update(MenuDO menuDO);
 
     /**
+     * 更新菜品信息
+     *
+     * @param menuDO
+     * @return
+     */
+    ResultDO<Void> updatepic(MenuDO menuDO);
+
+    /**
      * 删除菜品信息
      *
      * @param id
      * @return
      */
     ResultDO<Void> delete(long id);
+
+    /**
+     * 删除部分菜品信息
+     *
+     * @param ids
+     * @return
+     */
+    ResultDO<Void> deleteList(Long[] ids);
 
     /**
      * 返回所有菜品信息
