@@ -35,9 +35,9 @@ public class MealdistributionDAOTest {
     public void aInsert() {
         MealdistributionDO mealdistributionDO = new MealdistributionDO();
         mealdistributionDO.setId(ID);
-        mealdistributionDO.setRoomID(ROOOM_ID);
-        mealdistributionDO.setStaffID(STAFF_ID);
-        mealdistributionDO.setMenuID(ORDER_ID);
+        mealdistributionDO.setOrderId(ROOOM_ID);
+        mealdistributionDO.setStaffId(STAFF_ID);
+        mealdistributionDO.setOrderId(ORDER_ID);
         mealdistributionDAO.insert(mealdistributionDO);
     }
 
@@ -79,7 +79,7 @@ public class MealdistributionDAOTest {
     @Test
     public void gUpdate() {
         MealdistributionDO mealdistributionDOById = mealdistributionDAO.getMealdistributionDOById(ID);
-        mealdistributionDOById.setMenuID(2);
+        mealdistributionDOById.setOrderId(2);
         int update = mealdistributionDAO.update(mealdistributionDOById);
         Assert.assertEquals(1, update);
     }

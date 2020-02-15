@@ -16,13 +16,13 @@ public class MealdistributionDO {
     /** 订单编号 */
     private long orderId;
 
-    /** 下单时间 */
+    /** 开始配送时间 */
     private Date inTime;
 
-    /** 配送时间 */
+    /** 送达时间 */
     private Date outTime;
 
-    /** 创建时间 */
+    /** 创建时间/下单实际 */
     private Date createTime;
 
     /** 修改时间 */
@@ -36,27 +36,27 @@ public class MealdistributionDO {
         this.id = id;
     }
 
-    public long getRoomID() {
+    public long getRoomId() {
         return roomId;
     }
 
-    public void setRoomID(long roomId) {
+    public void setRoomId(long roomId) {
         this.roomId = roomId;
     }
 
-    public long getStaffID() {
+    public long getStaffId() {
         return staffId;
     }
 
-    public void setStaffID(long staffId) {
+    public void setStaffId(long staffId) {
         this.staffId = staffId;
     }
 
-    public long getMenuID() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setMenuID(long orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 

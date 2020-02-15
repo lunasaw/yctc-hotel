@@ -93,7 +93,7 @@ public interface MealdistributionDAO {
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    MealdistributionDO getMealdistributionDOByMenuId(long orderId);
+    MealdistributionDO getMealdistributionDOByOrderId(long orderId);
 
     /**
      * 更新配送订单消息
@@ -106,18 +106,18 @@ public interface MealdistributionDAO {
     /**
      * 开始配送
      *
-     * @param staffId
+     * @param id
      */
-    @Update("update tb_mealdistribution  set mealdistribution_intime=now(), modify_time=now()  where staff_id=#{staffId}")
-    int start(long staffId);
+    @Update("update tb_mealdistribution  set mealdistribution_intime=now(), modify_time=now()  where id=#{id}")
+    int start(long id);
 
     /**
      * 完成配送
      *
-     * @param staffId
+     * @param id
      */
-    @Update("update tb_mealdistribution  set mealdistribution_outtime=now(), modify_time=now()  where staff_id=#{staffId}")
-    int end(long staffId);
+    @Update("update tb_mealdistribution  set mealdistribution_outtime=now(), modify_time=now()  where id=#{id}")
+    int end(long id);
 
     /**
      * 根据id删除一条配送订单消息
@@ -133,5 +133,5 @@ public interface MealdistributionDAO {
      * @return
      */
     @Select("select id  from tb_mealdistribution ")
-    List<Long> getFloorIdList();
+    List<MealdistributionDO> getMealList();
 }
