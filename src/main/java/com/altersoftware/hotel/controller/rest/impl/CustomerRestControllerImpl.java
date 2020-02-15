@@ -13,7 +13,6 @@ import com.altersoftware.hotel.controller.rest.CustomerRestController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.CustomerService;
-import com.altersoftware.hotel.service.GoodsService;
 
 /**
  * @author hzx
@@ -25,7 +24,7 @@ import com.altersoftware.hotel.service.GoodsService;
 public class CustomerRestControllerImpl implements CustomerRestController {
 
     @Autowired
-    CustomerService      customerService;
+    CustomerService customerService;
 
     /**
      * 获取所有客户信息
@@ -54,6 +53,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     @Override
     @PostMapping("update-userdo")
     public ResultDO<Void> updateUserDO(@RequestBody UserDO userDO) {
+        System.out.println(userDO);
         // 参数校验
         if (StringUtils.isBlank(userDO.getNumber())) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
@@ -66,16 +66,45 @@ public class CustomerRestControllerImpl implements CustomerRestController {
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             UserDO userDObyNumber = byNumber.getModule();
-            userDObyNumber.setAge(userDO.getAge());
-            userDObyNumber.setContactPhone(userDO.getContactPhone());
-            userDObyNumber.setAccount(userDO.getAccount());
-            userDObyNumber.setEmail(userDO.getEmail());
-            userDObyNumber.setIdCardNumber(userDO.getIdCardNumber());
-            userDObyNumber.setName(userDO.getName());
-            userDObyNumber.setSex(userDO.getSex());
-            userDObyNumber.setType(userDO.getType());
-            userDObyNumber.setFaceId(userDO.getFaceId());
-            userDObyNumber.setDepartmentId(userDO.getDepartmentId());
+            System.out.println(userDObyNumber);
+            if (userDO.getAge() != 0) {
+                userDObyNumber.setAge(userDO.getAge());
+            }
+            if (userDO.getContactPhone() != null) {
+                userDObyNumber.setContactPhone(userDO.getContactPhone());
+            }
+            if (userDO.getAccount() != null) {
+                userDObyNumber.setAccount(userDO.getAccount());
+
+            }
+            if (userDO.getEmail() != null) {
+                userDObyNumber.setEmail(userDO.getEmail());
+
+            }
+            if (userDO.getIdCardNumber() != null) {
+                userDObyNumber.setIdCardNumber(userDO.getIdCardNumber());
+
+            }
+            if (userDO.getName() != null) {
+                userDObyNumber.setName(userDO.getName());
+
+            }
+            if (userDO.getSex() != null) {
+                userDObyNumber.setSex(userDO.getSex());
+
+            }
+            if (userDO.getType() != 0) {
+                userDObyNumber.setType(userDO.getType());
+
+            }
+            if (userDO.getFaceId() != null) {
+                userDObyNumber.setFaceId(userDO.getFaceId());
+
+            }
+            if (userDO.getDepartmentId() != 0) {
+                userDObyNumber.setDepartmentId(userDO.getDepartmentId());
+
+            }
             ResultDO<Void> voidResultDO = customerService.updateUserDO(userDObyNumber);
             if (voidResultDO.isSuccess()) {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
@@ -117,20 +146,21 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     }
 
     /**
-     *删除多条记录
+     * 删除多条记录
+     * 
      * @param numbers
      * @return
      */
     @Override
     @PostMapping("delete-byidlist")
     public ResultDO<Void> deleteList(@RequestBody String[] numbers) {
-        //参数校验
-        if (numbers == null || numbers.length == 0){
+        // 参数校验
+        if (numbers == null || numbers.length == 0) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
         List<String> resultList = new ArrayList<>(numbers.length);
-        for (String s:numbers){
+        for (String s : numbers) {
             resultList.add(s);
         }
         ResultDO<Void> voidResultDO = customerService.deleteList(resultList);
@@ -174,7 +204,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
      */
     @Override
     @PostMapping("get-byId")
-    public ResultDO<UserDO> getByCustomerId(@RequestBody long customerId) {
+    public ResultDO<UserDO> getByCustomerId(long customerId) {
         // 参数校验
         if (customerId < 0) {
             return new ResultDO<UserDO>(false, ResultCode.PARAMETER_INVALID,
