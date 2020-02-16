@@ -61,7 +61,7 @@ public class VipServiceTest {
 
     @Test
     public void fShowVip() {
-        ResultDO<VipDO> vipDOResultDO = vipService.showVip(1);
+        ResultDO<VipDO> vipDOResultDO = vipService.showVip(10013);
         Assert.assertEquals(true, vipDOResultDO.isSuccess());
     }
 

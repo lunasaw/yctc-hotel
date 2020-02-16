@@ -75,6 +75,25 @@ public class VipRestControllerImpl implements VipRestController {
         }
     }
 
+    @Override
+    @PostMapping("get-bycustomerId")
+    public ResultDO<VipDO> showVipByCustomerId(long customerId) {
+        // 参数校验
+        if (customerId < 0) {
+            return new ResultDO<VipDO>(false, ResultCode.PARAMETER_INVALID,
+                ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+
+        ResultDO<VipDO> vipDOResultDO = vipService.showVipByCustomerId(customerId);
+        if (vipDOResultDO.isSuccess() == false) {
+            return new ResultDO<VipDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            VipDO doResultDOModule = vipDOResultDO.getModule();
+            return new ResultDO<VipDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, doResultDOModule);
+        }
+    }
+
 
     /**
      * 修改会员信息

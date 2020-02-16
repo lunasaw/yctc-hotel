@@ -45,10 +45,23 @@ public class VipServiceImpl implements VipService {
     public ResultDO<VipDO> showVip(long id) {
         try {
             VipDO vipDOById = vipDAO.getVipDOById(id);
-            LOG.info("getVipDOById success, id={}", id);
+            LOG.info("getVipDOById success, id={} , vipDOById={}", id, vipDOById);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, vipDOById);
         } catch (Exception e) {
             LOG.error("getVipDOById error, id={}", id, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
+    public ResultDO<VipDO> showVipByCustomerId(long customerId) {
+        try {
+            VipDO vipDOById = vipDAO.getVipDOByCustomerId(customerId);
+            LOG.info("showVipByCustomerId success, id={} , vipDOById={}", customerId, vipDOById);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, vipDOById);
+        } catch (Exception e) {
+            LOG.error("showVipByCustomerId error, id={}", customerId, e);
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
         }
