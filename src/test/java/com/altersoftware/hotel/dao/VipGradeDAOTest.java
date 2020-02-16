@@ -23,7 +23,7 @@ import com.altersoftware.hotel.entity.VipGradeDO;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VipGradeDAOTest {
 
-    private static final long   ID       = 1;
+    private static final long   ID       = 99;
     private static final String EQUITY   = "快速退房:无需人员查房,一点即退";
     private static final String GRADE    = "至尊会员";
     private static final Double DISCOUNT = 0.8;

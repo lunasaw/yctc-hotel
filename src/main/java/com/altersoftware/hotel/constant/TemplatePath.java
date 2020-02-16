@@ -126,7 +126,7 @@ public class TemplatePath {
     /** 房间类别信息页面 */
     public static final String ROOM_TYPE                                  = "hotel/roomType";
 
-    /** 房间类别信息页面 */
+    /** 管理房间类别信息页面 */
     public static final String ROOM_TYPE_ADMIN                           = "hotel/roomTypeAdmin";
 
     /** 房间类别信息页面 */

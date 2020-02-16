@@ -50,6 +50,12 @@ public class RoomServiceTest {
     }
 
     @Test
+    public void Test() {
+        RoomDO roomDO = new RoomDO();
+        roomService.insert(roomDO);
+    }
+
+    @Test
     public void dGetById() {
         ResultDO<RoomDO> roomDO = roomService.getRoomDO(1);
         Assert.assertEquals(true, roomDO.isSuccess());
