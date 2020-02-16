@@ -14,7 +14,7 @@ import com.altersoftware.hotel.controller.MenuController;
  */
 @Controller
 @ComponentScan({"com.altersoftware.hotel.service"})
-@RequestMapping("/menu")
+@RequestMapping("/menuinfo")
 public class MenuControllerImpl implements MenuController {
 
     @Override

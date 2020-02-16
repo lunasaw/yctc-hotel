@@ -147,6 +147,9 @@ public class TemplatePath {
     /** 会员信息页面 */
     public static final String VIP_TABLE                                  = "vip/viptable";
 
+    /** 客户会员权益信息页面 */
+    public static final String VIP_GRADE_SHOW                             = "vip/showvipGrade";
+
     /** 会员等级信息页面 */
     public static final String VIP_GRADE_INFO                             = "vip/vipGrade";
 
@@ -165,10 +168,10 @@ public class TemplatePath {
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
 
-    /** 菜品信息页面 */
+    /** 管理员菜品信息页面 */
     public static final String MENUS_ADMIN                               = "hotel/menuadmin";
 
-    /** 菜品信息页面 */
+    /** 管理员菜品信息页面 */
     public static final String MENUS_ADMIN_TABLE                         = "hotel/menuadmintable";
 
     /** 部门信息页面 */

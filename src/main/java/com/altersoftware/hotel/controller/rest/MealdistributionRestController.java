@@ -51,7 +51,7 @@ public interface MealdistributionRestController {
      *
      * @return
      */
-    ResultDO<Void> deleteList(List<Long> ids);
+    ResultDO<Void> deleteList(Long[] ids);
 
     /**
      * 查询所有配送订单信息
@@ -69,7 +69,7 @@ public interface MealdistributionRestController {
     ResultDO<List<MealdistributionDO>> getListByStaffId(long staffId);
 
     /**
-     * 通过员工编号获取配送订单信息
+     * 通过房间编号获取配送订单信息
      *
      * @param roomId
      * @return

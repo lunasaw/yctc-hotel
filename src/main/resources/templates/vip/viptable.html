@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="form-group has-success">
-                            <label class="col-sm-2 control-label">会员等级</label>
+                            <label class="col-sm-4 control-label">会员等级</label>
                             <div class="col-sm-8">
                                 <input  class="form-control" type="text" id="edit_vipgrade">
                             </div>
@@ -183,17 +183,11 @@
         $("#edit_vipid").val(rows[index].customerNumber);
         $("#edit_vipgrade").val(rows[index].grade);
         $("#edit_discount").val(rows[index].amount);
-        parameterPostRequest("/hotel/vip/get-vip", rows[index].id, result => {
-            if (null !== result.module) {
-                editid = rows[index].id;
-            } else {
-                swal("错误", "不存在该用户", "error");
-            }
-        });
+
     }
     function edit() {
         let data = {
-            "id":editid ,
+            "id": $("#edit_id").val(),
             "customerNumber": $("#edit_vipid").val(),
             "grade": $("#edit_vipgrade").val(),
             "amount": $("#edit_discount").val(),

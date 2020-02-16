@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class VipGradeControllerImpl implements VipGradeController {
 
     @Override
+    @GetMapping("show-vipuser")
+    public String showUserGrade() {
+        return TemplatePath.VIP_GRADE_SHOW;
+    }
+
+    @Override
     @GetMapping("show-vipgrade")
     public String showGrade() {
         return TemplatePath.VIP_GRADE_INFO;
