@@ -12,6 +12,11 @@ public interface MenuController {
      */
     String showMenu();
 
+    /**
+     * 管理员后台
+     * 
+     * @return
+     */
     String showMenuAdmin();
 
     String showMenuAdminTable();
