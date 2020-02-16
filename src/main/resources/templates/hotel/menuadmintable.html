@@ -336,7 +336,7 @@
         maxFileCount: 1,        // 每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0
         maxFilesNum: 1,
         uploadExtraData: function() {
-            return { fileType: "img", fileName: editId + ".jpg" };
+            return {fileType: "img", fileName: "http://111.229.114.126:8087/iszychen/img/menu/" + editId + ".jpg"};
         }
     }).on("fileuploaded", function(e, data) { // 文件上传成功的回调函数
         if (data.response === null) {
@@ -352,7 +352,7 @@
         } else {
             let data = {
                 id: editId,
-                picture: editId + ".jpg"
+                picture: "http://111.229.114.126:8087/iszychen/img/menu/" + editId + ".jpg"
             };
 
             parameterPostRequest("/hotel/menuinfo/update-roompic", data, () => {
