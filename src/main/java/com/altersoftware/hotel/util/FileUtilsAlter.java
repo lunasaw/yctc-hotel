@@ -1,11 +1,12 @@
 package com.altersoftware.hotel.util;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class FileUtils {
+import javax.imageio.ImageIO;
+
+public class FileUtilsAlter {
     /**
      * 判断文件夹是否存在 不存在则创建文件夹
      *

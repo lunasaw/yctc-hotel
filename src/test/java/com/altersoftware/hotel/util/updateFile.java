@@ -15,8 +15,9 @@ public class updateFile {
     @Test
     public void Test() throws Exception {
         File file = new File("C:/ERPSystem/img/15.jpg");
-        byte[] bytes = FileUtils.fileToByte(file);
-        UploadUtils.uploadFile((FileUtils.fileToByte(file)), "http://111.229.114.126:8087/iszychen/img/", "test.jpg");
+        byte[] bytes = FileUtilsAlter.fileToByte(file);
+        UploadUtils.uploadFile((FileUtilsAlter.fileToByte(file)), "http://111.229.114.126:8087/iszychen/img/",
+            "test.jpg");
     }
 
 }
