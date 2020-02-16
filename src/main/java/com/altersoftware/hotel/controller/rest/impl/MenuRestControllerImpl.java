@@ -61,7 +61,7 @@ public class MenuRestControllerImpl implements MenuRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<MenuDO> showById(long id) {
+    public ResultDO<MenuDO> showById(@RequestBody long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<MenuDO>(false, ResultCode.PARAMETER_INVALID,

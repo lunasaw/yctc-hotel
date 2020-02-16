@@ -10,4 +10,6 @@ public interface VipGradeController {
 
     String showGradeTable();
 
+    String showUserGrade();
+
 }

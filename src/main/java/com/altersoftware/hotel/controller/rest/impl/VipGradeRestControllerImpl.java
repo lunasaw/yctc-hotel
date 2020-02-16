@@ -58,7 +58,7 @@ public class VipGradeRestControllerImpl implements VipGradeRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<VipGradeDO> showVipGrade(@RequestBody long id) {
+    public ResultDO<VipGradeDO> showVipGrade(long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<VipGradeDO>(false, ResultCode.PARAMETER_INVALID,

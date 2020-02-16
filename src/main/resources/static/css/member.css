@@ -1,0 +1,183 @@
+main {
+    font-family: Montserrat, SimHei, Microsoft YaHei, sans-serif;
+}
+
+.wrapper-container {
+    width: 100%;
+    margin-bottom: 120px;
+    margin-top: 25px;
+}
+
+.card-wrapper {
+    width: 100%;
+    position: relative;
+    bottom: 35px;
+}
+
+.card-picture {
+    margin-left: 35%;
+    display: inline-block;
+}
+
+.icon-left {
+    position: relative;
+    left: 32%;
+    display: inline-block;
+}
+
+
+.icon-right {
+    margin-left: 3%;
+    display: inline-block;
+}
+
+.card-text {
+    position: relative;
+    bottom: 40px;
+
+}
+
+.card-description {
+    float: left;
+    width: 300px;
+    position: relative;
+    left: 100px;
+}
+
+.card-prediction {
+    float: left;
+    position: relative;
+    left: 300px;
+    width: 300px;
+
+}
+
+.card-level {
+    float: left;
+    width: 300px;
+    height: 100px;
+    position: relative;
+    left: 200px;
+    padding: 5px 50px;
+    text-align: center;
+    border-left: rgb(135, 106, 32) solid 1px;
+    border-right: rgb(135, 106, 32) solid 1px;
+}
+
+.p-rights {
+    color: rgb(135, 106, 32);
+    float: left;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.ul-rights {
+    margin-left: 60%;
+
+}
+
+.li-rights {
+    float: left;
+    margin-left: 60px;
+    margin-top: 25px;
+}
+
+.container-rights {
+    height: 50px;
+    border-bottom: lightgray solid 1px;
+}
+
+.rights-head {
+    font-size: 16px;
+    color: rgb(135, 106, 32);
+}
+
+.p-rights-t {
+    margin-top: 20px;
+
+}
+
+.notes-rights {
+    font-size: 12px;
+    color: grey;
+    margin: 25px 0;
+    border-bottom: black solid 1px;
+}
+
+.xing-member {
+    width: 10px;
+    height: 10px;
+    background-color: blueviolet;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: left;
+    position: relative;
+    left: 20px;
+}
+.silver-member {
+    width: 10px;
+    height: 10px;
+    background-color: gainsboro;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: left;
+    position: relative;
+    left: 115px;
+
+}
+.golden-member {
+    width: 10px;
+    height: 10px;
+    background-color: gold;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: left;
+    position: relative;
+    left: 210px;
+
+}
+.rosen-golden-member {
+    width: 10px;
+    height: 10px;
+    background-color: goldenrod;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    float: left;
+    position: relative;
+    left: 320px;
+
+
+}
+
+.ul-colors-4{
+    position: relative;
+    bottom: 33px;
+    left: 66%;
+    width: 300px;
+}
+
+.ul-colors-3{
+    position: relative;
+    bottom: 33px;
+    left: 67%;
+    width: 300px;
+}
+
+.ul-colors-2{
+    position: relative;
+    bottom: 33px;
+    left: 68%;
+    width: 300px;
+}
+
+.ul-colors-1{
+    position: relative;
+    bottom: 33px;
+    left: 69%;
+    width: 300px;
+}
