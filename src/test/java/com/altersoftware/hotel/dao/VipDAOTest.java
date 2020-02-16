@@ -43,7 +43,7 @@ public class VipDAOTest {
 
     @Test
     public void bGetById() {
-        VipDO vipDOById = vipDAO.getVipDOById(ID);
+        VipDO vipDOById = vipDAO.getVipDOById(10013);
         System.out.println(vipDOById);
         Assert.assertNotNull(vipDOById);
     }

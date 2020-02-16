@@ -27,6 +27,13 @@ public interface VipRestController {
     ResultDO<VipDO> showVip(long id);
 
     /**
+     * 展示会员信息
+     *
+     * @param customerId
+     */
+    ResultDO<VipDO> showVipByCustomerId(long customerId);
+
+    /**
      * 修改会员信息
      *
      * @param vipDO

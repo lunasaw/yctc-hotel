@@ -27,6 +27,14 @@ public interface VipService {
     ResultDO<VipDO> showVip(long id);
 
     /**
+     * 客户编号展示会员信息
+     * 
+     * @param customerId
+     * @return
+     */
+    ResultDO<VipDO> showVipByCustomerId(long customerId);
+
+    /**
      * 修改会员信息
      *
      * @param vipDO
@@ -60,5 +68,6 @@ public interface VipService {
      * @return <List<VipDO>>
      */
     ResultDO<List<Long>> getAllNumberList();
+
 
 }
