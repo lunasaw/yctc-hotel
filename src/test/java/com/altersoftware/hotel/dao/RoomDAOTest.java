@@ -21,7 +21,7 @@ import com.altersoftware.hotel.entity.RoomDO;
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RoomDAOTest {
-    private static final int    ID           = 1;
+    private static final int    ID           = 99;
     private static final int    FLOOR_ID     = 1;
     private static final int    ROOOM_NUMBER = 101;
     private static final String TYPE         = "501";

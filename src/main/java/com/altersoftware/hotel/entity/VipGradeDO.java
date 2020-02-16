@@ -20,6 +20,12 @@ public class VipGradeDO {
     private Date   createTime;
     /** 修改时间 */
     private Date   modifyTime;
+    /** 图片 */
+    private String picture;
+    /** 达成条件描述 */
+    private String description;
+    /** 升级描述 */
+    private String updateDescription;
 
     public long getId() {
         return id;
@@ -69,15 +75,42 @@ public class VipGradeDO {
         this.modifyTime = modifyTime;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUpdate_description() {
+        return updateDescription;
+    }
+
+    public void setUpdate_description(String updateDescription) {
+        this.updateDescription = updateDescription;
+    }
+
     @Override
     public String toString() {
         return "VipGradeDO{" +
             "id=" + id +
             ", grade='" + grade + '\'' +
             ", equity='" + equity + '\'' +
-            ", discount='" + discount + '\'' +
+            ", discount=" + discount +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
+            ", picture='" + picture + '\'' +
+            ", description='" + description + '\'' +
+            ", updateDescription='" + updateDescription + '\'' +
             '}';
     }
 }

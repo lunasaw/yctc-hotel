@@ -2804,8 +2804,9 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-};
-var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
+}
+
+    var rsingleTag = (/^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i);
 
 
 
@@ -9463,7 +9464,7 @@ jQuery.ajaxSettings.xhr = function() {
 
 var xhrSuccessStatus = {
 
-		// File protocol always yields status code 0, assume 200
+        // fle protocol always yields status code 0, assume 200
 		0: 200,
 
 		// Support: IE <=9 only
@@ -9538,8 +9539,7 @@ jQuery.ajaxTransport( function( options ) {
 									complete( 0, "error" );
 								} else {
 									complete(
-
-										// File: protocol always yields status 0; see #8605, #14207
+                                        // fle: protocol always yields status 0; see #8605, #14207
 										xhr.status,
 										xhr.statusText
 									);

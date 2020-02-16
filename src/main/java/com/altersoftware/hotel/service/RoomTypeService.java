@@ -28,7 +28,7 @@ public interface RoomTypeService {
     ResultDO<Void> updateRoom(RoomTypeDO roomTypeDO);
 
     /**
-     * 上传文件
+     * 更新图片
      * 
      * @param id
      * @param fileName
