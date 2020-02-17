@@ -51,6 +51,10 @@
                     <tbody id="modalTbody">
 
                     </tbody>
+                    <select class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getroomnum()";>
+                        <option  disabled="disabled" selected="selected">请选择...</option>
+
+                    </select>
                 </table>
             </div>
             <div class="modal-footer">
@@ -146,7 +150,7 @@
 
     function initmodel() {
         $("#modalTbody").find("tr").remove();
-
+        getroomnum();
         let data = $("#table").bootstrapTable("getData");
         let input = $("input[type='number']");
         // let newDate = [];
@@ -160,12 +164,30 @@
         }
     }
 
+    function getroomnum() {
+        var userId = getCookie("userId");
+        $.ajax({
+            url: "/hotel/customer/get-byId",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": userId
+            },
+            success:function (result) {
+                var list = result.module;
+                for (var i = 0; i < list.length; i++) {
+                    document.getElementById("selectun").options.add(new Option(list[i].roomNumber, i));
+                }
+            }
+        })
+    }
 
     function addinmodel() {
         $("#modalTbody").find("tr").remove();
 
         let data = $("#table").bootstrapTable("getData");
         let input = $("input[type='number']");
+        var roomNumber=$("#selectun option:selected").text();
         // let newDate = [];
         var userId = getCookie("userId");
         for (let i = 0; i < data.length; ++i) {

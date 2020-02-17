@@ -29,6 +29,12 @@ public class RoomControllerImpl implements RoomController {
 
 
     @Override
+    @GetMapping("show-roomsreception")
+    public String showRoomsReception() {
+        return TemplatePath.ROOMS_RECEPTION;
+    }
+
+    @Override
     @GetMapping("rooms-update")
     public String showUpdate() { return TemplatePath.ROOMS_UPDATE; }
 
