@@ -8,7 +8,7 @@ public class MealdistributionDO {
     private long id;
 
     /** 房间编号 */
-    private long roomId;
+    private long roomNumber;
 
     /** 员工编号 */
     private long staffId;
@@ -36,12 +36,12 @@ public class MealdistributionDO {
         this.id = id;
     }
 
-    public long getRoomId() {
-        return roomId;
+    public long getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoomId(long roomId) {
-        this.roomId = roomId;
+    public void setRoomNumber(long roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public long getStaffId() {
@@ -96,7 +96,7 @@ public class MealdistributionDO {
     public String toString() {
         return "MealdistributionDO{" +
             "id=" + id +
-            ", roomId=" + roomId +
+            ", roomNumber=" + roomNumber +
             ", staffId=" + staffId +
             ", orderId=" + orderId +
             ", inTime=" + inTime +

@@ -106,34 +106,34 @@ public class TemplatePath {
     public static final String FLOOR                                      = "hotel/floor";
 
     /** 楼层信息页面 */
-    public static final String FLOOR_ADMIN                                      = "hotel/flooradmin";
+    public static final String FLOOR_ADMIN                                = "hotel/flooradmin";
 
     /** 楼层信息页面 */
-    public static final String FLOOR_ADMIN_TABLE                                      = "hotel/flooradmintable";
+    public static final String FLOOR_ADMIN_TABLE                          = "hotel/flooradmintable";
 
     /** 房间信息页面 */
     public static final String ROOMS                                      = "hotel/rooms";
 
     /** 前台房间信息页面 */
-    public static final String ROOMS_RECEPTION                                      = "hotel/roomscondition";
+    public static final String ROOMS_RECEPTION                            = "hotel/roomscondition";
 
     /** 房间修改页面 */
     public static final String ROOMS_UPDATE                               = "hotel/rooms-update";
 
     /** 房间信息页面 */
-    public static final String ROOM_ADMIN                                      = "hotel/roomAdmin";
+    public static final String ROOM_ADMIN                                 = "hotel/roomAdmin";
 
     /** 房间信息页面 */
-    public static final String ROOM_ADMIN_TABLE                                      = "hotel/roomAdminTable";
+    public static final String ROOM_ADMIN_TABLE                           = "hotel/roomAdminTable";
 
     /** 房间类别信息页面 */
     public static final String ROOM_TYPE                                  = "hotel/roomType";
 
     /** 管理房间类别信息页面 */
-    public static final String ROOM_TYPE_ADMIN                           = "hotel/roomTypeAdmin";
+    public static final String ROOM_TYPE_ADMIN                            = "hotel/roomTypeAdmin";
 
     /** 房间类别信息页面 */
-    public static final String ROOM_TYPE_ADMIN_TABLE                    = "hotel/roomTypeAdminTable";
+    public static final String ROOM_TYPE_ADMIN_TABLE                      = "hotel/roomTypeAdminTable";
 
     /** 客户信息页面 */
     public static final String CUSTOMER_INFO                              = "customer/customer-info";
@@ -172,13 +172,13 @@ public class TemplatePath {
     public static final String MENUS                                      = "hotel/menus";
 
     /** 菜品信息页面 */
-    public static final String MENUS_TABLE                                      = "hotel/menustable";
+    public static final String MENUS_TABLE                                = "hotel/menustable";
 
     /** 管理员菜品信息页面 */
-    public static final String MENUS_ADMIN                               = "hotel/menuadmin";
+    public static final String MENUS_ADMIN                                = "hotel/menuadmin";
 
     /** 管理员菜品信息页面 */
-    public static final String MENUS_ADMIN_TABLE                         = "hotel/menuadmintable";
+    public static final String MENUS_ADMIN_TABLE                          = "hotel/menuadmintable";
 
     /** 部门信息页面 */
     public static final String DEPARTMENT                                 = "hotel/depatment";

@@ -42,6 +42,7 @@ public interface RoomRestController {
      */
     ResultDO<RoomDO> getRoomByNumber(int roomNumber);
 
+
     /**
      * 插入一个房间信息
      * 

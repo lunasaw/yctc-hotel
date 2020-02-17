@@ -39,6 +39,8 @@ public class PermissionServiceImpl implements PermissionIService {
     /** 员工权限组 */
     private static final String          STAFF_GROUP_NAME         = "staff";
     private static final long            STUDENT_GROUP_ID         = UserType.RECEPTION;
+    /** 管理员权限组 */
+    private static final String          Admin_GROUP_NAME         = "administrator";
     private static final long            ADMINISTRATOR_GROUP_ID   = UserType.MANAGEMENT;
     @Resource
     private UserDAO                      userDAO;                                                            // 用户

@@ -1,6 +1,9 @@
 package com.altersoftware.hotel.service.impl;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,6 +20,8 @@ import com.altersoftware.hotel.dao.VipDAO;
 import com.altersoftware.hotel.dao.VipGradeDAO;
 import com.altersoftware.hotel.entity.*;
 import com.altersoftware.hotel.service.OrderService;
+import com.altersoftware.hotel.util.RandomNumber;
+import com.altersoftware.hotel.vo.OrderVO;
 
 /**
  * @author Iszychen@win10
@@ -40,13 +45,22 @@ public class OrderServiceImpl implements OrderService {
     private VipDAO              vipDAO;
 
     @Override
-    public ResultDO<Void> createOrder(OrderDO orderDO) {
+    public ResultDO<Long> createOrder(OrderVO orderVO) {
         try {
+            long customerId = orderVO.getCustomerId();
+            int numbers = orderVO.getNumbers();
+            long menuId = orderVO.getMenuId();
+            // 生成随机数
+            RandomNumber menuOrder = new RandomNumber();
+            String s = menuOrder.GetRandomOrder();
+            long l = Long.parseLong(s);
+            OrderDO orderDO = new OrderDO(l, menuId, numbers, customerId);
+            // 生成订单存入数据库
             orderDAO.insert(orderDO);
             LOG.info("createOrder success, OrderDO={}", orderDO);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, orderDO.getId());
         } catch (Exception e) {
-            LOG.error("createOrder error, OrderDO={}", orderDO, e);
+            LOG.error("createOrder error, orderVO={}", orderVO, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
@@ -135,12 +149,25 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public ResultDO<Void> deleteList() {
+        try {
+            orderDAO.deleteStateZero();
+            LOG.info("deleteStateZero success");
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteStateZero error, e");
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
     public ResultDO<List<OrderDO>> getAll() {
         List<OrderDO> all = null;
         try {
             all = orderDAO.getOrderDOList();
             LOG.info("getAll success, all={}", all);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,all);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, all);
         } catch (Exception e) {
             LOG.error("getAll error, all={}", all, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
@@ -182,5 +209,55 @@ public class OrderServiceImpl implements OrderService {
         }
         LOG.info("getActualMoney success, money={}", actualMoney);
         return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, actualMoney);
+    }
+
+    @Override
+    public ResultDO<Void> changeMenuMoneyPay(long orderId, int number, long menuId) {
+        try {
+            MenuDO menuDOById = menuDAO.getMenuDOById(menuId);
+            Double price = menuDOById.getPrice();
+            OrderDO orderDOById = orderDAO.getOrderDOById(orderId);
+            orderDOById.setPayMoney(price * number);
+            int update = orderDAO.update(orderDOById);
+            if (update == 1) {
+                LOG.info("changeMenuMoneyPay success, orderId={},menuId={},numbers={}", orderId, menuId, number);
+            }
+            return new ResultDO<>(true, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        } catch (Exception e) {
+            LOG.info("changeMenuMoneyPay success, orderId={},menuId={},numbers={}", orderId, menuId, number);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
+    }
+
+    @Override
+    public Double allOnceMoney(long customerId) {
+        List<OrderDO> orderDOByCustomerId = orderDAO.getOrderDOByCustomerId(customerId);
+        Date date = new Date();
+        double x = 0;
+        for (int i = 0; i < orderDOByCustomerId.size(); i++) {
+            OrderDO orderDO = orderDOByCustomerId.get(i);
+            if (orderDO.getState() == 1) {
+                continue;
+            } else {
+                x += orderDO.getPayMoney();
+            }
+        }
+        return x;
+    }
+
+    /**
+     * 获取当前时间前1分钟
+     * 
+     * @param
+     * @return
+     */
+    public Date getCurrentTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar beforeTime = Calendar.getInstance();
+        beforeTime.add(Calendar.MINUTE, -1);// 支付宝支付限定时间为9
+        Date beforeD = beforeTime.getTime();
+        System.out.println(beforeD + "===================================================>");
+        return beforeD;
     }
 }

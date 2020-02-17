@@ -26,6 +26,14 @@ public interface RecordRestController {
     ResultDO<List<RecordDO>> showRecordBystaffId(long staffId);
 
     /**
+     * 通过客户id搜索房间
+     *
+     * @param CustomerId
+     * @return
+     */
+    ResultDO<List<Integer>> getRoomByCustomerId(long CustomerId);
+
+    /**
      * 修改订单信息
      *
      * @param recordDO

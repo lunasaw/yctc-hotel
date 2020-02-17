@@ -3,6 +3,7 @@ package com.altersoftware.hotel.controller.rest;
 import java.util.List;
 
 import com.altersoftware.hotel.entity.OrderDO;
+import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.vo.OrderVO;
 
@@ -18,7 +19,7 @@ public interface OrderRestController {
      * @param orderVO
      * @return
      */
-    ResultDO<Void> createOrder(OrderVO orderVO);
+    ResultDO<RecordDO> createOrder(List<OrderVO> orderVO);
 
     /**
      * 展示菜品订单信息
@@ -54,6 +55,13 @@ public interface OrderRestController {
      * @return
      */
     ResultDO<Void> deleteById(long id);
+
+    /**
+     * 删除未支付菜品订单信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteStateZero();
 
     /**
      * 删除部分菜品订单信息

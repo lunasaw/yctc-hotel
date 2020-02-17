@@ -113,14 +113,16 @@
     </style>
 
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+
 </head>
 <body>
 
 
+
 <div class="scene">
     <svg
-            id="dc-spinner"
             version="1.1"
+            id="dc-spinner"
             width:
             x="0px" xmlns="http://www.w3.org/2000/svg"
             y="0px"
@@ -129,7 +131,6 @@
     viewBox="0 0 38 38"
     preserveAspectRatio="xMinYMin meet"
     >
-
     <text fill="grey" font-family="Monaco" font-size="2px" style="letter-spacing:0.6" x="14" y="21">LOADING
         <animate
                 attributeName="opacity"
@@ -152,11 +153,11 @@
         <animateTransform
                 attributeName="transform"
                 calcMode="spline"
-                dur="2s"
                 from="0 20 20"
+                dur="2s"
+                repeatCount="indefinite"
                 keySplines="0.4, 0, 0.2, 1"
                 keyTimes="0;1"
-                repeatCount="indefinite"
                 to="360 20 20"
                 type="rotate"/>
     </path>
@@ -168,14 +169,13 @@
                 attributeName="transform"
                 dur="1.8s"
                 from="0 20 20"
-                repeatCount="indefinite"
                 to="360 20 20"
+                repeatCount="indefinite"
                 type="rotate"/>
     </path>
-
-
     </svg>
 </div>
+
 <script>
     $(document).ready(function () {
         console.log("获取订单编号");
@@ -183,6 +183,7 @@
         var searchParams = new URLSearchParams(window.location.search);
         var recordId = searchParams.get('out_trade_no');
         console.log(recordId);
+
         $.ajax({
             url: "/hotel/record/get-byid",
             type: "POST",

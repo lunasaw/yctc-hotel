@@ -1,6 +1,9 @@
 package com.altersoftware.hotel.service.impl;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -140,7 +143,7 @@ public class RecordServiceImpl implements RecordService {
         try {
             all = recordDAO.getAll();
             LOG.info("getAll success, all={}", all);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,all);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, all);
         } catch (Exception e) {
             LOG.error("getAll error, all={}", all, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
@@ -181,5 +184,32 @@ public class RecordServiceImpl implements RecordService {
         }
         LOG.info("getActualMoney success, money={}", actualMoney);
         return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, actualMoney);
+    }
+
+    @Override
+    public ResultDO<List<RecordDO>> showRecordByCustomer(long customerId) {
+        List<RecordDO> recordDOByCustomerId = null;
+        try {
+            recordDOByCustomerId = recordDAO.getRecordDOByCustomerId(customerId);
+            List<RecordDO> list = new ArrayList<>();
+            for (int i = 0; i < recordDOByCustomerId.size(); i++) {
+                Date now = new Date();
+                SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                String checkOutTime = recordDOByCustomerId.get(i).getCheckOutTime();
+                if (checkOutTime == null) {
+                    continue;
+                }
+                Date date = f.parse(checkOutTime);
+                if (recordDOByCustomerId.get(i).getState() == 1 && (date.after(now) || date == now)) {
+                    list.add(recordDOByCustomerId.get(i));
+                }
+            }
+            LOG.info("showRecordByCustomer success, customerId={},list={}", customerId, list);
+            return new ResultDO<>(true, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, list);
+        } catch (Exception e) {
+            LOG.info("showRecordByCustomer success, customerId={},allList={}", customerId, recordDOByCustomerId, e);
+            return new ResultDO<>(false, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, null);
+        }
     }
 }

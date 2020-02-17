@@ -56,6 +56,12 @@ public class RecordServiceTest {
     }
 
     @Test
+    public void eshowRecordByCustomer() {
+        ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByCustomer(10013);
+        Assert.assertEquals(true, listResultDO.isSuccess());
+    }
+
+    @Test
     public void fInsert() {
         RecordDO recordDO = new RecordDO();
         recordDO.setId(11);

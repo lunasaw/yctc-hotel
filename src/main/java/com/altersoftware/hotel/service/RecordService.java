@@ -75,4 +75,12 @@ public interface RecordService {
      * @return
      */
     ResultDO<Double> getActualMoney(long customerId, int roomNumber);
+
+    /**
+     * 客户id 查出正在使用的订单List
+     *
+     * @param customerId
+     * @return
+     */
+    ResultDO<List<RecordDO>> showRecordByCustomer(long customerId);
 }

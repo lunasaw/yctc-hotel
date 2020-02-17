@@ -8,10 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -155,26 +152,36 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             String receipt_amount = params.get("receipt_amount");
             // 状态 TRADE_SUCCESS
             String trade_status = params.get("trade_status");
-            if (trade_status.equals("TRADE_SUCCESS") == true && out_trade_no.length() == 11) {
+            if (trade_status.equals("TRADE_SUCCESS") == true) {
                 ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
                 RecordDO recordDO = recordDOResultDO.getModule();
                 if (recordDOResultDO.isSuccess() && recordDOResultDO.isSuccess()
                     || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
                     recordDO.setState(1);
                     recordService.updateRecord(recordDO);
+                    long customerId = recordDO.getCustomerId();
+                    // 设置order为付款
+                    ResultDO<List<OrderDO>> listResultDO = orderService.showOrderByCustomerId(customerId);
+                    List<OrderDO> module = listResultDO.getModule();
+                    for (int i = 0; i < module.size(); i++) {
+                        OrderDO orderDO = module.get(i);
+                        orderDO.setState(1);
+                        orderService.updateOrder(orderDO);
+                    }
                 }
-                LOG.info("该住房订单已经完成付款 id={}", out_trade_no);
+                LOG.info("该订单已经完成付款 id={}", out_trade_no);
             }
-            if (trade_status.equals("TRADE_SUCCESS") == true && out_trade_no.length() == 10) {
-                ResultDO<OrderDO> orderDOResultDO = orderService.showOrder(Long.parseLong(out_trade_no));
-                OrderDO orderDO = orderDOResultDO.getModule();
-                if (orderDOResultDO.isSuccess() && orderDOResultDO.isSuccess()
-                    || Integer.parseInt(buyer_pay_amount) == orderDO.getPayMoney()) {
-                    orderDO.setState(1);
-                    orderService.updateOrder(orderDO);
-                }
-                LOG.info("该餐品订单已经完成付款 id={}", out_trade_no);
-            }
+            // TODO 菜品订单返回的是用户用户时间ID
+            // if (trade_status.equals("TRADE_SUCCESS") == true && out_trade_no.length() == 10) {
+            // ResultDO<OrderDO> orderDOResultDO = orderService.showOrder(Long.parseLong(out_trade_no));
+            // OrderDO orderDO = orderDOResultDO.getModule();
+            // if (orderDOResultDO.isSuccess() && orderDOResultDO.isSuccess()
+            // || Integer.parseInt(buyer_pay_amount) == orderDO.getPayMoney()) {
+            // orderDO.setState(1);
+            // orderService.updateOrder(orderDO);
+            // }
+            // LOG.info("该餐品订单已经完成付款 id={}", out_trade_no);
+            // }
         } catch (Exception e) {
             LOG.error("error", e);
         }

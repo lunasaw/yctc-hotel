@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.altersoftware.hotel.entity.OrderDO;
 import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.vo.OrderVO;
 
 /**
  * @author Iszychen@win10
@@ -13,10 +14,10 @@ public interface OrderService {
     /**
      * 根据构造的菜品订单存入数据库
      *
-     * @param orderDO
+     * @param orderVO
      * @return
      */
-    ResultDO<Void> createOrder(OrderDO orderDO);
+    ResultDO<Long> createOrder(OrderVO orderVO);
 
     /**
      * 展示菜品订单信息
@@ -61,6 +62,13 @@ public interface OrderService {
     ResultDO<Void> deleteList(List<Long> ids);
 
     /**
+     * 删除未支付订单订单信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList();
+
+    /**
      * 查询所有菜品订单信息
      *
      * @return
@@ -68,10 +76,29 @@ public interface OrderService {
     ResultDO<List<OrderDO>> getAll();
 
     /**
+     * 会员试用 //TODO 暂不考虑餐品打折
      * 通过客户编号和房间号返回实际需支付金额
      *
      * @param customerId
      * @return
      */
     ResultDO<Double> getActualMoney(long customerId);
+
+    /**
+     * 更改支付金额
+     * 
+     * @param orderId
+     * @param number
+     * @param menuId
+     * @return
+     */
+    ResultDO<Void> changeMenuMoneyPay(long orderId, int number, long menuId);
+
+    /**
+     * 返回一次支付所有金额
+     * 
+     * @param orderId
+     * @return
+     */
+    Double allOnceMoney(long orderId);
 }

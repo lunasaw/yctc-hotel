@@ -54,6 +54,13 @@ public interface MealdistributionService {
     ResultDO<Void> deleteList(List<Long> ids);
 
     /**
+     * 订单编号删除部分配送订单信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteByOrder(long orderId);
+
+    /**
      * 查询所有配送订单信息
      *
      * @return
@@ -69,12 +76,12 @@ public interface MealdistributionService {
     ResultDO<List<MealdistributionDO>> getListByStaffId(long staffId);
 
     /**
-     * 通过员工编号获取配送订单信息
+     * 通过房间门牌获取配送订单信息
      *
-     * @param roomId
+     * @param roomNumber
      * @return
      */
-    ResultDO<List<MealdistributionDO>> getListByRoom(long roomId);
+    ResultDO<List<MealdistributionDO>> getListByRoom(int roomNumber);
 
     /**
      * 获取当前正在配送的订单

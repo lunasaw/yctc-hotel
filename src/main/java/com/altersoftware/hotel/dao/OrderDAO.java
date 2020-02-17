@@ -94,6 +94,14 @@ public interface OrderDAO {
     int deleteById(long id);
 
     /**
+     * 根据state删除一条订单消息
+     *
+     * @param
+     */
+    @Delete("DELETE FROM tb_order WHERE state=0")
+    int deleteStateZero();
+
+    /**
      * 返回订单list
      *
      * @return
