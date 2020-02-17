@@ -2,17 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="component/head :: head"></head>
+<header th:replace="component/fram :: commonHeader"></header>
 
+<div class="container" th:replace="component/fram :: commonMenu">
+</div>
 <body>
-	<header th:replace="component/header :: header"></header>
 
 	<!-- Begin page content -->
-	<div class="container">
+    <div class="container" style="float: right;">
+
+        <br>
+        <br>
+        <br>
+        <br>
 		<div class="row">
 
-			<div th:replace="component/sidebar"></div>
-
-			<div class="col-md-9">
+            <div class="col-md-9">
 				<h5>管理员-功能1：管理用户权限</h5>
 				<hr />
 				<div>
@@ -59,7 +64,6 @@
 			</div>
 		</div>
 	</div>
-	<footer th:replace="component/footer :: footer"></footer>
 
 	<script>
 		/**

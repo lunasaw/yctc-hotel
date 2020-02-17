@@ -4,13 +4,18 @@
 <head th:replace="component/head :: head"></head>
 
 <body onload="showAllRoles()">
-	<header th:replace="component/header :: header"></header>
+<header th:replace="component/fram :: commonHeader"></header>
 
+<div class="container" th:replace="component/fram :: commonMenu">
+</div>
 	<!-- Begin page content -->
-	<div class="container">
+<div class="container" style="float: right;">
+    <br>
+    <br>
+    <br>
+    <br>
 		<div class="row">
 
-			<div th:replace="component/sidebar"></div>
 
 			<div class="col-md-9">
 				<h5>权限管理—角色管理</h5>
@@ -39,7 +44,6 @@
 			</div>
 		</div>
 	</div>
-	<footer th:replace="component/footer :: footer"></footer>
 
 	<script>
 	/**
@@ -125,13 +129,13 @@
 					}
 				});
 			}else {
-				return;
+
 			}
 		}
 		
 		function getUrl() {
 			var url = location.search; //获取url中"?"符后的字串
-			var theRequest = new Object();
+            var theRequest = {};
 			if (url.indexOf("?") != -1) {
 				var str = url.substr(1);
 				strs = str.split("&");
@@ -143,7 +147,7 @@
 		}
 		
 		function redirectUrl() {
-			var theRequest = new Object();
+            var theRequest = {};
 			theRequest = getUrl();
 			var id = theRequest["id"];
 			var href = getHref(id);

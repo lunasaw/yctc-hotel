@@ -593,6 +593,26 @@ public class PermissionServiceImpl implements PermissionIService {
         return new ResultDO<String>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, permissionGroupName);
     }
 
+    // 根据permissionGroupId获得permissionGroupName和id
+    public ResultDO<PermissionGroupDO> getPermissionGroupNameAndIdByPermissionGroupId(Long permissionGroupId) {
+        // 参数检验
+        if (permissionGroupId == null) {
+            LOG.error("userId error, getPermissionsByPermissionGroupId error, parameter illegal, permissionGroupId={}",
+                permissionGroupId);
+            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        PermissionGroupDO permissionGroupDOById;
+        try {
+            permissionGroupDOById = permissionGroupDAO.getPermissionGroupDOById(permissionGroupId);
+        } catch (Exception e) {
+            LOG.error("shiro authentication getPermissionGroupNameByPermissionGroupId error, permissionGroupId={}",
+                permissionGroupId, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION,
+                null);
+        }
+        return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, permissionGroupDOById);
+    }
+
     // 根据permissionGroupId展示其已拥有的所有PermissionIds
     @Override
     public ResultDO<List<Long>> getPermissionIdsByPermissionGroupId(Long permissionGroupId) {

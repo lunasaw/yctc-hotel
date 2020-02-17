@@ -4,13 +4,17 @@
 <head th:replace="component/head :: head"></head>
 
 <body onload="showName(), showPermissionsState()">
-	<header th:replace="component/header :: header"></header>
+<header th:replace="component/fram :: commonHeader"></header>
 
+<div class="container" th:replace="component/fram :: commonMenu">
+</div>
 	<!-- Begin page content -->
-	<div class="container">
+<div class="container" style="float: right;">
+    <br>
+    <br>
+    <br>
+    <br>
 		<div class="row">
-
-			<div th:replace="component/sidebar"></div>
 
 			<div class="col-md-9">
 				<h5>权限管理—角色管理-角色修改</h5>
@@ -20,7 +24,8 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">角色名称（英文）</span>
 						</div>
-						<input type="text" class="form-control" id="name" aria-describedby="basic-addon3">
+                        <input aria-describedby="basic-addon3" class="form-control" id="name" type="text">
+                        <input aria-describedby="basic-addon3" class="form-control" id="id" type="text">
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -41,14 +46,13 @@
 			</div>	
 		</div>
 	</div>
-	<footer th:replace="component/footer :: footer"></footer>
-
 	<script>
 	function showName() {
-		var theRequest = new Object();
+        var theRequest = {};
 		theRequest = getUrl();
 		var id = theRequest["id"];
-		var permissionGroupId = unescape(id); 
+        var permissionGroupId = unescape(id);
+        $("#id").val(permissionGroupId);
 		$.ajax({
 			url: "/hotel/restpermission/get-permissionname-by-permissiongroupid",
 			type: "POST",
@@ -69,8 +73,10 @@
 				} else {
 					//得到权限list
 					var name = result.module;
-					$("#name").val(name);                 
-				}                             
+                    var id = result.id;
+                    console.log(result);
+                    $("#name").val(name);
+                }
 			},
 			error: function (e) {
 				alert("获取库中权限异常");
@@ -108,7 +114,7 @@
 	
 	function getUrl() {
 		var url = location.search; //获取url中"?"符后的字串
-		var theRequest = new Object();
+        var theRequest = {};
 		if (url.indexOf("?") != -1) {
 			var str = url.substr(1);
 			strs = str.split("&");
@@ -123,7 +129,7 @@
 	 */
 	 function showPermissionsState() {
 		//1.获得URL后面的id	
-		var theRequest = new Object();
+        var theRequest = {};
 		theRequest = getUrl();
 		var id = theRequest["id"];
 		var permissionGroupId = unescape(id);
@@ -166,12 +172,12 @@
 		});
 	}
 		
-	function modify() {	
-		var theRequest = new Object();
+	function modify() {
+        var theRequest = {};
 		theRequest = getUrl();
 		var id = theRequest["id"];	
 		var name =  $("#name").val();
-		var permissonIds = new Array();  
+        var permissonIds = [];
 		$('input[name="id"]:checked').each(function(){  
 			permissonIds.push($(this).val());  
 		}); 	
@@ -205,13 +211,8 @@
 				alert("modifyRole异常");
 			}
 		});
-	}	
-		
-		
-		
+    }
 	</script>
-
-	<div th:replace="component/footer-lib"></div>
 </body>
 
 </html>

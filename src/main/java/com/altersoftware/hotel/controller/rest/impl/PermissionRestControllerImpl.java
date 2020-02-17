@@ -155,6 +155,15 @@ public class PermissionRestControllerImpl implements PermissionRestController {
     }
 
     @Override
+    @PostMapping("get-permissionnameandid-by-permissiongroupid")
+    public ResultDO<PermissionGroupDO> getPermissionNameAndIdByPermissionGroupId(@RequestBody Long permissionGroupId) {
+        if (permissionGroupId == null) {
+            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        return permissionService.getPermissionGroupNameAndIdByPermissionGroupId(permissionGroupId);
+    }
+
+    @Override
     @PostMapping("get-permissionidlist-by-permissiongroupid")
     public ResultDO<List<Long>> getPermissionIdListByPermissionGroupId(@RequestBody Long permissionGroupId) {
         if (permissionGroupId == null) {

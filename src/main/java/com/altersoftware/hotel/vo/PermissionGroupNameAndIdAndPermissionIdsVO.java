@@ -8,8 +8,19 @@ public class PermissionGroupNameAndIdAndPermissionIdsVO {
     private String name;
     /** 权限组的原Id */
     private Long id;
+    /** 权限组的新Id */
+    private Long       newId;
     /** 可拥有的新权限ids */
+
     private List<Long> permissonIds;
+
+    public Long getNewId() {
+        return newId;
+    }
+
+    public void setNewId(Long newId) {
+        this.newId = newId;
+    }
 
     public String getName() {
         return name;
@@ -42,6 +53,8 @@ public class PermissionGroupNameAndIdAndPermissionIdsVO {
         builder.append(name);
         builder.append(", id=");
         builder.append(id);
+        builder.append(", newId=");
+        builder.append(newId);
         builder.append(", permissonIds=");
         builder.append(permissonIds);
         builder.append("]");

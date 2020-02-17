@@ -134,4 +134,12 @@ public interface PermissionIService {
      */
     ResultDO<List<Long>> getPermissionIdsByPermissionGroupId(Long permissionGroupId);
 
+    /**
+     * id获取权限组
+     * 
+     * @param permissionGroupId
+     * @return
+     */
+    ResultDO<PermissionGroupDO> getPermissionGroupNameAndIdByPermissionGroupId(Long permissionGroupId);
+
 }

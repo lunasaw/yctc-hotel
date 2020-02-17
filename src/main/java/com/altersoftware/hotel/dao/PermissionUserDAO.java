@@ -78,7 +78,7 @@ public interface PermissionUserDAO {
      * @param permissionId
      * @return
      */
-    @Select("select id, user_id, permission_id, , create_time, modify_time from tb_permission_user where user_id=#{userId} and permission_id=#{permissionId} ")
+    @Select("select id, user_id, permission_id, create_time, modify_time from tb_permission_user where user_id=#{userId} and permission_id=#{permissionId} ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "userId", column = "user_id"),
