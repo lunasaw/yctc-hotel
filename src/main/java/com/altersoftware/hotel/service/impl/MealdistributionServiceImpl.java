@@ -110,6 +110,21 @@ public class MealdistributionServiceImpl implements MealdistributionService {
     }
 
     @Override
+    public ResultDO<Void> deleteByOrder(long orderId) {
+        try {
+
+            int i = mealdistributionDAO.deleteByOrder(orderId);
+
+            LOG.info("deleteByOrder success, orderId={}", orderId);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteByOrder error, orderId={}", orderId, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+        }
+    }
+
+    @Override
     public ResultDO<List<MealdistributionDO>> getAll() {
         List<MealdistributionDO> all = null;
         try {
@@ -138,14 +153,14 @@ public class MealdistributionServiceImpl implements MealdistributionService {
     }
 
     @Override
-    public ResultDO<List<MealdistributionDO>> getListByRoom(long roomId) {
+    public ResultDO<List<MealdistributionDO>> getListByRoom(int roomNumber) {
         List<MealdistributionDO> getListByRoomId = null;
         try {
-            getListByRoomId = mealdistributionDAO.getMealdistributionDOByRoomId(roomId);
+            getListByRoomId = mealdistributionDAO.getMealdistributionDOByRoomNumber(roomNumber);
             LOG.info("getListByRoom success, getListByRoomId={}", getListByRoomId);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, getListByRoomId);
         } catch (Exception e) {
-            LOG.error("getListByRoom error, roomId={}", roomId, e);
+            LOG.error("getListByRoom error, roomNumber={}", roomNumber, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }

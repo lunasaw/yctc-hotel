@@ -24,7 +24,7 @@ import com.altersoftware.hotel.entity.MealdistributionDO;
 public class MealdistributionDAOTest {
 
     private static final long   ID       = 1;
-    private static final long   ROOOM_ID = 1;
+    private static final int    ROOOM_Number = 327;
     private static final long   STAFF_ID = 10005;
     private static final long   ORDER_ID = 1;
 
@@ -35,7 +35,7 @@ public class MealdistributionDAOTest {
     public void aInsert() {
         MealdistributionDO mealdistributionDO = new MealdistributionDO();
         mealdistributionDO.setId(ID);
-        mealdistributionDO.setOrderId(ROOOM_ID);
+        mealdistributionDO.setOrderId(ROOOM_Number);
         mealdistributionDO.setStaffId(STAFF_ID);
         mealdistributionDO.setOrderId(ORDER_ID);
         mealdistributionDAO.insert(mealdistributionDO);
@@ -51,7 +51,7 @@ public class MealdistributionDAOTest {
     @Test
     public void cGetByRoomId() {
         List<MealdistributionDO> mealdistributionDOByRoomId =
-            mealdistributionDAO.getMealdistributionDOByRoomId(ROOOM_ID);
+            mealdistributionDAO.getMealdistributionDOByRoomNumber(ROOOM_Number);
         System.out.println(mealdistributionDOByRoomId);
         Assert.assertNotNull(mealdistributionDOByRoomId);
     }

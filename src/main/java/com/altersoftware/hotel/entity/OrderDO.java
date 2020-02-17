@@ -25,6 +25,15 @@ public class OrderDO {
     /** 状态 暂定为是否付款 */
     private int    state;
 
+    public OrderDO(long id, long menuId, int numbers, long customerId) {
+        this.id = id;
+        this.menuId = menuId;
+        this.numbers = numbers;
+        this.customerId = customerId;
+    }
+
+    public OrderDO() {}
+
     public long getId() {
         return id;
     }

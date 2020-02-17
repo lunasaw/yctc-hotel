@@ -1,19 +1,17 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.MenuDO;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.MealdistributionRestController;
 import com.altersoftware.hotel.entity.MealdistributionDO;
 import com.altersoftware.hotel.entity.ResultDO;
@@ -100,7 +98,7 @@ public class MealdistributionRestControllerImpl implements MealdistributionRestC
     @PostMapping("update")
     public ResultDO<Void> updateMealdistribution(@RequestBody MealdistributionDO mealdistribution) {
         // 参数校验
-        if (mealdistribution.getId() <= 0 || mealdistribution.getOrderId() <=0 ||  mealdistribution.getRoomId()<= 0
+        if (mealdistribution.getId() <= 0 || mealdistribution.getOrderId() <= 0 || mealdistribution.getRoomNumber() <= 0
                 || mealdistribution.getStaffId() <= 0) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                     ResultCode.MSG_PARAMETER_INVALID, null);
@@ -115,7 +113,7 @@ public class MealdistributionRestControllerImpl implements MealdistributionRestC
             doResultDOModule.setOrderId(mealdistribution.getOrderId());
             doResultDOModule.setId(mealdistribution.getId());
             doResultDOModule.setStaffId(mealdistribution.getStaffId());
-            doResultDOModule.setRoomId(mealdistribution.getRoomId());
+            doResultDOModule.setRoomNumber(mealdistribution.getRoomNumber());
 
             ResultDO<Void> voidResultDO = mealdistributionService.updateMealdistribution(doResultDOModule);
             if (mealdistributionDOResultDO.isSuccess() == false) {
@@ -221,19 +219,19 @@ public class MealdistributionRestControllerImpl implements MealdistributionRestC
     /**
      * 通过房间编号获取配送订单信息
      *
-     * @param roomId
+     * @param roomNumber
      * @return
      */
     @Override
     @PostMapping("get-byroom")
-    public ResultDO<List<MealdistributionDO>> getListByRoom(long roomId) {
+    public ResultDO<List<MealdistributionDO>> getListByRoomNumber(int roomNumber) {
         // 参数校验
-        if (roomId <= 0) {
+        if (roomNumber <= 0) {
             return new ResultDO<List<MealdistributionDO>>(false, ResultCode.PARAMETER_INVALID,
                     ResultCode.MSG_PARAMETER_INVALID, null);
         }
 
-        ResultDO<List<MealdistributionDO>> listByRoom = mealdistributionService.getListByRoom(roomId);
+        ResultDO<List<MealdistributionDO>> listByRoom = mealdistributionService.getListByRoom(roomNumber);
         if (listByRoom.isSuccess() == false) {
             return new ResultDO<List<MealdistributionDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);

@@ -79,6 +79,13 @@ public class RecordDAOTest {
     }
 
     @Test
+    public void dGetByRoomCustomer() {
+        List<RecordDO> recordDOByRoomNumber = recordDAO.getRecordDOByCustomerId(10013);
+        System.out.println(recordDOByRoomNumber);
+        Assert.assertNotNull(recordDOByRoomNumber);
+    }
+
+    @Test
     public void dGetByStaff() {
         List<RecordDO> recordDOByCustomerId = recordDAO.getRecordDOByCustomerId(CUSTOMER_ID);
         System.out.println(recordDOByCustomerId);

@@ -71,10 +71,10 @@ public interface MealdistributionRestController {
     /**
      * 通过房间编号获取配送订单信息
      *
-     * @param roomId
+     * @param roomNumber
      * @return
      */
-    ResultDO<List<MealdistributionDO>> getListByRoom(long roomId);
+    ResultDO<List<MealdistributionDO>> getListByRoomNumber(int roomNumber);
 
     /**
      * 获取当前正在配送的订单

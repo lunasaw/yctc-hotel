@@ -33,7 +33,7 @@ public class RecordRestControllerImpl implements RecordRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<RecordDO> showRecord(@RequestBody long id) {
+    public ResultDO<RecordDO> showRecord(long id) {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,
@@ -69,6 +69,32 @@ public class RecordRestControllerImpl implements RecordRestController {
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, listResultDO.getModule());
+        }
+    }
+
+    @Override
+    @PostMapping("getnumbers-bycustomer")
+    public ResultDO<List<Integer>> getRoomByCustomerId(long customerId) {
+        // 参数校验
+        if (customerId <= 0) {
+            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        try {
+            ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByCustomer(customerId);
+            List<RecordDO> module = listResultDO.getModule();
+            List<Integer> strings = new ArrayList<>();
+            for (int i = 0; i < module.size(); i++) {
+                strings.add(module.get(i).getRoomNumber());
+            }
+            if (listResultDO.isSuccess() == false) {
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            } else {
+                return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, strings);
+            }
+        } catch (Exception e) {
+            return new ResultDO<>(false, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, null);
         }
     }
 
