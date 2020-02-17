@@ -51,14 +51,18 @@
                     <tbody id="modalTbody">
 
                     </tbody>
-                    <select class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getroomnum()";>
-                        <option  disabled="disabled" selected="selected">请选择...</option>
-
+                    <select ; class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getroomnum()">
+                        <option disabled="disabled" selected="selected">请选择...</option>
                     </select>
                 </table>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success">立即支付</button>
+                <form action="http://111.229.114.126:8088/epay/order/alipay" id="form" method="post">
+                       <input name="outTradeNo" type="hidden" value="dzcp1000165460001"><br>
+                       <input name="subject" type="hidden" value="红魔手机"><br>
+                       <input name="totalAmount" type="hidden" value="0.1"><br>
+                    <input class="btn btn-success" onclick="submin()" type="submit">立即支付</input>
+                </form>
             </div>
         </div>
     </div>
@@ -150,7 +154,6 @@
 
     function initmodel() {
         $("#modalTbody").find("tr").remove();
-        getroomnum();
         let data = $("#table").bootstrapTable("getData");
         let input = $("input[type='number']");
         // let newDate = [];
@@ -167,27 +170,33 @@
     function getroomnum() {
         var userId = getCookie("userId");
         $.ajax({
-            url: "/hotel/customer/get-byId",
+            url: "/hotel/record/getnumbers-bycustomer",
             type: "POST",
             contentType: "application/x-www-form-urlencoded",
             data: {
                 "customerId": userId
             },
-            success:function (result) {
+            success: function (result) {
+                console.log(result);
                 var list = result.module;
+                console.log(list);
                 for (var i = 0; i < list.length; i++) {
-                    document.getElementById("selectun").options.add(new Option(list[i].roomNumber, i));
+                    document.getElementById("selectun").options.add(new Option(list[i], i));
                 }
             }
         })
     }
 
     function addinmodel() {
+        initmodel();
+    }
+
+    function submin() {
         $("#modalTbody").find("tr").remove();
 
         let data = $("#table").bootstrapTable("getData");
         let input = $("input[type='number']");
-        var roomNumber=$("#selectun option:selected").text();
+        var roomNumber = $("#selectun option:selected").text();
         // let newDate = [];
         var userId = getCookie("userId");
         for (let i = 0; i < data.length; ++i) {
@@ -195,13 +204,13 @@
                 let dataSubmit = {
                     "menuId": data[i].id,
                     "numbers": input[i].value,
-                    "customerId": userId
+                    "customerId": userId,
+                    "roomNumber": roomNumber,
                 };
                 let url = "/hotel/order/add-order";
                 parameterPostRequest(url, dataSubmit);
             }
         }
-        initmodel();
     }
 
     // 无参数post请求
@@ -251,16 +260,28 @@
             dataType: "json",
             data: JSON.stringify(data),
             traditional: true,
-            contentType : "application/json",
+            contentType: "application/json",
             success: function (result) {
                 if (result.success === false) {
                     switch (result.code) {
-                        case 9001: swal("错误", "数据库错误", "error");   break;
-                        case 9002: swal("错误", "参数错误", "error");     break;
-                        case 9005: swal("错误", "文件删除错误", "error"); break;
-                        case 9006: swal("错误", "文件创建错误", "error"); break;
-                        case 9007: swal("错误", "文件不存在", "error");   break;
-                        case 9999: swal("错误", "系统错误", "error");     break;
+                        case 9001:
+                            swal("错误", "数据库错误", "error");
+                            break;
+                        case 9002:
+                            swal("错误", "参数错误", "error");
+                            break;
+                        case 9005:
+                            swal("错误", "文件删除错误", "error");
+                            break;
+                        case 9006:
+                            swal("错误", "文件创建错误", "error");
+                            break;
+                        case 9007:
+                            swal("错误", "文件不存在", "error");
+                            break;
+                        case 9999:
+                            swal("错误", "系统错误", "error");
+                            break;
                     }
                 } else {
                     callback(result);
@@ -282,32 +303,6 @@
         }
     }
 
-
-    console.log(string);
-    $(document).ready(function () {
-        console.log("获取用户名");
-        $.ajax({
-            url: "/hotel/customer/get-byId",
-            type: "POST",
-            contentType: "application/x-www-form-urlencoded",
-            data: {
-                "customerId": string
-            },
-            success: function (result) {
-                //console.log(result);
-                var data = result.module;
-                console.log(data);
-                // $('#userName').val(data.name);
-                // $('#sex').val(data.sex);
-                // $('#phone').val(data.contactPhone);
-
-
-            },
-            error: function (xhr, resp, text) {
-                console.log(xhr, resp, text)
-            }
-        });
-    });
 
     function serializeFormData($form) {
         let unindexed_array = $form.serializeArray();
