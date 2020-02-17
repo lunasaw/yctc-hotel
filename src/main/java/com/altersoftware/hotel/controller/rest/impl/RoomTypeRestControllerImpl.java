@@ -119,7 +119,6 @@ public class RoomTypeRestControllerImpl implements RoomTypeRestController {
         roomTypeDOById.getModule().setId(roomTypeDO.getId());
         roomTypeDOById.getModule().setPicture(roomTypeDO.getPicture());
 
-
         return roomTypeService.updateRoom( roomTypeDOById.getModule());
     }
 

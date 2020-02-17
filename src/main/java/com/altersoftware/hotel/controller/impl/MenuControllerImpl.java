@@ -24,6 +24,12 @@ public class MenuControllerImpl implements MenuController {
     }
 
     @Override
+    @GetMapping("show-menustable")
+    public String showMenuTable() {
+        return TemplatePath.MENUS_TABLE;
+    }
+
+    @Override
     @GetMapping("show-menusadmin")
     public String showMenuAdmin() {
         return TemplatePath.MENUS_ADMIN;

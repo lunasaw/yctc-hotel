@@ -1,186 +1,22 @@
 <!DOCTYPE html>
-<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head th:replace="component/head :: head">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>用户服务中心</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 
 </head>
-
 <body>
 
+<header th:replace="component/fram :: commonHeader"></header>
 
-  <header th:replace="component/fram :: commonHeader"></header>
+<div class="container" th:replace="component/fram :: commonMenu"></div>
 
-  <!-- Begin page content -->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <iframe frameborder="no" height="600px" th:src="@{/menuinfo/show-menustable}" width="100%"></iframe>
+</main>
 
-  <div class="container" th:replace="component/fram :: commonMenu"></div>
-
-
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="chartjs-size-monitor"
-      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-      <div class="chartjs-size-monitor-expand"
-        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-      </div>
-      <div class="chartjs-size-monitor-shrink"
-        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-      </div>
-    </div>
-
-    <h2 style="color:  rgb(135, 106, 32);"><small>菜单预览</small></h2>
-    <hr color="lightgrey" width="85%" align="left">
-    <form>
-      <div class="table-responsive" style="margin-top: 25px;">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
-          style="margin-bottom: 150px; text-align: center;">
-            <thead>
-              <tr>
-                <th>菜肴</th>
-                <th>图片展示</th>
-                <th>价位/元</th>
-                <th>订餐</th>
-              </tr>
-            </thead>
-            <tbody id="tbody">
-            </tbody>
-              <tfoot>
-                  <tr>
-                      <th colspan="5">
-                        <button type="button" class="btn btn-success col-md-2" data-toggle="modal" data-target="#dishes" onclick="showmodel()">提交订单</button>
-                      </th>
-                  </tr>
-              </tfoot>
-        </table>
-      </div>
-    </form>
-
-  </main>
-
-<!-- 模态框-bookdishes -->
-<div class="modal fade" id="dishes" tabindex="-1" role="dialog" aria-labelledby="dishes" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: rgb(226, 203, 145);">
-        <h5 class="modal-title" id="payforroomLabel">菜肴订单</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="close">
-          <Span aria-hidden="true">&times;</Span>
-        </button>
-      </div>
-      <div class="modal-body" style="height: auto;">
-        <h4>当前订单为：</h4>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>菜肴</th>
-              <th>数量</th>
-              <th>价格</th>
-            </tr>
-          </thead>
-          <tbody id="modalTbody"></tbody>
-          <tfoot>
-            <tr>
-              <th>总价</th>
-              <th colspan="2"></th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-success">立即支付</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-  <footer th:replace="component/fram :: commonFooter"></footer>
-
-  <script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "/hotel/menuinfo/get-listmenu",
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            async: true,
-            success:function (result) {
-                let item = result.module;
-                let tbody = $("#tbody");
-                for (let i = 0; i < item.length; i++) {
-                    let name = item[i].name;
-                    let picture = item[i].picture;
-                    let price = item[i].price;
-                    let id = item[i].id;
-                    tbody.append('<tr class="append-tr">' +
-                        '<th style="padding-top:50px">' + name + '</th>' +
-                        '<th >' + '<img src="'+picture+'" id="picutre" width="200px" height="100px">' + '</th>' +
-                        '<th style="padding-top:50px">' + price + '</th>' +
-                        '<th style="padding-top:50px">' +
-                        '<input type="number" value="0" style="width:60px;border-top:none;border-left:none;border-right:none;text-align:center;outline:none" oninput="if(value<0)value=0;if(value>10)value=10" >' +
-                        '</th>' +
-                        '</tr>')
-                }
-            }
-        })
-    })
+<footer th:replace="component/fram :: commonFooter"></footer>
 
 
-    function getorder(id,value) {
-        $.ajax({
-            url:"/hotel/menuinfo/get-byid",
-            type:"POST",
-            data:JSON.stringify(id),
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            async: true,
-            success:function (result) {
-                let item = result.module;
-                let data = [{
-                    "name":item.name,
-                    "price":item.price,
-                    "number":value,
-                }]
-                return data;
-            }
-        })
-    }
-
-    function showmodel() {
-        let modalTbody = $("#modalTbody");
-
-        modalTbody.append('<tr>'+'<th>'+data.name+'</th>'+'<th>'+data.value+'</th>'+'<th>'+data.price+'</th>'+'<tr>');
-
-    }
-  </script>
-
-<script>
-$(document).ready(function(){
-  let data =  [{
-          "name": "西红柿炒鸡蛋"
-        },
-        {
-          "name": "拔丝地瓜"
-        },
-        {
-          "name": "紫菜蛋汤"
-        },
-        {
-          "name": "梅菜扣肉"
-        },
-      ];
-      let modalTbody = $("#modalTbody");
-      $.each(data,function(i,item){
-        modalTbody.append('<tr>'+'<th>'+item.name+'</th>'+'<th>'+item.number+'</th>'+'<th>'+item.price+'</th>'+'<tr>')
-      });
-})
-
-</script>
 </body>
-
 </html>
