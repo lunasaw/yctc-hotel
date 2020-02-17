@@ -20,4 +20,6 @@ public interface MenuController {
     String showMenuAdmin();
 
     String showMenuAdminTable();
+
+    String showMenuTable();
 }
