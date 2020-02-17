@@ -11,6 +11,7 @@ public interface RoomController {
      */
     String showRooms();
 
+    String showRoomsReception();
 
     /**
      * 跳转到修改页面

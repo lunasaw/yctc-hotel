@@ -114,6 +114,9 @@ public class TemplatePath {
     /** 房间信息页面 */
     public static final String ROOMS                                      = "hotel/rooms";
 
+    /** 前台房间信息页面 */
+    public static final String ROOMS_RECEPTION                                      = "hotel/roomscondition";
+
     /** 房间修改页面 */
     public static final String ROOMS_UPDATE                               = "hotel/rooms-update";
 

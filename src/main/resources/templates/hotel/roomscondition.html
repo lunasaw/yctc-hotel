@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+
+</head>
+
+<body>
+
+  <header th:replace="component/fram :: commonHeader"></header>
+
+  <div class="container" th:replace="component/fram :: commonMenu"></div>
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid">
+      <h2 style="color:  rgb(135, 106, 32);margin-top: 45px;"><small>房间管理</small></h2>
+      <hr width="85%" align="left" color="lightgrey">
+      <div class="card mb-3">
+        <div class="card-header col-md-12">
+          房间状态管理系统
+        </div>
+        <div class="card-body col-md-12">
+          <div class="row" id="row" style="margin: auto;padding-left:5%;">
+          </div>
+        </div>
+        <div class="card-footer col-md-12">
+          <div class="row" style="margin:10px auto;padding-left:5%;">
+            <div class="example-a col-md-1">空房间</div>
+            <div class="example-b col-md-1">待打扫房间</div>
+            <div class="example-c col-md-1">已入住房间</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+
+  <footer th:replace="component/fram :: commonFooter"></footer>
+
+  <script>
+    $(document).ready(function () {
+        $.ajax({
+            url:"/hotel/room/get-list",
+            type:"POST",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            success:function (result) {
+                let item = result.module;
+
+                for (let i = 0; i < item.length; i++) {
+                    let roomNumber = item[i].roomNumber;
+                    let type = item[i].type;
+                    if (item[i].state == 20000) {
+                        $("#row").append('<div class="lived1 col-md-1">' + roomNumber + '<br>' + type + '</div>');
+                    } else if (item[i].state == 20001) {
+                        $("#row").append('<div class="lived2 col-md-1">' + roomNumber + '<br>' + type + '</div>');
+                    } else if (item[i].state== 20002) {
+                        $("#row").append('<div class="lived3 col-md-1">' + roomNumber + '<br>' + type + '</div>');
+                    }
+                }
+            }
+        });
+
+    });
+  </script>
+
+</body>
+
+</html>
