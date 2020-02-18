@@ -158,14 +158,14 @@
 
     $(document).ready(function () {
         console.log("获取用户名Id");
-        var string = getCookie("userId");
-        console.log(string);
+        var userId = getCookie("userId");
+        console.log(userId);
         $.ajax({
             url: "/hotel/customer/get-byId",
             type: "POST",
             contentType: "application/x-www-form-urlencoded",
             data: {
-                "customerId": string
+                "customerId": userId
             },
             success: function (result) {
                 var data = result.module;
