@@ -3,6 +3,7 @@ package com.altersoftware.hotel.controller.rest.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
     @PostMapping("add-goods")
     public ResultDO<GoodsDO> insert(@RequestBody GoodsDO goodsDO) {
         // 参数校验
-        if (goodsDO.getId() <= 0 || goodsDO.getroomId() <= 0) {
+        if (goodsDO.getId() <= 0 || StringUtils.isBlank(goodsDO.getroomNumberList())) {
             return new ResultDO<GoodsDO>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -83,7 +84,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
     @PostMapping("update-goods")
     public ResultDO<Void> updateGoods(@RequestBody GoodsDO goodsDO) {
         // 参数校验
-        if (goodsDO.getId() <= 0 || goodsDO.getroomId() <= 0) {
+        if (goodsDO.getId() <= 0 || StringUtils.isBlank(goodsDO.getroomNumberList())) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -98,7 +99,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
             doResultDOModule.setName(goodsDO.getName());
             doResultDOModule.setId(goodsDO.getId());
             doResultDOModule.setPrice(goodsDO.getPrice());
-            doResultDOModule.setroomId(goodsDO.getroomId());
+            doResultDOModule.setroomNumberList(goodsDO.getroomNumberList());
             doResultDOModule.setState(goodsDO.getState());
             doResultDOModule.setbuyTime(goodsDO.getbuyTime());
 
