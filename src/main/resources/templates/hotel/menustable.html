@@ -225,6 +225,10 @@
                 console.log(result);
                 var list = result.module;
                 console.log(list);
+                if (list.length == 0) {
+                    alert("对不起,未查到您的房间号,请先预定房间");
+                    return;
+                }
                 for (var i = 0; i < list.length; i++) {
                     document.getElementById("selectun").options.add(new Option(list[i], i));
                 }
@@ -353,7 +357,6 @@
         });
         // alert('嘿，我听说您喜欢模态框...');
     });
-
     function getCookie(objName) {//获取指定名称的cookie的值
         var arrStr = document.cookie.split("; ");
         for (var i = 0; i < arrStr.length; i++) {

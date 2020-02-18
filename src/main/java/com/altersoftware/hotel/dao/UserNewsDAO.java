@@ -59,15 +59,7 @@ public interface UserNewsDAO {
      * @param userId
      * @return
      */
-    @Select("select  news_id from tb_user_news where id=#{id}  ")
-    @Results({
-        @Result(property = "id", column = "id"),
-        @Result(property = "userId", column = "user_id"),
-        @Result(property = "newsId", column = "news_id"),
-        @Result(property = "state", column = "state"),
-        @Result(property = "createTime", column = "create_time"),
-        @Result(property = "modifyTime", column = "modify_time")
-    })
+    @Select("select news_id from tb_user_news where user_id=#{userId}  ")
     List<Long> getNewsIdByUserId(long userId);
 
     /**
@@ -86,7 +78,7 @@ public interface UserNewsDAO {
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    UserNewsDO getUserNewsDOByUserIdAndNewsId(long userId, long newsId);
+    UserNewsDO getUserNewsDOByUserIdAndNewsId(@Param("userId") long userId, @Param("newsId") long newsId);
 
     /**
      * 通过用户id得到用户未读信息的id
@@ -94,15 +86,7 @@ public interface UserNewsDAO {
      * @param userId
      * @return
      */
-    @Select("select news_id  from tb_user_news where state=1 ")
-    @Results({
-        @Result(property = "id", column = "id"),
-        @Result(property = "userId", column = "user_id"),
-        @Result(property = "newsId", column = "news_id"),
-        @Result(property = "state", column = "state"),
-        @Result(property = "createTime", column = "create_time"),
-        @Result(property = "modifyTime", column = "modify_time")
-    })
+    @Select("select news_id  from tb_user_news where state=0 and user_id=#{userId}")
     List<Long> getNoReadNewsIdByUserId(long userId);
 
     /**
@@ -112,8 +96,9 @@ public interface UserNewsDAO {
      * @param newsId
      * @param state
      */
-    @Update("update tb_user_news  set  state=0 ,modify_time=now()  where  user_id=#{userId} and news_id=#{newsId} and state=#{state}")
-    int updateStateByUserIdAndNewsId(long userId, long newsId, int state);
+    @Update("update tb_user_news  set  state=#{state} ,modify_time=now()  where  user_id=#{userId} and news_id=#{newsId} and state=0")
+    int updateStateByUserIdAndNewsId(@Param("userId") long userId, @Param("newsId") long newsId,
+        @Param("state") int state);
 
     /**
      * 通过用户id得到用户已读信息的id
@@ -121,7 +106,7 @@ public interface UserNewsDAO {
      * @param userId
      * @return
      */
-    @Select("select news_id  from tb_user_news where state=0 ")
+    @Select("select news_id  from tb_user_news where state=1 and user_id=#{userId}")
     List<Long> getReadedNewsIdByUserId(long userId);
 
     /**
@@ -132,13 +117,13 @@ public interface UserNewsDAO {
      * @return
      */
     @Delete("DELETE FROM tb_user_news WHERE  user_id=#{userId} and news_id=#{newsId}")
-    void deletByUserIdAndNewsId(long userId, long newsId);
+    void deletByUserIdAndNewsId(@Param("userId") long userId, @Param("newsId") long newsId);
 
     /**
      * 删除所有已读通知
      * 
      * @param userId
      */
-    @Delete("DELETE FROM tb_user_news WHERE  state=0 and user_id=#{userId} ")
+    @Delete("DELETE FROM tb_user_news WHERE  state=1 and user_id=#{userId} ")
     void deleteAllReadedNewsByUserId(long userId);
 }
