@@ -1,24 +1,32 @@
 package com.altersoftware.hotel.entity;
 
-public class RoomGoodsDO {
-    //房间号
-    private long roomId;
+import java.util.Date;
 
-    //物品名
+public class RoomGoodsDO {
+    // 房间门牌号
+    private int    roomNumber;
+
+    // 物品名
     private String goodsName;
 
     /**
      * 物品状态
      * {@link com.altersoftware.hotel.constant.entity.room.RoomState}
      */
-    private int    state;
+    private String state;
 
-    public long getRoomId() {
-        return roomId;
+    /** 创建时间 */
+    private Date   createTime;
+
+    /** 修改时间 */
+    private Date   modifyTime;
+
+    public int getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoomId(long roomId) {
-        this.roomId = roomId;
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public String getGoodsName() {
@@ -29,20 +37,38 @@ public class RoomGoodsDO {
         this.goodsName = goodsName;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     @Override
     public String toString() {
         return "RoomGoodsDO{" +
-                "roomId=" + roomId +
-                ", goodsName='" + goodsName + '\'' +
-                ", state=" + state +
-                '}';
+            "roomNumber=" + roomNumber +
+            ", goodsName='" + goodsName + '\'' +
+            ", state=" + state +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
+            '}';
     }
 }
