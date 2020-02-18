@@ -17,9 +17,9 @@ public interface GoodsDAO {
      *
      *
      */
-    @Insert(" INSERT INTO tb_goods (id, room_id, name, buy_time, price, compensation_money, state, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_goods (id, room_list, name, buy_time, price, compensation_money, state, create_time, modify_time ) "
         +
-        "VALUES(#{id}, #{roomId},#{name}, #{buyTime}, #{price}, #{compensationMoeny}, #{state},  now(), now()) ")
+        "VALUES(#{id}, #{roomNumberList},#{name}, #{buyTime}, #{price}, #{compensationMoeny}, #{state},  now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(GoodsDO goodsDO);
 
@@ -29,10 +29,10 @@ public interface GoodsDAO {
      * @param id
      * @return
      */
-    @Select("select id, room_id, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods where id=#{id}  ")
+    @Select("select id, room_list, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods where id=#{id}  ")
     @Results({
         @Result(property = "id", column = "id"),
-        @Result(property = "roomId", column = "room_id"),
+        @Result(property = "roomNumberList", column = "room_list"),
         @Result(property = "name", column = "name"),
         @Result(property = "buyTime", column = "buy_time"),
         @Result(property = "price", column = "price"),
@@ -49,10 +49,10 @@ public interface GoodsDAO {
      *
      * @return
      */
-    @Select("select id, room_id, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods ")
+    @Select("select id, room_list, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods ")
     @Results({
         @Result(property = "id", column = "id"),
-        @Result(property = "roomId", column = "room_id"),
+        @Result(property = "roomNumberList", column = "room_list"),
         @Result(property = "name", column = "name"),
         @Result(property = "buyTime", column = "buy_time"),
         @Result(property = "price", column = "price"),
@@ -68,7 +68,7 @@ public interface GoodsDAO {
      *
      * @param floorDO
      */
-    @Update("update tb_goods  set room_id=#{roomId}, name=#{name}, buy_time=#{buyTime}, price=#{price}, compensation_money=#{compensationMoeny}, state=#{state}, modify_time=now()  where id=#{id}")
+    @Update("update tb_goods  set room_list=#{roomNumberList}, name=#{name}, buy_time=#{buyTime}, price=#{price}, compensation_money=#{compensationMoeny}, state=#{state}, modify_time=now()  where id=#{id}")
     int update(GoodsDO floorDO);
 
     /**
@@ -82,13 +82,13 @@ public interface GoodsDAO {
     /**
      * 根据房间Id查询所属物品
      *
-     * @param roomId
+     * @param roomNumberList
      * @return
      */
-    @Select("select id, room_id, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods where room_id=#{roomId}  ")
+    @Select("select id, room_list, name, buy_time, price, compensation_money, state,  create_time, modify_time from tb_goods where room_list=#{roomNumberList}  ")
     @Results({
         @Result(property = "id", column = "id"),
-        @Result(property = "roomId", column = "room_id"),
+        @Result(property = "roomNumberList", column = "room_list"),
         @Result(property = "name", column = "name"),
         @Result(property = "buyTime", column = "buy_time"),
         @Result(property = "price", column = "price"),
@@ -97,6 +97,6 @@ public interface GoodsDAO {
         @Result(property = "createTime", column = "create_time"),
         @Result(property = "modifyTime", column = "modify_time")
     })
-    List<GoodsDO> getGoodsDOByRoomId(long roomId);
+    List<GoodsDO> getGoodsDOByRoomId(long roomNumberList);
 
 }

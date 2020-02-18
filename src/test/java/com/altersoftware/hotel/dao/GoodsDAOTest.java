@@ -26,8 +26,8 @@ import com.altersoftware.hotel.entity.GoodsDO;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GoodsDAOTest {
 
-    private static final int    ID                 = 2;
-    private static final int    ROOM_ID            = 1;
+    private static final int    ID                 = 99;
+    private static final String ROOM_ID_List       = "1,2,3";
     private static final String NAME               = "Type-C充电器";
     private static final Double PRICE              = 33.0;
     private static final Double COMPENSATION_MONEY = 33.0;
@@ -42,7 +42,7 @@ public class GoodsDAOTest {
     public void aInsert() {
         GoodsDO goodDO = new GoodsDO();
         goodDO.setId(ID);
-        goodDO.setroomId(ROOM_ID);
+        goodDO.setroomNumberList(ROOM_ID_List);
         goodDO.setName(NAME);
         goodDO.setbuyTime(BUY_TIME);
         goodDO.setPrice(PRICE);

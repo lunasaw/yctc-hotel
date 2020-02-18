@@ -22,12 +22,13 @@
     <button id="btn_delete" type="button" class="btn btn-default" onclick="deleteAll();">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
     </button>
+    <button class="btn btn-default" data-target="#addModal" data-toggle="modal" id="btn_add" type="button">
+        <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>新增
+    </button>
 </div>
 
 <div id="toolbaradd" class="btn-group">
-    <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增物品
-    </button>
+
 </div>
 
 <table id="table"></table>
@@ -111,7 +112,7 @@
                     <div class="form-group has-success">
                         <label class="col-sm-4 control-label">房间编号</label>
                         <div class="col-sm-8">
-                            <input  class="form-control" type="number" id="edit_roomnum">
+                            <input class="form-control" id="edit_roomnum" type="text">
                         </div>
                     </div>
                     <div class="form-group has-success">
@@ -156,7 +157,7 @@
             title: '物品编号',
             width: '40px'
         },{
-            field: 'roomId',
+            field: 'roomNumberList',
             title: '房间编号',
             width: "40px"
         }, {
@@ -183,8 +184,8 @@
 
     function operateFormatter(value, row, index) {  // 赋予的参数
         return [
-            '<button class="btn btn-success view" data-toggle="modal" data-target="#viewModal" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
-            '<button class="btn btn-primary view" data-toggle="modal" data-target="#editModal" onclick="initEdit('+ index +');">增加</button>&nbsp;&nbsp;' +
+            // '<button class="btn btn-success view" data-toggle="modal" data-target="#viewModal" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
+            '<button class="btn btn-primary view" data-toggle="modal" data-target="#editModal" onclick="initEdit(' + index + ');">修改</button>&nbsp;&nbsp;' +
             '<button class="btn btn-danger view" onclick="deleteOne('+ index +');">删除</button>&nbsp;&nbsp;'
         ].join('');
     }
@@ -212,7 +213,7 @@
     function initEdit(index) {
         let rows = $("#table").bootstrapTable('getData');
         $("#edit_id").val(rows[index].id);
-        $("#edit_roomnum").val(rows[index].roomId);
+        $("#edit_roomnum").val(rows[index].roomNumberList);
         $("#edit_Name").val(rows[index].name);
         $("#edit_Date").val(rows[index].buyTime);
         $("#edit_price").val(rows[index].price);
@@ -228,14 +229,14 @@
     function edit() {
         let data = {
             "id": $("#edit_id").val(),
-            "roomId": $("#edit_roomnum").val(),
+            "roomNumberList": $("#edit_roomnum").val(),
             "name": $("#edit_Name").val(),
             "buyTime": $("#edit_Date").val(),
             "price": $("#edit_price").val(),
             "compensationMoeny": $("#edit_Bprice").val(),
         };
         if ( data.id <=0 || data.name == null || data.buyTime == "" || data.price <= 0
-            || data.roomId <= 0 ||data.compensationMoeny <= 0) {
+            || data.roomNumberList <= 0 || data.compensationMoeny <= 0) {
             swal("错误", "请输入必输入项！", "error");
         }else {
             parameterPostRequest("/hotel/goods/update-goods", data, () => {
@@ -251,13 +252,13 @@
     function add() {
         let data = {
             "id": $("#add_id").val(),
-            "roomId": $("#add_roomnum").val(),
+            "roomNumberList": $("#add_roomnum").val(),
             "name": $("#add_name").val(),
             "buyTime": $("#add_Date").val(),
             "price": $("#add_inprice").val(),
             "compensationMoeny": $("#add_outprice").val()
         };
-        if (add.id <= 0 ||  data.roomId <= 0
+        if (add.id <= 0 || data.roomNumberList <= 0
             || data.name == null || data.price <= 0 || data.buyTime == ""
             || data.compensationMoeny <= 0
             ) {

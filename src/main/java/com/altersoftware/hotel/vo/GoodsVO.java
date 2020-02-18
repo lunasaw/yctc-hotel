@@ -1,31 +1,32 @@
-package com.altersoftware.hotel.entity;
+package com.altersoftware.hotel.vo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
- * @author czy@win10
- * @date 2020/1/20 15:58
+ * @author Iszychen@win10
+ * @date 2020/2/18 15:27
  */
-public class GoodsDO {
+public class GoodsVO {
 
     /** 物品编号 */
-    private long   id;
+    private long          id;
     /** 房间编号 */
-    private String roomNumberListToString;
+    private List<Integer> roomId;
     /** 物品名称 */
-    private String name;
+    private String        name;
     /** 物品采购时间 */
-    private String buyTime;
+    private String        buyTime;
     /** 物品采购价格 */
-    private Double price;
+    private Double        price;
     /** 物品损坏赔偿价格 */
-    private Double compensationMoeny;
+    private Double        compensationMoeny;
     /** 物品状态 */
-    private String state;
+    private String        state;
     /** 创建时间 */
-    private Date   createTime;
+    private Date          createTime;
     /** 修改时间 */
-    private Date   modifyTime;
+    private Date          modifyTime;
 
     public long getId() {
         return id;
@@ -35,12 +36,12 @@ public class GoodsDO {
         this.id = id;
     }
 
-    public String getroomNumberList() {
-        return roomNumberListToString;
+    public List<Integer> getRoomId() {
+        return roomId;
     }
 
-    public void setroomNumberList(String roomNumberList) {
-        this.roomNumberListToString = roomNumberList;
+    public void setRoomId(List<Integer> roomId) {
+        this.roomId = roomId;
     }
 
     public String getName() {
@@ -51,11 +52,11 @@ public class GoodsDO {
         this.name = name;
     }
 
-    public String getbuyTime() {
+    public String getBuyTime() {
         return buyTime;
     }
 
-    public void setbuyTime(String buyTime) {
+    public void setBuyTime(String buyTime) {
         this.buyTime = buyTime;
     }
 
@@ -97,20 +98,5 @@ public class GoodsDO {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsDO{" +
-            "id=" + id +
-            ", roomNumberListToString=" + roomNumberListToString +
-            ", name='" + name + '\'' +
-            ", buyTime=" + buyTime +
-            ", price=" + price +
-            ", compensationMoeny=" + compensationMoeny +
-            ", state=" + state +
-            ", createTime=" + createTime +
-            ", modifyTime=" + modifyTime +
-            '}';
     }
 }
