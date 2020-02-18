@@ -90,7 +90,6 @@
                     <li class="lsm-sidebar-item">
                         <a href="javascript:"><span>住房服务</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a th:href="@{/floor/show-floor}"><span>楼层信息</span></a></li>
                             <li><a th:href="@{/room/show-rooms}"><span>房间预定</span></a></li>
                             <li><a href="javascript:"><span>物品租赁查询</span></a></li>
                             <li><a href="/hotel/menuinfo/show-menus"><span>预订餐饮信息</span></a></li>
@@ -100,11 +99,12 @@
                         <a href="javascript:"><span>我的房间</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
                             <li><a href=""><span>我的订单</span></a></li>
+                            <li><a th:href="@{/floor/show-floor}"><span>楼层信息</span></a></li>
+                            <li><a href="/hotel/placeorder/order-customer"><span>餐品历史订单</span></a></li>
                             <li class="1sm-sidebar-item">
                                 <a href="javascript:"><span>房间个性化设置</span><i class="my-icon lsm-sidebar-more"></i></a>
                                 <ul>
                                     <li><a href="javascript:"><span>查看我的房间物品</span></a></li>
-                                    <li><a href="javascript:"><span>预订打扫</span></a></li>
                                     <li><a href="javascript:"><span>设置设备状态</span></a></li>
                                 </ul>
                             </li>
@@ -115,6 +115,7 @@
                     <li class="lsm-sidebar-item">
                         <a href="javascript:"><span>会员系统</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
+                            <li><a href="/hotel/customer/show-customerinfo"><span>查看酒店客户信息</span></a></li>
                             <li><a href="/hotel/vipinfo/show-vip"><span>查看酒店会员信息</span></a></li>
                             <li><a href="/hotel/vipgrade/show-vipgrade"><span>设置酒店会员权益</span></a></li>
                         </ul>
@@ -123,7 +124,7 @@
                         <a href="javascript:"><span>订单系统</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
                             <li><a href="/hotel/order/order-admin"><span>客房订单</span></a></li>
-                            <li><a href="#"><span>菜品配送</span></a></li>
+                            <li><a href="/hotel/order/order-admin"><span>菜品配送</span></a></li>
                             <li><a href="/hotel/placeorder/order-admin"><span>餐品订单</span></a></li>
                         </ul>
                     </li>
@@ -139,6 +140,7 @@
                         <a href="javascript:"><span>部门管理</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
                             <li><a href="/hotel/department/show-departmentinfo"><span>部门分配</span></a></li>
+                            <li><a href="/hotel/staffinfo/show-staff"><span>员工信息</span></a></li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
