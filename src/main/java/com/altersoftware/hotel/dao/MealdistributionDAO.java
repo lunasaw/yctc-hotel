@@ -140,6 +140,16 @@ public interface MealdistributionDAO {
      *
      * @return
      */
-    @Select("select id  from tb_mealdistribution ")
+    @Select("select id, room_number, staff_id, order_id, mealdistribution_intime, mealdistribution_outtime, create_time, modify_time from tb_mealdistribution  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "staffId", column = "staff_id"),
+        @Result(property = "orderId", column = "order_id"),
+        @Result(property = "inTime", column = "mealdistribution_intime"),
+        @Result(property = "outTime", column = "mealdistribution_outtime"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
     List<MealdistributionDO> getMealList();
 }
