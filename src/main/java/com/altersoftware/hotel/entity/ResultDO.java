@@ -1,6 +1,5 @@
 package com.altersoftware.hotel.entity;
 
-
 import com.altersoftware.hotel.constant.ResultCode;
 
 public class ResultDO<T> {
@@ -8,11 +7,11 @@ public class ResultDO<T> {
     /** 是否调用以及过参数校验 */
     private boolean success = false;
     /** 业务code，见{@linkplain ResultCode} */
-    private int code;
+    private int     code;
     /** 业务消息，见{@linkplain ResultCode} */
-    private String msg;
+    private String  msg;
     /** 返回值 */
-    private T module;
+    private T       module;
 
     public ResultDO() {}
 
