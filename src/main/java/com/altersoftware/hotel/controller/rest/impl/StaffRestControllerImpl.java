@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.altersoftware.hotel.service.StaffService;
@@ -113,6 +114,26 @@ public class StaffRestControllerImpl implements StaffRestController {
         }
     }
 
+    @Override
+    @PostMapping("update-userpic")
+    public ResultDO<Void> updateUserDOPic(@RequestBody UserDO userDO) {
+        //参数校验
+        if (StringUtils.isBlank(userDO.getNumber()) || StringUtils.isBlank(userDO.getFaceToken())){
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        ResultDO<UserDO> byNumber = customerService.getByNumber(userDO.getNumber());
+        byNumber.getModule().setNumber(userDO.getNumber());
+        byNumber.getModule().setFaceToken(userDO.getFaceToken());
+        ResultDO<Void> voidResultDO = customerService.updateUserDO(byNumber.getModule());
+        if (voidResultDO.isSuccess()) {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } else {
+            return new ResultDO<Void>(false, ResultCode.UPDATE_FAILD,
+                    ResultCode.MSG_UPDATE_FAILD, null);
+        }
+    }
+
     /**
      * 删除指定员工信息
      *
@@ -139,6 +160,33 @@ public class StaffRestControllerImpl implements StaffRestController {
             } else {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             }
+        }
+
+    }
+
+    /**
+     * 删除多条记录
+     *
+     * @param numbers
+     * @return
+     */
+    @Override
+    @PostMapping("delete-byidlist")
+    public ResultDO<Void> deleteByList(String[] numbers) {
+        // 参数校验
+        if (numbers == null || numbers.length == 0) {
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        List<String> resultList = new ArrayList<>(numbers.length);
+        for (String s : numbers) {
+            resultList.add(s);
+        }
+        ResultDO<Void> voidResultDO = customerService.deleteList(resultList);
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DELETE_FAILD, ResultCode.MSG_DELETE_FAILD);
+        } else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }
 
     }

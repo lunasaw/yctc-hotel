@@ -195,6 +195,12 @@ public class TemplatePath {
     /** 订单信息页面 */
     public static final String RECORD_INFO                                = "order/record";
 
+    /** 配送订单管理员页面 */
+    public static final String MENU_ADMIN                                 = "order/Mealdistribution";
+
+    /** 配送订单管理员页面 */
+    public static final String MENU_ADMIN_TABLE                          = "order/MealdistributionTable";
+
     /** 填写订单类型选择页面 */
     public static final String PLACE_AN_ORDER                             = "order/placeanorder";
 

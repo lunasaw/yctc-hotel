@@ -1,11 +1,20 @@
 package com.altersoftware.hotel.controller.impl;
 
+import com.altersoftware.hotel.constant.TemplatePath;
 import com.altersoftware.hotel.controller.MealdistributionController;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Iszychen@win10
  * @date 2020/2/16 16:29
  */
+
+@Controller
+@ComponentScan({"com.altersoftware.hotel.service"})
+@RequestMapping("/mealdistribution")
 public class MealdistributionControllerImpl implements MealdistributionController {
 
     @Override
@@ -14,12 +23,14 @@ public class MealdistributionControllerImpl implements MealdistributionControlle
     }
 
     @Override
+    @GetMapping("show-mwalbysdmin")
     public String showMenuAdmin() {
-        return null;
+        return TemplatePath.MENU_ADMIN ;
     }
 
     @Override
+    @GetMapping("show-mwalbysdmintable")
     public String showMenuAdminTable() {
-        return null;
+        return TemplatePath.MENU_ADMIN_TABLE;
     }
 }

@@ -35,12 +35,28 @@ public interface StaffRestController {
     ResultDO<Void> updateUserDO(UserDO userDO);
 
     /**
+     * 修改客户信息
+     *
+     * @param userDO
+     * @return
+     */
+    ResultDO<Void> updateUserDOPic(UserDO userDO);
+
+    /**
      * 删除指定客户信息
      *
      * @param number
      * @return
      */
     ResultDO<Void> deleteByUserId(String number);
+
+    /**
+     * 删除部分指定员工信息
+     *
+     * @param numbers
+     * @return
+     */
+    ResultDO<Void> deleteByList(String[] numbers);
 
     /**
      * 会员号搜索客户/员工
