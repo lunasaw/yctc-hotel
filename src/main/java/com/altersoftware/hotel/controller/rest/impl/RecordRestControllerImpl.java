@@ -75,7 +75,13 @@ public class RecordRestControllerImpl implements RecordRestController {
         }
     }
 
+    /**
+     * 根据用户编号查询订单信息List
+     *
+     * @param customerId
+     */
     @Override
+    @PostMapping("get-bycustomerId")
     public ResultDO<List<RecordDO>> showRecordByCustomer(long customerId) {
         // 参数校验
         if (customerId <= 0) {
