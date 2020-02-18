@@ -27,6 +27,13 @@ public interface RecordRestController {
     ResultDO<List<RecordDO>> showRecordBystaffId(long staffId);
 
     /**
+     * 根据客户编号查询订单信息List
+     *
+     * @param customerId
+     */
+    ResultDO<List<RecordDO>> showRecordByCustomer(long customerId);
+
+    /**
      * 通过客户id搜索房间
      *
      * @param CustomerId

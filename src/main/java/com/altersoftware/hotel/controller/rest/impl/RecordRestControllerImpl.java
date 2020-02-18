@@ -76,6 +76,23 @@ public class RecordRestControllerImpl implements RecordRestController {
     }
 
     @Override
+    public ResultDO<List<RecordDO>> showRecordByCustomer(long customerId) {
+        // 参数校验
+        if (customerId <= 0) {
+            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+
+        ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByCustomer(customerId);
+        if (listResultDO.isSuccess() == false) {
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, listResultDO.getModule());
+        }
+    }
+
+    @Override
     @PostMapping("getnumbers-bycustomer")
     public ResultDO<List<Integer>> getRoomByCustomerId(long customerId) {
         // 参数校验
