@@ -9,10 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.constant.entity.department.DepartmentType;
 import com.altersoftware.hotel.controller.rest.CustomerRestController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.CustomerService;
+import com.altersoftware.hotel.service.StaffService;
 
 /**
  * @author hzx
@@ -25,6 +27,9 @@ public class CustomerRestControllerImpl implements CustomerRestController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    StaffService    staffService;
 
     /**
      * 获取所有客户信息
@@ -224,6 +229,29 @@ public class CustomerRestControllerImpl implements CustomerRestController {
     @PostMapping("check-time")
     public ResultDO<Boolean> checkMyRoom() {
         return null;
+    }
+
+    /**
+     * 返回所有清洁部员工
+     *
+     * @return
+     */
+    @PostMapping("get-cleanlist")
+    public ResultDO<List<Long>> returnCleanStaffIdList() {
+        List<Long> list = new ArrayList<>();
+
+        // 返回所有清洁部人员
+        ResultDO<List<UserDO>> staffByDepartmentId =
+            staffService.getStaffByDepartmentId(DepartmentType.LOGISTICS);
+        // 向所有清洁部发送
+        for (int i = 0; i < staffByDepartmentId.getModule().size(); i++) {
+            list.add(staffByDepartmentId.getModule().get(i).getId());
+        }
+        if (list.size() == 0) {
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        }
+        return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, list);
     }
 
 }

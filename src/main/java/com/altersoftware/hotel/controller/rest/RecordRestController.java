@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.controller.rest;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.altersoftware.hotel.entity.RecordDO;
@@ -68,4 +69,11 @@ public interface RecordRestController {
      */
     ResultDO<List<RecordDO>> getAll();
 
+    /**
+     * 通过房间号 返回当前时间内正在居住的用户
+     * 
+     * @param roomNumber
+     * @return
+     */
+    ResultDO<Long> overClean(int roomNumber) throws ParseException;
 }

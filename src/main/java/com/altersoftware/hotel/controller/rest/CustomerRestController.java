@@ -78,6 +78,7 @@ public interface CustomerRestController {
      * 3.员工完成后需向指定客户发送消息 通过已读消息获取内容中的房间号 获取客户id 向客户发送消息
      *
      */
+    ResultDO<List<Long>> returnCleanStaffIdList();
 
     /**
      * TODO 预定餐饮信息

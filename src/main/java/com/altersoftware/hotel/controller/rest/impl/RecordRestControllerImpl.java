@@ -1,6 +1,9 @@
 package com.altersoftware.hotel.controller.rest.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -221,6 +224,32 @@ public class RecordRestControllerImpl implements RecordRestController {
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, listResultDO.getModule());
+        }
+    }
+
+    @Override
+    @PostMapping("get-nowtocustomerid")
+    public ResultDO<Long> overClean(int roomNumber) throws ParseException {
+        ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByRoomNumber(roomNumber);
+        List<RecordDO> module = listResultDO.getModule();
+        long id = 0;
+        for (int i = 0; i < module.size(); i++) {
+            String checkOutTime = module.get(i).getCheckOutTime();
+            Date now = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date parse = sdf.parse(checkOutTime);
+            // 如果退房时间在当前时间之前 则无视
+            if (parse.before(now) || module.get(i).getState() == 0) {
+                continue;
+            } else {
+                id = module.get(i).getCustomerId();
+            }
+        }
+        if (id != 0) {
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, id);
+        } else {
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         }
     }
 }

@@ -125,6 +125,7 @@ public class NewsRestControllerImpl implements NewsRestController {
     @Override
     @PostMapping("send-news-to-user-list")
     public ResultDO<Void> sendNewsToUser(@RequestBody SendNewsVO sendNewsVO) {
+        System.out.println(sendNewsVO.toString());
         List<Long> userIdList = sendNewsVO.getUserIdList();
         String title = sendNewsVO.getTitle();
         String content = sendNewsVO.getContent();
