@@ -154,4 +154,9 @@ public class StateSetControllerImpl implements StateSetController {
                 listResultDO.getModule());
         }
     }
+
+    @Override
+    public ResultDO<List<RoomGoodsDO>> showGoodsStateList() {
+        return null;
+    }
 }

@@ -134,4 +134,18 @@ public class RoomGoodsServiceImpl implements RoomGoodsService {
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
         }
     }
+
+    @Override
+    public ResultDO<List<RoomGoodsDO>> showRoomGoodsList() {
+        List<RoomGoodsDO> getAll = null;
+        try {
+            getAll = roomGoodsDAO.getAll();
+            LOG.info("showRoomGoodsList success, getAll={}", getAll);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, getAll);
+        } catch (Exception e) {
+            LOG.error("showRoomGoodsList error, getAll={}", getAll, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
 }

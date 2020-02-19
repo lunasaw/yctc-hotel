@@ -41,9 +41,16 @@ public interface StateSetController {
     ResultDO<List<RoomGoodsDO>> showRoomGoodsByRoomNumber(int roomNumber);
 
     /**
-     * 查询所有物品状态信息
+     * 查询所有相同物品的状态信息
      *
      * @return
      */
     ResultDO<List<RoomGoodsDO>> showRoomGoodsByGoodsName(String goodsName);
+
+    /**
+     * 查询所有物品的状态信息
+     *
+     * @return
+     */
+    ResultDO<List<RoomGoodsDO>> showGoodsStateList();
 }

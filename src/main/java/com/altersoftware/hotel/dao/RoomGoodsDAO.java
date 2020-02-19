@@ -99,4 +99,19 @@ public interface RoomGoodsDAO {
     @Delete("DELETE FROM room_number WHERE room_number=#{roomNumber} ")
     int deleteByRooomNumber(int roomNumber);
 
+    /**
+     * 查询所有物品状态信息
+     * 
+     * @return
+     */
+    @Select("select  room_number, goods_name, state, create_time, modify_time from tb_room_goods ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "goodsName", column = "goods_name"),
+        @Result(property = "state", column = "state"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<RoomGoodsDO> getAll();
 }
