@@ -59,9 +59,17 @@ public interface RoomGoodsService {
     ResultDO<Void> deleteList(int roomNumber);
 
     /**
-     * 查询所有物品状态信息
+     * 查询物品名状态信息
      *
      * @return
      */
     ResultDO<List<RoomGoodsDO>> showRoomGoodsByGoodsName(String goodsName);
+
+    /**
+     * 查询所有物品信息
+     *
+     * @return
+     */
+    ResultDO<List<RoomGoodsDO>> showRoomGoodsList();
+
 }
