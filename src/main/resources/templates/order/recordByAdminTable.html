@@ -221,7 +221,7 @@
                         <p >入住时间：</p><span id="text7"></span><br>
                         <p >退房时间：</p><span id="text8"></span><br>
                         <p >评价：</p><span id="text9"></span><br>
-                        <p >状态：</p><span id="text10"></span><br>
+                        <p >是否付款：</p><span id="text10"></span><br>
                     </div>
                 </div>
             </div>
@@ -238,15 +238,15 @@
         }, {
             field: 'id',
             title: '订单编号',
-            width: '40px'
+            width: '30px'
         }, {
             field: 'roomNumber',
             title: '房间号',
-            width: '40px'
+            width: '60px'
         }, {
             field: 'customerId',
             title: '客户编号',
-            width: '100px'
+            width: '50px'
         },{
             field: 'checkInTime',
             title: '入住时间',
@@ -300,7 +300,13 @@
         $("#text7").text(rows[index].checkInTime);
         $("#text8").text(rows[index].checkOutTime);
         $("#text9").text(rows[index].evaluate);
-        $("#text10").text(rows[index].state);
+        if (rows[index].state == 0){
+            $("#text10").text("否");
+        }
+        else {
+            $("#text10").text("是");
+        }
+
     }
 
     //修改

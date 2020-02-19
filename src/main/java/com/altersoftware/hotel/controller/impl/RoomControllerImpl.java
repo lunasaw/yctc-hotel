@@ -46,6 +46,12 @@ public class RoomControllerImpl implements RoomController {
     @GetMapping("rooms-admintable")
     public String showUpdateAdminTable() { return TemplatePath.ROOM_ADMIN_TABLE; }
 
+    @Override
+    @GetMapping("rooms-goods")
+    public String showRoomGoods() { return TemplatePath.ROOM_GOODS; }
 
+    @Override
+    @GetMapping("rooms-goodstable")
+    public String showRoomGoodsTable() { return TemplatePath.ROOM_GOODS_TABLE; }
 
 }

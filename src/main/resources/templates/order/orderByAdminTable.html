@@ -150,7 +150,56 @@
     </div><!-- /.modal -->
 </div>
 
-
+<!-- 模态框（Modal） 查看 -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="viewModalLabel">
+                    查看
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <caption>菜品订单信息</caption>
+                    <tbody>
+                    <tr>
+                        <td>订单编号</td>
+                        <td id="view_id">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>菜品编号</td>
+                        <td id="view_foodsid">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>菜品份数</td>
+                        <td id="view_foodsNum">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>客户编号</td>
+                        <td id="view_staffid">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>实际付款金额</td>
+                        <td id="view_pay">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>是否付款</td>
+                        <td id="view_state">xxx</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <script>
     // 构造表格
     initTable($('#table'), [10, 25, 100, 100],
@@ -159,7 +208,7 @@
         }, {
             field: 'id',
             title: '订单编号',
-            width: '10px'
+            width: '30px'
         },{
             field: 'menuId',
             title: '菜品编号',
@@ -177,10 +226,6 @@
             title: '实际付款金额',
             width: '50px'
         },{
-            field: 'state',
-            title: '状态',
-            width: '70px'
-        },{
             title: '操作',
             width: '150px',
             formatter: operateFormatter // 自定义方法，添加操作按钮
@@ -188,10 +233,27 @@
 
     function operateFormatter(value, row, index) {  // 赋予的参数
         return [
-            '<button class="btn btn-success view" data-toggle="modal" data-target="#exact" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
+            '<button class="btn btn-success view" data-toggle="modal" data-target="#viewModal" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
             '<button class="btn btn-primary view" data-toggle="modal" data-target="#editModal" onclick="initEdit('+ index +');">编辑</button>&nbsp;&nbsp;' +
             '<button class="btn btn-danger view" onclick="deleteOne('+ index +');">删除</button>&nbsp;&nbsp;'
         ].join('');
+    }
+
+    // 查看
+    function view(index) {
+        let rows = $("#table").bootstrapTable('getData');
+        $("#view_id").text(rows[index].id);
+        $("#view_foodsid").text(rows[index].menuId);
+        $("#view_foodsNum").text(rows[index].numbers);
+        $("#view_staffid").text(rows[index].customerId);
+        $("#view_pay").text(rows[index].payMoney);
+        if (rows[index].state == 0){
+            $("#view_state").text("否");
+        }
+        else {
+            $("#view_state").text("是");
+        }
+
     }
 
     // 初始化表格信息

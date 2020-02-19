@@ -53,4 +53,11 @@ public interface StateSetController {
      * @return
      */
     ResultDO<List<RoomGoodsDO>> showGoodsStateList();
+
+    /**
+     * 删除物品状态信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteByRoomNumberAndGoodsName(int roomNumber, String goodsName);
 }

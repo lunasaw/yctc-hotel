@@ -23,4 +23,8 @@ public interface RoomController {
 
     String showUpdateAdminTable();
 
+    String showRoomGoods();
+
+    String showRoomGoodsTable();
+
 }

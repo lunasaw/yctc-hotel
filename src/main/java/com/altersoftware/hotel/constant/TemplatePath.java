@@ -126,6 +126,12 @@ public class TemplatePath {
     /** 房间信息页面 */
     public static final String ROOM_ADMIN_TABLE                           = "hotel/roomAdminTable";
 
+    /** 房间物品页面 */
+    public static final String ROOM_GOODS                                 = "hotel/roomgoods";
+
+    /** 房间物品页面 */
+    public static final String ROOM_GOODS_TABLE                          = "hotel/roomgoodstable";
+
     /** 房间类别信息页面 */
     public static final String ROOM_TYPE                                  = "hotel/roomType";
 
@@ -161,6 +167,9 @@ public class TemplatePath {
 
     /** 酒店信息页面 */
     public static final String HOTEL                                      = "hotel/hotels";
+
+    /** 酒店信息页面 */
+    public static final String GOAWAY                                      = "hotel/goaway";
 
     /** 物品信息页面 */
     public static final String GOODS                                      = "hotel/goods";

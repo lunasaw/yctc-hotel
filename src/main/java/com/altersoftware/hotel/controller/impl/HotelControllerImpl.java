@@ -25,4 +25,16 @@ public class HotelControllerImpl implements HotelController {
     public String showHotel() {
         return TemplatePath.HOTEL;
     }
+
+    /**
+     * 酒店退房页面
+     * @return
+     */
+    @Override
+    @GetMapping("show-goaway")
+    public String showGoAway() {
+        return TemplatePath.GOAWAY;
+    }
+
+
 }
