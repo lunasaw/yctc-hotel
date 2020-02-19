@@ -44,19 +44,19 @@ public interface RoomGoodsService {
      */
     ResultDO<List<RoomGoodsDO>> showRoomGoodsByRoomNumber(int roomNumber);
 
-    // /**
-    // * 删除物品状态信息
-    // *
-    // * @return
-    // */
-    // ResultDO<Void> deleteByRoomNumberAndGoodsName(int roomNumber, String goodsName);
-    //
-    // /**
-    // * 删除一个房间所有物品物品状态信息
-    // *
-    // * @return
-    // */
-    // ResultDO<Void> deleteList(int roomNumber);
+    /**
+     * 删除物品状态信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteByRoomNumberAndGoodsName(int roomNumber, String goodsName);
+
+    /**
+     * 删除一个房间所有物品物品状态信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(int roomNumber);
 
     /**
      * 查询所有物品状态信息

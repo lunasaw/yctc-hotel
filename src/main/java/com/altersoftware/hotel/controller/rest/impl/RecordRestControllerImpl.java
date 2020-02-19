@@ -40,15 +40,16 @@ public class RecordRestControllerImpl implements RecordRestController {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<RecordDO>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
 
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(id);
         if (recordDOResultDO.isSuccess() == false) {
             return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
-            return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, recordDOResultDO.getModule());
+            return new ResultDO<RecordDO>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
+                recordDOResultDO.getModule());
         }
     }
 
@@ -63,15 +64,16 @@ public class RecordRestControllerImpl implements RecordRestController {
         // 参数校验
         if (staffId <= 0) {
             return new ResultDO<List<RecordDO>>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
 
         ResultDO<List<RecordDO>> listResultDO = recordService.showRecordBystaffId(staffId);
         if (listResultDO.isSuccess() == false) {
             return new ResultDO<List<RecordDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
-            return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, listResultDO.getModule());
+            return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
+                listResultDO.getModule());
         }
     }
 
@@ -134,14 +136,14 @@ public class RecordRestControllerImpl implements RecordRestController {
     public ResultDO<Void> updateRecord(@RequestBody RecordDO recordDO) {
         // 参数校验
         if (recordDO.getId() <= 0 || recordDO.getRoomNumber() <= 0 || recordDO.getStaffId() <= 0
-                || recordDO.getCustomerId() <= 0 || StringUtils.isBlank(recordDO.getEvaluate())) {
+            || recordDO.getCustomerId() <= 0 || StringUtils.isBlank(recordDO.getEvaluate())) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(recordDO.getId());
         if (recordDOResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             RecordDO doResultDOModule = recordDOResultDO.getModule();
             doResultDOModule.setPrecheckInTime(recordDO.getPrecheckInTime());
@@ -156,7 +158,7 @@ public class RecordRestControllerImpl implements RecordRestController {
             ResultDO<Void> voidResultDO = recordService.updateRecord(doResultDOModule);
             if (voidResultDO.isSuccess() == false) {
                 return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             } else {
                 return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
             }
@@ -173,14 +175,15 @@ public class RecordRestControllerImpl implements RecordRestController {
     public ResultDO<List<RecordDO>> showRecordByRoomNumber(@RequestParam(name = "roomNumber") int roomNumber) {
         if (roomNumber <= 0) {
             return new ResultDO<List<RecordDO>>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
         ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByRoomNumber(roomNumber);
         if (listResultDO.isSuccess() == false) {
             return new ResultDO<List<RecordDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
-            return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, listResultDO.getModule());
+            return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
+                listResultDO.getModule());
         }
     }
 
@@ -195,30 +198,31 @@ public class RecordRestControllerImpl implements RecordRestController {
         // 参数校验
         if (id <= 0) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
 
         ResultDO<Void> voidResultDO = recordService.deleteById(id);
         if (voidResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }
     }
 
     /**
-     *删除多条记录
+     * 删除多条记录
+     * 
      * @param ids
      * @return
      */
     @Override
     @PostMapping("delete-byidlist")
     public ResultDO<Void> deleteList(@RequestBody Long[] ids) {
-        //参数校验
+        // 参数校验
         if (ids == null || ids.length == 0) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
-                    ResultCode.MSG_PARAMETER_INVALID, null);
+                ResultCode.MSG_PARAMETER_INVALID, null);
         }
         List<Long> resultList = new ArrayList<>(ids.length);
         for (Long s : ids) {
@@ -227,7 +231,7 @@ public class RecordRestControllerImpl implements RecordRestController {
         ResultDO<Void> voidResultDO = recordService.deleteList(resultList);
         if (voidResultDO.isSuccess() == false) {
             return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }
@@ -244,9 +248,10 @@ public class RecordRestControllerImpl implements RecordRestController {
         ResultDO<List<RecordDO>> listResultDO = recordService.getAll();
         if (listResultDO.isSuccess() == false) {
             return new ResultDO<List<RecordDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
-            return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, listResultDO.getModule());
+            return new ResultDO<List<RecordDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
+                listResultDO.getModule());
         }
     }
 

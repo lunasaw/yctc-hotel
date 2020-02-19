@@ -96,6 +96,32 @@ public class RoomGoodsServiceImpl implements RoomGoodsService {
     }
 
     @Override
+    public ResultDO<Void> deleteByRoomNumberAndGoodsName(int roomNumber, String goodsName) {
+        try {
+            roomGoodsDAO.deleteByRoomNumberAndGoodsName(roomNumber, goodsName);
+            LOG.info("deleteByRoomNumberAndGoodsName success, roomNumber={},goodsName={}", roomNumber, goodsName);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteByRoomNumberAndGoodsName error, roomNumber={},goodsName={}", roomNumber, goodsName, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
+    public ResultDO<Void> deleteList(int roomNumber) {
+        try {
+            roomGoodsDAO.deleteByRooomNumber(roomNumber);
+            LOG.info("deleteList success, roomNumber={}", roomNumber);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        } catch (Exception e) {
+            LOG.error("deleteList error, roomNumber={}", roomNumber, e);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
+    }
+
+    @Override
     public ResultDO<List<RoomGoodsDO>> showRoomGoodsByGoodsName(String goodsName) {
         List<RoomGoodsDO> oneGoodsStateListByName = null;
         try {

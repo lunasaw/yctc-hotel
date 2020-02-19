@@ -90,4 +90,13 @@ public interface RoomGoodsDAO {
     @Delete("DELETE FROM tb_room_goods WHERE room_number=#{roomNumber} and goods_name=#{goodsName}")
     int deleteByRoomNumberAndGoodsName(@Param("roomNumber") int roomNumber, @Param("goodsName") String goodsName);
 
+    /**
+     * 根据房间编号删除一个房间的物品状态消息
+     *
+     * @param roomNumber
+     * @return
+     */
+    @Delete("DELETE FROM room_number WHERE room_number=#{roomNumber} ")
+    int deleteByRooomNumber(int roomNumber);
+
 }
