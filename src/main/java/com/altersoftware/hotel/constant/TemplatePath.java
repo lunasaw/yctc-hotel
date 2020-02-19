@@ -169,7 +169,7 @@ public class TemplatePath {
     public static final String GOODS_TABLE                                = "hotel/goodstable";
 
     /** 物品信息页面 */
-    public static final String GOODS_STATE_SET                                = "hotel/goodsStateSet";
+    public static final String GOODS_STATE_SET                            = "hotel/goodsStateSet";
 
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
@@ -202,7 +202,7 @@ public class TemplatePath {
     public static final String MENU_ADMIN                                 = "order/Mealdistribution";
 
     /** 配送订单管理员页面 */
-    public static final String MENU_ADMIN_TABLE                          = "order/MealdistributionTable";
+    public static final String MENU_ADMIN_TABLE                           = "order/MealdistributionTable";
 
     /** 填写订单类型选择页面 */
     public static final String PLACE_AN_ORDER                             = "order/placeanorder";

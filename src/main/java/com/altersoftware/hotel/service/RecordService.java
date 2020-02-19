@@ -83,4 +83,12 @@ public interface RecordService {
      * @return
      */
     ResultDO<List<RecordDO>> showRecordByCustomer(long customerId);
+
+    /**
+     * 查询客户所有历史订单
+     *
+     * @param customerId
+     * @return
+     */
+    ResultDO<List<RecordDO>> showRecordListByCustomer(long customerId);
 }

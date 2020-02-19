@@ -2,6 +2,7 @@ package com.altersoftware.hotel.service.impl;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -84,11 +85,17 @@ public class OrderServiceImpl implements OrderService {
     public ResultDO<List<OrderDO>> showOrderByCustomerId(long customerId) {
         List<OrderDO> orderDOByCustomerId = null;
         try {
+            List<OrderDO> list = new ArrayList<>();
             orderDOByCustomerId = orderDAO.getOrderDOByCustomerId(customerId);
-            LOG.info("showOrderBystaffId success, customerId={}", customerId);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, orderDOByCustomerId);
+            for (int i = 0; i < orderDOByCustomerId.size(); i++) {
+                if (orderDOByCustomerId.get(i).getState() == 1) {
+                    list.add(orderDOByCustomerId.get(i));
+                }
+            }
+            LOG.info("showOrderBystaffId success, customerId={},list={}", list, customerId);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, list);
         } catch (Exception e) {
-            LOG.error("showOrderBystaffId error, orderDOByCustomerId={}", orderDOByCustomerId, e);
+            LOG.error("showOrderBystaffId error, customerId={}", customerId, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }

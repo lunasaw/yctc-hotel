@@ -93,6 +93,11 @@ public class CustomerServiceImpl implements CustomerService {
         UserDO userDOByNumber = null;
         try {
             userDOByNumber = userDAO.getUserDOByNumber(number);
+            if (userDOByNumber == null) {
+                LOG.info("getByNumber error, number={}", number);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
             LOG.info("getUserDOByNumber success, number={}", userDOByNumber);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userDOByNumber);
         } catch (Exception e) {
@@ -108,12 +113,17 @@ public class CustomerServiceImpl implements CustomerService {
         UserDO userDOByNumber = null;
         try {
             userDOByNumber = userDAO.getUserDOById(customerId);
-            LOG.info("getByCustomerId success, customerId={}", customerId);
+            if (userDOByNumber == null) {
+                LOG.info("getByCustomerId error, customerId={}", customerId);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
+            LOG.info("getByCustomerId success, userDOByNumber={}", userDOByNumber);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userDOByNumber);
         } catch (Exception e) {
             LOG.error("getByCustomerId error, customerId={}", customerId, e);
-            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, userDOByNumber);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, userDOByNumber);
         }
     }
 }
