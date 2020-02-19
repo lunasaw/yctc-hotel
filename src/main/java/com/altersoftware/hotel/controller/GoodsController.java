@@ -16,4 +16,6 @@ public interface GoodsController {
      *
      */
     String showGoodsTable();
+
+    String showGoodsState();
 }

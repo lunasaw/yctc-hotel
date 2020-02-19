@@ -168,6 +168,9 @@ public class TemplatePath {
     /** 物品信息页面 */
     public static final String GOODS_TABLE                                = "hotel/goodstable";
 
+    /** 物品信息页面 */
+    public static final String GOODS_STATE_SET                                = "hotel/goodsStateSet";
+
     /** 菜品信息页面 */
     public static final String MENUS                                      = "hotel/menus";
 

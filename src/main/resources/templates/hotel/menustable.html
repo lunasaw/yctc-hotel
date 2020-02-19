@@ -51,7 +51,7 @@
                     <tbody id="modalTbody">
 
                     </tbody>
-                    <select ; class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getroomnum()">
+                    <select ; class="custom-select col-md-3 col-sm-3" id="selectun">
                         <option disabled="disabled" selected="selected">请选择...</option>
                     </select>
                 </table>
@@ -211,7 +211,7 @@
         }
     }
 
-    function getroomnum() {
+    $(document).ready(function () {
         var userId = getCookie("userId");
         console.log(userId);
         $.ajax({

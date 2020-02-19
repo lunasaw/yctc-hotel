@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="component/head :: head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+
+</head>
+
+<body>
+  <header th:replace="component/fram :: commonHeader"></header>
+
+  <div class="container" th:replace="component/fram :: commonMenu"></div>
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+    <div class="god">
+      <form>
+        <h2 style="color: rgb(135, 106, 32);"><small>房间物品状态设置</small></h2>
+        <hr align="left" width="80%">
+        <div class="pimg1">
+          <div class="ptext">
+            <span>灯光设置</span>
+          </div>
+        </div>
+        <section class="section1 section-light">
+          <h4>温暖的灯光令您寻找到避风的港湾</h4>
+          <div class="input-group input-group-lightlabel">
+            <label style="margin-right: 3%;">玄关灯光开关</label>
+            <input type="checkbox" id="toggle-button" name="玄关灯光开光">
+            <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+            <label for="toggle-button" class="button-label">
+              <span class="circle"></span>
+              <span class="text on">开</span>
+              <span class="text off">关</span>
+            </label>
+            <label style="margin-right: 3%;margin-left: 16%;">房间灯光开关</label>
+            <input type="checkbox" id="toggle-button1" name="房间灯光开光">
+            <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+            <label for="toggle-button1" class="button-label">
+              <span class="circle"></span>
+              <span class="text on">开</span>
+              <span class="text off">关</span>
+            </label>
+            <label style="margin-right: 3%;margin-left: 16%;">厕所灯光开关</label>
+            <input type="checkbox" id="toggle-button2" name="厕所灯光开光">
+            <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+            <label for="toggle-button2" class="button-label">
+              <span class="circle"></span>
+              <span class="text on">开</span>
+              <span class="text off">关</span>
+            </label>
+          </div>
+        </section>
+        <div class="pimg2">
+          <div class="ptext">
+            <span>窗户设置</span>
+          </div>
+        </div>
+        <section class="section2 section-dark">
+          <h4>和风吹拂面颊，还是感受一人的宁静？由您自己决定</h4>
+          <div class="input-group input-group-lightlabel">
+            <label style="margin-left: 22%;margin-right: 3%;">窗帘开关</label>
+            <input type="checkbox" id="toggle-button3" name="窗帘开关">
+            <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+            <label for="toggle-button3" class="button-label">
+              <span class="circle"></span>
+              <span class="text on">开</span>
+              <span class="text off">关</span>
+            </label>
+            <label style="margin-right: 3%;margin-left: 22%;">窗子开关</label>
+            <input type="checkbox" id="toggle-button4" name="窗子开关">
+            <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+            <label for="toggle-button4" class="button-label">
+              <span class="circle"></span>
+              <span class="text on">开</span>
+              <span class="text off">关</span>
+            </label>
+          </div>
+        </section>
+        <div class="pimg3">
+          <div class="ptext">
+            <span>空调设置</span>
+          </div>
+        </div>
+        <section class="section3 section-light">
+          <h4>舒适惬意的环境助您安梦</h4>
+          <div class="input-group input-group-lightlabel">
+            <label style="margin-right: 3%;">空调开关</label>
+            <input type="checkbox" id="toggle-button5" name="空调开关">
+            <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+            <label for="toggle-button5" class="button-label">
+              <span class="circle"></span>
+              <span class="text on">开</span>
+              <span class="text off">关</span>
+            </label>
+            <label style="margin-left:22%;margin-right: 3%;">空调模式</label>
+            <input type="checkbox" id="toggle-button6" name="空调模式">
+            <!--label中的for跟input的id绑定。作用是在点击label时选中input或者取消选中input-->
+            <label for="toggle-button6" class="button-label1">
+              <span class="circle"></span>
+              <span class="text on">冷</span>
+              <span class="text off">热</span>
+            </label>
+            <label style="margin-left:22%;margin-right: 3%;">空调温度</label>
+            <input type="number" placeholder="22"
+              style="width:60px;border-top:none;border-left:none;border-right:none;text-align:center;outline:none;border-radius: 5px 5px 5px 5px;"
+              min="22" max="30" step="1" name="空调温度">
+          </div>
+        </section>
+        <div class="pimg5">
+          <div class="ptext">
+            <span>您的光临就是对我们最大的支持</span>
+          </div>
+        </div>
+        <section class="section4 section-light">
+          <button type="submit" class="btn btn-success" onclick="submit();">保存设置</button>
+        </section>
+      </form>
+    </div>
+
+  </main>
+
+  <footer th:replace="component/fram :: commonFooter"></footer>
+
+  <script>
+    $(document).ready(function () {
+        //空调模式
+      $("#toggle-button6").click(function () {
+        if ($("#toggle-button6").prop("checked")) {
+          $("#toggle-button6").attr("value", "1");
+        } else {
+          $("#toggle-button6").attr("value", "0");
+        }
+      });
+
+      //空调开关
+      $("#toggle-button5").click(function () {
+        if ($("#toggle-button5").prop("checked")) {
+          $("#toggle-button5").attr("value", "1");
+        } else {
+          $("#toggle-button5").attr("value", "0");
+        }
+      });
+
+      //窗子
+      $("#toggle-button4").click(function () {
+        if ($("#toggle-button4").prop("checked")) {
+          $("#toggle-button4").attr("value", "1");
+        } else {
+          $("#toggle-button4").attr("value", "0");
+        }
+      });
+
+      //窗帘
+      $("#toggle-button3").click(function () {
+        if ($("#toggle-button3").prop("checked")) {
+          $("#toggle-button3").attr("value", "1");
+        } else {
+          $("#toggle-button3").attr("value", "0");
+        }
+      });
+
+      //厕所灯光
+      $("#toggle-button2").click(function () {
+        if ($("#toggle-button2").prop("checked")) {
+          $("#toggle-button2").attr("value", "1");
+        } else {
+          $("#toggle-button2").attr("value", "0");
+        }
+      });
+
+      //房间灯光
+      $("#toggle-button1").click(function () {
+        if ($("#toggle-button1").prop("checked")) {
+          $("#toggle-button1").attr("value", "1");
+        } else {
+          $("#toggle-button1").attr("value", "0");
+        }
+      });
+
+      //玄关灯光
+      $("#toggle-button").click(function () {
+        if ($("#toggle-button").prop("checked")) {
+          $("#toggle-button").attr("value", "1");
+        } else {
+          $("#toggle-button").attr("value", "0");
+        }
+      });
+
+    })
+  </script>
+
+  <script>
+      function getCookie(objName) {//获取指定名称的cookie的值
+          var arrStr = document.cookie.split(";");
+          for (var i = 0; i < arrStr.length; i++) {
+              var temp = arrStr[i].split("=");
+              if (temp[0] == objName)
+                  return unescape(temp[1]);
+          }
+      }
+      $(document).ready(function () {
+          console.log("获取用户名Id");
+          var userId = getCookie("userId");
+          console.log(userId);
+          $.ajax({
+              url: "/hotel/room/get-byId",
+              type: "POST",
+              contentType: "application/x-www-form-urlencoded",
+              data: {
+                  "customerId": userId
+              },
+              success:function (result) {
+                  var data = result.module;
+                  let roomNumber = data.roomNumber;
+              }
+          })
+      });
+
+      function submit() {
+         let button6 =  $("#toggle-button6").val();
+         let button5 =  $("#toggle-button5").val();
+         let button4 =  $("#toggle-button4").val();
+         let button3 =  $("#toggle-button3").val();
+         let button2 =  $("#toggle-button2").val();
+         let button1 =  $("#toggle-button1").val();
+         let button =  $("#toggle-button").val();
+
+         let arr = [];
+         let data = {
+             roomNumber:roomNumber,
+
+         };
+         arr.push(data);
+
+      }
+
+  </script>
+
+</body>
+
+</html>
