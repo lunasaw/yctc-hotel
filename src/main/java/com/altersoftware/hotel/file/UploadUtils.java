@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.fle;
+package com.altersoftware.hotel.file;
 
 import java.io.*;
 

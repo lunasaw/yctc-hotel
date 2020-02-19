@@ -2563,7 +2563,7 @@ Object.deepExtend = function (e, a) {
         if (4 == i.readyState) if (200 == i.status) {
             var s = JSON.parse(a.currentTarget.response);
             window.particlesJS(e, s), t && t()
-        } else console.log("Error pJS - XMLHttpRequest status: " + i.status), console.log("Error pJS - fle config not found")
+        } else console.log("Error pJS - XMLHttpRequest status: " + i.status), console.log("Error pJS - file config not found")
     }, i.send()
 };
 
