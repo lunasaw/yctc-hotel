@@ -40,6 +40,20 @@ public interface GoodsRestController {
     ResultDO<List<GoodsDO>> showGoodsByRoom(long roomId);
 
     /**
+     * 删除物品状态信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteByRoomNumberAndGoodsName(int roomNumber, String goodsName);
+
+    /**
+     * 删除一个房间所有物品物品状态信息
+     *
+     * @return
+     */
+    ResultDO<Void> deleteList(int roomNumber);
+
+    /**
      * 删除物品信息
      *
      * @return

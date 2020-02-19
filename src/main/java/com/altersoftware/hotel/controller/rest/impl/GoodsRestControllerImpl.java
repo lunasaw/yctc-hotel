@@ -137,6 +137,16 @@ public class GoodsRestControllerImpl implements GoodsRestController {
         }
     }
 
+    @Override
+    public ResultDO<Void> deleteByRoomNumberAndGoodsName(int roomNumber, String goodsName) {
+        return null;
+    }
+
+    @Override
+    public ResultDO<Void> deleteList(int roomNumber) {
+        return null;
+    }
+
     /**
      * 删除物品信息
      *
