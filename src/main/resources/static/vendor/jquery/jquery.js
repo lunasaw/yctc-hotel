@@ -9464,7 +9464,7 @@ jQuery.ajaxSettings.xhr = function() {
 
 var xhrSuccessStatus = {
 
-        // fle protocol always yields status code 0, assume 200
+        // file protocol always yields status code 0, assume 200
 		0: 200,
 
 		// Support: IE <=9 only
@@ -9539,7 +9539,7 @@ jQuery.ajaxTransport( function( options ) {
 									complete( 0, "error" );
 								} else {
 									complete(
-                                        // fle: protocol always yields status 0; see #8605, #14207
+                                        // file: protocol always yields status 0; see #8605, #14207
 										xhr.status,
 										xhr.statusText
 									);
