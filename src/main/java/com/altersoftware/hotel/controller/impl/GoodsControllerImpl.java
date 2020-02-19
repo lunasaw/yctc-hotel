@@ -39,4 +39,15 @@ public class GoodsControllerImpl implements GoodsController {
         return TemplatePath.GOODS_TABLE;
     }
 
+    /**
+     * 物品状态页面
+     *
+     * @return
+     */
+    @Override
+    @GetMapping("show-goodstate")
+    public String showGoodsState() {
+        return TemplatePath.GOODS_STATE_SET;
+    }
+
 }
