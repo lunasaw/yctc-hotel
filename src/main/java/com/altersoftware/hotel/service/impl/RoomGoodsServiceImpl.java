@@ -43,17 +43,28 @@ public class RoomGoodsServiceImpl implements RoomGoodsService {
     @Override
     public ResultDO<RoomGoodsDO> showGoodsByRoomNumberAndGoodsName(int roomNumber, String goodsName) {
         RoomGoodsDO roomGoodsDOResultDO = null;
+        if (roomNumber < 0 | goodsName.equals("")) {
+            LOG.error("showGoodsByRoomNumberAndGoodsName error, roomNumber={},goodsName={}", roomNumber, goodsName);
+            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+        }
         try {
             RoomGoodsDO roomGoodsDOByRoomNumberAndGoodsName =
                 roomGoodsDAO.getRoomGoodsDOByRoomNumberAndGoodsName(roomNumber, goodsName);
+            if (roomGoodsDOByRoomNumberAndGoodsName == null) {
+                LOG.info("showGoodsByRoomNumberAndGoodsName error, roomGoodsDOByRoomNumberAndGoodsName={}",
+                    roomGoodsDOByRoomNumberAndGoodsName);
+                return new ResultDO<>(true, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+            }
             LOG.info("showGoodsByRoomNumberAndGoodsName success, roomGoodsDOByRoomNumberAndGoodsName={}",
                 roomGoodsDOResultDO);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
                 roomGoodsDOByRoomNumberAndGoodsName);
         } catch (Exception e) {
             LOG.error("showGoodsByRoomNumberAndGoodsName error, roomNumber={},goodsName={}", roomNumber, goodsName, e);
-            return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
     }
 

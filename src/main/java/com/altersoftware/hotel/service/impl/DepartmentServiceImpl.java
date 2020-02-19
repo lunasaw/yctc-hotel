@@ -45,6 +45,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     public ResultDO<DepartmentDO> showDepartment(long id) {
         try {
             DepartmentDO departmentDOById = departmentDAO.getDepartmentDOById(id);
+            if (departmentDOById == null) {
+                LOG.info("getByCustomerId error, id={}", id);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, departmentDOById);
+            }
             LOG.info("getDepartmentDOById success, departmentDOById={}", departmentDOById);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, departmentDOById);
         } catch (Exception e) {
@@ -71,6 +76,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     public ResultDO<DepartmentDO> showGoodsBystaffId(long staffId) {
         try {
             DepartmentDO departmentDOByRoomId = departmentDAO.getDepartmentDOByStaffId(staffId);
+            if (departmentDOByRoomId == null) {
+                LOG.info("showGoodsBystaffId error, staffId={}", staffId);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
             LOG.info("getDepartmentDOByRoomId success, departmentDO={}", departmentDOByRoomId);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, departmentDOByRoomId);
         } catch (Exception e) {

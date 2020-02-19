@@ -89,7 +89,7 @@ public class RecordRestControllerImpl implements RecordRestController {
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
 
-        ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByCustomer(customerId);
+        ResultDO<List<RecordDO>> listResultDO = recordService.showRecordListByCustomer(customerId);
         if (listResultDO.isSuccess() == false) {
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);

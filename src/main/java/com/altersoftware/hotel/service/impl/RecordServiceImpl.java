@@ -60,6 +60,11 @@ public class RecordServiceImpl implements RecordService {
         RecordDO recordDOById = null;
         try {
             recordDOById = recordDAO.getRecordDOById(id);
+            if (recordDOById == null) {
+                LOG.info("showRecord error, id={}", id);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
             LOG.info("showRecord success, recordDOById={}", recordDOById);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, recordDOById);
         } catch (Exception e) {
@@ -74,6 +79,11 @@ public class RecordServiceImpl implements RecordService {
         List<RecordDO> recordDOByStaffId = null;
         try {
             recordDOByStaffId = recordDAO.getRecordDOByStaffId(staffId);
+            if (recordDOByStaffId == null) {
+                LOG.info("showRecordBystaffId error, staffId={}", staffId);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
             LOG.info("showRecordBystaffId success, staffId={}", staffId);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, recordDOByStaffId);
         } catch (Exception e) {
@@ -100,6 +110,11 @@ public class RecordServiceImpl implements RecordService {
         List<RecordDO> recordDOByRoomNumber = null;
         try {
             recordDOByRoomNumber = recordDAO.getRecordDOByRoomNumber(roomNumber);
+            if (recordDOByRoomNumber == null) {
+                LOG.info("showRecordByRoomNumber error, roomNumber={}", roomNumber);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
             LOG.info("showRecordByRoomNumber success, roomNumber={}", roomNumber);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, recordDOByRoomNumber);
         } catch (Exception e) {
@@ -142,6 +157,11 @@ public class RecordServiceImpl implements RecordService {
         List<RecordDO> all = null;
         try {
             all = recordDAO.getAll();
+            if (all == null) {
+                LOG.info("getAll error, all={}", all);
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
             LOG.info("getAll success, all={}", all);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, all);
         } catch (Exception e) {
@@ -210,6 +230,26 @@ public class RecordServiceImpl implements RecordService {
         } catch (Exception e) {
             LOG.info("showRecordByCustomer success, customerId={},allList={}", customerId, recordDOByCustomerId, e);
             return new ResultDO<>(false, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, null);
+        }
+    }
+
+    @Override
+    public ResultDO<List<RecordDO>> showRecordListByCustomer(long customerId) {
+        List<RecordDO> recordDOByCustomer = null;
+        try {
+            List<RecordDO> list = new ArrayList<>();
+            recordDOByCustomer = recordDAO.getRecordDOByCustomerId(customerId);
+            for (int i = 0; i < recordDOByCustomer.size(); i++) {
+                if (recordDOByCustomer.get(i).getState() == 1) {
+                    list.add(recordDOByCustomer.get(i));
+                }
+            }
+            LOG.info("showRecordListByCustomer success, customerId={}", customerId);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, list);
+        } catch (Exception e) {
+            LOG.error("showRecordBystaffId error, customerId={}", customerId, e);
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
     }
 }
