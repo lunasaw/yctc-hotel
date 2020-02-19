@@ -84,4 +84,11 @@ public interface RecordRestController {
      */
     ResultDO<Long> overClean(int roomNumber) throws ParseException;
 
+    /**
+     * 更新退房时间信息
+     *
+     * @param id
+     */
+    ResultDO<Void> updateOutime(long id, String evaluate);
+
 }

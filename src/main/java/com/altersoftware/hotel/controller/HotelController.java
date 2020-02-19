@@ -12,4 +12,10 @@ public interface HotelController {
      */
     String showHotel();
 
+    /**
+     * 在线退房页面
+     * @return
+     */
+    String showGoAway();
+
 }

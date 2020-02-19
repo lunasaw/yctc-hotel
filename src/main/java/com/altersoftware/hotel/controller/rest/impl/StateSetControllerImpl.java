@@ -156,7 +156,33 @@ public class StateSetControllerImpl implements StateSetController {
     }
 
     @Override
+    @PostMapping("get-list")
     public ResultDO<List<RoomGoodsDO>> showGoodsStateList() {
-        return null;
+        ResultDO<List<RoomGoodsDO>> listResultDO = roomGoodsService.showRoomGoodsList();
+        if (listResultDO.isSuccess() == false) {
+            return new ResultDO<List<RoomGoodsDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+
+            return new ResultDO<List<RoomGoodsDO>>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
+                    listResultDO.getModule());
+        }
+    }
+
+    @Override
+    @PostMapping("delet-goods")
+    public ResultDO<Void> deleteByRoomNumberAndGoodsName( int roomNumber, String goodsName) {
+        //参数校验
+        if (roomNumber <= 0 || StringUtils.isBlank(goodsName)){
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        ResultDO<Void> voidResultDO = roomGoodsService.deleteByRoomNumberAndGoodsName(roomNumber, goodsName);
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+        }
     }
 }

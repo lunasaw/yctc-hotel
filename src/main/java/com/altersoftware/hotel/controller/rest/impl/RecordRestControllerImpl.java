@@ -280,4 +280,40 @@ public class RecordRestControllerImpl implements RecordRestController {
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         }
     }
+
+    /**
+     * 更新退房时间
+     * @param id
+     * @return
+     */
+    @Override
+    @PostMapping("update-nowtime")
+    public ResultDO<Void> updateOutime(long id,String evaluate) {
+        //参数校验
+        if (id <= 0 || StringUtils.isBlank(evaluate)) {
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(id);
+        if (recordDOResultDO.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = new java.util.Date();
+            String now = sdf.format(date);
+            RecordDO doResultDOModule = recordDOResultDO.getModule();
+            doResultDOModule.setCheckOutTime(now);
+            doResultDOModule.setEvaluate(evaluate);
+
+            ResultDO<Void> voidResultDO = recordService.updateRecord(doResultDOModule);
+            if (voidResultDO.isSuccess() == false) {
+                return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            } else {
+                return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            }
+
+        }
+    }
 }

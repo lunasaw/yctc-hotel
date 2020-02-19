@@ -29,27 +29,27 @@
 }
 
 .pimg1 {
-    background-image: url("../img/a.jpg");
+    background-image: url("../img/a.png");
     min-height: 400px;
 }
 
 .pimg2 {
-    background-image: url("../img/b.jpg");
+    background-image: url("../img/b.png");
     min-height: 400px;
 }
 
 .pimg3 {
-    background-image: url("../img/c.jpg");
+    background-image: url("../img/c.png");
     min-height: 400px;
 }
 
 .pimg4 {
-    background-image: url("../img/d.jpg");
+    background-image: url("../img/d.png");
     min-height:400px;
 }
 
 .pimg5 {
-    background-image: url("../img/f.jpg");
+    background-image: url("../img/f.png");
     min-height: 400px;
 }
 
