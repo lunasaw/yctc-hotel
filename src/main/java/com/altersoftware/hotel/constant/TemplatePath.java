@@ -168,7 +168,7 @@ public class TemplatePath {
     /** 酒店信息页面 */
     public static final String HOTEL                                      = "hotel/hotels";
 
-    /** 酒店信息页面 */
+    /** 酒店退房信息页面 */
     public static final String GOAWAY                                      = "hotel/goaway";
 
     /** 物品信息页面 */

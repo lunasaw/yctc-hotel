@@ -46,6 +46,9 @@ public class OrderRestControllerImpl implements OrderRestController {
     @Resource
     StaffService                staffService;
 
+    @Resource
+    NewsIService                newsIService;
+
     /**
      *
      * @param orderVO
@@ -75,7 +78,15 @@ public class OrderRestControllerImpl implements OrderRestController {
                 mealdistributionDO.setStaffId(userDO.getId());
                 mealdistributionDO.setOrderId(orderModule);
                 mealdistributionService.createMealdistribution(mealdistributionDO);
-                // TODO 这里需要给该员工发送配送信息
+                // TODO 这里需要给该员工发送配送信息--已解决
+                List<Long> newsList = new ArrayList<>();
+                newsList.add(staffId);
+                OrderVO vo = orderVO.get(i);
+                ResultDO<MenuDO> menuDOResultDO = menuService.showById(vo.getMenuId());
+                String name = menuDOResultDO.getModule().getName();
+                String content =
+                    vo.getRoomNumber() + "该房间用户" + vo.getCustomerId() + "已经下单" + name + vo.getNumbers() + "份,请速联系并配送";
+                newsIService.sendNewsTOUserList(newsList, "您有新的订单", content);
                 // 设置支付金额
                 orderService.changeMenuMoneyPay(orderModule, orderVO.get(i).getNumbers(), orderVO.get(i).getMenuId());
             }

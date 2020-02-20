@@ -101,6 +101,32 @@ public class RecordRestControllerImpl implements RecordRestController {
     }
 
     @Override
+    @PostMapping("get-bynowcustomer")
+    public ResultDO<List<RecordDO>> showRecordNowByCustomer(long customerId) {
+        // 参数校验
+        if (customerId <= 0) {
+            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        try {
+            ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByCustomer(customerId);
+            List<RecordDO> module = listResultDO.getModule();
+            List<RecordDO> nowToLive = new ArrayList<>();
+            for (int i = 0; i < module.size(); i++) {
+                nowToLive.add(module.get(i));
+            }
+            if (listResultDO.isSuccess() == false) {
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            } else {
+                return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, nowToLive);
+            }
+        } catch (Exception e) {
+            return new ResultDO<>(false, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, null);
+        }
+    }
+
+    @Override
     @PostMapping("getnumbers-bycustomer")
     public ResultDO<List<Integer>> getRoomByCustomerId(long customerId) {
         // 参数校验
