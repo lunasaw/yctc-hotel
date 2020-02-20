@@ -34,6 +34,9 @@
             <h2 style="color: rgb(135, 106, 32);">
                 <small>房间物品状态设置</small>
             </h2>
+            <select class="custom-select col-md-3 col-sm-3" id="selectun">
+                <option  disabled="disabled" selected="selected">请选择...</option>
+            </select>
             <hr align="left" width="80%">
             <div class="pimg1">
                 <div class="ptext">
@@ -220,7 +223,6 @@
         }
     }
 
-    var roomNumber;
     $(document).ready(function () {
         console.log("获取用户名Id");
         var userId = getCookie("userId");
@@ -235,13 +237,14 @@
             success: function (result) {
                 console.log(result);
                 var data = result.module;
-                roomNumber = data[0];
+                for (var i = 0; i < data.length; i++) {
+                    document.getElementById("selectun").options.add(new Option(data[i], i));
+                }
             }
         })
-
-
     });
 
+    let roomNumber = $("#selectun option:selected").text();
 
     $('.sendupdategoods').submit(function (e) {
         // 阻止默认提交

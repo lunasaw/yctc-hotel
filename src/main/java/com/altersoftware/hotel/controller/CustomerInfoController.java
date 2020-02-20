@@ -13,12 +13,6 @@ public interface CustomerInfoController {
      */
     String showCustomers();
 
-    /**
-     * 客户信息修改页面
-     *
-     * @return
-     */
-    public String showCustomersupdate();
 
     /**
      * 来到客户信息页面的子网页
