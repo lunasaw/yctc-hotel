@@ -147,9 +147,6 @@ public class TemplatePath {
     /** 客户信息页面 */
     public static final String CUSTOMER_INFO_TABLE                        = "customer/customer-infotable";
 
-    /** 客户信息修改页面 */
-    public static final String CUSTOMER_UPDATE                            = "customer/updateByCustomer";
-
     /** 会员信息页面 */
     public static final String VIP_INFO                                   = "vip/vipinfo";
 
