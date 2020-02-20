@@ -44,31 +44,35 @@ public class StateSetControllerImpl implements StateSetController {
 
         for (int i = 0; i < roomGoodsDOS.size(); i++) {
             RoomGoodsDO roomGoodsDO = roomGoodsDOS.get(i);
+            // 去数据库查出相关状态
             ResultDO<RoomGoodsDO> roomGoodsDOResultDO = roomGoodsService
                 .showGoodsByRoomNumberAndGoodsName(roomGoodsDO.getRoomNumber(), roomGoodsDO.getGoodsName());
+            // 如果为false 则跳出
             if (roomGoodsDOResultDO.isSuccess() == false) {
                 return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             }
-            if (roomGoodsDOResultDO.getModule() == null) {
+            // 为True 则更新状态
+            RoomGoodsDO goodsDOResultDOModule = roomGoodsDOResultDO.getModule();
+            String state = roomGoodsDO.getState();
+            if (state.equals("1")) {
+                roomGoodsDO.setState("开启");
+            } else if (state.equals("0")) {
+                roomGoodsDO.setState("关闭");
+            } else {
+                roomGoodsDO.setState(state);
+            }
+            // 如果数据库没有数据,则插入
+            if (goodsDOResultDOModule == null) {
                 ResultDO<Void> insert = roomGoodsService.insert(roomGoodsDO);
                 if (insert.isSuccess()) {
-                    return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+                    return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
                 } else {
-                    return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                    return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                        ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
                 }
             } else {
-                RoomGoodsDO goodsDOResultDOModule = roomGoodsDOResultDO.getModule();
-                String state = roomGoodsDO.getState();
-                if (state.equals("1")) {
-                    goodsDOResultDOModule.setState("开启");
-                } else if (state.equals("0")) {
-                    goodsDOResultDOModule.setState("关闭");
-                } else {
-                    goodsDOResultDOModule.setState(state);
-                }
-                ResultDO<Void> voidResultDO = roomGoodsService.updateGoods(goodsDOResultDOModule);
+                ResultDO<Void> voidResultDO = roomGoodsService.updateGoods(roomGoodsDO);
                 if (voidResultDO.isSuccess() == false) {
                     return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                         ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);

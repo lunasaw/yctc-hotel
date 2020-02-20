@@ -55,10 +55,10 @@ public class RoomGoodsServiceImpl implements RoomGoodsService {
                 LOG.info("showGoodsByRoomNumberAndGoodsName error, roomGoodsDOByRoomNumberAndGoodsName={}",
                     roomGoodsDOByRoomNumberAndGoodsName);
                 return new ResultDO<>(true, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA);
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             }
             LOG.info("showGoodsByRoomNumberAndGoodsName success, roomGoodsDOByRoomNumberAndGoodsName={}",
-                roomGoodsDOResultDO);
+                roomGoodsDOByRoomNumberAndGoodsName);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
                 roomGoodsDOByRoomNumberAndGoodsName);
         } catch (Exception e) {

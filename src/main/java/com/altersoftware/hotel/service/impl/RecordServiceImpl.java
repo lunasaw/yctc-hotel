@@ -172,7 +172,8 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public ResultDO<Double> getActualMoney(long customerId, int roomNumber) {
+    public ResultDO<Double> getActualMoney(long customerId, int roomNumber, String stringDays) {
+        int days = Integer.parseInt(stringDays);
         VipDO vipDOById = null;
         double actualMoney = 0.0;
         try {
@@ -190,6 +191,7 @@ public class RecordServiceImpl implements RecordService {
                     if (roomDOByNumber != null) {
                         LOG.info("getRoomDOByNumber success, roomDO={}", roomDOByNumber);
                         double price = roomDOByNumber.getPrice();
+                        price = price * days;
                         actualMoney = price * discount + roomDOByNumber.getDeposit();
                     }
                 }
