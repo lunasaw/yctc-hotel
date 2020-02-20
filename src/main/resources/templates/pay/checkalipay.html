@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>正在支付,请稍后</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
     <style>
         /* Demo Styles - It's all in the SVG  */
         html {
@@ -104,11 +105,8 @@
             }
         }
     </style>
-    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-
 </head>
 <body>
-
 
 
 
@@ -201,7 +199,7 @@
             error: function (xhr, resp, text) {
                 console.log(xhr, resp, text)
             }
-        });
+        })
     });
 </script>
 

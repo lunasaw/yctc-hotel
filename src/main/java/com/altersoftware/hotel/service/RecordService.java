@@ -74,7 +74,7 @@ public interface RecordService {
      * @param roomNumber
      * @return
      */
-    ResultDO<Double> getActualMoney(long customerId, int roomNumber);
+    ResultDO<Double> getActualMoney(long customerId, int roomNumber, String days);
 
     /**
      * 客户id 查出正在使用的订单List

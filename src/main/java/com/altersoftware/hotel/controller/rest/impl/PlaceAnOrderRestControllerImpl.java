@@ -75,7 +75,8 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
         LocalDate localDateIn = parse.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate localDateOut = parse1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         long between = ChronoUnit.DAYS.between(localDateIn, localDateOut);
-        recordVO.setPrecheckInTime(Long.toString(between));
+        String string = Long.toString(between);
+        recordVO.setPrecheckInTime(string);
         // 1.从前端接受类型名称
         // 2.在roomService中返回一个房间
         ResultDO<RoomDO> roomDOByRoomType1 = roomService.getRoomDOByRoomType(recordVO.getRoomTypeName());
@@ -84,10 +85,11 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             ResultDO<Double> actualMoney =
-                recordService.getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber());
+                recordService.getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber(),
+                    string);
             if (actualMoney.isSuccess() == false) {
-                return new ResultDO<RecordDO>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+                return new ResultDO<RecordDO>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                    ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }
             // 3.将RecordDO构造插入订单
             RecordDO recordDO = new RecordDO();
@@ -97,8 +99,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             recordDO.setPrecheckInTime(recordVO.getPrecheckInTime());
             recordDO.setCheckInTime(recordVO.getCheckInTime());
             recordDO.setCheckOutTime(recordVO.getCheckOutTime());
-            recordDO.setPayMoney(recordService
-                .getActualMoney(recordVO.getCustomerId(), roomDOByRoomType1.getModule().getRoomNumber()).getModule());
+            recordDO.setPayMoney(actualMoney.getModule());
             recordDO.setPayMoney(actualMoney.getModule());
             recordDO.setId(Long.parseLong(randomNumber.GetRandom()));
             ResultDO<Void> recordServiceRecord = recordService.createRecord(recordDO);

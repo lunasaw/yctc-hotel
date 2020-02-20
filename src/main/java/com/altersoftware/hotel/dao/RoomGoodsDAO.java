@@ -17,7 +17,7 @@ public interface RoomGoodsDAO {
      *
      *
      */
-    @Insert(" INSERT INTO tb_room_goods ( room_number, goods_name, state,  create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_room_goods ( room_number, goods_name, state, create_time, modify_time ) "
         +
         "VALUES(  #{roomNumber}, #{goodsName}, #{state}, now(), now()) ")
     void insert(RoomGoodsDO roomGoodsDO);

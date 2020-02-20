@@ -97,7 +97,7 @@
                 <textarea id="eva" class="form-control" rows="5" maxlength="50" placeholder="请在50个字内描述" style="color: rgb(135,92,120);font-size: 18px;"></textarea>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-success" onclick="goaway()">立即退房</button>
+                  <button class="btn btn-success" onclick="goaway()">填写评价或退房</button>
               </div>
           </form>
       </div>
@@ -121,7 +121,7 @@
         var userId = getCookie("userId");
         console.log(userId);
         $.ajax({
-            url: "/hotel/record/get-bycustomerId",
+            url: "/hotel/record/get-bynowcustomer",
             type: "POST",
             contentType: "application/x-www-form-urlencoded",
             data: {
