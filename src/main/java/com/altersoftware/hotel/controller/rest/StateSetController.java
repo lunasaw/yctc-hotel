@@ -17,6 +17,12 @@ public interface StateSetController {
     ResultDO<Void> updateGoodsDO(List<RoomGoodsDO> roomGoodsDOS);
 
     /**
+     * 接收物品状态值
+     *
+     */
+    ResultDO<Void> updateOneGoodsDO(RoomGoodsDO roomGoodsDOS);
+
+    /**
      * 插入一条物品状态信息
      *
      * @param roomGoodsDO

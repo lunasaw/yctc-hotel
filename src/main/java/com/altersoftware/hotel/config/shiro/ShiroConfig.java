@@ -96,23 +96,58 @@ public class ShiroConfig {
             // 注销登陆
             filterMap.put("/" + TemplatePath.USER_SIGN_OUT_SUCCESS, "authc");
             // 注销成功
-            filterMap.put("/" + TemplatePath.FLOOR, "authc");
-            //楼层信息
-            filterMap.put("/" + TemplatePath.CUSTOMER_INFO, "authc");
-            //客户信息页面
-            filterMap.put("/" + TemplatePath.CUSTOMER_INFO_TABLE, "authc");
-            //客户信息页面表格
+
 
         }
         // 需要资源权限的页面   授权过滤器
         {
+            filterMap.put("/" + TemplatePath.EDUCATION_AUTHORITY_MANAGEMENT, "perms[admin:authorityManagement]");
             // 管理员-权限管理
             filterMap.put("/" + TemplatePath.EDUCATION_AUTHORITY_ROLE_MANAGEMENT, "perms[admin:roleManagement]");
             // 管理员-角色管理
-            filterMap.put("/" + TemplatePath.EDUCATION_AUTHORITY_ROLE_MANAGEMENT_ADD, "perms[admin:roleManagement]");
-            // 管理员-角色管理-增加角色
-            filterMap.put("/" + TemplatePath.EDUCATION_AUTHORITY_ROLE_MANAGEMENT_MODIFY, "perms[admin:roleManagement]");
-            // 管理员-角色管理-修改角色
+
+            filterMap.put("/" + TemplatePath.FLOOR, "perms[staff:FireFigure]");
+            //楼层信息
+            filterMap.put("/" + TemplatePath.CUSTOMER_INFO, "perms[satff:UserInformation]");
+            //客户信息页面
+            filterMap.put("/" + TemplatePath.ROOMS, "perms[customer:RoomReservation]");
+            //房间预订
+            filterMap.put("/" + TemplatePath.MENUS, "perms[customer:MealReservation]");
+            //菜品预订
+            filterMap.put("/" + TemplatePath.ORDER_BY_CUSTOMER, "perms[customer:GuesRoomHistory]");
+            //客户客房订单
+            filterMap.put("/" + TemplatePath.RECORD_BY_CUSTOMER, "perms[customer:FoodHistoryOrder]");
+            //客户菜品订单
+            filterMap.put("/" + TemplatePath.GOODS_STATE_SET, "perms[customer:DeviceStatus]");
+            //设置设备状态
+            filterMap.put("/" + TemplatePath.GOAWAY, "perms[customer:CheckOutOnline]");
+            //在线退房
+            filterMap.put("/" + TemplatePath.ORDER_BY_ADMIN, "perms[staff:RoomOrder]");
+            //管理员客房订单
+            filterMap.put("/" + TemplatePath.MENU_ADMIN, "perms[staff:RoomOrder]");
+            //菜品配送订单
+            filterMap.put("/" + TemplatePath.RECORD_BY_ADMIN, "perms[staff:OrderForFood]");
+            //管理员菜品订单
+            filterMap.put("/" + TemplatePath.ROOM_ADMIN, "perms[staff:RoomSettings]");
+            //房间信息
+            filterMap.put("/" + TemplatePath.ROOM_TYPE_ADMIN, "perms[staff:RoomTypeSettings]");
+            //房间类别信息
+            filterMap.put("/" + TemplatePath.ROOM_GOODS, "perms[staff:ItemStatusSettings]");
+            //管理员房间状态设置
+            filterMap.put("/" + TemplatePath.GOODS, "perms[staff:ItemSetup]");
+            //物品设置
+            filterMap.put("/" + TemplatePath.MENUS_ADMIN, "perms[staff:DishesSetUp]");
+            //菜品设置
+            filterMap.put("/" + TemplatePath.DEPARTMENT, "perms[staff:DepartmentalDistribution]");
+            //部门分配
+            filterMap.put("/" + TemplatePath.STAFF_INFO, "perms[staff:EmployeeInformation]");
+            //员工信息
+            filterMap.put("/" + TemplatePath.VIP_GRADE_SHOW, "perms[customer:ViewVipGrade]");
+            //客户会员权益
+            filterMap.put("/" + TemplatePath.VIP_INFO, "perms[staff:MembershipSetup]");
+            //会员信息设置
+            filterMap.put("/" + TemplatePath.VIP_GRADE_INFO, "perms[staff:MembershipVipGradeSetup]");
+            //会员信息设置
 
      }
         // rest权限设置
@@ -135,6 +170,90 @@ public class ShiroConfig {
         // 增加一条权限
         filterMap.put(RestPath.DELETE_PERMISSION, "perms[admin:authorityManagement]");
         // 删除一条权限
+
+        //1物品状态管理
+        filterMap.put(RestPath.RETURN_BYROOMNUM_ANDNAME, "authc");
+        // 通过房间号和物品名返回
+        filterMap.put(RestPath.RETURN_BYROOMNUM, "authc");
+        // 通过房间号返回物品状态
+        filterMap.put(RestPath.RETURN_GOODSNAME, "authc");
+        // 通过物品名返回物品状态
+        filterMap.put(RestPath.RETURN_LIST, "authc");
+        // 获取所有物品及状态
+        filterMap.put(RestPath.DELET_GOODS_STATE, "perms[staff:ItemStatusSettings]");
+        // 删除物品状态
+        filterMap.put(RestPath.UPDATE_GOODS_STATE, "perms[staff:ItemStatusSettings]");
+        // 修改物品状态
+        filterMap.put(RestPath.ADD_GOODS_STATE, "perms[staff:ItemStatusSettings]");
+        // 增加物品状态值
+        filterMap.put(RestPath.UPDATE_ONE_STATE, "perms[staff:ItemStatusSettings]");
+        // 更新物品状态值
+
+
+        //2房间类别设置
+        filterMap.put(RestPath.RETURN_BYROOMID, "authc");
+        // 房间类别id查询房间类别信息
+        filterMap.put(RestPath.GET_LIST, "authc");
+        // 查询所有房间类别信息
+        filterMap.put(RestPath.ADD_ROOMTYPE, "perms[staff:RoomTypeSettings]");
+        // 增加一个房间类别
+        filterMap.put(RestPath.UPDATE_ROOMTYPE, "perms[staff:RoomTypeSettings]");
+        // 更新房间类别状态
+        filterMap.put(RestPath.UPDATE_ROOMTYPE_PIC, "perms[staff:RoomTypeSettings]");
+        // 更新房间照片
+        filterMap.put(RestPath.DELETE_ROOMTYPE, "perms[staff:RoomTypeSettings]");
+        // 删除指定房间类别数据
+        filterMap.put(RestPath.DELETE_LIST_ROOMTYPE, "perms[staff:RoomTypeSettings]");
+        // 删除多条记录
+
+        //3房间信息设置
+        filterMap.put(RestPath.RETURN_ROOMS_BYID, "authc");
+        // 通过id获取房间信息
+        filterMap.put(RestPath.GET_ROOM_LIST, "authc");
+        // 显示所有房间信息
+        filterMap.put(RestPath.RETURN_ROOMS_BYROOMNUM, "authc");
+        // 按照房间号查找房间信息
+        filterMap.put(RestPath.UPDATE_ROOMS, "perms[staff:RoomSettings]");
+        // 更新房间信息
+        filterMap.put(RestPath.ADD_ROOMS, "perms[staff:RoomSettings]");
+        // 插入一个房间信息
+        filterMap.put(RestPath.DELETE_ROOMS_BYID, "perms[staff:RoomSettings]");
+        // id删除房间信息
+        filterMap.put(RestPath.DELETE_ROOMS_BYIDLIST, "perms[staff:RoomSettings]");
+        // 删除多条记录
+
+        //4客户信息设置
+        filterMap.put(RestPath.RETURN_CUSTOMER_BYNUMBER, "authc");
+        // 会员号搜索客户/员工
+        filterMap.put(RestPath.RETURN_CUSTOMER_BYCUSTOMERID, "authc");
+        // 客户编号搜索客户
+        filterMap.put(RestPath.RETURN_CLEANER_LIST, "authc");
+        // 返回所有清洁部员工
+        filterMap.put(RestPath.GET_ALL_CUSTOMERS, "authc");
+        // 获取所有客户信息
+        filterMap.put(RestPath.DELETE_CUSTOMER_BYID, "perms[satff:UserInformation]");
+        // 删除指定客户信息
+        filterMap.put(RestPath.DELETE_CUSTOMER_LIST, "perms[satff:UserInformation]");
+        // 删除多条记录
+        filterMap.put(RestPath.UPDATE_CUSTOMERS, "perms[satff:UserInformation]");
+        // 修改客户信息
+
+        //5员工信息设置
+        filterMap.put(RestPath.GET_STAFF_LIST, "authc");
+        // 获取所有员工信息
+        filterMap.put(RestPath.GET_BY_DEPERTMENTID, "authc");
+        // 获取通过部门号
+        filterMap.put(RestPath.GET_STAFF_BYNUMBER, "authc");
+        // 会员号搜索员工/员工
+        filterMap.put(RestPath.DELETE_BYID, "perms[staff:EmployeeInformation]");
+        // 删除指定员工信息
+        filterMap.put(RestPath.DELETE_BYID_LIST, "perms[staff:EmployeeInformation]");
+        // 删除多条记录
+        filterMap.put(RestPath.UPDATE_STAFF, "perms[staff:EmployeeInformation]");
+        // 修改员工信息
+        filterMap.put(RestPath.UPDATE_STAFF_PIC, "perms[staff:EmployeeInformation]");
+        // 修改员工照片信息
+
 
         // 8.消息系统
         filterMap.put(RestPath.SHOW_NEWS, "authc");
