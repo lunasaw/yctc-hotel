@@ -43,7 +43,6 @@
       </div>
       <select class="custom-select col-md-3 col-sm-3" id="selectun" onclick="getdate()";>
         <option  disabled="disabled" selected="selected">请选择...</option>
-        
       </select>
     </div>
     <hr color="lightgrey"  >
@@ -85,10 +84,10 @@
           $.ajax({
               url:"/hotel/floor/get-byid",
               type:"POST",
-              data:JSON.stringify(id),
-              dataType: 'json',
-              contentType: "application/json; charset=utf-8",
-              async: true,
+              contentType: "application/x-www-form-urlencoded",
+              data: {
+                  "id": id
+              },
               success: function (result) {
 
                   var re = result.module;

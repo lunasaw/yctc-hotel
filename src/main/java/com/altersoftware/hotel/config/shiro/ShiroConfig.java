@@ -98,10 +98,14 @@ public class ShiroConfig {
             // 注销成功
             filterMap.put("/" + TemplatePath.FLOOR, "authc");
             //楼层信息
+            filterMap.put("/" + TemplatePath.CUSTOMER_INFO, "authc");
+            //客户信息页面
+            filterMap.put("/" + TemplatePath.CUSTOMER_INFO_TABLE, "authc");
+            //客户信息页面表格
+
         }
         // 需要资源权限的页面   授权过滤器
         {
-
             // 管理员-权限管理
             filterMap.put("/" + TemplatePath.EDUCATION_AUTHORITY_ROLE_MANAGEMENT, "perms[admin:roleManagement]");
             // 管理员-角色管理
