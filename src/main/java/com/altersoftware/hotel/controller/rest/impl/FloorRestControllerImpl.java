@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.FloorRestController;
@@ -60,7 +57,7 @@ public class FloorRestControllerImpl implements FloorRestController {
      */
     @Override
     @PostMapping("get-byid")
-    public ResultDO<FloorDO> showFloorDO(@RequestBody long id) {
+    public ResultDO<FloorDO> showFloorDO(@RequestParam(name = "id") long id) {
         if (id <= 0) {
             return new ResultDO<FloorDO>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);

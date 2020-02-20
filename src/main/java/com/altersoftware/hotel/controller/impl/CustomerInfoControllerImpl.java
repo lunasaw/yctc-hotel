@@ -16,22 +16,27 @@ import com.altersoftware.hotel.controller.CustomerInfoController;
 @ComponentScan({"com.altersoftware.hotel.service"})
 @RequestMapping("/customer")
 public class CustomerInfoControllerImpl implements CustomerInfoController {
-
+    /**
+     * 来到客户信息页面
+     *
+     * @return
+     */
     @Override
     @GetMapping("show-customerinfo")
     public String showCustomers() {
         return TemplatePath.CUSTOMER_INFO;
     }
 
+    /**
+     * 来到客户信息修改页面
+     *
+     * @return
+     */
     @Override
     @GetMapping("show-customerinfotable")
     public String showCustomersTable() {
         return TemplatePath.CUSTOMER_INFO_TABLE;
     }
 
-    @Override
-    @GetMapping("show-customerupdate")
-    public String showCustomersupdate() {
-        return TemplatePath.CUSTOMER_UPDATE;
-    }
+
 }
