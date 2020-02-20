@@ -45,6 +45,7 @@
                                 <th>消费内容</th>
                                 <th>消费时间</th>
                                 <th>消费金额</th>
+                                <th>住房评价</th>
                             </tr>
                             </thead>
                             <tbody id="tbody">
@@ -89,7 +90,8 @@
                     let roomnum = item[i].roomNumber;
                     let payMoney = item[i].payMoney;
                     let checkInTime = item[i].checkInTime;
-                    tbody.append('<tr>'+'<th>'+roomnum+'</th>'+'<th>'+checkInTime+'</th>'+'<th>'+payMoney+'</th>'+'</tr>')
+                    let eValuate = item[i].evaluate;
+                    tbody.append('<tr>' + '<th>' + roomnum + '</th>' + '<th>' + checkInTime + '</th>' + '<th>' + payMoney + '</th>' + '<th>' + eValuate + '</th>' + '</tr>')
                 }
             }
         });
