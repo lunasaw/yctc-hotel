@@ -236,6 +236,7 @@ public class CustomerRestControllerImpl implements CustomerRestController {
      *
      * @return
      */
+    @Override
     @PostMapping("get-cleanlist")
     public ResultDO<List<Long>> returnCleanStaffIdList() {
         List<Long> list = new ArrayList<>();

@@ -174,7 +174,7 @@
         if ( data.roomNumber <=0 || data.goodsName == null || data.state == null) {
             swal("错误", "请输入必输入项！", "error");
         }else {
-            parameterPostRequest("/hotel/department/update-department", data, () => {
+            parameterPostRequest("/hotel/state/update-onestate", data, () => {
                 $('#editModal').modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();
