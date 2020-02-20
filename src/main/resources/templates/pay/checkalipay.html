@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>正在支付,请稍后</title>
-
     <style>
         /* Demo Styles - It's all in the SVG  */
         html {
@@ -11,7 +10,6 @@
             min-height: 100%;
             overflow: hidden;
         }
-
         html body {
             background: #222428;
             background-size: 163px;
@@ -25,12 +23,10 @@
             height: 100%;
             min-height: 100%;
         }
-
         html body a, html body a:visited {
             text-decoration: none;
             color: #FF805F;
         }
-
         html body h4 {
             margin: 0;
             color: #666;
@@ -45,7 +41,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .scene svg {
             width: 240px;
             height: 240px;
@@ -63,7 +58,6 @@
             -webkit-animation: arrow-spin 2.5s 0s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
             animation: arrow-spin 2.5s 0s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
         }
-
         .dc-logo:hover:hover:before {
             content: '\2764';
             padding: 6px;
@@ -79,7 +73,6 @@
             box-shadow: 0px 0px 4px #222;
             background: rgba(0, 0, 0, 0.4);
         }
-
         .dc-logo:hover:hover:after {
             content: 'Digital Craft';
             padding: 6px;
@@ -111,11 +104,11 @@
             }
         }
     </style>
-
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
 
 </head>
 <body>
+
 
 
 
@@ -152,10 +145,10 @@
           fill="#2AA198" stroke="#2AA198" stroke-miterlimit="10" stroke-width="0.6027">
         <animateTransform
                 attributeName="transform"
-                calcMode="spline"
-                from="0 20 20"
                 dur="2s"
+                from="0 20 20"
                 repeatCount="indefinite"
+                calcMode="spline"
                 keySplines="0.4, 0, 0.2, 1"
                 keyTimes="0;1"
                 to="360 20 20"
