@@ -197,38 +197,73 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<!-- 模态框-详情 -->
-<div aria-hidden="true" aria-labelledby="exact" class="modal fade" id="exact" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-xl" role="document">
+
+<!-- 模态框（Modal） 查看 -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: rgb(226, 203, 145);">
-                <h5 class="modal-title" id="payforroomLabel1">详细信息</h5>
-                <button aria-label="close" class="close" data-dismiss="modal" type="button">
-                    <Span aria-hidden="true">&times;</Span>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="viewModalLabel">
+                    查看房间订单信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <caption>住房订单信息</caption>
+                    <tbody>
+                    <tr>
+                        <td>订单编号</td>
+                        <td id="text1">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>房间号</td>
+                        <td id="text2">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>客户编号</td>
+                        <td id="text3">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>处理员工编号</td>
+                        <td id="text4">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>实际付款金额</td>
+                        <td id="text5">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>预计入住时间间隔</td>
+                        <td id="text6">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>入住时间</td>
+                        <td id="text7">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>退房时间</td>
+                        <td id="text8">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>评价</td>
+                        <td id="text9">xxx</td>
+                    </tr>
+                    <tr>
+                        <td>是否付款</td>
+                        <td id="text10">xxx</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
             </div>
-            <div class="modal-body" style="height: 300px;">
-                <div class="container">
-                    <div class="p-left">
-                        <p >订单编号：</p><span id="text1"></span><br>
-                        <p >房间号：</p><span id="text2"></span><br>
-                        <p >客户编号：</p><span id="text3"></span><br>
-                        <p >处理员工编号：</p><span id="text4"></span><br>
-                        <p >实际付款金额：</p><span id="text5"></span><br>
-                    </div>
-                    <div class="p-right">
-                        <p >预计入住时间间隔：</p><span id="text6"></span><br>
-                        <p >入住时间：</p><span id="text7"></span><br>
-                        <p >退房时间：</p><span id="text8"></span><br>
-                        <p >评价：</p><span id="text9"></span><br>
-                        <p >是否付款：</p><span id="text10"></span><br>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
-
 
 <script>
     // 构造表格
@@ -263,7 +298,7 @@
 
     function operateFormatter(value, row, index) {  // 赋予的参数
         return [
-            '<button class="btn btn-success view" data-toggle="modal" data-target="#exact" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
+            '<button class="btn btn-success view" data-toggle="modal" data-target="#viewModal" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
             '<button class="btn btn-primary view" data-toggle="modal" data-target="#editModal" onclick="initEdit('+ index +');">编辑</button>&nbsp;&nbsp;' +
             '<button class="btn btn-danger view" onclick="deleteOne('+ index +');">删除</button>&nbsp;&nbsp;'
         ].join('');
