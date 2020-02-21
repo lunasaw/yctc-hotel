@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <title>用户服务中心</title>
+    <!--<link th:href="@{/css/bootstrap.min.css}"  href="../../static/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/bootstrap-table.min.css" rel="stylesheet" th:href="@{/css/bootstrap-table.min.css}">
+    <link href="../../static/css/file.css" rel="stylesheet" th:href="@{/css/file.css}">
+    <link href="../../static/css/fileinput.min.css" rel="stylesheet" th:href="@{/css/fileinput.min.css}">
+    <script src="../../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"
+            type="text/javascript"></script>
+    <!--<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="../../static/js/lib/bootstrap-table.min.js" th:src="@{/js/lib/bootstrap-table.min.js}"
+            type="text/javascript"></script>
+    <script src="../../static/js/lib/bootstrap-table-zh-CN.min.js" th:src="@{/js/lib/bootstrap-table-zh-CN.min.js}"
+            type="text/javascript"></script>
+    <script src="../../static/js/lib/sweetalert.min.js" th:src="@{/js/lib/sweetalert.min.js}"></script>
+    <script src="../../static/js/lib/es6-promise.auto.min.js" th:src="@{/js/lib/es6-promise.auto.min.js}"></script>
+    <!--<script src="../../static/js/lib/popper.min.js" th:src="@{/js/lib/popper.min.js}"></script>-->
+    <script src="../../static/js/common.js" th:src="@{/js/common.js}" type="text/javascript"></script>
+    <script src="../../static/js/lib/fileinput.min.js" th:src="@{/js/lib/fileinput.min.js}"></script>
+    <script src="../../static/js/lib/fileinput_locale_zh.js" th:src="@{/js/lib/fileinput_locale_zh.js}"></script>
+
+</head>
+
+<body>
+
+<!-- 模态框（Modal） 图片上传 -->
+<div aria-hidden="true" aria-labelledby="imgModalLabel" class="modal fade" id="imgModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="imgModalLabel">
+                    图片上传
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input class="file" id="upload" name="file" type="file">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" type="button">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
+    <div class="chartjs-size-monitor"
+         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+        </div>
+    </div>
+    <form action="" class="updateinfo">
+        <div id="main-wrapper">
+
+            <div class="page-wrapper">
+
+                <div class="container-fluid">
+                    <h3>个人信息</h3>
+                    <hr style="margin-bottom: 25px;">
+                    <div class="row">
+                        <!-- Column -->
+                        <div class="col-lg-4 col-xlg-3 col-md-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <center class="m-t-30">
+                                        <img class="img-circle" id="view_photo" src="" width="150"/>
+                                        <input id="view_photo_1" name="faceId" type="hidden">
+                                    </center>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">姓名</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control form-control-line" id="name" name="name"
+                                               placeholder="" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">余额</label>
+                                    <div class="col-md-12">
+                                        <input class="form-control form-control-line" disabled id="account"
+                                               placeholder="" type="number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-8 col-xlg-9 col-md-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="/hotel/customer/update-userdo" class="form-horizontal form-material">
+                                        <!--                                        <input type="hidden" placeholder="" name="name"-->
+                                        <!--                                               class="form-control form-control-line" id="name1">-->
+                                        <input class="form-control form-control-line" id="number1" name="number"
+                                               placeholder="" type="hidden">
+                                        <div class="form-group">
+                                            <label class="col-md-12">会员账号</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control-line" disabled id="number"
+                                                       name="number" placeholder=""
+                                                       type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12" for="name">身份证号</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control-line" disabled id="idCardNumber"
+                                                       name="idCardNumber"
+                                                       placeholder="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">用户性别</label>
+                                            <div class="col-sm-12">
+                                                <input class="form-control form-control-line" id="sex" name="sex"
+                                                       placeholder="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">用户年龄 </label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control-line" id="age" name="age"
+                                                       placeholder="" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">联系方式</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control-line" id="contactPhone"
+                                                       name="contactPhone"
+                                                       placeholder="" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">邮箱地址</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control-line" id="email" name="email"
+                                                       placeholder="" type="email">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="col-sm-12">
+                                        <!--                                        <a th:href="@{/user/my-informationupdate}">-->
+                                        <button class="btn btn-success">修改个人信息</button>
+                                        <button class="btn btn-primary" data-target="#imgModal" data-toggle="modal"
+                                                type="button">图片上传
+                                        </button>
+                                        <!--                                        </a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</main>
+
+<script>
+    function getCookie(objName) {//获取指定名称的cookie的值
+        var arrStr = document.cookie.split(";");
+        for (var i = 0; i < arrStr.length; i++) {
+            var temp = arrStr[i].split("=");
+            if (temp[0] == objName)
+                return unescape(temp[1]);
+        }
+    }
+
+    var editId;
+    $(document).ready(function () {
+        console.log("获取用户名Id");
+        var userId = getCookie("userId");
+        console.log(userId);
+        $.ajax({
+            url: "/hotel/customer/get-byId",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": userId
+            },
+            success: function (result) {
+                var data = result.module;
+                console.log(data);
+                $("#userimg").attr({src: data.faceId});
+                $('#name').val(data.name);
+                $('#name1').val(data.name);
+                $('#number').val(data.number);
+                $('#number1').val(data.number);
+                $("#view_photo").attr('src', data.faceId);
+                editId = data.number;
+                console.log(editId);
+                $('#sex').val(data.sex);
+                $('#age').val(data.age);
+                $('#contactPhone').val(data.contactPhone);
+                $('#email').val(data.email);
+                $('#idCardNumber').val(data.idCardNumber);
+                $('#account').val(data.account);
+
+            }
+        });
+
+        function serializeFormData($form) {
+            let unindexed_array = $form.serializeArray();
+            let indexed_array = {};
+
+            $.map(unindexed_array, function (n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return JSON.stringify(indexed_array);
+        }
+
+        $('.updateinfo').submit(function (e) {
+            // 阻止默认提交
+            e.preventDefault();
+
+            // send ajax
+            $.ajax({
+                url: "/hotel/customer/update-userdo", // url where to submit the request
+                type: "POST", // type of action POST || GET
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json', // data type
+                data: serializeFormData($('.updateinfo')), // post data || get data
+                success: function (result) {
+                    console.log(result);
+                    //console.log(result);
+                    if (result.success) {
+                        alert("修改成功");
+                    }
+                    window.location.reload();//刷新当前页面.
+                },
+                error: function (xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            })
+        });
+    })
+</script>
+<script>
+    function serializeFormData($form) {
+        let unindexed_array = $form.serializeArray();
+        let indexed_array = {};
+
+        $.map(unindexed_array, function (n, i) {
+            indexed_array[n['name']] = n['value'];
+        });
+
+        return JSON.stringify(indexed_array);
+    }
+
+    // 图片上传
+    $("#upload").fileinput({
+        language: 'zh',     // 设置语言
+        dropZoneTitle: '可以将图片拖放到这里...',
+        uploadUrl: '/hotel/file/upload',
+        allowedFileExtensions: ['jpg', 'png'],
+        overwriteInitial: false,
+        minImageWidth: 50,      // 图片的最小宽度
+        minImageHeight: 50,     // 图片的最小高度
+        maxImageWidth: 1000,    // 图片的最大宽度
+        maxImageHeight: 1000,   // 图片的最大高度
+        maxFileSize: 1024,      // 单位为kb，如果为0表示不限制文件大小
+        minFileCount: 1,        // 每次上传允许的最少文件数。如果设置为0，则表示文件数是可选的。默认为0
+        maxFileCount: 1,        // 每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0
+        maxFilesNum: 1,
+        uploadExtraData: function () {
+            return {
+                fileType: "img",
+                fileName: "http://111.229.114.126:8087/iszychen/img/userInfo/" + editId + ".jpg"
+            };
+        }
+    }).on("fileuploaded", function (e, data) { // 文件上传成功的回调函数
+        if (data.response === null) {
+            swal("错误", "不支持该文件类型", "success");
+            return;
+        }
+
+        if (data.response.success === false) {
+            switch (data.response.code) {
+                case 9002:
+                    swal("错误", "参数错误", "error");
+                    break;
+                case 9006:
+                    swal("错误", "文件创建错误", "error");
+                    break;
+            }
+        } else {
+            let data = {
+                number: editId,
+                picture: "http://111.229.114.126:8087/iszychen/img/userInfo/" + editId + ".jpg"
+            };
+            console.log(editId);
+            // parameterPostRequest("/hotel/customer/update-userdo", data, () => {
+            //     if (rows[index].picture.substring(0,4) === "http"){
+            //         if (rows[index].picture !== null && rows[index].picture !== "") {
+            //             $("#view_photo").attr('src', rows[index].picture);
+            //         }
+            //     } else{
+            //         $("#view_photo").attr('src', "/hotel/file/img/" + rows[index].picture);
+            //     }
+            var picture = "http://111.229.114.126:8087/iszychen/img/userInfo/" + editId + ".jpg";
+            var leq = serializeFormData($('.updateinfo'));
+            console.log(leq);
+            $("#view_photo").attr('src', picture);
+            $("#view_photo_1").attr('value', picture);
+            $.ajax({
+                url: "/hotel/customer/update-userdo", // url where to submit the request
+                type: "POST", // type of action POST || GET
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json', // data type
+                data: serializeFormData($('.updateinfo')), // post data || get data
+                success: function (result) {
+                    console.log(result);
+
+
+                },
+                error: function (xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            });
+            swal("成功", "图片上传成功", "success");
+            // window.location.reload();//刷新当前页面.
+
+            // init();
+            // });
+        }
+    });
+
+</script>
+</body>
+
+</html>

@@ -34,7 +34,8 @@ public class UploadUtils {
         }
         Client client = new Client();
         WebResource resource = client.resource(filePath + fileName);
-        resource.put(String.class, file);
+        String put = resource.put(String.class, file);
+        System.out.println(put);
         return filePath + fileName;
     }
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
@@ -32,6 +33,7 @@
     <ul class="navbar-nav " style="left: 82%;position: absolute;">
         <li>
             <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+                                              th:src="@{/img/resizeApi3.png}"
                                               style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
         </li>
     </ul>
@@ -39,6 +41,7 @@
     <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
         <li>
             <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+                                              th:src="@{/img/resizeApi2.png}"
                                               style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
         </li>
     </ul>
@@ -47,6 +50,7 @@
         <li>
             <a class="nav-link" href="#"><img alt="搜索"
                                               src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+                                              th:src="@{/img/resizeApi1.png}"
                                               style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
         </li>
     </ul>
@@ -55,6 +59,7 @@
         <li>
             <a class="nav-link" href="/hotel/user/sign-out">注销&nbsp&nbsp<img
                     alt="退出" src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+                    th:src="@{/img/resizeApi4.png}"
                     style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
             </a>
         </li>
@@ -82,7 +87,7 @@
     <div class="lsm-container">
         <div class="lsm-scroll">
             <div style="margin-bottom: 10px;text-align: center;color: white;">
-                <img src="https://www.easyicon.net/api/resizeApi.php?id=1196112&size=128"
+                <img src="https://www.easyicon.net/api/resizeApi.php?id=1196112&size=128" th:src="@{/img/resizeApi.png}"
                      style="width: 48px;height: 48px;filter: invert(98%) sepia(0%) saturate(366%) hue-rotate(200deg) brightness(91%) contrast(84%);">
                 <p th:text="${userName}">用户</p>
             </div>
