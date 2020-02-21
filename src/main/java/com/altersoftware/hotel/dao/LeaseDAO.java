@@ -87,6 +87,6 @@ public interface LeaseDAO {
      *
      * @return
      */
-    @Select("select id  from tb_lease ")
-    List<Long> getFloorIdList();
+    @Select("select *  from tb_lease ")
+    List<LeaseDO> getLeaseList();
 }

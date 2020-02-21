@@ -14,6 +14,8 @@ public class GoodsDO {
     private String roomNumberListToString;
     /** 物品名称 */
     private String name;
+    /** 物品名称 */
+    private String picture;
     /** 物品采购时间 */
     private String buyTime;
     /** 物品采购价格 */
@@ -35,12 +37,12 @@ public class GoodsDO {
         this.id = id;
     }
 
-    public String getroomNumberList() {
+    public String getRoomNumberListToString() {
         return roomNumberListToString;
     }
 
-    public void setroomNumberList(String roomNumberList) {
-        this.roomNumberListToString = roomNumberList;
+    public void setRoomNumberListToString(String roomNumberListToString) {
+        this.roomNumberListToString = roomNumberListToString;
     }
 
     public String getName() {
@@ -51,11 +53,19 @@ public class GoodsDO {
         this.name = name;
     }
 
-    public String getbuyTime() {
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getBuyTime() {
         return buyTime;
     }
 
-    public void setbuyTime(String buyTime) {
+    public void setBuyTime(String buyTime) {
         this.buyTime = buyTime;
     }
 
@@ -103,12 +113,13 @@ public class GoodsDO {
     public String toString() {
         return "GoodsDO{" +
             "id=" + id +
-            ", roomNumberListToString=" + roomNumberListToString +
+            ", roomNumberListToString='" + roomNumberListToString + '\'' +
             ", name='" + name + '\'' +
-            ", buyTime=" + buyTime +
+            ", picture='" + picture + '\'' +
+            ", buyTime='" + buyTime + '\'' +
             ", price=" + price +
             ", compensationMoeny=" + compensationMoeny +
-            ", state=" + state +
+            ", state='" + state + '\'' +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
             '}';

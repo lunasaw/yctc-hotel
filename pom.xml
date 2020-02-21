@@ -182,7 +182,16 @@
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>qcloud-image-sdk</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arcsoft</groupId>
+            <artifactId>arcsoft-sdk-face</artifactId>
+            <version>3.0.0.0</version>
+        </dependency>
     </dependencies>
 
 	<build>
