@@ -9,7 +9,7 @@ public class TemplatePath {
 
     // user start
     /** 用户主页 */
-    public static final String USER_HOME                                  = "user/home";
+    public static final String USER_HOME                                  = "user/userhome";
 
     /** 注册 */
     @Deprecated
@@ -130,7 +130,7 @@ public class TemplatePath {
     public static final String ROOM_GOODS                                 = "hotel/roomgoods";
 
     /** 房间物品页面 */
-    public static final String ROOM_GOODS_TABLE                          = "hotel/roomgoodstable";
+    public static final String ROOM_GOODS_TABLE                           = "hotel/roomgoodstable";
 
     /** 房间类别信息页面 */
     public static final String ROOM_TYPE                                  = "hotel/roomType";
@@ -166,7 +166,7 @@ public class TemplatePath {
     public static final String HOTEL                                      = "hotel/hotels";
 
     /** 酒店退房信息页面 */
-    public static final String GOAWAY                                      = "hotel/goaway";
+    public static final String GOAWAY                                     = "hotel/goaway";
 
     /** 物品信息页面 */
     public static final String GOODS                                      = "hotel/goods";
@@ -239,5 +239,8 @@ public class TemplatePath {
 
     /** 管理员菜品历史订单页面 */
     public static final String ORDER_BY_ADMIN_TABLE                       = "order/orderByAdminTable";
+
+    /** 管理员主页 */
+    public static final String ADMIN_HOME                                 = "hotel/roomscondition";
 
 }

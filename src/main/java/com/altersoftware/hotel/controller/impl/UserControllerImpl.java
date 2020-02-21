@@ -710,7 +710,12 @@ public class UserControllerImpl implements UserController {
             return "redirect:/" + StaticPath.COMMON_ERROR + "?" + resultDO.getMsg();
         }
         model.addAttribute("userName", resultDO.getModule().getName());
-        return TemplatePath.USER_HOME;
+        long type = resultDO.getModule().getType();
+        if (type == 90001 || type == 90002) {
+            return TemplatePath.ADMIN_HOME;
+        } else {
+            return TemplatePath.USER_HOME;
+        }
     }
 
     @Override
