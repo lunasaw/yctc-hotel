@@ -177,6 +177,15 @@ public class TemplatePath {
     /** 物品信息页面 */
     public static final String GOODS_TABLE                                = "hotel/goodstable";
 
+    /** 租赁主页 */
+    public static final String LEASE                                      = "hotel/lease";
+
+    /** 管理租赁主页 */
+    public static final String LEASE_ADMIN                                = "hotel/leaseAdmin";
+
+    /** 管理租赁表格主页 */
+    public static final String LEASE_TABLE                                = "hotel/leaseAdmintable";
+
     /** 物品信息页面 */
     public static final String GOODS_STATE_SET                            = "hotel/goodsStateSet";
 

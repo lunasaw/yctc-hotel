@@ -1,6 +1,7 @@
 package com.altersoftware.hotel.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import javax.annotation.Resource;
 
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.ResourceUtils;
 
 import com.altersoftware.hotel.controller.rest.impl.OrderRestControllerImpl;
 import com.altersoftware.hotel.entity.UserDO;
@@ -41,4 +43,10 @@ public class updateFile {
         System.out.println(userDO);
     }
 
+    @Test
+    public void TestFile() throws FileNotFoundException {
+        String path = ResourceUtils.getURL("classpath:").getPath();
+        File file = new File(path, "static/dll/ceshi.txt");
+        System.out.println(file);
+    }
 }

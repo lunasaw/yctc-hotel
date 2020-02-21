@@ -42,11 +42,12 @@ public class GoodsDAOTest {
     public void aInsert() {
         GoodsDO goodDO = new GoodsDO();
         goodDO.setId(ID);
-        goodDO.setroomNumberList(ROOM_ID_List);
+        goodDO.setRoomNumberListToString(ROOM_ID_List);
         goodDO.setName(NAME);
-        goodDO.setbuyTime(BUY_TIME);
+        goodDO.setBuyTime(BUY_TIME);
         goodDO.setPrice(PRICE);
         goodDO.setCompensationMoeny(COMPENSATION_MONEY);
+        goodDO.setPicture("hhtp");
         goodDO.setState(STATE);
         goodsDAO.insert(goodDO);
     }

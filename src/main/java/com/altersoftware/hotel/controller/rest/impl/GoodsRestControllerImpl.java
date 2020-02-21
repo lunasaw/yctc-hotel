@@ -36,7 +36,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
     @PostMapping("add-goods")
     public ResultDO<GoodsDO> insert(@RequestBody GoodsDO goodsDO) {
         // 参数校验
-        if (goodsDO.getId() <= 0 || StringUtils.isBlank(goodsDO.getroomNumberList())) {
+        if (goodsDO.getId() <= 0 || StringUtils.isBlank(goodsDO.getRoomNumberListToString())) {
             return new ResultDO<GoodsDO>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -84,7 +84,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
     @PostMapping("update-goods")
     public ResultDO<Void> updateGoods(@RequestBody GoodsDO goodsDO) {
         // 参数校验
-        if (goodsDO.getId() <= 0 || StringUtils.isBlank(goodsDO.getroomNumberList())) {
+        if (goodsDO.getId() <= 0 || StringUtils.isBlank(goodsDO.getRoomNumberListToString())) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -99,9 +99,9 @@ public class GoodsRestControllerImpl implements GoodsRestController {
             doResultDOModule.setName(goodsDO.getName());
             doResultDOModule.setId(goodsDO.getId());
             doResultDOModule.setPrice(goodsDO.getPrice());
-            doResultDOModule.setroomNumberList(goodsDO.getroomNumberList());
+            doResultDOModule.setRoomNumberListToString(goodsDO.getRoomNumberListToString());
             doResultDOModule.setState(goodsDO.getState());
-            doResultDOModule.setbuyTime(goodsDO.getbuyTime());
+            doResultDOModule.setBuyTime(goodsDO.getBuyTime());
 
             ResultDO<Void> voidResultDO = goodsService.updateGoods(doResultDOModule);
             if (voidResultDO.isSuccess() == false) {
