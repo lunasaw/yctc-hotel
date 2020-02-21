@@ -132,7 +132,7 @@
                     <li class="lsm-sidebar-item">
                         <a shiro:hasPermission="staff:CommoditySetup" href="javascript:"><span>商品设置</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a shiro:hasPermission="staff:RoomSettings" href="/hotel/roomType/show-roomtypeadmin"><span>房间信息设置</span></a></li>
+                            <li><a shiro:hasPermission="staff:RoomSettings" href="/hotel/room/rooms-admin"><span>房间信息设置</span></a></li>
                             <li><a shiro:hasPermission="staff:RoomSettings" href="/hotel/roomType/show-roomtypeadmin"><span>房间类别信息设置</span></a></li>
                             <li><a shiro:hasPermission="staff:ItemStatusSettings" href="/hotel/goods/show-goodstate"><span>房间物品状态设置</span></a></li>
                             <li><a shiro:hasPermission="staff:ItemSetup" href="/hotel/goods/show-goods"><span>物品设置</span></a></li>
@@ -149,8 +149,8 @@
                     <li class="lsm-sidebar-item">
                         <a href="javascript:"><span>角色权限管理</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a href="/hotel/education/authority-management"><span>权限管理</span></a></li>
-                            <li><a href="/hotel/education/authority-role-management"><span>角色管理</span></a></li>
+                            <li><a shiro:hasPermission="admin:authorityManagement" href="/hotel/education/authority-management"><span>权限管理</span></a></li>
+                            <li><a shiro:hasPermission="admin:roleManagement" href="/hotel/education/authority-role-management"><span>角色管理</span></a></li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
