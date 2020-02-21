@@ -147,7 +147,7 @@
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
-                        <a href="javascript:"><span>角色权限管理</span><i class="my-icon lsm-sidebar-more"></i></a>
+                        <a shiro:hasPermission="admin:RoleJurisdiction" href="javascript:"><span>角色权限管理</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
                             <li><a shiro:hasPermission="admin:authorityManagement" href="/hotel/education/authority-management"><span>权限管理</span></a></li>
                             <li><a shiro:hasPermission="admin:roleManagement" href="/hotel/education/authority-role-management"><span>角色管理</span></a></li>
