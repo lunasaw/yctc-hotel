@@ -74,6 +74,9 @@ public class TemplatePath {
     /** 我的信息 */
     public static final String USER_MY_INFORMATION                        = "user/my-information";
 
+    /** 我的信息子页面 */
+    public static final String USER_MY_INFORMATION_TABLE                  = "user/my-informationtable";
+
     /** 修改我的信息 */
     public static final String USER_MY_INFORMATION_UPDATE                 = "user/my-informationupdate";
 
