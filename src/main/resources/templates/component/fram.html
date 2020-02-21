@@ -82,69 +82,98 @@
     <div class="lsm-container">
         <div class="lsm-scroll">
             <div style="margin-bottom: 10px;text-align: center;color: white;">
-                <img src="https://www.easyicon.net/api/resizeApi.php?id=1196112&size=128"
-                     style="width: 48px;height: 48px;filter: invert(98%) sepia(0%) saturate(366%) hue-rotate(200deg) brightness(91%) contrast(84%);">
-                <p th:text="${userName}">用户</p>
+                <a href=""><img src="https://www.easyicon.net/api/resizeApi.php?id=1196112&size=128"
+                                style="width: 48px;height: 48px;filter: invert(98%) sepia(0%) saturate(366%) hue-rotate(200deg) brightness(91%) contrast(84%);">
+                    <p th:text="${userName}">用户</p></a>
             </div>
             <div class="lsm-sidebar">
                 <ul>
                     <li class="lsm-sidebar-item">
-                        <a shiro:hasPermission="customer:HousingService" href="javascript:"><span>住房服务</span><i class="my-icon lsm-sidebar-more"></i></a>
+                        <a href="javascript:" shiro:hasPermission="customer:HousingService"><span>住房服务</span><i
+                                class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a shiro:hasPermission="admin:FireFigure" href="/hotel/floor/show-floor"><span>楼层消防图</span></a></li>
-                            <li><a shiro:hasPermission="customer:RoomReservation" href="/hotel/room/show-rooms"><span>房间预定</span></a></li>
-                            <li><a shiro:hasPermission="customer:RentalOfGoods"  href="javascript:"><span>物品租赁</span></a></li>
-                            <li><a shiro:hasPermission="customer:MealReservation" href="/hotel/menuinfo/show-menus"><span>预订餐饮信息</span></a></li>
+                            <li><a href="/hotel/floor/show-floor"
+                                   shiro:hasPermission="admin:FireFigure"><span>楼层消防图</span></a></li>
+                            <li><a href="/hotel/room/show-rooms" shiro:hasPermission="customer:RoomReservation"><span>房间预定</span></a>
+                            </li>
+                            <li><a href="javascript:" shiro:hasPermission="customer:RentalOfGoods"><span>物品租赁</span></a>
+                            </li>
+                            <li><a href="/hotel/menuinfo/show-menus"
+                                   shiro:hasPermission="customer:MealReservation"><span>预订餐饮信息</span></a></li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
-                        <a shiro:hasPermission="customer:MyRoom" href="javascript:"><span>我的房间</span><i class="my-icon lsm-sidebar-more"></i></a>
+                        <a href="javascript:" shiro:hasPermission="customer:MyRoom"><span>我的房间</span><i
+                                class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a  shiro:hasPermission="customer:GuesRoomHistory" href="/hotel/order/order-customer"><span>客房历史订单</span></a></li>
-                            <li><a shiro:hasPermission="customer:FoodHistoryOrder" href="/hotel/placeorder/order-customer"><span>餐品历史订单</span></a></li>
+                            <li><a href="/hotel/order/order-customer"
+                                   shiro:hasPermission="customer:GuesRoomHistory"><span>客房历史订单</span></a></li>
+                            <li><a href="/hotel/placeorder/order-customer"
+                                   shiro:hasPermission="customer:FoodHistoryOrder"><span>餐品历史订单</span></a></li>
                             <li class="1sm-sidebar-item">
-                                <a shiro:hasPermission="customer:RoomPersonalization" href="javascript:"><span>房间个性化设置</span><i class="my-icon lsm-sidebar-more"></i></a>
+                                <a href="javascript:"
+                                   shiro:hasPermission="customer:RoomPersonalization"><span>房间个性化设置</span><i
+                                        class="my-icon lsm-sidebar-more"></i></a>
                                 <ul>
-                                    <li><a shiro:hasPermission="customer:ViewLease" href=""><span>查看我的房间物品</span></a></li>
-                                    <li><a shiro:hasPermission="customer:DeviceStatus" href="/hotel/goods/show-goodstate"><span>设置设备状态</span></a></li>
+                                    <li><a href="" shiro:hasPermission="customer:ViewLease"><span>查看我的房间物品</span></a>
+                                    </li>
+                                    <li><a href="/hotel/goods/show-goodstate"
+                                           shiro:hasPermission="customer:DeviceStatus"><span>设置设备状态</span></a></li>
                                 </ul>
                             </li>
-                            <li><a shiro:hasPermission="customer:CheckOutOnline" href="/hotel/hotelinfo/show-goaway"><span>在线退房</span></a></li>
-                            <li><a shiro:hasPermission="customer:EvaluationSystem" href="javascript:"><span>评价系统</span></a></li>
+                            <li><a href="/hotel/hotelinfo/show-goaway"
+                                   shiro:hasPermission="customer:CheckOutOnline"><span>在线退房</span></a></li>
+                            <li><a href="javascript:" shiro:hasPermission="customer:EvaluationSystem"><span>评价系统</span></a>
+                            </li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
-         <!--缺少-->        <a shiro:hasPermission="staff:MembershipSystem" href="javascript:"><span>会员系统</span><i class="my-icon lsm-sidebar-more"></i></a>
+                        <!--缺少--> <a href="javascript:" shiro:hasPermission="staff:MembershipSystem"><span>会员系统</span><i
+                            class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a shiro:hasPermission="customer:ViewVipGrade" href="/hotel/vipgrade/show-vipuser"><span>查看酒店会员权益信息</span></a></li>
-                            <li><a shiro:hasPermission="staff:MembershipSetup" href="/hotel/vipinfo/show-vip"><span>会员信息设置</span></a></li>
-                            <li><a shiro:hasPermission="staff:MembershipVipGradeSetup" href="/hotel/vipgrade/show-vipgrade"><span>设置酒店会员权益</span></a></li>
+                            <li><a href="/hotel/vipgrade/show-vipuser"
+                                   shiro:hasPermission="customer:ViewVipGrade"><span>查看酒店会员权益信息</span></a></li>
+                            <li><a href="/hotel/vipinfo/show-vip" shiro:hasPermission="staff:MembershipSetup"><span>会员信息设置</span></a>
+                            </li>
+                            <li><a href="/hotel/vipgrade/show-vipgrade"
+                                   shiro:hasPermission="staff:MembershipVipGradeSetup"><span>设置酒店会员权益</span></a></li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
                         <a href="javascript:"><span>订单系统</span><i class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a shiro:hasPermission="staff:RoomOrder" href="/hotel/order/order-admin"><span>客房订单</span></a></li>
-                            <li><a shiro:hasPermission="staff:MealDistribution" href="/hotel/mealdistribution/show-mwalbysdmin"><span>菜品配送</span></a></li>
-                            <li><a shiro:hasPermission="staff:OrderForFood" href="/hotel/placeorder/order-admin"><span>餐品订单</span></a></li>
+                            <li><a href="/hotel/order/order-admin"
+                                   shiro:hasPermission="staff:RoomOrder"><span>客房订单</span></a></li>
+                            <li><a href="/hotel/mealdistribution/show-mwalbysdmin"
+                                   shiro:hasPermission="staff:MealDistribution"><span>菜品配送</span></a></li>
+                            <li><a href="/hotel/placeorder/order-admin" shiro:hasPermission="staff:OrderForFood"><span>餐品订单</span></a>
+                            </li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
-                        <a shiro:hasPermission="staff:CommoditySetup" href="javascript:"><span>商品设置</span><i class="my-icon lsm-sidebar-more"></i></a>
+                        <a href="javascript:" shiro:hasPermission="staff:CommoditySetup"><span>商品设置</span><i
+                                class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
                             <li><a href="/hotel/room/rooms-admin"
                                    shiro:hasPermission="staff:RoomSettings"><span>房间信息设置</span></a></li>
-                            <li><a shiro:hasPermission="staff:RoomSettings" href="/hotel/roomType/show-roomtypeadmin"><span>房间类别信息设置</span></a></li>
-                            <li><a shiro:hasPermission="staff:ItemStatusSettings" href="/hotel/goods/show-goodstate"><span>房间物品状态设置</span></a></li>
-                            <li><a shiro:hasPermission="staff:ItemSetup" href="/hotel/goods/show-goods"><span>物品设置</span></a></li>
-                            <li><a shiro:hasPermission="staff:DishesSetUp" href="/hotel/menuinfo/show-menusadmin"><span>菜品设置</span></a></li>
+                            <li><a href="/hotel/roomType/show-roomtypeadmin"
+                                   shiro:hasPermission="staff:RoomSettings"><span>房间类别信息设置</span></a></li>
+                            <li><a href="/hotel/goods/show-goodstate"
+                                   shiro:hasPermission="staff:ItemStatusSettings"><span>房间物品状态设置</span></a></li>
+                            <li><a href="/hotel/goods/show-goods"
+                                   shiro:hasPermission="staff:ItemSetup"><span>物品设置</span></a></li>
+                            <li><a href="/hotel/menuinfo/show-menusadmin" shiro:hasPermission="staff:DishesSetUp"><span>菜品设置</span></a>
+                            </li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
-                        <a shiro:hasPermission="staff:DepartmentManagement" href="javascript:"><span>部门管理</span><i class="my-icon lsm-sidebar-more"></i></a>
+                        <a href="javascript:" shiro:hasPermission="staff:DepartmentManagement"><span>部门管理</span><i
+                                class="my-icon lsm-sidebar-more"></i></a>
                         <ul>
-                            <li><a shiro:hasPermission="staff:DepartmentalDistribution" href="/hotel/department/show-departmentinfo"><span>部门分配</span></a></li>
-                            <li><a shiro:hasPermission="staff:EmployeeInformation" href="/hotel/staffinfo/show-staff"><span>员工信息</span></a></li>
+                            <li><a href="/hotel/department/show-departmentinfo"
+                                   shiro:hasPermission="staff:DepartmentalDistribution"><span>部门分配</span></a></li>
+                            <li><a href="/hotel/staffinfo/show-staff"
+                                   shiro:hasPermission="staff:EmployeeInformation"><span>员工信息</span></a></li>
                         </ul>
                     </li>
                     <li class="lsm-sidebar-item">
