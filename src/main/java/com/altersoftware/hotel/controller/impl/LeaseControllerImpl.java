@@ -50,4 +50,27 @@ public class LeaseControllerImpl implements LeaseController {
         return TemplatePath.LEASE_ADMIN;
     }
 
+
+    /**
+     * 租赁状态页面
+     *
+     * @return
+     */
+    @Override
+    @GetMapping("show-leaseadmintable")
+    public String showLeaseStateTable() {
+        return TemplatePath.LEASE_ADMIN_TABLE_;
+    }
+
+    /**
+     * 历史租赁页面
+     *
+     * @return
+     */
+    @Override
+    @GetMapping("show-historylease")
+    public String showLeaseHistory() {
+        return TemplatePath.HISTORY_LEASE;
+    }
+
 }

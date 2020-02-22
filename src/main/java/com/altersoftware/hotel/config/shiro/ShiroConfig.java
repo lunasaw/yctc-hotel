@@ -113,6 +113,10 @@ public class ShiroConfig {
             filterMap.put("/" + TemplatePath.ROOMS, "perms[customer:RoomReservation]");
             //房间预订
             filterMap.put("/" + TemplatePath.MENUS, "perms[customer:MealReservation]");
+            //租赁页面
+            filterMap.put("/" + TemplatePath.LEASE, "perms[customer:RentalOfGoods]");
+            //管理员租赁页面
+            filterMap.put("/" + TemplatePath.LEASE_ADMIN, "perms[staff:LeaseSetUp]");
             //菜品预订
             filterMap.put("/" + TemplatePath.ORDER_BY_CUSTOMER, "perms[customer:GuesRoomHistory]");
             //客户客房订单

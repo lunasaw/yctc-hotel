@@ -22,68 +22,53 @@
     <button id="btn_delete" type="button" class="btn btn-default" onclick="deleteAll();">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
     </button>
-    <button class="btn btn-default" data-target="#addModal" data-toggle="modal" id="btn_add" type="button">
-        <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>新增
+    <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
     </button>
 </div>
 
-<div id="toolbaradd" class="btn-group">
+<table id="table">
 
-</div>
-
-<table id="table"></table>
-
+</table>
 <!-- 模态框（Modal） 新增 -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="min-width: 800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title text-center" id="addModalLabel">
-                    新增物品信息
+                    新增
                 </h2>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group has-error">
-                        <label class="col-sm-2 control-label">物品编号</label>
+                        <label class="col-sm-2 control-label">出租纪录编号</label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control" id="add_id">
                         </div>
                     </div>
                     <div class="form-group has-error">
-                        <label class="col-sm-2 control-label">房间编号</label>
+                        <label class="col-sm-2 control-label">租赁物品编号</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="add_roomnum">
+                            <input type="number" class="form-control" id="add_goodsid">
                         </div>
                     </div>
                     <div class="form-group has-error">
-                        <label class="col-sm-2 control-label">物品名称</label>
+                        <label class="col-sm-2 control-label">租赁顾客编号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="add_name">
+                            <input type="number" class="form-control" id="add_customid">
                         </div>
                     </div>
                     <div class="form-group has-error">
-                        <label class="col-sm-2 control-label">物品采购时间</label>
+                        <label class="col-sm-2 control-label">租赁约定时长</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" id="add_Date">
-                        </div>
-                    </div>
-                    <div class="form-group has-success">
-                        <label class="col-sm-2 control-label">物品采购价格</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="add_inprice">
-                        </div>
-                    </div>
-                    <div class="form-group has-success">
-                        <label class="col-sm-2 control-label">物品损坏赔偿价格</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="add_outprice">
+                            <input type="text" class="form-control" id="add_applytime">
                         </div>
                     </div>
                     <div class="form-group has-error">
-                        <label class="col-sm-4 control-label">能否出租</label>
-                        <div class="col-sm-8">
-                            <input class="form-control" type="number" id="add_state" >
+                        <label class="col-sm-2 control-label">出租归还时间</label>
+                        <div class="col-sm-10">
+                            <input type="Date" class="form-control" id="add_returntime">
                         </div>
                     </div>
                 </form>
@@ -94,7 +79,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-
 <!-- 模态框（Modal） 编辑 -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -104,51 +88,39 @@
                     &times;
                 </button>
                 <h4 class="modal-title" id="editModalLabel">
-                    修改物品信息
+                    修改
                 </h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group has-success">
-                        <label class="col-sm-4 control-label">物品编号</label>
+                        <label class="col-sm-4 control-label">出租纪录编号</label>
                         <div class="col-sm-8">
                             <input  class="form-control" type="number" id="edit_id">
                         </div>
                     </div>
                     <div class="form-group has-success">
-                        <label class="col-sm-4 control-label">房间编号</label>
+                        <label class="col-sm-4 control-label">租赁物品编号</label>
                         <div class="col-sm-8">
-                            <input class="form-control" id="edit_roomnum" type="text">
+                            <input  class="form-control" type="number" id="edit_goodsid">
                         </div>
                     </div>
                     <div class="form-group has-success">
-                        <label class="col-sm-4 control-label">物品名称</label>
+                        <label class="col-sm-4 control-label">租赁顾客编号</label>
                         <div class="col-sm-8">
-                            <input  class="form-control" type="text" id="edit_Name">
+                            <input  class="form-control" type="number" id="edit_customid">
                         </div>
                     </div>
                     <div class="form-group has-error">
-                        <label class="col-sm-4 control-label">物品采购时间</label>
+                        <label class="col-sm-4 control-label">租赁约定时长</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="Date" id="edit_Date" >
+                            <input class="form-control" type="text" id="edit_applytime" >
                         </div>
                     </div>
                     <div class="form-group has-error">
-                        <label class="col-sm-4 control-label">物品采购价格</label>
+                        <label class="col-sm-4 control-label">出租归还时间</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="number" id="edit_price" >
-                        </div>
-                    </div>
-                    <div class="form-group has-error">
-                        <label class="col-sm-4 control-label">物品损坏赔偿价格</label>
-                        <div class="col-sm-8">
-                            <input class="form-control" type="number" id="edit_Bprice" >
-                        </div>
-                    </div>
-                    <div class="form-group has-error">
-                        <label class="col-sm-4 control-label">能否出租</label>
-                        <div class="col-sm-8">
-                            <input class="form-control" type="number" id="edit_state" >
+                            <input class="form-control" type="Date" id="edit_returntime" >
                         </div>
                     </div>
                 </form>
@@ -166,31 +138,23 @@
             checkbox: true
         }, {
             field: 'id',
-            title: '物品编号',
-            width: '40px'
-        },{
-            field: 'roomNumberList',
-            title: '房间编号',
-            width: "40px"
-        }, {
-            field: 'name',
-            title: '物品名称',
+            title: '出租纪录编号',
             width: '40px'
         }, {
-            field: 'buyTime',
-            title: '物品采购时间',
-            width: '100px'
-        },{
-            field: 'price',
-            title: '物品采购价格',
+            field: 'goodsId',
+            title: '租赁物品编号',
+            width: '40px'
+        }, {
+            field: 'customerId',
+            title: '租赁顾客编号',
             width: '50px'
         },{
-            field: 'compensationMoeny',
-            title: '物品损坏赔偿价格',
+            field: 'rentalTime',
+            title: '租赁约定时长',
             width: '50px'
         },{
-            field: 'state',
-            title: '能否出租',
+            field: 'returnTime',
+            title: '出租归还时间',
             width: '50px'
         },{
             title: '操作',
@@ -200,15 +164,15 @@
 
     function operateFormatter(value, row, index) {  // 赋予的参数
         return [
-            // '<button class="btn btn-success view" data-toggle="modal" data-target="#viewModal" onclick="view('+ index +');">查看</button>&nbsp;&nbsp;' +
-            '<button class="btn btn-primary view" data-toggle="modal" data-target="#editModal" onclick="initEdit(' + index + ');">修改</button>&nbsp;&nbsp;' +
+            '<button class="btn btn-primary view" data-toggle="modal" data-target="#editModal" onclick="initEdit('+ index +');">编辑</button>&nbsp;&nbsp;' +
             '<button class="btn btn-danger view" onclick="deleteOne('+ index +');">删除</button>&nbsp;&nbsp;'
         ].join('');
     }
 
     // 初始化表格信息
     function init() {
-        noParameterPostRequest("/hotel/goods/get-goodslist", result => {
+        noParameterPostRequest("/hotel/lease/get-list", result => {
+            console.info(result);
             let data = { total: result.module.length, rows: result.module };
             $("#table").bootstrapTable("load", data);
         });
@@ -218,7 +182,7 @@
     function deleteAll() {
         dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-            parameterPostRequest("/hotel/goods/delete-byidlist", filNames.map(item => item.id), () => {
+            parameterPostRequest("/hotel/lease/delete-byidlist", filNames.map(item => item.id), () => {
                 swal("删除", "文件删除成功", "success");
                 init();
             });
@@ -229,28 +193,23 @@
     function initEdit(index) {
         let rows = $("#table").bootstrapTable('getData');
         $("#edit_id").val(rows[index].id);
-        $("#edit_roomnum").val(rows[index].roomNumberList);
-        $("#edit_Name").val(rows[index].name);
-        $("#edit_Date").val(rows[index].buyTime);
-        $("#edit_price").val(rows[index].price);
-        $("#edit_Bprice").val(rows[index].compensationMoeny);
-        $("#edit_state").val(rows[index].state);
+        $("#edit_goodsid").val(rows[index].goodsId);
+        $("#edit_customid").val(rows[index].customerId);
+        $("#edit_applytime").val(rows[index].rentalTime);
+        $("#edit_returntime").val(rows[index].returnTime);
     }
     function edit() {
         let data = {
             "id": $("#edit_id").val(),
-            "roomNumberList": $("#edit_roomnum").val(),
-            "name": $("#edit_Name").val(),
-            "buyTime": $("#edit_Date").val(),
-            "price": $("#edit_price").val(),
-            "compensationMoeny": $("#edit_Bprice").val(),
-            "state": $("#edit_state").val()
+            "goodsId": $("#edit_goodsid").val(),
+            "customerId": $("#edit_customid").val(),
+            "rentalTime": $("#edit_applytime").val(),
+            "returnTime": $("#edit_returntime").val()
         };
-        if ( data.id <=0 || data.name == null || data.buyTime == "" || data.price <= 0
-            || data.roomNumberList <= 0 || data.compensationMoeny <= 0 || data.state < 0) {
+        if ( data.id <=0 || data.rentalTime == null || data.goodsId <= 0 || data.customerId <= 0 || data.returnTime == "") {
             swal("错误", "请输入必输入项！", "error");
         }else {
-            parameterPostRequest("/hotel/goods/update-goods", data, () => {
+            parameterPostRequest("/hotel/lease/update-lease", data, () => {
                 $('#editModal').modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();
@@ -258,25 +217,19 @@
         }
     }
 
-
     // 添加
     function add() {
         let data = {
             "id": $("#add_id").val(),
-            "roomNumberList": $("#add_roomnum").val(),
-            "name": $("#add_name").val(),
-            "buyTime": $("#add_Date").val(),
-            "price": $("#add_inprice").val(),
-            "compensationMoeny": $("#add_outprice").val(),
-            "state": $("#add_state").val()
+            "goodsId": $("#add_goodsid").val(),
+            "customerId": $("#add_customid").val(),
+            "rentalTime": $("#add_applytime").val(),
+            "returnTime": $("#add_returntime").val()
         };
-        if (add.id <= 0 || data.roomNumberList <= 0
-            || data.name == null || data.price <= 0 || data.buyTime == ""
-            || data.compensationMoeny <= 0
-            ) {
+        if ( data.id <=0 || data.rentalTime == null || data.goodsId <= 0 || data.customerId <= 0 || data.returnTime == "") {
             swal("错误", "请输入必输入项！", "error");
         } else {
-            parameterPostRequest("/hotel/goods/add-goods", data, () => {
+            parameterPostRequest("/hotel/lease/add-lease", data, () => {
                 $('#addModal').modal('hide');
                 swal("正确", "添加成功", "success");
                 init();

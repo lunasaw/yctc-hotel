@@ -18,4 +18,8 @@ public interface LeaseController {
     String showLeaseTable();
 
     String showLeaseState();
+
+    String showLeaseStateTable();
+
+    String showLeaseHistory();
 }

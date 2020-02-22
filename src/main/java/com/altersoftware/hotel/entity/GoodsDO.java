@@ -14,7 +14,7 @@ public class GoodsDO {
     private String roomNumberListToString;
     /** 物品名称 */
     private String name;
-    /** 物品名称 */
+    /** 物品图片 */
     private String picture;
     /** 物品采购时间 */
     private String buyTime;

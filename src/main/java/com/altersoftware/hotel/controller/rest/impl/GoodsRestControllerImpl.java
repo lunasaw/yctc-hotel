@@ -84,7 +84,7 @@ public class GoodsRestControllerImpl implements GoodsRestController {
     @PostMapping("update-goods")
     public ResultDO<Void> updateGoods(@RequestBody GoodsDO goodsDO) {
         // 参数校验
-        if (goodsDO.getId() <= 0 || StringUtils.isBlank(goodsDO.getRoomNumberListToString())) {
+        if (goodsDO.getId() <= 0 ) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
