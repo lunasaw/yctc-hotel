@@ -19,11 +19,13 @@
     <!--<script src="../../static/js/lib/popper.min.js" th:src="@{/js/lib/popper.min.js}"></script>-->
 
 </head>
-<body onload="init();">
+<body onload="init();" style="overflow-y: hidden">
 <table id="table">
 
 </table>
-<button class="btn btn-success col-md-2" data-target="#dishes" data-toggle="modal" onclick="addinmodel()" type="button">
+
+
+<button style="margin-top: 30px;margin-left: 33%" class="btn btn-primary col-md-4" data-target="#dishes" data-toggle="modal" onclick="addinmodel()" type="button">
     提交订单
 </button>
 
