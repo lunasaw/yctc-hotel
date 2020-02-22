@@ -101,6 +101,21 @@ public class TemplatePath {
         "management/authority-role-management-modify";
     // management end
 
+    // 客户入住页面 start
+    public static final String USER_CHECK_IN_A                            = "user/verify-input-step-a";
+
+    public static final String USER_CHECK_IN_A_INPUT                      = "user/verify-input-step-a-input";
+
+    public static final String USER_CHECK_IN_A_INPUT_TABLE                = "user/verify-input-step-a-input-table";
+
+    public static final String USER_CHECK_IN_B                            = "user/verify-input-step-b";
+
+    public static final String USER_CHECK_IN_C                            = "user/verify-input-step-c";
+
+    public static final String USER_CHECK_IN_SUCCESS                      = "user/verify-input-step-success";
+
+    // 客户入住页面end
+
     /** 后台管理界面 */
     public static final String USER_MANAGE                                = "manage/user-manage";
     // 此为测试页面，不上线
