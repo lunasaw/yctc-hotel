@@ -4,12 +4,22 @@ import java.util.List;
 
 import com.altersoftware.hotel.entity.LeaseDO;
 import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.vo.LeaseVO;
+import com.altersoftware.hotel.vo.OrderVO;
 
 /**
  * @author czy@win10
  * @date 2020/1/31 21:53
  */
 public interface LeaseRestController {
+    /**
+     * 创建一条租赁订单
+     *
+     * @param
+     * @return
+     */
+    ResultDO<Void> addlease(List<LeaseVO> leaseVOS);
+
     /**
      * 插入一条租赁信息
      *

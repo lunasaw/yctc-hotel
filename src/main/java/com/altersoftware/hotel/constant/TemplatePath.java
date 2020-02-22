@@ -193,13 +193,19 @@ public class TemplatePath {
     public static final String GOODS_TABLE                                = "hotel/goodstable";
 
     /** 租赁主页 */
-    public static final String LEASE                                      = "hotel/lease";
+    public static final String LEASE                                      = "hotel/goodslease";
 
     /** 管理租赁主页 */
     public static final String LEASE_ADMIN                                = "hotel/leaseAdmin";
 
+    /** 管理租赁主页 */
+    public static final String LEASE_ADMIN_TABLE_                        = "hotel/leaseAdminTable";
+
+    /** 管理租赁主页 */
+    public static final String HISTORY_LEASE                        = "hotel/historylease";
+
     /** 管理租赁表格主页 */
-    public static final String LEASE_TABLE                                = "hotel/leaseAdmintable";
+    public static final String LEASE_TABLE                                = "hotel/goodsleasetable";
 
     /** 物品信息页面 */
     public static final String GOODS_STATE_SET                            = "hotel/goodsStateSet";
