@@ -62,6 +62,7 @@ public class MyFaceContract {
 
         if (errorCode != ErrorInfo.MOK.getValue()) {
             System.out.println("初始化引擎失败");
+            System.out.println(errorCode);
         }
         // 人脸检测
         ImageInfo imageInfo = getRGBData(new File(face1));

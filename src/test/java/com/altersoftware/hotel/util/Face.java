@@ -1,5 +1,6 @@
 package com.altersoftware.hotel.util;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 
 import org.junit.FixMethodOrder;
@@ -36,7 +37,9 @@ public class Face {
     }
 
     @Test
-    public void checkIn() {
+    public void checkIn() throws FileNotFoundException {
+        String path = ResourceUtils.getURL("classpath:static").getPath();
+        System.out.println(path);
         boolean b = CheckIn.checkIn("https://wx2.sinaimg.cn/mw690/6ff51fefly1gc2ovph1iej20j60r7wfm.jpg",
             "https://wx2.sinaimg.cn/mw690/6ff51fefly1gc2ovpi0mmj20j60j6q4f.jpg");
         System.out.println(b);

@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.checkIn.faceIdCompere;
+package com.altersoftware.hotel.util;
 
 import java.io.*;
 
