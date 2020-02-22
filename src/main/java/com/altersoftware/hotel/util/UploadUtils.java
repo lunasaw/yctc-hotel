@@ -1,4 +1,4 @@
-package com.altersoftware.hotel.file;
+package com.altersoftware.hotel.util;
 
 import java.io.*;
 
@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.altersoftware.hotel.constant.ConstantHolder;
-import com.altersoftware.hotel.util.FileUtilsAlter;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 

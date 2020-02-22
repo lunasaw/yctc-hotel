@@ -17,7 +17,7 @@ import com.altersoftware.hotel.constant.ConstantHolder;
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.FileRestController;
 import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.file.UploadUtils;
+import com.altersoftware.hotel.util.UploadUtils;
 
 /**
  * @author hzx

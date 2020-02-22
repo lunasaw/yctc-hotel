@@ -15,7 +15,6 @@ import org.springframework.util.ResourceUtils;
 
 import com.altersoftware.hotel.controller.rest.impl.OrderRestControllerImpl;
 import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.file.UploadUtils;
 
 /**
  * @author Iszychen@win10

@@ -17,6 +17,11 @@ public class ConstantHolder {
     public static final String IMG_SAVE_PATH     = "";
 
     /**
+     * 图片上传路径
+     */
+    public static final String FILE_UPLOAD       = "http://111.229.114.126:8087/iszychen/img/userInfo/";
+
+    /**
      * 文件类型--图片
      */
     public static final String IMG_FILE          = "img";
