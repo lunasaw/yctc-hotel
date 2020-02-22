@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ResourceUtils;
 
-import com.altersoftware.hotel.checkIn.FaceIdCompere.GetUrlPic;
-import com.altersoftware.hotel.checkIn.FaceIdCompere.MyFaceContract;
+import com.altersoftware.hotel.checkIn.faceIdCompere.GetUrlPic;
+import com.altersoftware.hotel.checkIn.faceIdCompere.MyFaceContract;
 
 /**
  * @author Iszychen@win10
