@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"  style="overflow-y: hidden">
 
 <head>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../static/css/bootstrap-table.min.css" rel="stylesheet" th:href="@{/css/bootstrap-table.min.css}">
+    <link href="../../static/css/head.css" rel="stylesheet" th:href="@{/css/head.css}">
+    <link href="../../static/css/left-side-menu.css" rel="stylesheet" th:href="@{css/left-side-menu.css}">
     <link href="../../static/css/file.css" rel="stylesheet" th:href="@{/css/file.css}">
     <link href="../../static/css/fileinput.min.css" rel="stylesheet" th:href="@{/css/fileinput.min.css}">
     <script src="../../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"
@@ -13,10 +15,10 @@
     <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<body style="overflow-y: hidden">
+<body>
 
 
-<main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main" style="">
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main" >
     <div class="chartjs-size-monitor"
          style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
         <div class="chartjs-size-monitor-expand"
@@ -35,7 +37,7 @@
     <br>
     <br>
     <!-- Begin page content -->
-    <div class="container">
+    <div class="container" style="margin-bottom: 150px">
         <div class="row text-center">
             <div class="col-md-1"></div>
             <div class="col-md-2">
@@ -66,36 +68,24 @@
             </div>
         </div>
 
-        <div class="card" style="margin-top: 50px;margin-bottom:150px;">
-            <div class="card-header">
-                人脸扫描
-            </div>
-            <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 offset-md-4">
-                        <p class="card-text">请为我们拍摄您的人脸照片或者上传本地人脸照片</p>
+                    <div class="col-md-5 col-md-offset-4">
+                        <p>请为我们拍摄您的人脸照片或者上传本地人脸照片</p>
                     </div>
                 </div>
-                <div class="row" style="margin: 25px 0;">
-                    <button class="btn btn-danger col-md-2 offset-md-5">提供人脸照片</button>
+                <div class="row" style="margin-bottom: 50px">
+                    <button class="btn btn-danger col-md-2 col-md-offset-5">提供人脸照片</button>
                 </div>
                 <div class="row" style="margin-bottom: 50px;">
                     <div class="col-md-12">
-                        <img class="w-100 d-block" height="500px" src="">
+                        <img width="100%" height="500px" src="">
                     </div>
                 </div>
+
+            <div class="row">
+                <button class="btn btn-success col-md-2 col-md-offset-5">扫描完成</button>
             </div>
-            <div class="card-footer">
-                <button class="btn btn-success col-md-2 offset-md-5">扫描完成</button>
-            </div>
-        </div>
-
-
-        <div class="row">
-
-        </div>
     </div>
-
 
 </main>
 
