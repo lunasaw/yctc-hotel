@@ -5,14 +5,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.exception.HotelException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.exception.HotelException;
 
 
 /**
@@ -69,9 +69,7 @@ public class UserPermissionCache {
             LOG.error("userId error, get permission by userId error, parameter illegal, userId={}", userId);
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        if (USERID_2_PERMISSION_LIST_MAP.containsKey(userId)) {
-            USERID_2_PERMISSION_LIST_MAP.remove(userId);
-        }
+        USERID_2_PERMISSION_LIST_MAP.remove(userId);
         USERID_2_PERMISSION_LIST_MAP.put(userId, permissions);
         // 获取当前系统时间
         Date timeOfGetPermission = new Date();
