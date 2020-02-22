@@ -25,7 +25,7 @@ $(document).ready(function () {
     // Tooltips init
     // ------------------------------------------------------ //    
 
-    $('[data-toggle="tooltip"]').tooltip()    
+    $('[data-toggle="tooltip"]').tooltip();
 
 
     // ------------------------------------------------------- //
@@ -127,7 +127,7 @@ $(document).ready(function () {
 
     $(window).on('resize', function () {
         adjustFooter();
-    })
+    });
 
     function adjustFooter() {
         var footerBlockHeight = $('.main-footer').outerHeight();

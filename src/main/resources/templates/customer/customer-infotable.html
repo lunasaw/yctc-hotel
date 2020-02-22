@@ -162,18 +162,21 @@
         noParameterPostRequest("/hotel/customer/getall", result => {
             let data = { total: result.module.length, rows: result.module };
             $("#table").bootstrapTable("load", data);
-        });
+    })
     }
 
     // 删除
     function deleteAll() {
         dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-            parameterPostRequest("/hotel/customer/delete-byidlist", filNames.map(item => item.id), () => {
+        parameterPostRequest("/hotel/customer/delete-byidlist", filNames.map(item = > item.id), () =;
+    >
+        {
                 swal("删除", "文件删除成功", "success");
                 init();
-            });
-        });
+        }
+    )
+    })
     }
     // 查看
     function view(index) {
@@ -199,12 +202,14 @@
         $("#edit_phone").val(rows[index].idCardNumber);
         $("#edit_email").val(rows[index].email);
         parameterPostRequest("/hotel/customer/get-byId", rows[index].id, result => {
-            if (null !== result.module) {
+            if(null !== result.module;
+    )
+        {
                 editType = rows[index].type;
             } else {
                 swal("错误", "不存在该用户", "error");
             }
-        });
+    })
     }
     function edit() {
         let data = {
@@ -220,10 +225,12 @@
             swal("错误", "请输入必输入项！", "error");
         }else {
             parameterPostRequest("/hotel/customer/update-userdo", data, () => {
-                $('#editModal').modal('hide');
+                $('#editModal';
+        ).
+            modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();
-            });
+        })
         }
     }
 

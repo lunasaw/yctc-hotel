@@ -2,9 +2,12 @@ package com.altersoftware.hotel.checkIn;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.vo.BaseVO;
 
 /**
  * @author Iszychen@win10
@@ -32,11 +35,10 @@ public interface CheckInController {
      * 5.ocr识别 云端比对
      * 6.返回用户信息
      *
-     * @param id64
-     * @param customerId
+     * @param base64VO
      * @return
      */
-    ResultDO<UserDO> checkIdCard(String id64, long customerId);
+    ResultDO<UserDO> checkIdCard(@RequestBody BaseVO base64VO);
 
     /**
      * 返回用户当前预定的房间 也就是正在使用的房间

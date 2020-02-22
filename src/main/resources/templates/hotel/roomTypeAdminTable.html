@@ -305,7 +305,7 @@
                 console.info(result);
                 let data = { total: result.module.length, rows: result.module };
                 $("#table").bootstrapTable("load", data);
-            });
+        })
         }
 
         // 查看
@@ -332,11 +332,14 @@
         function deleteAll() {
             dialog("确定删除吗？", () => {
                 let filNames = $("#table").bootstrapTable('getSelections');
-                parameterPostRequest("/hotel/roomTypeInfo/delete-byidlist", filNames.map(item => item.id), () => {
+            parameterPostRequest("/hotel/roomTypeInfo/delete-byidlist", filNames.map(item = > item.id), () =;
+        >
+            {
                     swal("删除", "文件删除成功", "success");
                     init();
-                });
-            });
+            }
+        )
+        })
         }
 
         let editId;
@@ -366,10 +369,12 @@
                 swal("错误", "请输入必输入项！", "error");
             }else {
                 parameterPostRequest("/hotel/roomTypeInfo/update-roomtype", data, () => {
-                    $('#editModal').modal('hide');
+                    $('#editModal';
+            ).
+                modal('hide');
                     swal("正确", "编辑成功", "success");
                     init();
-                });
+            })
             }
         }
 
@@ -388,10 +393,12 @@
                 swal("错误", "请输入必输入项！", "error");
             } else {
                 parameterPostRequest("/hotel/roomTypeInfo/add-roomtype", data, () => {
-                    $('#addModal').modal('hide');
+                    $('#addModal';
+            ).
+                modal('hide');
                     swal("正确", "添加成功", "success");
                     init();
-                });
+            })
             }
         }
     </script>
@@ -434,11 +441,13 @@
                     picture: "http://111.229.114.126:8087/iszychen/img/roomType/" + editId + ".jpg"
                 };
                 parameterPostRequest("/hotel/roomTypeInfo/update-roompic", data, () => {
-                    $('#imgModal').modal('hide');
+                    $('#imgModal';
+            ).
+                modal('hide');
                     $('#editModal').modal('hide');
                     swal("成功", "图片上传成功", "success");
                     init();
-                });
+            })
             }
         });
 

@@ -20,7 +20,6 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.util.ResourceUtils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.altersoftware.hotel.checkIn.faceIdCompere.GetUrlPic;
 import com.altersoftware.hotel.checkIn.faceIdCompere.MyFaceContract;
 import com.altersoftware.hotel.checkIn.tencentcloudapi.common.Credential;
 import com.altersoftware.hotel.checkIn.tencentcloudapi.common.exception.TencentCloudSDKException;
@@ -38,18 +37,18 @@ import sun.misc.BASE64Encoder;
  */
 public class CheckIn {
 
-    public static boolean checkIn(String url1, String url2) {
+    public static boolean checkIn(long customerId) {
 
         try {
-            URL img1 = new URL(url1);
-            URL img2 = new URL(url2);
-            GetUrlPic getUrlPic = new GetUrlPic();
-            getUrlPic.geturlpic(img1, 1);
-            getUrlPic.geturlpic(img2, 2);
+            // URL img1 = new URL(url1);
+            // URL img2 = new URL(url2);
+            // GetUrlPic getUrlPic = new GetUrlPic();
+            // getUrlPic.geturlpic(img1, 1);
+            // getUrlPic.geturlpic(img2, 2);
             MyFaceContract myFaceContract = new MyFaceContract();
-            String path = ResourceUtils.getURL("classpath:static").getPath();
-            float contract = myFaceContract.contract(path + "1.jpg", path + "2.jpg");
-            if (contract > 0.9) {
+            String path = ResourceUtils.getURL("classpath:static/").getPath();
+            float contract = myFaceContract.contract(path + customerId + ".jpg", path + "body.jpg");
+            if (contract > 0.8) {
                 return true;
             }
         } catch (Exception e) {
@@ -182,7 +181,7 @@ public class CheckIn {
 
             Credential cred =
                 new Credential("AKIDrW1GK9nutd8PMLDdMs8dvz2smRQPraWH", "jJeRrOksmSyQeTGuMYXMuHMTQDl7d0Al");
-            com.altersoftware.hotel.checkIn.tencentcloudapi.common.profile.HttpProfile httpProfile = new HttpProfile();
+            HttpProfile httpProfile = new HttpProfile();
             (httpProfile).setEndpoint("ocr.tencentcloudapi.com");
             ClientProfile clientProfile = new ClientProfile();
             clientProfile.setHttpProfile(httpProfile);
