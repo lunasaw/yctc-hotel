@@ -13,6 +13,7 @@
 	</div>
 </div>
 <!-- End page content -->
+<footer th:replace="component/fram :: commonFooter"></footer>
 
 <script>
 	function redirect() { //跳转页
@@ -22,8 +23,6 @@
 	timer = setTimeout('redirect()', 1 * 1000); //跳转
 </script>
 
-<footer th:replace="component/footer :: footer"></footer>
-<div th:replace="component/footer-lib"></div>
 	<Script language="javascript">
 		function GetRequest() {
 			var url = location.search; //获取url中"?"符后的字串   

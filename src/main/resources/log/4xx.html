@@ -4,8 +4,14 @@
 <head th:replace="component/head :: head"></head>
 
 <body>
-<header th:replace="component/header :: header"></header>
 
+<header th:replace="component/fram :: commonHeader"></header>
+
+
+<br>
+<br>
+<br>
+<br>
 <!-- Begin page content -->
 <div class="container">
     <div class="text-center">
@@ -19,11 +25,11 @@
     function redirect() { //跳转页
         window.location.href = "/hotel/user/home";
     }
+
     timer = setTimeout('redirect()', 3 * 1000); //跳转
 </script>
 
-<footer th:replace="component/footer :: footer"></footer>
-<div th:replace="component/footer-lib"></div>
+<footer th:replace="component/fram :: commonFooter"></footer>
 </body>
 
 </html>

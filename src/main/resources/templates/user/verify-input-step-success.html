@@ -7,17 +7,17 @@
 <body>
 <header th:replace="component/fram :: commonHeader"></header>
 <div class="container" th:replace="component/fram :: commonMenu"></div>
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
     <div class="chartjs-size-monitor"
-      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-      <div class="chartjs-size-monitor-expand"
-        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-      </div>
-      <div class="chartjs-size-monitor-shrink"
-        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-      </div>
+         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+        </div>
     </div>
     <h2 style="color: rgb(135, 106, 32);font-family: 宋体;">恭喜已完成入住办理，您已成功入住</h2>
     <br>
@@ -27,89 +27,80 @@
     <br>
     <!-- Begin page content -->
     <div class="container">
-      <div class="row text-center">
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-          <i class="fas fa-user-check fa-2x"></i>
-          <h6>验证身份</h6>
+        <div class="row text-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <i class="fas fa-user-check fa-2x"></i>
+                <h6>验证身份</h6>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <i class="fas fa-key fa-2x"></i>
+                <h6>办理房间</h6>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <i class="fas fa-check-circle fa-2x"></i>
+                <h6>人脸扫描</h6>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-2">
-          <i class="fas fa-key fa-2x"></i>
-          <h6>办理房间</h6>
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-2">
-          <i class="fas fa-check-circle fa-2x"></i>
-          <h6>人脸扫描</h6>
-        </div>
-        <div class="col-md-1"></div>
-      </div>
 
-      <div class="progress mt-4 mb-4">
-        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:100%"
-          aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-
-    	<div class="row">
-        <div class="col-md-4 offset-md-4">
-          <h4 class="text-center"><i class="fas fa-check"></i>已经完成操作</h4>
-          <a href="" class="btn btn-primary btn-block">返回主页</a>
+        <div class="progress mt-4 mb-4">
+            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="15"
+                 class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:100%"></div>
         </div>
-      </div>
+
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h4 class="text-center"><i class="fas fa-check"></i>已经完成操作</h4>
+                <a class="btn btn-primary btn-block" href="">返回主页</a>
+            </div>
+        </div>
 
     </div>
 
 
-
-
-
-
-  </main>
-
-
-
-
-
+</main>
 
 
 <footer th:replace="component/fram :: commonFooter"></footer>
 
-  <script>
+<script>
     $(document).ready(function () {
-      let data = [{
-          "id": "1001"
+        let data = [{
+            "id": "1001"
         },
-        {
-          "id": "1002"
-        },
-        {
-          "id": "1003"
-        },
-        {
-          "id": "1004"
-        },
-      ];
-      let tbody = $("#tbody");
-      data.forEach(item => {
-        tbody.append('<tr>' + '<th>' + item.id + '</th>' + '<th>' + item.das + '</th>' + '<th>' + item.dass +
-          '</th>' + '<th>' + item.fdsafasd + '</th>' + '<th>' +
-          '<a href="" data-toggle="modal" data-target="#go">' + '确认退房' + '</a>' + '</th>' +
-          '</tr>')
+            {
+                "id": "1002"
+            },
+            {
+                "id": "1003"
+            },
+            {
+                "id": "1004"
+            },
+        ];
+        let tbody = $("#tbody");
+        data.forEach(item => {
+            tbody.append('<tr>' + '<th>' + item.id + '</th>' + '<th>' + item.das + '</th>' + '<th>' + item.dass +
+                '</th>' + '<th>' + item.fdsafasd + '</th>' + '<th>' +
+                '<a href="" data-toggle="modal" data-target="#go">' + '确认退房' + '</a>' + '</th>' +
+                '</tr>')
 
-      });
-      $("#area").on("input propertychange", function () {
-        var $this = $(this),
-          _val = $this.val(),
-          count = "";
-        if (_val.length > 20) {
-          $this.val(_val.substring(0, 20));
-        }
-        count = 20 - $this.val().length;
-        $("#text-count").text(count);
-      });
+        });
+        $("#area").on("input propertychange", function () {
+            var $this = $(this),
+                _val = $this.val(),
+                count = "";
+            if (_val.length > 20) {
+                $this.val(_val.substring(0, 20));
+            }
+            count = 20 - $this.val().length;
+            $("#text-count").text(count);
+        });
     })
-  </script>
+</script>
 
 
 </body>
