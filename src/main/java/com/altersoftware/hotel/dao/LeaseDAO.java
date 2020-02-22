@@ -87,6 +87,15 @@ public interface LeaseDAO {
      *
      * @return
      */
-    @Select("select *  from tb_lease ")
+    @Select("select  id, goods_id, customer_id, lease_rentaltime, lease_returntime, create_time, modify_time from tb_lease ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "goodsId", column = "goods_id"),
+        @Result(property = "customerId", column = "customer_id"),
+        @Result(property = "rentalTime", column = "lease_rentaltime"),
+        @Result(property = "returnTime", column = "lease_returntime"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
     List<LeaseDO> getLeaseList();
 }
