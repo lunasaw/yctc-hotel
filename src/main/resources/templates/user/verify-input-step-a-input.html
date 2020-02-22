@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body>
+<header th:replace="component/fram :: commonHeader"></header>
+<div class="container" th:replace="component/fram :: commonMenu"></div>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+    <h2 style="color: rgb(135, 106, 32);font-family: 宋体;">请协助验证您的身份信息</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<i class="fas fa-user-check fa-2x"></i>
+				<h6>验证身份</h6>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<i class="fas fa-key fa-2x"></i>
+				<h6>办理房间</h6>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<i class="fas fa-check-circle fa-2x"></i>
+				<h6>人脸扫描</h6>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+
+    <div class="progress mt-4 mb-4">
+			<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:33.33%" aria-valuenow="15"
+			 aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+
+    <div class="row">
+      <div class="col-md-12" style="text-align: center;">
+        <h4 style="color: rgb(105, 105, 105);font-family: 宋体;">为了保证您的安全，请协助我们为您验证身份信息</h4>
+      </div>
+    </div>
+
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="card">
+					<div class="card-body">
+						<i class="far fa-envelope fa-4x"></i>
+            <p class="card-text">请拍摄您的身份证正反面照片或者上传本地身份证正反面照片</p>
+            <div class="row">
+              <button class="btn btn-danger col-md-2 offset-md-5" style="margin-bottom: 30px;">提供身份证照片</button>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <img class="d-block w-100" height="300px">
+              </div>
+              <div class="col-md-6">
+                <img class="d-block w-100" height="300px">
+              </div>
+            </div>
+            <div class="row" style="margin-top:50px;"> 
+            <a href="" class="btn btn-primary col-md-2 offset-md-5">下一步</a>
+            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+  </main>
+
+
+
+
+
+
+
+
+<footer th:replace="component/fram :: commonFooter"></footer>
+  
+
+
+</body>
+
+</html>
