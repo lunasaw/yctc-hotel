@@ -24,6 +24,6 @@ public class idDemo {
 
     @Test
     public void ocrFace() {
-        CheckIn.IDCardOCR(10013);
+        CheckIn.IDCardOCR(10014);
     }
 }

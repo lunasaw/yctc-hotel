@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ResourceUtils;
 
+import com.altersoftware.hotel.constant.ConstantHolder;
 import com.altersoftware.hotel.controller.rest.impl.OrderRestControllerImpl;
 import com.altersoftware.hotel.entity.UserDO;
 
@@ -47,5 +48,11 @@ public class updateFile {
         String path = ResourceUtils.getURL("classpath:").getPath();
         File file = new File(path, "static/dll/ceshi.txt");
         System.out.println(file);
+    }
+
+    @Test
+    public void downLoad() throws Exception {
+        String path = ResourceUtils.getURL("classpath:static/").getPath();
+        FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + "10013.jpg", path, "body.jpg");
     }
 }

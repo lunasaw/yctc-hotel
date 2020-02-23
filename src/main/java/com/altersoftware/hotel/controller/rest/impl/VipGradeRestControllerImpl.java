@@ -3,17 +3,16 @@ package com.altersoftware.hotel.controller.rest.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.VipDO;
-import com.altersoftware.hotel.service.VipGradeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
+import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.VipGradeRestController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.VipGradeDO;
+import com.altersoftware.hotel.service.VipGradeService;
 
 /**
  * @author Iszychen@win10

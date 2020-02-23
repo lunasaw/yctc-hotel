@@ -131,8 +131,8 @@ function showNews() {
 				}
 				if(result.code == 9999){
 					alert("系统错误");
-					return;
-				}
+
+                }
 			}
 			else{				
 				console.log(result.module);
@@ -182,11 +182,11 @@ function deleteReadedNews() {
 			if(result.success == false){
 				if(result.code == 9002){
 					alert("参数非法");
-					return;
-				}else if(result.code == 9999){
+
+                }else if(result.code == 9999){
 					alert("系统错误");
-					return;
-				}
+
+                }
 			}
 			else{				
 				alert("删除成功");

@@ -38,8 +38,8 @@
             // ------------------------------------------------------------------------------ //
             // Navbar Center 
             // ------------------------------------------------------------------------------ //
-            if( getNav.hasClass("brand-center")){                
-                var postsArr = new Array(),
+            if( getNav.hasClass("brand-center")){
+                var postsArr = [],
                     index = $("nav.brand-center"),
                     $postsList = index.find('ul.navbar-nav');
 				
@@ -64,7 +64,7 @@
                     for (var i = 0; i < list.length; i++) {
                         ListHTML += '<li>' + list[i] + '</li>'
                     }
-                }
+                };
                 
                 //Generate HTML for first list
                 createHTML(firstList);
@@ -290,7 +290,7 @@
                     $(".col-menu", this).removeClass("on");
                     $(".col-menu .content", this).stop().fadeOut();
                     $(".col-menu .content", this).removeClass(getIn);
-                }
+                };
                 
                 // Hidden om mouse leave
                 $("nav.navbar.bootsnav").on("mouseleave", function(){
@@ -559,7 +559,7 @@
                         $body.data('bs.scrollspy', data);
                         $body.scrollspy('refresh');
                     }
-                }
+                };
                 
                 // Activate Navigation on resize
                 var resizeTimer;

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,7 @@ import com.altersoftware.hotel.util.Base64Utils;
 import com.altersoftware.hotel.util.CheckIn;
 import com.altersoftware.hotel.util.FileUtilsAlter;
 import com.altersoftware.hotel.util.UploadUtils;
+import com.altersoftware.hotel.vo.BaseVO;
 
 /**
  * @author Iszychen@win10
@@ -62,28 +64,28 @@ public class CheckInControllerImpl implements CheckInController {
 
     @Override
     @PostMapping("idcard")
-    public ResultDO<UserDO> checkIdCard(String id64, long customerId) {
+    public ResultDO<UserDO> checkIdCard(@RequestBody BaseVO base64VO) {
         // 参数校验
-        if (customerId <= 0) {
+        if (base64VO.getCustomerId() <= 0) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
+        UserDO userDO = null;
         try {
-            String path = ResourceUtils.getURL("classpath:static/tmp").getPath();
+            String path = ResourceUtils.getURL("classpath:static/").getPath();
             // 将拍摄 或者 上传 的身份证照片解码
-            if (Base64Utils.GenerateImage(id64, path + customerId + ".jpg") == false) {
+            if (Base64Utils.GenerateImage(base64VO.getId64(), path + base64VO.getCustomerId() + ".jpg") == false) {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }
             // 将图片上传到服务器
-            File file = new File(path + customerId + ".jpg");
+            File file = new File(path + base64VO.getCustomerId() + ".jpg");
             byte[] bytes = FileUtilsAlter.fileToByte(file);
-            String s = ConstantHolder.FILE_UPLOAD + customerId + ".jpg";
-            UploadUtils.uploadFile(bytes, s, customerId + ".jpg");
-            ResultDO<UserDO> userDOById = userIService.getUserDOById(customerId);
-            UserDO userDO = userDOById.getModule();
+            UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
+            ResultDO<UserDO> userDOById = userIService.getUserDOById(base64VO.getCustomerId());
+            userDO = userDOById.getModule();
             // OCR识别身份信息
-            String s1 = CheckIn.IDCardOCR(customerId);
+            String s1 = CheckIn.IDCardOCR(base64VO.getCustomerId());
             String[] split = s1.split(",");
             // 将识别的信息与预设信息比较
             if (split[0].equals(userDO.getName()) == false || split[1].equals(userDO.getIdCardNumber()) == false) {
@@ -122,17 +124,17 @@ public class CheckInControllerImpl implements CheckInController {
     @Override
     public ResultDO<Void> checkFace(String face64, long customerId) {
         try {
-            String path = ResourceUtils.getURL("classpath:static/tmp").getPath();
+            String path = ResourceUtils.getURL("classpath:static/").getPath();
             // 将拍摄 或者 上传 的身份证照片解码
-            if (Base64Utils.GenerateImage(face64, path + customerId + ".jpg") == false) {
+            if (Base64Utils.GenerateImage(face64, path + "tmp.jpg") == false) {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }
-            // 获取身份证图片 和本地图片地址
-            String s1 = path + customerId + ".jpg";
-            String s = ConstantHolder.FILE_UPLOAD + customerId + ".jpg";
+            // // 获取身份证图片 和本地图片地址
+            // String s1 = path + customerId + ".jpg";
+            // String s = ConstantHolder.FILE_UPLOAD + customerId + ".jpg";
             // 虹软sdk对比
-            if (CheckIn.checkIn(s1, s) == false) {
+            if (CheckIn.checkIn(customerId) == false) {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }

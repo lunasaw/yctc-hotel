@@ -1,8 +1,7 @@
 package com.altersoftware.hotel.controller.impl;
 
-import com.altersoftware.hotel.constant.ResultCode;
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.service.FloorService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.altersoftware.hotel.constant.TemplatePath;
 import com.altersoftware.hotel.controller.FloorController;
-
-import java.util.List;
+import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.service.FloorService;
 
 /**
  * @author czy@win10

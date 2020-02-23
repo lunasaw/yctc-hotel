@@ -5,7 +5,6 @@ import java.util.List;
 import com.altersoftware.hotel.entity.LeaseDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.vo.LeaseVO;
-import com.altersoftware.hotel.vo.OrderVO;
 
 /**
  * @author czy@win10

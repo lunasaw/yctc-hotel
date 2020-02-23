@@ -3,7 +3,6 @@ package com.altersoftware.hotel.controller.rest.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.altersoftware.hotel.service.StaffService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +13,7 @@ import com.altersoftware.hotel.controller.rest.StaffRestController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.service.CustomerService;
+import com.altersoftware.hotel.service.StaffService;
 
 /**
  * @author hzx
