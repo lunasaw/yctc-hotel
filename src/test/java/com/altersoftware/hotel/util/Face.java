@@ -29,26 +29,6 @@ public class Face {
     @Resource
     private CheckInController checkInController;
 
-    // @Test
-    // public void Test() throws Exception {
-    // GetUrlPic getUrlPic = new GetUrlPic();
-    // URL url = new URL("https://wx2.sinaimg.cn/mw690/6ff51fefly1gc2ovph1iej20j60r7wfm.jpg");
-    // String geturlpic = getUrlPic.geturlpic(url, 1);
-    // url = new URL("https://wx2.sinaimg.cn/mw690/6ff51fefly1gc2ovpi0mmj20j60j6q4f.jpg");
-    // String geturlpic1 = getUrlPic.geturlpic(url, 2);
-    // MyFaceContract myFaceContract = new MyFaceContract();
-    // String path = ResourceUtils.getURL("classpath:static/").getPath();
-    //
-    // System.out.println(myFaceContract.contract(path + "body.jpg", path + "10013.jpg"));
-    // }
-    //
-    // @Test
-    // public void checkIn() throws FileNotFoundException {
-    // String path = ResourceUtils.getURL("classpath:static/").getPath();
-    // System.out.println(path);
-    // boolean b = CheckIn.checkIn(10013);
-    // System.out.println(b);
-    // }
 
     @Test
     public void atest() throws Exception {
@@ -57,16 +37,19 @@ public class Face {
         // System.out.println(s);
         BaseVO baseVO = new BaseVO();
         baseVO.setId64(s);
-        baseVO.setCustomerId(10014);
+        baseVO.setPhone("15696756582");
+//	    baseVO.setCustomerId(10014);
         ResultDO<UserDO> userDOResultDO = checkInController.checkIdCard(baseVO);
         System.out.println(userDOResultDO);
     }
+
+
 
     @Test
     public void bface() throws FileNotFoundException {
         String path = ResourceUtils.getURL("classpath:static/").getPath();
         String s = Base64Utils.GetImageStr(path + "body.jpg");
-        ResultDO<Void> voidResultDO = checkInController.checkFace(s, 10013);
+        ResultDO<Void> voidResultDO = checkInController.checkFace(s, 10014);
         System.out.println(voidResultDO.isSuccess());
     }
 

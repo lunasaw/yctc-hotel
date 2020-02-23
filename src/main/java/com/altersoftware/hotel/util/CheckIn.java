@@ -176,7 +176,7 @@ public class CheckIn {
         return false;
     }
 
-    public static String IDCardOCR(long customerId) {
+    public static String IDCardOCR(long path) {
         try {
 
             Credential cred =
@@ -188,7 +188,7 @@ public class CheckIn {
             OcrClient client = new OcrClient(cred, "ap-shanghai", clientProfile);
             // 身份证照片的的url地址
             String params =
-                "{\"ImageUrl\":\"http://111.229.114.126:8087/iszychen/img/userInfo/" + customerId
+                "{\"ImageUrl\":\"http://111.229.114.126:8087/iszychen/img/userInfo/" + path
                     + ".jpg\",\"CardSide\":\"FRONT\",\"Config\":\"{\\\"CropIdCard\\\":true,\\\"CropPortrait\\\":true}\"}";
             IDCardOCRRequest req = IDCardOCRRequest.fromJsonString(params, IDCardOCRRequest.class);
 

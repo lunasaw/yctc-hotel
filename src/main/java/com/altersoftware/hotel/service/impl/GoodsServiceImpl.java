@@ -85,10 +85,10 @@ public class GoodsServiceImpl implements GoodsService {
     public ResultDO<Void> deleteById(long id) {
         try {
             goodsDAO.deleteById(id);
-            LOG.info("deleteById success, goodsDO={}", id);
+            LOG.info("deleteById success, id={}", id);
             return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         } catch (Exception e) {
-            LOG.error("deleteById error, goodsId={}", id, e);
+            LOG.error("deleteById error, id={}", id, e);
             return new ResultDO<>(false, ResultCode.DELETE_FAILD,
                 ResultCode.MSG_DELETE_FAILD);
         }
