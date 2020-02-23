@@ -6,10 +6,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.altersoftware.hotel.entity.CheckInWithDO;
-import com.altersoftware.hotel.service.CheckInWithService;
-import com.altersoftware.hotel.service.CustomerService;
-import com.altersoftware.hotel.vo.CheckWithVO;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
@@ -20,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.altersoftware.hotel.constant.ConstantHolder;
 import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.entity.CheckInWithDO;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.service.CheckInWithService;
+import com.altersoftware.hotel.service.CustomerService;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.UserIService;
 import com.altersoftware.hotel.util.Base64Utils;
@@ -30,6 +29,7 @@ import com.altersoftware.hotel.util.CheckIn;
 import com.altersoftware.hotel.util.FileUtilsAlter;
 import com.altersoftware.hotel.util.UploadUtils;
 import com.altersoftware.hotel.vo.BaseVO;
+import com.altersoftware.hotel.vo.CheckWithVO;
 
 /**
  * @author Iszychen@win10
@@ -137,16 +137,16 @@ public class CheckInControllerImpl implements CheckInController {
                         ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
                 }
                 System.out.println("解码完成");
-                 // 将图片上传到服务器
-                 System.out.println("开始上传服务器");
-                 File file = new File(path + base64VO.getPhone() + ".jpg");
-                 byte[] bytes = FileUtilsAlter.fileToByte(file);
-                 UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
-                 System.out.println("上传完成");
+                // 将图片上传到服务器
+                System.out.println("开始上传服务器");
+                File file = new File(path + base64VO.getPhone() + ".jpg");
+                byte[] bytes = FileUtilsAlter.fileToByte(file);
+                UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
+                System.out.println("上传完成");
 
                 CheckInWithDO module = checkInWithPhone.getModule();
                 String s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
-	            module.setIdPiture(s);
+                module.setIdPiture(s);
                 // OCR识别身份信息
                 System.out.println("开始ocr识别");
                 String s1 = CheckIn.IDCardOCR(Long.parseLong(base64VO.getPhone()));
@@ -162,10 +162,10 @@ public class CheckInControllerImpl implements CheckInController {
                 // // 将识别到的信息与云端比较
                 System.out.println("开始云端比较");
 
-                 if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
-                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                 }
+                if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
+                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                }
                 System.out.println("完成云端比较");
 
                 module.setIdCard(split[1]);
@@ -206,10 +206,10 @@ public class CheckInControllerImpl implements CheckInController {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }
-//             // 获取身份证图片 和本地图片地址
-//             String s1 = path + customerId + ".jpg";
-//             String s = ConstantHolder.FILE_UPLOAD + customerId + ".jpg";
-//             虹软sdk对比
+            // // 获取身份证图片 和本地图片地址
+            // String s1 = path + customerId + ".jpg";
+            // String s = ConstantHolder.FILE_UPLOAD + customerId + ".jpg";
+            // 虹软sdk对比
             if (CheckIn.checkIn(customerId) == false) {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
@@ -235,6 +235,7 @@ public class CheckInControllerImpl implements CheckInController {
             CheckWithVO checkWithVO = list.get(i);
             checkInWithDO.setPhone(checkWithVO.getPhone());
             checkInWithDO.setName(checkWithVO.getName());
+            checkInWithDO.setCustomerId(checkWithVO.getCustomerId());
             checkInWithDO.setRoomNumber(checkWithVO.getRoomNumber());
             ResultDO<Void> insert = checkInWithService.insert(checkInWithDO);
             if (insert.isSuccess() == false) {
@@ -246,17 +247,31 @@ public class CheckInControllerImpl implements CheckInController {
             ResultCode.MSG_SUCCESS);
     }
 
-	@Override
-	public ResultDO<RecordDO> checkWithPhone(String phone) {
-		ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(phone);
-		if (!checkInWithPhone.isSuccess()){
-			return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-					ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
-		}
-
-
-		return null;
-	}
+    @Override
+    public ResultDO<RecordDO> checkWithPhone(String phone) {
+        try {
+            ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(phone);
+            if (!checkInWithPhone.isSuccess()) {
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
+            // 预定用户填写的房间号 和他预定的正在使用房间号相等
+            ResultDO<List<RecordDO>> listResultDO =
+                recordService.showRecordByCustomer(checkInWithPhone.getModule().getCustomerId());
+            List<RecordDO> module = listResultDO.getModule();
+            for (int i = 0; i < module.size(); i++) {
+                if (module.get(i).getRoomNumber() == checkInWithPhone.getModule().getRoomNumber()) {
+                    return new ResultDO<>(true, ResultCode.SUCCESS,
+                        ResultCode.MSG_SUCCESS, module.get(i));
+                }
+            }
+            // 操作成功 但是没有房间给他选
+            return new ResultDO<>(true, ResultCode.SUCCESS,
+                ResultCode.MSG_SUCCESS, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+        }
+    }
 }
-
-

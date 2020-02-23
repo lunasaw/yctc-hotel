@@ -1,9 +1,10 @@
 package com.altersoftware.hotel.dao;
 
-import com.altersoftware.hotel.entity.CheckInWithDO;
+import java.util.List;
+
 import org.apache.ibatis.annotations.*;
 
-import java.util.List;
+import com.altersoftware.hotel.entity.CheckInWithDO;
 
 /**
  * @author Iszychen@win10
@@ -16,9 +17,9 @@ public interface CheckInWithDAO {
 	 *
 	 *
 	 */
-	@Insert(" INSERT INTO tb_checkin_with (id, phone, name, idcard, room_number, picture, last_time, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_checkin_with (id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time ) "
 			+
-			"VALUES(#{id}, #{phone}, #{name}, #{idCard}, #{roomNumber}, #{idPiture}, #{lastTime}, now(), now()) ")
+        "VALUES(#{id}, #{customerId}, #{phone}, #{name}, #{idCard}, #{roomNumber}, #{idPiture}, #{lastTime}, now(), now()) ")
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 	void insert(CheckInWithDO checkInWithDO);
 
@@ -27,9 +28,10 @@ public interface CheckInWithDAO {
 	 *
 	 * @param id
 	 */
-	@Select("select id, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where id=#{id}  ")
+    @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where id=#{id}  ")
 	@Results({
 			@Result(property = "id", column = "id"),
+        @Result(property = "custoemrId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -45,9 +47,10 @@ public interface CheckInWithDAO {
 	 * 入住人员信息List消息
 	 *
 	 */
-	@Select("select id, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with ")
+    @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with ")
 	@Results({
 			@Result(property = "id", column = "id"),
+        @Result(property = "custoemrId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -64,7 +67,7 @@ public interface CheckInWithDAO {
 	 *
 	 * @param checkInWithDO
 	 */
-	@Update("update tb_checkin_with  set phone=#{phone}, name=#{name}, idcard=#{idCard}, room_number=#{roomNumber}, picture=#{idPiture}, last_time=#{lastTime}, modify_time=now()  where id=#{id}")
+    @Update("update tb_checkin_with  set phone=#{phone}, pre_customerid=#{custoemrId}, name=#{name}, idcard=#{idCard}, room_number=#{roomNumber}, picture=#{idPiture}, last_time=#{lastTime}, modify_time=now()  where id=#{id}")
 	int update(CheckInWithDO checkInWithDO);
 
 	/**
@@ -90,9 +93,10 @@ public interface CheckInWithDAO {
 	 * @param roomNumber
 	 * @return
 	 */
-	@Select("select id, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where room_number=#{roomNumber}  ")
+    @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where room_number=#{roomNumber}  ")
 	@Results({
 			@Result(property = "id", column = "id"),
+        @Result(property = "custoemrId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -104,9 +108,16 @@ public interface CheckInWithDAO {
 	})
 	List<CheckInWithDO> getNumbersByRoom(int roomNumber);
 
-	@Select("select id, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where phone=#{phone}  ")
+    /**
+     * 手机号返回同住人订单
+     *
+     * @param phone
+     * @return
+     */
+    @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where phone=#{phone}  ")
 	@Results({
 			@Result(property = "id", column = "id"),
+        @Result(property = "custoemrId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -117,4 +128,25 @@ public interface CheckInWithDAO {
 			@Result(property = "modifyTime", column = "modify_time")
 	})
 	CheckInWithDO getCheckInWithDOByPhone(String phone);
+
+    /**
+     * 预定人编号返回同住人List
+     *
+     * @param customerId
+     * @return
+     */
+    @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where pre_customerid=#{customerId}  ")
+    @Results({
+        @Result(property = "id", column = "id"),
+        @Result(property = "custoemrId", column = "pre_customerid"),
+        @Result(property = "phone", column = "phone"),
+        @Result(property = "name", column = "name"),
+        @Result(property = "idCard", column = "idcard"),
+        @Result(property = "roomNumber", column = "room_number"),
+        @Result(property = "idPiture", column = "picture"),
+        @Result(property = "lastTime", column = "last_time"),
+        @Result(property = "createTime", column = "create_time"),
+        @Result(property = "modifyTime", column = "modify_time")
+    })
+    List<CheckInWithDO> getCheckInWithDOByCustomerId(long customerId);
 }
