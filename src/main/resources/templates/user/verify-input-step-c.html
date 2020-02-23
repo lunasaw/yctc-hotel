@@ -1,22 +1,285 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="component/head :: head">
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}" href="../../static/css/left-side-menu.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="../../static/fonts/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/head.css" th:href="@{/css/head.css}">
+  <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}" src="../../static/js/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="../../static/js/left-side-menu.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+  <script src="../../static/js/footposition.js" th:src="@{/js/footposition.js}"  type="text/javascript"></script>
+
 
 </head>
+
 <body>
 
-<header th:replace="component/fram :: commonHeader"></header>
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
 
-<div class="container" th:replace="component/fram :: commonMenu"></div>
+    <ul class="navbar-nav " style="left: 82%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+      </li>
+    </ul>
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <iframe frameborder="no" th:src="@{/checkin/step_c_table}" width="100%" height="1200px"></iframe>
-</main>
+    <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+      </li>
+    </ul>
 
-<footer th:replace="component/fram :: commonFooter"></footer>
+    <ul class="navbar-nav " style="left: 87%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 90%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#">注销&nbsp&nbsp<img
+            src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <div class="left-side-menu col-sm-3 col-md-2 mr-0" style="float: left;position: fixed;">
+    <div class="lsm-expand-btn">
+      <div class="lsm-mini-btn">
+        <label>
+          <input type="checkbox" checked="checked">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" />
+            <path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
+            <path class="line--2" d="M0 50h80" />
+            <path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
+          </svg>
+        </label>
+
+      </div>
+      <!--        <input type="text"/>-->
+
+    </div>
+    <div class="lsm-container">
+      <div class="lsm-scroll">
+        <div style="margin-bottom: 10px;text-align: center;color: white;">
+          <img src="https://www.easyicon.net/api/resizeApi.php?id=1196112&size=128"
+            style="width: 48px;height: 48px;filter: invert(98%) sepia(0%) saturate(366%) hue-rotate(200deg) brightness(91%) contrast(84%);">
+          <p>用户</p>
+        </div>
+        <div class="lsm-sidebar">
+
+          <ul>
+            <li class="lsm-sidebar-item">
+
+              <a href="javascript:;"><span>住房服务</span><i class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li><a href="javascript:;"><span>房间预订</span></a></li>
+                <li><a href="javascript:;"><span>房间预览</span></a></li>
+
+                <li class="lsm-sidebar-item">
+
+                </li>
+
+                <li class="lsm-sidebar-item">
+
+                </li>
+              </ul>
+            </li>
+
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>我的房间</span><i class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li class="1sm-sidebar-item">
+                  <a href="javascript:;"><span>房间个性化设置</span><i class="my-icon lsm-sidebar-more"></i></a>
+                  <ul>
+                    <li><a href="javascript:;"><span>预订打扫</span></a></li>
+                    <li><a href="javascript:;"><span>设置设备状态</span></a></li>
+                    <li><a href="javascript:;"><span>预订餐饮信息</span></a></li>
+                    <li><a href="javascript:;"><span>留言</span></a></li>
+
+                  </ul>
+                </li>
+                <li><a href="javascript:;"><span>在线退房</span></a></li>
+                <li><a href="javascript:;"><span>评价系统</span></a></li>
+              </ul>
+            </li>
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>会员信息</span><i class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li><a href="javascript:;"><span>会员信息查询</span></a></li>
+
+              </ul>
+            </li>
+            <li class="lsm-sidebar-item">
+              <a href="javascript:;"><span>通知</span><i class="my-icon lsm-sidebar-more"></i></a>
+              <ul>
+                <li><a href="javascript:;"><span>物品租赁查询</span></a></li>
+                <li><a href="javascript:;"><span>归还提醒</span></a></li>
+                <li><a href="javascript:;"><span>服务提醒</span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+    <h2 style="color: rgb(135, 106, 32);font-family: 宋体;">请进行最后一步认证：人脸扫描</h2>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+          <i class="fas fa-user-check fa-2x"></i>
+          <h6>验证身份</h6>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+          <i class="fas fa-key fa-2x"></i>
+          <h6>办理房间</h6>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+          <i class="fas fa-check-circle fa-2x"></i>
+          <h6>人脸扫描</h6>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+
+      <div class="progress mt-4 mb-4">
+        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:100%"
+          aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12" style="text-align: center;">
+          <h4 style="color: rgb(105, 105, 105);font-family: 宋体;">在最后一个步骤中，您需要进行人脸扫描来获取认证，在这之后，您便可以成功入住</h4>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 50px;margin-bottom:150px;">
+        <div class="card-header">
+          人脸扫描
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 offset-md-4">
+              <p class="card-text">请为我们拍摄您的人脸照片或者上传本地人脸照片</p>
+            </div>
+          </div>
+          <div class="row" style="margin: 25px 0;">
+              <button class="btn btn-danger col-md-2 offset-md-5">提供人脸照片</button>
+          </div>
+          <div class="row" style="margin-bottom: 50px;">
+            <div class="col-md-12">
+              <img src="" class="w-100 d-block" height="500px">
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-success col-md-2 offset-md-5">扫描完成</button>
+        </div>
+      </div>
+
+
+      <div class="row">
+
+      </div>
+    </div>
+
+
+
+
+
+
+  </main>
+
+
+
+
+
+
+
+
+  <footer
+    style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;">
+    <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
+
+  </footer>
+
+  <script>
+    $(document).ready(function () {
+      let data = [{
+          "id": "1001"
+        },
+        {
+          "id": "1002"
+        },
+        {
+          "id": "1003"
+        },
+        {
+          "id": "1004"
+        },
+      ];
+      let tbody = $("#tbody");
+      data.forEach(item => {
+        tbody.append('<tr>' + '<th>' + item.id + '</th>' + '<th>' + item.das + '</th>' + '<th>' + item.dass +
+          '</th>' + '<th>' + item.fdsafasd + '</th>' + '<th>' +
+          '<a href="" data-toggle="modal" data-target="#go">' + '确认退房' + '</a>' + '</th>' +
+          '</tr>')
+
+      });
+      $("#area").on("input propertychange", function () {
+        var $this = $(this),
+          _val = $this.val(),
+          count = "";
+        if (_val.length > 20) {
+          $this.val(_val.substring(0, 20));
+        }
+        count = 20 - $this.val().length;
+        $("#text-count").text(count);
+      });
+    })
+  </script>
 
 
 </body>
+
 </html>
