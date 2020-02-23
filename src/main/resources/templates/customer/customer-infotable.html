@@ -169,8 +169,7 @@
     function deleteAll() {
         dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-        parameterPostRequest("/hotel/customer/delete-byidlist", filNames.map(item = > item.id), () =;
-    >
+        parameterPostRequest("/hotel/customer/delete-byidlist", filNames.map(item => item.id), () =>
         {
                 swal("删除", "文件删除成功", "success");
                 init();
@@ -202,8 +201,7 @@
         $("#edit_phone").val(rows[index].idCardNumber);
         $("#edit_email").val(rows[index].email);
         parameterPostRequest("/hotel/customer/get-byId", rows[index].id, result => {
-            if(null !== result.module;
-    )
+            if(null !== result.module)
         {
                 editType = rows[index].type;
             } else {
@@ -225,8 +223,7 @@
             swal("错误", "请输入必输入项！", "error");
         }else {
             parameterPostRequest("/hotel/customer/update-userdo", data, () => {
-                $('#editModal';
-        ).
+                $('#editModal').
             modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();

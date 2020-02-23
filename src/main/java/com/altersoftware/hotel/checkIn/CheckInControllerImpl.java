@@ -53,23 +53,24 @@ public class CheckInControllerImpl implements CheckInController {
     private CheckInWithService checkInWithService;
 
     @Override
-    public ResultDO<UserDO> checkFaceToken(String number) {
+    @RequestMapping("check-id")
+    public ResultDO<UserDO> checkFaceToken(long userId) {
         // 参数校验
-        if (StringUtils.isEmpty(number) == true) {
+        if (userId <=0 ) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
-        ResultDO<UserDO> userDOByNumber = userIService.getUserDOByNumber(number);
-        if (userDOByNumber.isSuccess() == false) {
+        ResultDO<UserDO> userDOById = userIService.getUserDOById(userId);
+        if (userDOById.isSuccess() == false) {
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
         }
-        if (userDOByNumber.getModule().getFaceToken() == null) {
+        if (userDOById.getModule().getFaceToken() == null) {
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, userDOByNumber.getModule());
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, userDOById.getModule());
         }
         return new ResultDO<>(true, ResultCode.SUCCESS,
-            ResultCode.MSG_SUCCESS, userDOByNumber.getModule());
+            ResultCode.MSG_SUCCESS, userDOById.getModule());
     }
 
     @Override

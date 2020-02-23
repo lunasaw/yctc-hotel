@@ -2,12 +2,58 @@
 <!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="component/head :: head"></head>
+<head>
 
-<body>
-<header th:replace="component/fram :: commonHeader"></header>
-<div class="container" th:replace="component/fram :: commonMenu"></div>
-<main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}" href="../../static/css/left-side-menu.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="../../static/fonts/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/head.css" th:href="@{/css/head.css}">
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}" src="../../static/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="../../static/js/left-side-menu.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <script src="../../static/js/footposition.js" th:src="@{/js/footposition.js}"  type="text/javascript"></script>
+</head>
+
+<body style="overflow-y: hidden">
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
+
+    <ul class="navbar-nav " style="left: 82%;position: absolute;">
+        <li>
+            <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+                                              style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+        <li>
+            <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+                                              style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 87%;position: absolute;">
+        <li>
+            <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+                                              style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 90%;position: absolute;">
+        <li>
+            <a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
+                    src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+                    style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<main class="col-md-12 ml-sm-auto col-lg-12 px-4" role="main">
     <div class="chartjs-size-monitor"
          style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
         <div class="chartjs-size-monitor-expand"
@@ -22,25 +68,22 @@
     <h2 style="color: rgb(135, 106, 32);font-family: 宋体;">恭喜已完成入住办理，您已成功入住</h2>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
     <!-- Begin page content -->
     <div class="container">
         <div class="row text-center">
             <div class="col-md-1"></div>
             <div class="col-md-2">
-                <i class="fas fa-user-check fa-2x"></i>
+                <img th:src="@{/img/user.png}" width="36px" height="36px">
                 <h6>验证身份</h6>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-2">
-                <i class="fas fa-key fa-2x"></i>
+                <img th:src="@{/img/house.png}" width="36px" height="36px">
                 <h6>办理房间</h6>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-2">
-                <i class="fas fa-check-circle fa-2x"></i>
+                <img th:src="@{/img/face1.png}" width="36px" height="36px">
                 <h6>人脸扫描</h6>
             </div>
             <div class="col-md-1"></div>
@@ -51,10 +94,10 @@
                  class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:100%"></div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-top: 50px">
             <div class="col-md-4 offset-md-4">
-                <h4 class="text-center"><i class="fas fa-check"></i>已经完成操作</h4>
-                <a class="btn btn-primary btn-block" href="">返回主页</a>
+                <h4 class="text-center" style="margin-bottom: 25px">已经完成操作</h4>
+                <a class="btn btn-primary btn-block" href="">改成欢迎您的入住</a>
             </div>
         </div>
 
