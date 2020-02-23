@@ -2,13 +2,13 @@ package com.altersoftware.hotel.checkIn;
 
 import java.util.List;
 
-import com.altersoftware.hotel.vo.CheckWithVO;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.vo.BaseVO;
+import com.altersoftware.hotel.vo.CheckWithVO;
 
 /**
  * @author Iszychen@win10
@@ -63,21 +63,20 @@ public interface CheckInController {
      */
     ResultDO<Void> checkFace(String face64, long customerId);
 
+    /**
+     * 客户添加同住人信息
+     *
+     * @param list
+     * @return
+     */
+    ResultDO<Void> checkWith(List<CheckWithVO> list);
 
-	/**
-	 * 客户添加同住人信息
-	 *
-	 * @param list
-	 * @return
-	 */
-	ResultDO<Void> checkWith(List<CheckWithVO> list);
-
-	/**
-	 * 检查有无同行人信息
-	 *
-	 * @param phone
-	 * @return
-	 */
-	ResultDO<RecordDO> checkWithPhone(String phone);
+    /**
+     * 检查有无同行人信息
+     *
+     * @param phone
+     * @return
+     */
+    ResultDO<RecordDO> checkWithPhone(String phone);
 
 }

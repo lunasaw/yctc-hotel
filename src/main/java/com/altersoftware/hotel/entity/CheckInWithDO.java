@@ -9,8 +9,10 @@ import java.util.Date;
 public class CheckInWithDO {
     /** 编号 */
     private long   id;
+    /** 预定客户编号 */
+    private long   customerId;
     /** 同行人手机 */
-    private String    phone;
+    private String phone;
     /** 同行人身份证号 */
     private String idCard;
     /** 同行人姓名 */
@@ -26,90 +28,83 @@ public class CheckInWithDO {
     /** 修改时间 */
     private Date   modifyTime;
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public long getCustomerId() {
+        return customerId;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
 
-	public String getIdCard() {
-		return idCard;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setIdCard(String idCard) {
-		this.idCard = idCard;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getIdCard() {
+        return idCard;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
 
-	public int getRoomNumber() {
-		return roomNumber;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getIdPiture() {
-		return idPiture;
-	}
+    public int getRoomNumber() {
+        return roomNumber;
+    }
 
-	public void setIdPiture(String idPiture) {
-		this.idPiture = idPiture;
-	}
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
 
-	public Date getLastTime() {
-		return lastTime;
-	}
+    public String getIdPiture() {
+        return idPiture;
+    }
 
-	public void setLastTime(Date lastTime) {
-		this.lastTime = lastTime;
-	}
+    public void setIdPiture(String idPiture) {
+        this.idPiture = idPiture;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public Date getLastTime() {
+        return lastTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setLastTime(Date lastTime) {
+        this.lastTime = lastTime;
+    }
 
-	public Date getModifyTime() {
-		return modifyTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	@Override
-	public String toString() {
-		return "CheckInWith{" +
-				"id=" + id +
-				", phone=" + phone +
-				", idCard='" + idCard + '\'' +
-				", name='" + name + '\'' +
-				", roomNumber=" + roomNumber +
-				", idPiture='" + idPiture + '\'' +
-				", lastTime=" + lastTime +
-				", createTime=" + createTime +
-				", modifyTime=" + modifyTime +
-				'}';
-	}
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
 }

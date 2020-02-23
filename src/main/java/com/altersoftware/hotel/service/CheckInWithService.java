@@ -1,9 +1,9 @@
 package com.altersoftware.hotel.service;
 
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.CheckInWithDO;
-
 import java.util.List;
+
+import com.altersoftware.hotel.entity.CheckInWithDO;
+import com.altersoftware.hotel.entity.ResultDO;
 
 /**
  * @author Iszychen@win10
@@ -78,4 +78,12 @@ public interface CheckInWithService {
 	 * @return
 	 */
 	ResultDO<Void> deleteLoseEfficacy();
+
+    /**
+     * 预定人id搜索入住人员
+     *
+     * @param customerId
+     * @return
+     */
+    ResultDO<List<CheckInWithDO>> getBycheckInWithCustomerId(long customerId);
 }
