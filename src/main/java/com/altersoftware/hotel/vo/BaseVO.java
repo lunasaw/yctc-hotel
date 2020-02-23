@@ -11,11 +11,21 @@ public class BaseVO {
     /** base64编码 */
     @NotEmpty
     private String id64;
+
     /** 客户id */
-    @NotEmpty
     private long   customerId;
 
-    public String getId64() {
+    private String phone;
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getId64() {
         return id64;
     }
 
