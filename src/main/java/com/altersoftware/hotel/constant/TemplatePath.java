@@ -110,11 +110,7 @@ public class TemplatePath {
 
     public static final String USER_CHECK_IN_B                            = "user/verify-input-step-b";
 
-    public static final String USER_CHECK_IN_B_TABLE                            = "user/verify-input-step-b-table";
-
     public static final String USER_CHECK_IN_C                            = "user/verify-input-step-c";
-
-    public static final String USER_CHECK_IN_C_TABLE                            = "user/verify-input-step-c-table";
 
     public static final String USER_CHECK_IN_SUCCESS                      = "user/verify-input-step-success";
 

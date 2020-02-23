@@ -21,11 +21,11 @@ public interface CheckInController {
      * true 存在 并且返回用户信息
      * false 不存在 也返回用户信息
      *
-     * @param number
+     * @param userId
      * @return
      */
     // TODO 1.通过客户会员账号查询faceToken
-    ResultDO<UserDO> checkFaceToken(String number);
+    ResultDO<UserDO> checkFaceToken(long userId);
 
     // TODO 2.拍摄身份正上传=> 拍摄留本地 从本保地指定 对身份证进行信息 认证返回true 提示认证成功
     /**

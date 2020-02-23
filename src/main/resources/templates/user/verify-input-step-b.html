@@ -24,7 +24,7 @@
 
 </head>
 
-<body>
+<body style="overflow-y: hidden">
 
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
@@ -52,7 +52,7 @@
 
     <ul class="navbar-nav " style="left: 90%;position: absolute;">
       <li>
-        <a class="nav-link" href="#">注销&nbsp&nbsp<img
+        <a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
             src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
             style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
         </a>
@@ -60,91 +60,7 @@
     </ul>
   </nav>
 
-
-  <div class="left-side-menu col-sm-3 col-md-2 mr-0" style="float: left;position: fixed;">
-    <div class="lsm-expand-btn">
-      <div class="lsm-mini-btn">
-        <label>
-          <input type="checkbox" checked="checked">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="30" />
-            <path class="line--1" d="M0 40h62c18 0 18-20-17 5L31 55" />
-            <path class="line--2" d="M0 50h80" />
-            <path class="line--3" d="M0 60h62c18 0 18 20-17-5L31 45" />
-          </svg>
-        </label>
-
-      </div>
-      <!--        <input type="text"/>-->
-
-    </div>
-    <div class="lsm-container">
-      <div class="lsm-scroll">
-        <div style="margin-bottom: 10px;text-align: center;color: white;">
-          <img src="https://www.easyicon.net/api/resizeApi.php?id=1196112&size=128"
-            style="width: 48px;height: 48px;filter: invert(98%) sepia(0%) saturate(366%) hue-rotate(200deg) brightness(91%) contrast(84%);">
-          <p>用户</p>
-        </div>
-        <div class="lsm-sidebar">
-
-          <ul>
-            <li class="lsm-sidebar-item">
-
-              <a href="javascript:;"><span>住房服务</span><i class="my-icon lsm-sidebar-more"></i></a>
-              <ul>
-                <li><a href="javascript:;"><span>房间预订</span></a></li>
-                <li><a href="javascript:;"><span>房间预览</span></a></li>
-
-                <li class="lsm-sidebar-item">
-
-                </li>
-
-                <li class="lsm-sidebar-item">
-
-                </li>
-              </ul>
-            </li>
-
-            <li class="lsm-sidebar-item">
-              <a href="javascript:;"><span>我的房间</span><i class="my-icon lsm-sidebar-more"></i></a>
-              <ul>
-                <li class="1sm-sidebar-item">
-                  <a href="javascript:;"><span>房间个性化设置</span><i class="my-icon lsm-sidebar-more"></i></a>
-                  <ul>
-                    <li><a href="javascript:;"><span>预订打扫</span></a></li>
-                    <li><a href="javascript:;"><span>设置设备状态</span></a></li>
-                    <li><a href="javascript:;"><span>预订餐饮信息</span></a></li>
-                    <li><a href="javascript:;"><span>留言</span></a></li>
-
-                  </ul>
-                </li>
-                <li><a href="javascript:;"><span>在线退房</span></a></li>
-                <li><a href="javascript:;"><span>评价系统</span></a></li>
-              </ul>
-            </li>
-            <li class="lsm-sidebar-item">
-              <a href="javascript:;"><span>会员信息</span><i class="my-icon lsm-sidebar-more"></i></a>
-              <ul>
-                <li><a href="javascript:;"><span>会员信息查询</span></a></li>
-
-              </ul>
-            </li>
-            <li class="lsm-sidebar-item">
-              <a href="javascript:;"><span>通知</span><i class="my-icon lsm-sidebar-more"></i></a>
-              <ul>
-                <li><a href="javascript:;"><span>物品租赁查询</span></a></li>
-                <li><a href="javascript:;"><span>归还提醒</span></a></li>
-                <li><a href="javascript:;"><span>服务提醒</span></a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
     <div class="chartjs-size-monitor"
       style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
       <div class="chartjs-size-monitor-expand"
@@ -159,25 +75,22 @@
     <h2 style="color: rgb(135, 106, 32);font-family: 宋体;">选择您将要入住的房间</h2>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
     <!-- Begin page content -->
     <div class="container">
       <div class="row text-center">
         <div class="col-md-1"></div>
         <div class="col-md-2">
-          <i class="fas fa-user-check fa-2x"></i>
+          <img th:src="@{/img/user.png}" width="36px" height="36px">
           <h6>验证身份</h6>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-2">
-          <i class="fas fa-key fa-2x"></i>
+          <img th:src="@{/img/house.png}" width="36px" height="36px">
           <h6>办理房间</h6>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-2">
-          <i class="fas fa-check-circle fa-2x"></i>
+          <img th:src="@{/img/face1.png}" width="36px" height="36px">
           <h6>人脸扫描</h6>
         </div>
         <div class="col-md-1"></div>

@@ -31,19 +31,10 @@ public class CommonController {
         return TemplatePath.USER_CHECK_IN_B;
     }
 
-    @GetMapping("step_b_table")
-    public String checkInStepBTable() {
-        return TemplatePath.USER_CHECK_IN_B_TABLE;
-    }
 
     @GetMapping("step_c")
     public String checkInStepC() {
         return TemplatePath.USER_CHECK_IN_C;
-    }
-
-    @GetMapping("step_c_table")
-    public String checkInStepCTable() {
-        return TemplatePath.USER_CHECK_IN_C_TABLE;
     }
 
     @GetMapping("step_success")
