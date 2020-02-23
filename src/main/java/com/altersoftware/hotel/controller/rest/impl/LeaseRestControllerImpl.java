@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.altersoftware.hotel.entity.RecordDO;
-import com.altersoftware.hotel.service.RecordService;
-import com.altersoftware.hotel.util.CaculateTotalTime;
-import com.altersoftware.hotel.util.RandomNumber;
-import com.altersoftware.hotel.vo.LeaseVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,8 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.LeaseRestController;
 import com.altersoftware.hotel.entity.LeaseDO;
+import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.service.LeaseService;
+import com.altersoftware.hotel.service.RecordService;
+import com.altersoftware.hotel.util.CaculateTotalTime;
+import com.altersoftware.hotel.util.RandomNumber;
+import com.altersoftware.hotel.vo.LeaseVO;
 
 /**
  * @author czy@win10

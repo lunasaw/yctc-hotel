@@ -1,8 +1,9 @@
 package com.altersoftware.hotel.controller.rest;
 
-import com.altersoftware.hotel.entity.ResultDO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.altersoftware.hotel.entity.ResultDO;
 
 public interface FileRestController {
     /**

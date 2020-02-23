@@ -3,8 +3,13 @@ package com.altersoftware.hotel.util;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
 
 public class FileUtilsAlter {
     /**
@@ -38,6 +43,41 @@ public class FileUtilsAlter {
             e.printStackTrace();
         }
         return bytes;
+    }
+
+    /**
+     * 下载http文件
+     *
+     * @param url 文件地址
+     * @param dir 存储目录
+     * @param fileName 存储文件名
+     * @return 下载后的文件存储路径
+     */
+    public static void downloadHttpUrl(String url, String dir, String fileName) throws IOException {
+
+        URL urlPath = new URL(url);
+        File file = new File(dir);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        FileUtils.copyURLToFile(urlPath, new File(dir + fileName));
+
+    }
+
+    /**
+     * 获取http文件大小
+     *
+     * @param path 待下载的文件地址
+     * @return
+     * @throws IOException
+     */
+    public static long getHttpFileLenth(String path) throws IOException {
+        long length = 0;
+        URL url = new URL(path);
+        HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+        length = urlConnection.getContentLengthLong();
+        urlConnection.disconnect();
+        return length;
     }
 
 }

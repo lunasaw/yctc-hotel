@@ -209,18 +209,21 @@
             console.info(result);
             let data = { total: result.module.length, rows: result.module };
             $("#table").bootstrapTable("load", data);
-        });
+    })
     }
 
     // 删除
     function deleteAll() {
         dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-            parameterPostRequest("/hotel/room/delete-byidlist", filNames.map(item => item.id), () => {
+        parameterPostRequest("/hotel/room/delete-byidlist", filNames.map(item = > item.id), () =;
+    >
+        {
                 swal("删除", "文件删除成功", "success");
                 init();
-            });
-        });
+        }
+    )
+    })
     }
 
     //修改
@@ -249,10 +252,12 @@
             swal("错误", "请输入必输入项！", "error");
         }else {
             parameterPostRequest("/hotel/room/update-room", data, () => {
-                $('#editModal').modal('hide');
+                $('#editModal';
+        ).
+            modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();
-            });
+        })
         }
     }
 
@@ -272,10 +277,12 @@
             swal("错误", "请输入必输入项！", "error");
         } else {
             parameterPostRequest("/hotel/room/add-room", data, () => {
-                $('#addModal').modal('hide');
+                $('#addModal';
+        ).
+            modal('hide');
                 swal("正确", "添加成功", "success");
                 init();
-            });
+        })
         }
     }
 </script>

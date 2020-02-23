@@ -310,18 +310,21 @@
             console.info(result);
             let data = { total: result.module.length, rows: result.module };
             $("#table").bootstrapTable("load", data);
-        });
+    })
     }
 
     // 删除
     function deleteAll() {
         dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-            parameterPostRequest("/hotel/record/delete-byidlist", filNames.map(item => item.id), () => {
+        parameterPostRequest("/hotel/record/delete-byidlist", filNames.map(item = > item.id), () =;
+    >
+        {
                 swal("删除", "文件删除成功", "success");
                 init();
-            });
-        });
+        }
+    )
+    })
     }
     // 查看
     function view(index) {
@@ -358,12 +361,14 @@
         $("#edit_Eva").val(rows[index].evaluate);
         $("#edit_State").val(rows[index].state);
         parameterPostRequest("/hotel/record/get-byid", rows[index].id, result => {
-            if (null !== result.module) {
+            if(null !== result.module;
+    )
+        {
                 editType = rows[index].type;
             } else {
                 swal("错误", "不存在该用户", "error");
             }
-        });
+    })
     }
     function edit() {
         let data = {
@@ -383,10 +388,12 @@
             swal("错误", "请输入必输入项！", "error");
         }else {
             parameterPostRequest("/hotel/record/update", data, () => {
-                $('#editModal').modal('hide');
+                $('#editModal';
+        ).
+            modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();
-            });
+        })
         }
     }
 
@@ -410,10 +417,12 @@
             swal("错误", "请输入必输入项！", "error");
         } else {
             parameterPostRequest("/hotel/placeorder/accept-order", data, () => {
-                $('#addModal').modal('hide');
+                $('#addModal';
+        ).
+            modal('hide');
                 swal("正确", "添加成功", "success");
                 init();
-            });
+        })
         }
     }
 </script>
