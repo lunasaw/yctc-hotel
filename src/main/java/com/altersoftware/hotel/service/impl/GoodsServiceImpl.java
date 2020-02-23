@@ -80,7 +80,6 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
-
     @Override
     public ResultDO<Void> deleteById(long id) {
         try {
@@ -114,7 +113,7 @@ public class GoodsServiceImpl implements GoodsService {
         try {
             List<GoodsDO> all = goodsDAO.getAll();
             LOG.info("getAll success, goodsDO list={}", all);
-            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,all);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, all);
         } catch (Exception e) {
             LOG.error("getAll error", e);
             return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,

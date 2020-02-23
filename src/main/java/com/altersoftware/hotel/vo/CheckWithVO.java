@@ -14,20 +14,12 @@ public class CheckWithVO {
     /** 同住人姓名 */
     @NotEmpty
     private String name;
-    /** 同住人房间号 */
+    /** 同住人房间 */
     @NotEmpty
     private int    roomNumber;
     /** 预定客户编号 */
     @NotEmpty
     private long   customerId;
-
-    public long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
 
     public int getRoomNumber() {
         return roomNumber;
@@ -35,6 +27,14 @@ public class CheckWithVO {
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public String getPhone() {
