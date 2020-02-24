@@ -18,6 +18,37 @@
 </head>
 
 <body style="overflow-y: hidden">
+<!-- modal -->
+<div class="modal fade" id="kk" tabindex="-1" role="dialog" aria-labelledby="kk" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(226, 203, 145);">
+                <h5 class="modal-title" id="payforroomLabel">同伴入住</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <Span aria-hidden="true">&times;</Span>
+                </button>
+            </div>
+            <div class="modal-body" style="height: 440px;">
+                <div class="container">
+                    <form></form>
+                    <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+                        <span class="offset-md-1 col-md-1">姓名</span>
+                        <input class="form-control col-md-8" type="text">
+                    </div>
+                    <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+                        <span class="offset-md-1 col-md-1">电话号码</span>
+                        <input class="form-control col-md-8" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="display:flex;align-items: center;justify-content: center;">
+                    <button class="btn btn-danger">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
@@ -98,6 +129,7 @@
             <div class="col-md-4 offset-md-4">
                 <h4 class="text-center" style="margin-bottom: 25px">已经完成操作</h4>
                 <a class="btn btn-primary btn-block" href="">改成欢迎您的入住</a>
+                <a data-toggle="modal" data-target="#kk" class="btn btn-danger btn-block" style="color: white;margin-top: 25px;">同伴入住</a>
             </div>
         </div>
 
@@ -107,43 +139,12 @@
 </main>
 
 
-<footer th:replace="component/fram :: commonFooter"></footer>
+<footer
+        style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;">
+    <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
 
 <script>
-    $(document).ready(function () {
-        let data = [{
-            "id": "1001"
-        },
-            {
-                "id": "1002"
-            },
-            {
-                "id": "1003"
-            },
-            {
-                "id": "1004"
-            },
-        ];
-        let tbody = $("#tbody");
-        data.forEach(item => {
-            tbody.append('<tr>' + '<th>' + item.id + '</th>' + '<th>' + item.das + '</th>' + '<th>' + item.dass +
-                '</th>' + '<th>' + item.fdsafasd + '</th>' + '<th>' +
-                '<a href="" data-toggle="modal" data-target="#go">' + '确认退房' + '</a>' + '</th>' +
-                '</tr>')
 
-        };
-    )
-        $("#area").on("input propertychange", function () {
-            var $this = $(this),
-                _val = $this.val(),
-                count = "";
-            if (_val.length > 20) {
-                $this.val(_val.substring(0, 20));
-            }
-            count = 20 - $this.val().length;
-            $("#text-count").text(count);
-        });
-    })
 </script>
 
 

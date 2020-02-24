@@ -162,7 +162,7 @@
 
     // 初始化表格信息
     function init() {
-        noParameterPostRequest("/hotel/vipGrade/get-list", result = > {
+        noParameterPostRequest("/hotel/vipGrade/get-list", result => {
             let data = {total: result.module.length, rows: result.module};
         $("#table").bootstrapTable("load", data);
     })
@@ -170,10 +170,9 @@
 
     // 删除
     function deleteAll() {
-        dialog("确定删除吗？", () = > {
+        dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-        parameterPostRequest("/hotel/vipGrade/delete-byidlist", filNames.map(item = > item.id), () =;
-    >
+        parameterPostRequest("/hotel/vipGrade/delete-byidlist", filNames.map(item => item.id), () =>
         {
             swal("删除", "文件删除成功", "success");
             init();
@@ -189,16 +188,15 @@
         $("#edit_grade").val(rows[index].grade);
         $("#edit_equity").val(rows[index].equity);
         $("#edit_discount").val(rows[index].discount);
-        parameterPostRequest("/hotel/vipGrade/get-byid", rows[index].id, result = > {
-            if(null !== result.module;
-    )
-        {
-            editid = rows[index].id;
-        }
-    else
-        {
-            swal("错误", "不存在该用户", "error");
-        }
+        parameterPostRequest("/hotel/vipGrade/get-byid", rows[index].id, result => {
+            if(null !== result.module)
+            {
+                editid = rows[index].id;
+            }
+            else
+            {
+                swal("错误", "不存在该用户", "error");
+            }
     })
     }
 
@@ -212,12 +210,10 @@
         if (data.equity == null || data.discount <= 0) {
             swal("错误", "请输入必输入项！", "error");
         } else {
-            parameterPostRequest("/hotel/vipGrade/update-vipgrade", data, () = > {
-                $('#editModal';
-        ).
-            modal('hide');
-            swal("正确", "编辑成功", "success");
-            init();
+            parameterPostRequest("/hotel/vipGrade/update-vipgrade", data, () => {
+                $('#editModal').modal('hide');
+                swal("正确", "编辑成功", "success");
+                init();
         })
         }
     }
@@ -235,12 +231,10 @@
         ) {
             swal("错误", "请输入必输入项！", "error");
         } else {
-            parameterPostRequest("/hotel/vipGrade/add-vipgrade", data, () = > {
-                $('#addModal';
-        ).
-            modal('hide');
-            swal("正确", "添加成功", "success");
-            init();
+            parameterPostRequest("/hotel/vipGrade/add-vipgrade", data, () => {
+                $('#addModal').modal('hide');
+                swal("正确", "添加成功", "success");
+                init();
         })
         }
     }
