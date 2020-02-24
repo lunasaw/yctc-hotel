@@ -44,6 +44,8 @@
 			<Span aria-hidden="true" style="text-align: center">拍摄人像面</Span>
 		</button>
 
+
+
 		<button aria-label="close" class="close" data-dismiss="modal" id="capture1" style="float: left" type="button">
 			<Span aria-hidden="true" style="text-align: center">拍摄国徽面</Span>
 		</button>
@@ -173,7 +175,7 @@
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 150px">
-			<button class="btn btn-danger col-md-2 offset-md-5" ng-click="uploadIDver()" type="button">上传</button>
+			<button class="btn btn-danger col-md-2 offset-md-5" ng-click="uploadIDver()" type="button" id="stop">上传</button>
 		</div>
 	</div>
 </main>
@@ -184,6 +186,7 @@
 </footer>
 </body>
 <script src="angular.js">
+
     myapp.controller('IDverificat', ['$scope', '$http', function ($scope, $http) {
         var dialog = new auiDialog();
         dialog.alert({
@@ -252,18 +255,19 @@
     }])
 </script>
 <script>
+
     function clickMode(id) {
         $('#' + id).modal({backdrop: 'static', keyboard: false});
     }
 
     //访问用户媒体设备的兼容方法
-    function getUserMedia(constraints, success, error) {
-        console.log("拍照");
-        if (navigator.mediaDevices.getUserMedia) {
-            //最新的标准API
-            navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
-        } else if (navigator.webkitGetUserMedia) {
-            //webkit核心浏览器
+			function getUserMedia(constraints, success, error) {
+				console.log("拍照");
+				if (navigator.mediaDevices.getUserMedia) {
+					//最新的标准API
+					navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
+				} else if (navigator.webkitGetUserMedia) {
+					//webkit核心浏览器
             navigator.webkitGetUserMedia(constraints, success, error)
         } else if (navigator.mozGetUserMedia) {
             //firfox浏览器
@@ -287,7 +291,7 @@
         let CompatibleURL = window.URL || window.webkitURL;
         //将视频流设置为video元素的源
         console.log(stream);
-
+		mediaStreamTrack = stream
         //video.src = CompatibleURL.createObjectURL(stream);
         video.srcObject = stream;
         video.play();
@@ -317,6 +321,13 @@
         $("#canvas1").attr("src", str);
         alert(str);
     })
+
+	document.getElementById('stop').addEventListener('click', function () {
+
+		mediaStreamTrack.getTracks()[0].stop();
+
+	})
+
 
 
 </script>

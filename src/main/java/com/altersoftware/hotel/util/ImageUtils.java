@@ -1,4 +1,5 @@
-package com.altersoftware.hotel.util; /**
+package com.altersoftware.hotel.util;
+/**
  * @Author 廿八十
  * @Date 2020/2/25 0:08
  * @Version 1.0
