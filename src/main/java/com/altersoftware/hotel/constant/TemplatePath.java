@@ -101,7 +101,7 @@ public class TemplatePath {
         "management/authority-role-management-modify";
     // management end
 
-    // 客户入住页面 start
+    /** 客户入住页面 start **/
     public static final String USER_CHECK_IN_A                            = "user/verify-input-step-a";
 
     public static final String USER_CHECK_IN_A_INPUT                      = "user/verify-input-step-a-input";

@@ -16,6 +16,7 @@ import com.altersoftware.hotel.checkIn.CheckInController;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.vo.BaseVO;
+import com.altersoftware.hotel.vo.FaceVO;
 
 /**
  * @author Iszychen@win10
@@ -29,7 +30,6 @@ public class Face {
     @Resource
     private CheckInController checkInController;
 
-
     @Test
     public void atest() throws Exception {
         String path = ResourceUtils.getURL("classpath:static/").getPath();
@@ -37,19 +37,20 @@ public class Face {
         // System.out.println(s);
         BaseVO baseVO = new BaseVO();
         baseVO.setId64(s);
-        baseVO.setPhone("15696756582");
-//	    baseVO.setCustomerId(10014);
+        // baseVO.setPhone("15696756582");
+        baseVO.setCustomerId(10014);
         ResultDO<UserDO> userDOResultDO = checkInController.checkIdCard(baseVO);
         System.out.println(userDOResultDO);
     }
-
-
 
     @Test
     public void bface() throws FileNotFoundException {
         String path = ResourceUtils.getURL("classpath:static/").getPath();
         String s = Base64Utils.GetImageStr(path + "body.jpg");
-        ResultDO<Void> voidResultDO = checkInController.checkFace(s, 10014);
+        FaceVO faceVO = new FaceVO();
+        faceVO.setBase64(s);
+        faceVO.setCustomerId(10014);
+        ResultDO<Void> voidResultDO = checkInController.checkFace(faceVO);
         System.out.println(voidResultDO.isSuccess());
     }
 

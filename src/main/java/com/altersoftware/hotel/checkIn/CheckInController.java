@@ -9,6 +9,7 @@ import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
 import com.altersoftware.hotel.vo.BaseVO;
 import com.altersoftware.hotel.vo.CheckWithVO;
+import com.altersoftware.hotel.vo.FaceVO;
 
 /**
  * @author Iszychen@win10
@@ -58,10 +59,10 @@ public interface CheckInController {
      * 2. 调用算法比对
      * 3. 返回比对结果
      *
-     * @param face64
+     * @param faceVO
      * @return
      */
-    ResultDO<Void> checkFace(String face64, long customerId);
+    ResultDO<Void> checkFace(FaceVO faceVO);
 
     /**
      * 客户添加同住人信息
