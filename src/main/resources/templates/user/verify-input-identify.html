@@ -1,0 +1,186 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}" href="../../static/css/left-side-menu.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="../../static/fonts/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/head.css" th:href="@{/css/head.css}">
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}" src="../../static/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="../../static/js/left-side-menu.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <script src="../../static/js/footposition.js" th:src="@{/js/footposition.js}"  type="text/javascript"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/hotel/index">Alter Hotel</a>
+
+    <ul class="navbar-nav " style="left: 82%;position: absolute;">
+        <li>
+            <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+                                              style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+        <li>
+            <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+                                              style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 87%;position: absolute;">
+        <li>
+            <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+                                              style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 90%;position: absolute;">
+        <li>
+            <a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
+                    src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+                    style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
+            </a>
+        </li>
+    </ul>
+</nav>
+<main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
+    <div class="chartjs-size-monitor"
+         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+        </div>
+    </div>
+<div class="container">
+    <h3 style="color: rgb(135, 106, 32);font-family: 宋体; ">身份证验证</h3>
+    <br>
+        <h4 style="text-align: center">为了办理入住，请拍照或上传您的二代身份证</h4>
+        <hr style="background-color: rgb(135, 106, 32);height: 0.8px;width: 80%;border: none">
+        <div class="row" style="margin: 50px 0">
+        <div class="card col-md-6 offset-md-3">
+            <div class="card-header">
+                <h5 style="text-align: center"><small>点击拍照或上传人像面</small></h5>
+            </div>
+
+            <div class="card-body">
+             <img src="" width="100%" height="300px" id="newImage1">
+            </div>
+            <div class="card-footer">
+            <input accept="image/*" class="form-control" id="fileInpBtn1" type="file">
+        </div>
+        </div>
+        </div>
+
+        <hr style="background-color: rgb(135, 106, 32);height: 0.8px;width: 80%;border: none">
+
+        <div class="row" style="margin: 50px 0">
+            <div class="card col-md-6 offset-md-3">
+                <div class="card-header">
+                    <h5 style="text-align: center">点击拍照或上传国徽面</h5>
+                </div>
+                <div class="card-body">
+                    <img  width="100%" height="300px" id="newImage2" src=""/>
+                </div>
+                <div class="card-footer">
+                <input accept="image/*" class="fileInpBtn" id="fileInpBtn2" type="file">
+                </div>
+             </div>
+        </div>
+
+    <hr style="background-color: rgb(135, 106, 32);height: 1px;width: 80%;border: none" >
+
+    <div class="row" style="margin-bottom: 40px">
+        <div class="col-md-12">
+           <h5 style="text-align:center"> 身份证信息仅用于入住办理，不得用于任何商业用途</h5>
+    </div>
+        </div>
+    <div class="row" style="margin-bottom: 150px">
+    <button class="btn btn-danger col-md-2 offset-md-5" ng-click="uploadIDver()" type="button">上传</button>
+    </div>
+</div>
+</main>
+    <footer
+        style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;">
+    <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
+
+</footer>
+</body>
+<script src="angular.js">
+    myapp.controller('IDverificat', ['$scope', '$http', function ($scope, $http) {
+        var dialog = new auiDialog();
+        dialog.alert({
+            title: "证件上传须知",
+            msg: ` <div class="algin_leaft">
+				  <p>1,</p>
+				  <p>2,</p>
+				  <p>3,</p>
+				  </div>`,
+            buttons: ['确定']
+        });
+
+
+        let tapDatas = {};
+        let fileInpBtn1 = document.getElementById("fileInpBtn1");
+        fileInpBtn1.onclick = function () { //上传身份证
+            document.getElementById("newImage1").src = window.URL.createObjectURL(this.file[0]);
+            document.getElementById("newImage1").style.display = 'block';
+            document.getElementById("camera1").style.display = 'none';
+            var oFReader1 = new FlieReader();
+            oFReader1.readAsDataURL(this.files[0]);
+            oFReader1.onload = function (oRFEvent) {
+                tapDatas.front = oRFEvent.target.result;
+            }
+        };
+
+        let fileInpBtn2 = document.getElementById("fileInpBtn2");
+        fileInpBtn1.onclick = function () { //上传身份证
+            document.getElementById("newImage2").src = window.URL.createObjectURL(this.file[0]);
+            document.getElementById("newImage2").style.display = 'block';
+            document.getElementById("camera2").style.display = 'none';
+            var oFReader1 = new FlieReader();
+            oFReader1.readAsDataURL(this.files[0]);
+            oFReader1.onload = function (oRFEvent) {
+                tapDatas.back = oRFEvent.target.result;
+            }
+        };
+
+        $scope.uploadIDver = function () {
+
+            if (!tapDatas.front) {
+                dialog.alert({
+                    title: "提示",
+                    msg: `请拍照/上传人像面`,
+                    buttons: ['确定']
+                });
+                return;
+            }
+            if (!tapDatas.back) {
+                dialog.alert({
+                    title: "提示",
+                    msg: `请拍照/上传国徽面`,
+                    buttons: ['确定']
+                });
+                return;
+            }
+            console.log(tapDatas);
+            $http.post('/someUrl', tapDatas, {}).then(function () {
+
+            }, function () {
+
+            },);
+        }
+    }])
+</script>
+</html>
