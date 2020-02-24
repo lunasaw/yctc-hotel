@@ -46,6 +46,7 @@ public class Face {
     @Test
     public void bface() throws FileNotFoundException {
         String path = ResourceUtils.getURL("classpath:static/").getPath();
+
         String s = Base64Utils.GetImageStr(path + "body.jpg");
         FaceVO faceVO = new FaceVO();
         faceVO.setBase64(s);
@@ -58,6 +59,7 @@ public class Face {
     public void live() throws Exception {
         System.out.println(FaceIR.scanVivo());
     }
+
 
     @Test
     public void face() throws Exception {
