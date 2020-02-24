@@ -154,43 +154,7 @@
 
 </footer>
 
-<script>
-    $(document).ready(function () {
-        let data = [{
-            "id": "1001"
-        },
-            {
-                "id": "1002"
-            },
-            {
-                "id": "1003"
-            },
-            {
-                "id": "1004"
-            },
-        ];
-        let tbody = $("#tbody");
-        data.forEach(item => {
-            tbody.append('<tr>' + '<th>' + item.id + '</th>' + '<th>' + item.das + '</th>' + '<th>' + item.dass +
-                '</th>' + '<th>' + item.fdsafasd + '</th>' + '<th>' +
-                '<a href="" data-toggle="modal" data-target="#go">' + '确认退房' + '</a>' + '</th>' +
-                '</tr>')
 
-        });
-        $("#area").on("input propertychange", function () {
-            var $this = $(this),
-                _val = $this.val(),
-                count = "";
-            if (_val.length > 20) {
-                $this.val(_val.substring(0, 20));
-            }
-            count = 20 - $this.val().length;
-            $("#text-count").text(count);
-        });
-    })
-
-
-</script>
 <script>
     window.onload = function () {
         var video = document.getElementById('video');
