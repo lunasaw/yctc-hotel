@@ -47,7 +47,7 @@ public class CheckIn {
             // getUrlPic.geturlpic(img2, 2);
             MyFaceContract myFaceContract = new MyFaceContract();
             String path = ResourceUtils.getURL("classpath:static/").getPath();
-            float contract = myFaceContract.contract(path + customerId + ".jpg", path + "body.jpg");
+            float contract = myFaceContract.contract(path + customerId + ".jpg", path + "tmp.jpg");
             if (contract > 0.8) {
                 return true;
             }
