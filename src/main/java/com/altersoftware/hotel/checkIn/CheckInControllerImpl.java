@@ -24,12 +24,12 @@ import com.altersoftware.hotel.service.CheckInWithService;
 import com.altersoftware.hotel.service.CustomerService;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.UserIService;
-import com.altersoftware.hotel.util.Base64Utils;
-import com.altersoftware.hotel.util.CheckIn;
-import com.altersoftware.hotel.util.FileUtilsAlter;
-import com.altersoftware.hotel.util.UploadUtils;
+import com.altersoftware.hotel.util.*;
 import com.altersoftware.hotel.vo.BaseVO;
 import com.altersoftware.hotel.vo.CheckWithVO;
+import com.altersoftware.hotel.vo.FaceVO;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * @author Iszychen@win10
@@ -53,10 +53,10 @@ public class CheckInControllerImpl implements CheckInController {
     private CheckInWithService checkInWithService;
 
     @Override
-    @RequestMapping("check-id")
+    @RequestMapping("id-check")
     public ResultDO<UserDO> checkFaceToken(long userId) {
-        // 参数校验
-        if (userId <=0 ) {
+        // 参数校验 预定用户用于检查是否有facetoken
+        if (userId <= 0) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -74,7 +74,40 @@ public class CheckInControllerImpl implements CheckInController {
     }
 
     @Override
-    @PostMapping("idcard")
+    public ResultDO<RecordDO> checkWithPhone(String phone) {
+        // 参数校验 同住用户用于检查是否有订单存在
+        if (StringUtils.isEmpty(phone) == false) {
+            return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+        try {
+            ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(phone);
+            if (!checkInWithPhone.isSuccess()) {
+                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+            }
+            // 预定用户填写的房间号 和他预定的正在使用房间号相等
+            ResultDO<List<RecordDO>> listResultDO =
+                recordService.showRecordByCustomer(checkInWithPhone.getModule().getCustomerId());
+            List<RecordDO> module = listResultDO.getModule();
+            for (int i = 0; i < module.size(); i++) {
+                if (module.get(i).getRoomNumber() == checkInWithPhone.getModule().getRoomNumber()) {
+                    return new ResultDO<>(true, ResultCode.SUCCESS,
+                        ResultCode.MSG_SUCCESS, module.get(i));
+                }
+            }
+            // 操作成功 但是没有房间给他选
+            return new ResultDO<>(true, ResultCode.SUCCESS,
+                ResultCode.MSG_SUCCESS, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+        }
+    }
+
+    @Override
+    @PostMapping("idCard-check")
     public ResultDO<UserDO> checkIdCard(@RequestBody BaseVO base64VO) {
         try {
             String path = ResourceUtils.getURL("classpath:static/").getPath();
@@ -169,6 +202,7 @@ public class CheckInControllerImpl implements CheckInController {
                 }
                 System.out.println("完成云端比较");
 
+                // 更新身份证号
                 module.setIdCard(split[1]);
                 checkInWithService.updateCheckInWithDO(module);
                 return new ResultDO<>(true, ResultCode.SUCCESS,
@@ -199,22 +233,45 @@ public class CheckInControllerImpl implements CheckInController {
     }
 
     @Override
-    public ResultDO<Void> checkFace(String face64, long customerId) {
+    @PostMapping("body-check")
+    public ResultDO<Void> checkFace(@RequestBody FaceVO faceVO) {
+        String cut = "data:image/png;base64,";
+        faceVO.setBase64(StrUtil.removePreAndLowerFirst(faceVO.getBase64(), cut));
         try {
             String path = ResourceUtils.getURL("classpath:static/").getPath();
-            // 将拍摄 或者 上传 的身份证照片解码
-            if (Base64Utils.GenerateImage(face64, path + "tmp.jpg") == false) {
+            // 将拍摄面部照片解码
+            if (Base64Utils.GenerateImage(faceVO.getBase64(), path + "tmp.jpg") == false) {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }
+            System.out.println("图片识别");
+            try {
+                FaceIR.scanVivo();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                    ResultCode.MSG_PARAMETER_INVALID, null);
+            }
+            System.out.println("活体完成");
             // // 获取身份证图片 和本地图片地址
             // String s1 = path + customerId + ".jpg";
             // String s = ConstantHolder.FILE_UPLOAD + customerId + ".jpg";
             // 虹软sdk对比
-            if (CheckIn.checkIn(customerId) == false) {
-                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                    ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+            System.out.println("人脸检测比对开始");
+            if (faceVO.getCustomerId() != 0) {
+                if (CheckIn.checkIn(faceVO.getCustomerId()) == false) {
+                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                }
             }
+            if (faceVO.getPhone() != null) {
+                if (CheckIn.checkIn(Long.parseLong(faceVO.getPhone())) == false) {
+                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                }
+            }
+            System.out.println("人脸检测比对完成");
+
             return new ResultDO<>(true, ResultCode.SUCCESS,
                 ResultCode.MSG_SUCCESS);
         } catch (IOException e) {
@@ -225,6 +282,7 @@ public class CheckInControllerImpl implements CheckInController {
     }
 
     @Override
+    @PostMapping("add-live")
     public ResultDO<Void> checkWith(List<CheckWithVO> list) {
         CheckInWithDO checkInWithDO = new CheckInWithDO();
         ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
@@ -246,33 +304,5 @@ public class CheckInControllerImpl implements CheckInController {
         }
         return new ResultDO<>(true, ResultCode.SUCCESS,
             ResultCode.MSG_SUCCESS);
-    }
-
-    @Override
-    public ResultDO<RecordDO> checkWithPhone(String phone) {
-        try {
-            ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(phone);
-            if (!checkInWithPhone.isSuccess()) {
-                return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
-                    ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
-            }
-            // 预定用户填写的房间号 和他预定的正在使用房间号相等
-            ResultDO<List<RecordDO>> listResultDO =
-                recordService.showRecordByCustomer(checkInWithPhone.getModule().getCustomerId());
-            List<RecordDO> module = listResultDO.getModule();
-            for (int i = 0; i < module.size(); i++) {
-                if (module.get(i).getRoomNumber() == checkInWithPhone.getModule().getRoomNumber()) {
-                    return new ResultDO<>(true, ResultCode.SUCCESS,
-                        ResultCode.MSG_SUCCESS, module.get(i));
-                }
-            }
-            // 操作成功 但是没有房间给他选
-            return new ResultDO<>(true, ResultCode.SUCCESS,
-                ResultCode.MSG_SUCCESS, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-        }
     }
 }

@@ -31,7 +31,6 @@ public class CommonController {
         return TemplatePath.USER_CHECK_IN_B;
     }
 
-
     @GetMapping("step_c")
     public String checkInStepC() {
         return TemplatePath.USER_CHECK_IN_C;
