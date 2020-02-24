@@ -21,7 +21,7 @@ public class CommonController {
         return TemplatePath.USER_CHECK_IN_A;
     }
 
-    @GetMapping("step_input")
+    @GetMapping("step_a_input")
     public String checkInStepInput() {
         return TemplatePath.USER_CHECK_IN_A_INPUT;
     }
@@ -41,8 +41,8 @@ public class CommonController {
         return TemplatePath.USER_CHECK_IN_SUCCESS;
     }
 
-    @GetMapping("step_a_input_table")
+    @GetMapping("step_a_number")
     public String checkInStepInputTable() {
-        return TemplatePath.USER_CHECK_IN_A_INPUT_TABLE;
+        return TemplatePath.USER_CHECK_IN_PHONE;
     }
 }

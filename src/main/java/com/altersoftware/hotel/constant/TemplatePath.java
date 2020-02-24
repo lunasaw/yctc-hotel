@@ -5,6 +5,8 @@ public class TemplatePath {
     // common start
     /** 主页 */
     public static final String INDEX                                      = "index";
+
+    public static final String RESTAURANT                                 = "hotel/restaurant";
     // common end
 
     // user start
@@ -104,9 +106,9 @@ public class TemplatePath {
     /** 客户入住页面 start **/
     public static final String USER_CHECK_IN_A                            = "user/verify-input-step-a";
 
-    public static final String USER_CHECK_IN_A_INPUT                      = "user/verify-input-step-a-input";
+    public static final String USER_CHECK_IN_A_INPUT                      = "user/verify-input-identify";
 
-    public static final String USER_CHECK_IN_A_INPUT_TABLE                = "user/verify-input-step-a-input-table";
+    public static final String USER_CHECK_IN_PHONE                        = "user/verify-input-step-phone";
 
     public static final String USER_CHECK_IN_B                            = "user/verify-input-step-b";
 
@@ -199,10 +201,10 @@ public class TemplatePath {
     public static final String LEASE_ADMIN                                = "hotel/leaseAdmin";
 
     /** 管理租赁主页 */
-    public static final String LEASE_ADMIN_TABLE_                        = "hotel/leaseAdminTable";
+    public static final String LEASE_ADMIN_TABLE_                         = "hotel/leaseAdminTable";
 
     /** 管理租赁主页 */
-    public static final String HISTORY_LEASE                        = "hotel/historylease";
+    public static final String HISTORY_LEASE                              = "hotel/historylease";
 
     /** 管理租赁表格主页 */
     public static final String LEASE_TABLE                                = "hotel/goodsleasetable";
