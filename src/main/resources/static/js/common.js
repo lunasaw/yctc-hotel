@@ -51,16 +51,13 @@ function dialog(message, callback) {
         },
     }).then((value) => {
         switch (value) {
-        case
-            "true";
-        :
+            case "true":
                 callback();
                 break;
             default:
                 break;
         }
-    };
-)
+    });
 }
 
 // 无参数post请求

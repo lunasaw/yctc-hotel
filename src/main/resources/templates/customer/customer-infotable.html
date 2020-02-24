@@ -223,8 +223,7 @@
             swal("错误", "请输入必输入项！", "error");
         }else {
             parameterPostRequest("/hotel/customer/update-userdo", data, () => {
-                $('#editModal').
-            modal('hide');
+                $('#editModal').modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();
         })

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}" href="../../static/css/left-side-menu.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="../../static/fonts/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="../../static/css/head.css" th:href="@{/css/head.css}">
+  <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}" src="../../static/js/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="../../static/js/left-side-menu.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+  <script src="../../static/js/footposition.js" th:src="@{/js/footposition.js}"  type="text/javascript"></script>
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+  </style>
+
+
+</head>
+
+<body style="overflow-y: hidden;">
+
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
+
+    <ul class="navbar-nav " style="left: 82%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 87%;position: absolute;">
+      <li>
+        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav " style="left: 90%;position: absolute;">
+      <li>
+        <a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
+            src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="row" style="margin-top: 50px;">
+        <div class="col-md-10 col-sm-10 offset-md-1 offset-sm-1">
+          <h2 style="color: rgb(135, 106, 32);font-family: 宋体;text-align: center;">请输入您的手机号码</h2>
+          <h3 style="text-align: center;margin-top: 25px;">等待验证之后，我们会为您办理入住</h3>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 50px;">
+        <input class="col-md-8 offset-md-2 form-control col-sm-8 offset-sm-2" type="number" placeholder="请输入同行伙伴的手机号码">
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <a data-toggle="modal" data-target="#number"><button
+              class="btn btn-danger col-md-4 offset-md-4 col-sm-4 offset-sm-4" style="margin-top: 50px;"
+              type="button">提交</button></a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer
+  style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;">
+  <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
+
+</footer>
+  <!-- modal -->
+  <div class="modal fade" id="number" tabindex="-1" role="dialog" aria-labelledby="number" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: rgb(226, 203, 145);">
+          <h5 class="modal-title" id="payforroomLabel">同伴入住</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <Span aria-hidden="true">&times;</Span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 440px;">
+          <div class="container">
+            <form></form>
+            <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+              <span class="offset-md-1 col-md-1">nothing!</span>
+              <input class="form-control col-md-8" type="text">
+            </div>
+            <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+              <span class="offset-md-1 col-md-1">nothing!</span>
+              <input class="form-control col-md-8" type="text">
+            </div>
+            <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+              <span class="offset-md-1 col-md-1">nothing!</span>
+              <input class="form-control col-md-8" type="text">
+            </div>
+            <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+              <span class="offset-md-1 col-md-1">nothing!</span>
+              <input class="form-control col-md-8" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row" style="display:flex;align-items: center;justify-content: center;">
+            <button class="btn btn-danger">立即入住</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+
+
+
+
+</body>
+
+</html>
