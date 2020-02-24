@@ -239,11 +239,13 @@ public class CheckInControllerImpl implements CheckInController {
         faceVO.setBase64(StrUtil.removePreAndLowerFirst(faceVO.getBase64(), cut));
         try {
             String path = ResourceUtils.getURL("classpath:static/").getPath();
+
             // 将拍摄面部照片解码
             if (Base64Utils.GenerateImage(faceVO.getBase64(), path + "tmp.jpg") == false) {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }
+            ImageUtils.zoomByScale(path + "tmp.jpg",path + "tmp.jpg","jpg",1.5);
             System.out.println("图片识别");
             try {
                 FaceIR.scanVivo();
