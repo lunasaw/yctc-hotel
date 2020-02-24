@@ -9,4 +9,11 @@ public interface CommonController {
      */
     String showIndex();
 
+    /**
+     * 主页餐厅页面
+     * 
+     * @return
+     */
+    String showIndexResturant();
+
 }

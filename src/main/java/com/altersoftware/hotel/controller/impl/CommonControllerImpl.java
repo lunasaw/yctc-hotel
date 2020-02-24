@@ -24,4 +24,11 @@ public class CommonControllerImpl implements CommonController {
     public String showIndex() {
         return TemplatePath.INDEX;
     }
+
+    @Override
+    @GetMapping("index/resturant")
+    public String showIndexResturant() {
+        return TemplatePath.RESTAURANT;
+    }
+
 }
