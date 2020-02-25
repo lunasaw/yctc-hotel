@@ -31,7 +31,7 @@ public interface CheckInWithDAO {
     @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where id=#{id}  ")
 	@Results({
 			@Result(property = "id", column = "id"),
-        @Result(property = "custoemrId", column = "pre_customerid"),
+        @Result(property = "customerId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -50,7 +50,7 @@ public interface CheckInWithDAO {
     @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with ")
 	@Results({
 			@Result(property = "id", column = "id"),
-        @Result(property = "custoemrId", column = "pre_customerid"),
+        @Result(property = "customerId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -67,7 +67,7 @@ public interface CheckInWithDAO {
 	 *
 	 * @param checkInWithDO
 	 */
-    @Update("update tb_checkin_with  set phone=#{phone}, pre_customerid=#{custoemrId}, name=#{name}, idcard=#{idCard}, room_number=#{roomNumber}, picture=#{idPiture}, last_time=#{lastTime}, modify_time=now()  where id=#{id}")
+    @Update("update tb_checkin_with  set phone=#{phone}, pre_customerid=#{customerId}, name=#{name}, idcard=#{idCard}, room_number=#{roomNumber}, picture=#{idPiture}, last_time=#{lastTime}, modify_time=now()  where id=#{id}")
 	int update(CheckInWithDO checkInWithDO);
 
 	/**
@@ -96,7 +96,7 @@ public interface CheckInWithDAO {
     @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where room_number=#{roomNumber}  ")
 	@Results({
 			@Result(property = "id", column = "id"),
-        @Result(property = "custoemrId", column = "pre_customerid"),
+        @Result(property = "customerId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -117,7 +117,7 @@ public interface CheckInWithDAO {
     @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where phone=#{phone}  ")
 	@Results({
 			@Result(property = "id", column = "id"),
-        @Result(property = "custoemrId", column = "pre_customerid"),
+        @Result(property = "customerId", column = "pre_customerid"),
 			@Result(property = "phone", column = "phone"),
 			@Result(property = "name", column = "name"),
 			@Result(property = "idCard", column = "idcard"),
@@ -138,7 +138,7 @@ public interface CheckInWithDAO {
     @Select("select id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time from tb_checkin_with where pre_customerid=#{customerId}  ")
     @Results({
         @Result(property = "id", column = "id"),
-        @Result(property = "custoemrId", column = "pre_customerid"),
+        @Result(property = "customerId", column = "pre_customerid"),
         @Result(property = "phone", column = "phone"),
         @Result(property = "name", column = "name"),
         @Result(property = "idCard", column = "idcard"),
