@@ -49,7 +49,7 @@ public class LeaseRestControllerImpl implements LeaseRestController {
         }
         for (int i = 0; i < leaseVOS.size(); i++) {
             LeaseVO leaseVO = leaseVOS.get(i);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formatDate = dateFormat.format(new Date());
             // 生成随机数
             RandomNumber randomNumber = new RandomNumber();

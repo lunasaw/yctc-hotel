@@ -17,7 +17,7 @@
 					<h1>注销确认</h1>
 					<p>真的要注销吗？</p>
 					<form action="/hotel/user/sign-out" method="post">
-						<button type="submit" class="btn btn-secondary btn-block">确认注销</button>
+						<button class="btn btn-secondary btn-block" onclick="remove()" type="submit">确认注销</button>
 						<button class="btn btn-primary btn-block" onclick="back(); return false;">返回</button>
 					</form>
 				</div>
@@ -30,9 +30,17 @@
 	<script type="text/javascript">
 		function back() {
 			history.back(-1);
-		}
 
-        document.cookie = "userId=; exports=Thu, 01 Jan 1980 00:00:00 GMT"
+        }
+
+        function remove() {
+            var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+            if (keys) {
+                for (var i = keys.length; i--;)
+                    document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+
+            }
+        }
 	</script>
 </body>
 

@@ -145,23 +145,52 @@
           }
       }
     $(document).ready(function () {
+
+        console.log("获取手机账号");
+        // 获取url上的site参数并且传入表单
+        var searchParams = new URLSearchParams(window.location.search);
+        phone = searchParams.get('phone');
+
         console.log("获取用户名Id");
         let userId = getCookie("userId");
         console.log(userId);
-        $.ajax({
-            url: "/hotel/record/getnumbers-bycustomer",
-            type: "POST",
-            contentType: "application/x-www-form-urlencoded",
-            data: {
-                "customerId": userId
-            },
-            success:function (result) {
-                var list = result.module;
-                for (var i = 0; i < list.length; i++) {
-                    document.getElementById("selectun").options.add(new Option(list[i], i));
+        if (phone != null) {
+            userId = null;
+        }
+        if (phone == null) {
+            $.ajax({
+                url: "/hotel/record/getnumbers-bycustomer",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    "customerId": userId
+                },
+                success: function (result) {
+                    var list = result.module;
+                    for (var i = 0; i < list.length; i++) {
+                        document.getElementById("selectun").options.add(new Option(list[i], i));
+                    }
                 }
-            }
-        })
+            })
+        } else {
+            $.ajax({
+                url: "/hotel/checkin/check-phone",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    "phone": phone
+                },
+                success: function (result) {
+                    console.log(result);
+                    var list = result.module;
+                    // for (var i = 0; i < list.length; i++) {
+                    //     document.getElementById("selectun").options.add(new Option(list[i], i));
+                    // }
+                }
+            })
+        }
+
+
     });
       
       function applynext() {

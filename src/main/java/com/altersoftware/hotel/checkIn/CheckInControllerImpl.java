@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -77,9 +76,10 @@ public class CheckInControllerImpl implements CheckInController {
     }
 
     @Override
+    @PostMapping("check-phone")
     public ResultDO<RecordDO> checkWithPhone(String phone) {
         // 参数校验 同住用户用于检查是否有订单存在
-        if (StringUtils.isEmpty(phone) == false) {
+        if (StringUtils.isEmpty(phone) == true) {
             return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
@@ -114,7 +114,8 @@ public class CheckInControllerImpl implements CheckInController {
     public ResultDO<UserDO> checkIdCard(@RequestBody BaseVO base64VO) {
         try {
             String path = ResourceUtils.getURL("classpath:static/").getPath();
-
+            String cut = "data:image/png;base64,";
+            base64VO.setId64(StrUtil.removePreAndLowerFirst(base64VO.getId64(), cut));
             // 先检查是预定用户 还是陪同用户
             ResultDO<UserDO> userDOById = userIService.getUserDOById(base64VO.getCustomerId());
             if (userDOById.getModule() != null) {
@@ -133,27 +134,31 @@ public class CheckInControllerImpl implements CheckInController {
                 System.out.println("上传完成");
                 userDO = userDOById.getModule();
                 String s = ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg";
-                userDO.setFaceToken(s);
-                customerService.updateUserDO(userDO);
+
+                System.out.println("开始ocr识别");
                 // OCR识别身份信息
                 String s1 = CheckIn.IDCardOCR(base64VO.getCustomerId());
                 String[] split = s1.split(",");
                 // 将识别的信息与预设信息比较
-                System.out.println("开始ocr识别");
-                if (split[0].equals(userDO.getName()) == false || split[1].equals(userDO.getIdCardNumber()) == false) {
-                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                if (split[0].equals(userDO.getName()) == false) {
+                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                        ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
+                }
+                if (split[1].equals(userDO.getIdCardNumber()) == false) {
+                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                        ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
                 }
                 System.out.println("结束ocr识别");
                 System.out.println("开始云端比较");
 
-                // 将识别到的信息与云端比较
-                if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
-                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                }
+                // 将识别到的信息与云端比较 上线之前先关闭远程api
+                // if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
+                // return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
+                // ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
+                // }
                 System.out.println("完成云端比较");
-
+                userDO.setFaceToken(s);
+                customerService.updateUserDO(userDO);
                 return new ResultDO<>(true, ResultCode.SUCCESS,
                     ResultCode.MSG_SUCCESS, userDO);
             } else {
@@ -199,10 +204,10 @@ public class CheckInControllerImpl implements CheckInController {
                 // // 将识别到的信息与云端比较
                 System.out.println("开始云端比较");
 
-                if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
-                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                }
+                // if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
+                // return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                // ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                // }
                 System.out.println("完成云端比较");
 
                 // 更新身份证号
@@ -248,7 +253,7 @@ public class CheckInControllerImpl implements CheckInController {
                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                     ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
             }
-            ImageUtils.zoomByScale(path + "tmp.jpg",path + "tmp.jpg","jpg",1.5);
+            ImageUtils.zoomByScale(path + "tmp.jpg", path + "tmp.jpg", "jpg", 1.5);
             System.out.println("图片识别");
             try {
                 FaceIR.scanVivo();
@@ -289,46 +294,43 @@ public class CheckInControllerImpl implements CheckInController {
     @Override
     @PostMapping("add-live")
     public ResultDO<Void> checkWith(@RequestBody List<CheckWithVO> list) {
+        ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
+        if (deleteLoseEfficacy.isSuccess() == false) {
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+        }
         CheckInWithDO checkInWithDO = new CheckInWithDO();
         for (int j = 0; j < list.size(); j++) {
             CheckWithVO checkWith = list.get(j);
             ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByCustomer(checkWith.getCustomerId());
             List<RecordDO> resultDOModule = listResultDO.getModule();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            for (int n = 0; n < resultDOModule.size(); n++){
+            for (int n = 0; n < resultDOModule.size(); n++) {
                 RecordDO recordDO = resultDOModule.get(n);
-                if (recordDO.getRoomNumber() == checkWith.getRoomNumber()){
+                if (recordDO.getRoomNumber() == checkWith.getRoomNumber()) {
                     try {
                         System.out.println(recordDO.getCheckOutTime());
                         checkInWithDO.setLastTime(dateFormat.parse(recordDO.getCheckOutTime()));
                         System.out.println(checkInWithDO.getLastTime());
+
+                        CheckWithVO checkWithVO = list.get(j);
+                        checkInWithDO.setPhone(checkWithVO.getPhone());
+                        checkInWithDO.setName(checkWithVO.getName());
+                        checkInWithDO.setCustomerId(checkWithVO.getCustomerId());
+                        checkInWithDO.setRoomNumber(checkWithVO.getRoomNumber());
+                        ResultDO<Void> insert = checkInWithService.insert(checkInWithDO);
+                        if (insert.isSuccess() == false) {
+                            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
                 }
             }
-
-            ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
-            if (deleteLoseEfficacy.isSuccess() == false) {
-                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-            }
-            for (int i = 0; i < list.size(); i++) {
-                CheckWithVO checkWithVO = list.get(i);
-                checkInWithDO.setPhone(checkWithVO.getPhone());
-                checkInWithDO.setName(checkWithVO.getName());
-                checkInWithDO.setCustomerId(checkWithVO.getCustomerId());
-                checkInWithDO.setRoomNumber(checkWithVO.getRoomNumber());
-                ResultDO<Void> insert = checkInWithService.insert(checkInWithDO);
-                if (insert.isSuccess() == false) {
-                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                            ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                }
-            }
-
         }
         return new ResultDO<>(true, ResultCode.SUCCESS,
-                ResultCode.MSG_SUCCESS);
+            ResultCode.MSG_SUCCESS);
     }
 }

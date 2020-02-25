@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
@@ -219,6 +220,9 @@ public class RecordServiceImpl implements RecordService {
                 SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                 String checkOutTime = recordDOByCustomerId.get(i).getCheckOutTime();
                 if (checkOutTime == null) {
+                    continue;
+                }
+                if (StringUtils.isBlank(checkOutTime)) {
                     continue;
                 }
                 Date date = f.parse(checkOutTime);
