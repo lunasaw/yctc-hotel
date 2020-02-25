@@ -141,6 +141,14 @@ public class ResultCode {
     public static final int FOREIGN_KEY_CONSTRAINT = 9004;
     public static final String MSG_FOREIGN_KEY_CONSTRAINT = "foreign key constraint";
 
+    /** 识别异常 */
+    public static final int     IDENTIFICATION_OF_ABNORMAL             = 9005;
+    public static final String  MSG_IDENTIFICATION_OF_ABNORMAL         = "Identification of abnormal";
+
+    /** 身份证不是本人 */
+    public static final int     ID_CARD_DOES_NOT_MATCH                 = 9006;
+    public static final String  MSG_ID_CARD_DOES_NOT_MATCH             = "ID card does not match ";
+
     /** 系统错误 */
     public static final int ERROR_SYSTEM_EXCEPTION = 9999;
     public static final String MSG_ERROR_SYSTEM_EXCEPTION = "system error";

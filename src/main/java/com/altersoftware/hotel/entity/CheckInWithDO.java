@@ -107,4 +107,20 @@ public class CheckInWithDO {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+    @Override
+    public String toString() {
+        return "CheckInWithDO{" +
+            "id=" + id +
+            ", customerId=" + customerId +
+            ", phone='" + phone + '\'' +
+            ", idCard='" + idCard + '\'' +
+            ", name='" + name + '\'' +
+            ", roomNumber=" + roomNumber +
+            ", idPiture='" + idPiture + '\'' +
+            ", lastTime=" + lastTime +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
+            '}';
+    }
 }

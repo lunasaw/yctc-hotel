@@ -45,7 +45,6 @@
 		</button>
 
 
-
 		<button aria-label="close" class="close" data-dismiss="modal" id="capture1" style="float: left" type="button">
 			<Span aria-hidden="true" style="text-align: center">拍摄国徽面</Span>
 		</button>
@@ -133,7 +132,7 @@
 				</div>
 
 				<div class="card-body" style="padding: 0">
-					<img height="300px" id="canvasx" width="100%"></img>
+					<img height="300px" id="canvasx" name="body" width="100%"></img>
 
 					<input type="hidden">
 					<canvas height="300px" id="canvas" style="margin-left: 20px" width="540px"></canvas>
@@ -175,7 +174,10 @@
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 150px">
-			<button class="btn btn-danger col-md-2 offset-md-5" ng-click="uploadIDver()" type="button" id="stop">上传</button>
+			<!--			id="stop"-->
+			<button class="btn btn-danger col-md-2 offset-md-5" ng-click="uploadIDver()" onclick="submit()"
+			        type="button">上传
+			</button>
 		</div>
 	</div>
 </main>
@@ -261,13 +263,13 @@
     }
 
     //访问用户媒体设备的兼容方法
-			function getUserMedia(constraints, success, error) {
-				console.log("拍照");
-				if (navigator.mediaDevices.getUserMedia) {
-					//最新的标准API
-					navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
-				} else if (navigator.webkitGetUserMedia) {
-					//webkit核心浏览器
+    function getUserMedia(constraints, success, error) {
+        // console.log("拍照");
+        if (navigator.mediaDevices.getUserMedia) {
+            //最新的标准API
+            navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
+        } else if (navigator.webkitGetUserMedia) {
+            //webkit核心浏览器
             navigator.webkitGetUserMedia(constraints, success, error)
         } else if (navigator.mozGetUserMedia) {
             //firfox浏览器
@@ -278,7 +280,6 @@
         }
     }
 
-    var strx;
     let video = document.getElementById('video');
     let canvas = document.getElementById('canvas');
     let context = canvas.getContext('2d');
@@ -291,7 +292,7 @@
         let CompatibleURL = window.URL || window.webkitURL;
         //将视频流设置为video元素的源
         console.log(stream);
-		mediaStreamTrack = stream
+        mediaStreamTrack = stream;
         //video.src = CompatibleURL.createObjectURL(stream);
         video.srcObject = stream;
         video.play();
@@ -308,9 +309,10 @@
         alert('不支持访问用户媒体');
     }
 
+    var str;
     document.getElementById('capture').addEventListener('click', function () {
         context.drawImage(video, 0, 0, 480, 320);
-        var str = canvas.toDataURL("image/png");
+        str = canvas.toDataURL("image/png");
         $("#canvasx").attr("src", str);
         alert(str);
     });
@@ -319,16 +321,106 @@
         context1.drawImage(video, 0, 0, 480, 320);
         var str = canvas1.toDataURL("image/png");
         $("#canvas1").attr("src", str);
-        alert(str);
+        // alert(str);
+    });
+
+    document.getElementById('stop').addEventListener('click', function () {
+
+        mediaStreamTrack.getTracks()[0].stop();
+
     })
 
-	document.getElementById('stop').addEventListener('click', function () {
 
-		mediaStreamTrack.getTracks()[0].stop();
+</script>
+<script>
+    var phone;
+    $(document).ready(function () {
 
-	})
+        console.log("获取手机账号");
+        // 获取url上的site参数并且传入表单
+        var searchParams = new URLSearchParams(window.location.search);
+        phone = searchParams.get('phone');
+
+    });
+
+    function submit() {
+
+        var id64 = $('#canvasx')[0].src;
+        // alert(id64);
+        // var id642=$('#canvas1')[0].src;
+        // // alert(id642);
+        // var id643=$('#canvasx').attr('src');
+        // alert(id643);
+        var userId = getCookie("userId");
+        url = "/hotel/checkin/idCard-check";
+        if (phone != null) {
+            userId = null;
+        }
+        data = {
+            id64: id64,
+            customerId: userId,
+            phone: phone
+        };
+        console.log(data);
+        parameterPostRequest(url, data);
+    }
+
+    // 有参数post请求
+    function parameterPostRequest(url, data, callback) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: JSON.stringify(data),
+            traditional: true,
+            contentType: "application/json",
+            success: function (result) {
+                if (result.success === false) {
+                    switch (result.code) {
+                        case 9001:
+                            swal("错误", "数据库错误", "error");
+                            break;
+                        case 9002:
+                            alert("对不起,拍摄不清晰,请上传或更换设备重试");
+                            break;
+                        case 9005:
+                            swal("对不起,识别异常或拍摄身份证拍摄不清晰,请重试");
+                            break;
+                        case 9006:
+                            swal("您的身份信息与账户不符,请上传本人信息");
+                            break;
+                        case 9007:
+                            swal("错误", "文件不存在", "error");
+                            break;
+                        case 9999:
+                            alert("系统错误");
+                            break;
+                    }
+                } else {
+                    console.log(result);
+                    alert("实名认证成功");
+                    if (phone == null) {
+                        window.location.href = "/hotel/checkin/step_b";
+                    } else {
+                        window.location.href = "/hotel/checkin/step_b?phone=" + phone;
+
+                    }
+                }
+            },
+            error: function () {
+                swal("错误", "404", "error");
+            }
+        });
+    }
 
 
-
+    function getCookie(objName) {//获取指定名称的cookie的值
+        var arrStr = document.cookie.split("; ");
+        for (var i = 0; i < arrStr.length; i++) {
+            var temp = arrStr[i].split("=");
+            if (temp[0] == objName)
+                return unescape(temp[1]);
+        }
+    }
 </script>
 </html>

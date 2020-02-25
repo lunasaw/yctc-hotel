@@ -15,6 +15,7 @@ public class BaseVO {
     /** 客户id */
     private long   customerId;
 
+    /** 手机号 */
     private String phone;
 
 	public String getPhone() {

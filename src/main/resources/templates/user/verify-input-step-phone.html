@@ -22,6 +22,8 @@
 	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="../../static/js/footposition.js" th:src="@{/js/footposition.js}" type="text/javascript"></script>
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="text/css">
+
 	<style>
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
@@ -95,7 +97,7 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 50px;">
-			<input class="col-md-8 offset-md-2 form-control col-sm-8 offset-sm-2" placeholder="请输入同行伙伴的手机号码"
+			<input class="col-md-8 offset-md-2 form-control col-sm-8 offset-sm-2" id="phone" placeholder="请输入您的手机号码"
 			       type="number">
 		</div>
 		<div class="row">
@@ -103,7 +105,7 @@
 				<a data-target="#number" data-toggle="modal">
 					<button
 							class="btn btn-danger col-md-4 offset-md-4 col-sm-4 offset-sm-4" style="margin-top: 50px;"
-							type="button">提交
+							onclick="livein()" type="button">提交
 					</button>
 				</a>
 			</div>
@@ -118,46 +120,71 @@
 
 </footer>
 <!-- modal -->
-<div aria-hidden="true" aria-labelledby="number" class="modal fade" id="number" role="dialog" tabindex="-1">
-	<div class="modal-dialog modal-xl" role="document">
-		<div class="modal-content">
-			<div class="modal-header" style="background-color: rgb(226, 203, 145);">
-				<h5 class="modal-title" id="payforroomLabel">同伴入住</h5>
-				<button aria-label="close" class="close" data-dismiss="modal" type="button">
-					<Span aria-hidden="true">&times;</Span>
-				</button>
-			</div>
-			<div class="modal-body" style="height: 440px;">
-				<div class="container">
-					<form></form>
-					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">
-						<span class="offset-md-1 col-md-1">nothing!</span>
-						<input class="form-control col-md-8" type="text">
-					</div>
-					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">
-						<span class="offset-md-1 col-md-1">nothing!</span>
-						<input class="form-control col-md-8" type="text">
-					</div>
-					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">
-						<span class="offset-md-1 col-md-1">nothing!</span>
-						<input class="form-control col-md-8" type="text">
-					</div>
-					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">
-						<span class="offset-md-1 col-md-1">nothing!</span>
-						<input class="form-control col-md-8" type="text">
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<div class="row" style="display:flex;align-items: center;justify-content: center;">
-					<button class="btn btn-danger">立即入住</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<!--<div aria-hidden="true" aria-labelledby="number" class="modal fade" id="number" role="dialog" tabindex="-1">-->
+<!--	<div class="modal-dialog modal-xl" role="document">-->
+<!--		<div class="modal-content">-->
+<!--			<div class="modal-header" style="background-color: rgb(226, 203, 145);">-->
+<!--				<h5 class="modal-title" id="payforroomLabel">同伴入住</h5>-->
+<!--				<button aria-label="close" class="close" data-dismiss="modal" type="button">-->
+<!--					<Span aria-hidden="true">&times;</Span>-->
+<!--				</button>-->
+<!--			</div>-->
+<!--&lt;!&ndash;			<div class="modal-body" style="height: 440px;">&ndash;&gt;-->
+<!--&lt;!&ndash;				<div class="container">&ndash;&gt;-->
+<!--&lt;!&ndash;					<form></form>&ndash;&gt;-->
+<!--&lt;!&ndash;					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">&ndash;&gt;-->
+<!--&lt;!&ndash;						<span class="offset-md-1 col-md-1">nothing!</span>&ndash;&gt;-->
+<!--&lt;!&ndash;						<input class="form-control col-md-8" type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;					</div>&ndash;&gt;-->
+<!--&lt;!&ndash;					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">&ndash;&gt;-->
+<!--&lt;!&ndash;						<span class="offset-md-1 col-md-1">nothing!</span>&ndash;&gt;-->
+<!--&lt;!&ndash;						<input class="form-control col-md-8" type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;					</div>&ndash;&gt;-->
+<!--&lt;!&ndash;					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">&ndash;&gt;-->
+<!--&lt;!&ndash;						<span class="offset-md-1 col-md-1">nothing!</span>&ndash;&gt;-->
+<!--&lt;!&ndash;						<input class="form-control col-md-8" type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;					</div>&ndash;&gt;-->
+<!--&lt;!&ndash;					<div class="row" style="margin: 50px 0; display: flex;align-items: center;">&ndash;&gt;-->
+<!--&lt;!&ndash;						<span class="offset-md-1 col-md-1">nothing!</span>&ndash;&gt;-->
+<!--&lt;!&ndash;						<input class="form-control col-md-8" type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;					</div>&ndash;&gt;-->
+<!--&lt;!&ndash;				</div>&ndash;&gt;-->
+<!--&lt;!&ndash;			</div>&ndash;&gt;-->
+<!--			<div class="modal-footer">-->
+<!--				<div class="row" style="display:flex;align-items: center;justify-content: center;">-->
+<!--					<button class="btn btn-danger" onclick="livein()">立即入住</button>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</div>-->
 
+<script>
 
+    function livein() {
+        var phone = $('#phone').val();
+        console.log(phone);
+        $.ajax({
+            url: "/hotel/checkin/check-phone",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "phone": phone
+            },
+            success: function (result) {
+                console.log(result);
+                if (result.success === true) {
+                    if (result.module != null) {
+                        window.location.href = "/hotel/checkin/step_a_input?phone=" + phone;
+                    }
+                } else {
+                    alert("您的伙伴为添加您的信息,如有疑问请联系前台工作人员");
+                }
+            }
+        });
+    }
+
+</script>
 </body>
 
 </html>

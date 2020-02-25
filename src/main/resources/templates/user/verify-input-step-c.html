@@ -194,6 +194,13 @@
     };
 
     document.getElementById('captureBtn').onclick = function () {
+        console.log("获取手机账号");
+        // 获取url上的site参数并且传入表单
+        var searchParams = new URLSearchParams(window.location.search);
+        var phone = searchParams.get('phone');
+        if (phone != null) {
+            userId = null;
+        }
         // alert("抓取成功");
         //创建canvas
         let canvas = document.createElement('canvas');
@@ -207,8 +214,10 @@
         var userId = getCookie("userId");
         url = "/hotel/checkin/body-check";
         data = {
-            "base64": canvas.toDataURL('image/png'),
-            "customerId": 10019
+            base64: canvas.toDataURL('image/png'),
+            customerId: userId,
+            phone: phone
+
         };
         parameterPostRequest(url, data);
 // 				下载抓图
@@ -263,7 +272,8 @@
                 } else {
                     console.log(result);
                     var order = result.module;
-                    alert("成功")
+                    alert("成功");
+                    window.location.href = "/hotel/checkin/step_success";
                     // callback(result);
                 }
             },

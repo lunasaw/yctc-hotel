@@ -1,9 +1,6 @@
 package com.altersoftware.hotel.util;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -28,6 +25,7 @@ import com.altersoftware.hotel.checkIn.tencentcloudapi.common.profile.HttpProfil
 import com.altersoftware.hotel.checkIn.tencentcloudapi.ocr.v20181119.OcrClient;
 import com.altersoftware.hotel.checkIn.tencentcloudapi.ocr.v20181119.models.IDCardOCRRequest;
 import com.altersoftware.hotel.checkIn.tencentcloudapi.ocr.v20181119.models.IDCardOCRResponse;
+import com.altersoftware.hotel.constant.ConstantHolder;
 
 import sun.misc.BASE64Encoder;
 
@@ -47,8 +45,18 @@ public class CheckIn {
             // getUrlPic.geturlpic(img2, 2);
             MyFaceContract myFaceContract = new MyFaceContract();
             String path = ResourceUtils.getURL("classpath:static/").getPath();
-            float contract = myFaceContract.contract(path + customerId + ".jpg", path + "tmp.jpg");
-            if (contract > 0.8) {
+            File file = new File(path + customerId + ".jpg");
+            boolean exists = file.exists();
+            float contract = 0;
+            if (exists == true) {
+                contract = myFaceContract.contract(path + customerId + ".jpg", path + "tmp.jpg");
+            }
+            if (exists == false) {
+                String psthWeb = ConstantHolder.FILE_UPLOAD + customerId + ".jpg";
+                FileUtilsAlter.downloadHttpUrl(psthWeb, path, customerId + ".jpg");
+                contract = myFaceContract.contract(path + customerId + ".jpg", path + "tmp.jpg");
+            }
+            if (contract > 0.75) {
                 return true;
             }
         } catch (Exception e) {
