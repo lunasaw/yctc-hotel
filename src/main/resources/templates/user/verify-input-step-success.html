@@ -34,19 +34,25 @@
             <div class="modal-body" style="height: 440px;">
                 <div class="container">
                     <form></form>
+                    <div class="row" style="margin: 50px 0; display: flex;  align: center;">
+                        <select class="custom-select col-md-3 col-sm-3" id="selectun">
+                            <option  disabled="disabled" selected="selected">请选择...</option>
+                        </select>
+                    </div>
                     <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
                         <span class="offset-md-1 col-md-1">姓名</span>
-                        <input class="form-control col-md-8" type="text">
+                        <input class="form-control col-md-8" type="text" id="name">
                     </div>
                     <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
                         <span class="offset-md-1 col-md-1">电话号码</span>
-                        <input class="form-control col-md-8" type="text">
+                        <input class="form-control col-md-8" type="number" id="phone">
                     </div>
+
                 </div>
             </div>
             <div class="modal-footer">
                 <div class="row" style="display:flex;align-items: center;justify-content: center;">
-                    <button class="btn btn-danger">提交</button>
+                    <button type="button" class="btn btn-danger" onclick="addman()">提交</button>
                 </div>
             </div>
         </div>
@@ -147,7 +153,74 @@
     <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
 </footer>
 <script>
+    //初始化模态框
+    $(document).ready(function () {
+        $("#kk").on('hide.bs.modal',function() {
+            //关闭后重置表单数据
+            window.location.reload();
+        });
 
+    });
+    function getCookie(objName) {//获取指定名称的cookie的值
+        var arrStr = document.cookie.split(";");
+        for (var i = 0; i < arrStr.length; i++) {
+            var temp = arrStr[i].split("=");
+            if (temp[0] == objName)
+                return unescape(temp[1]);
+        }
+    }
+    $(document).ready(function () {
+        console.log("获取用户名Id");
+        var userId = getCookie("userId");
+        console.log(userId);
+        $.ajax({
+            url: "/hotel/record/getnumbers-bycustomer",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": userId
+            },
+            success:function (result) {
+                var list = result.module;
+                for (var i = 0; i < list.length; i++) {
+                    document.getElementById("selectun").options.add(new Option(list[i], i));
+                }
+            }
+        })
+    });
+   function addman() {
+       console.log("获取用户名Id");
+       var string = getCookie("userId");
+       console.log(string);
+       let roomnumber = $("#selectun option:selected").text();
+       let name = $("#name").val();
+       let phone = $("#phone").val();
+       let data = {
+           name:name,
+           phone:phone,
+           customerId:string,
+           roomNumber:roomnumber
+       };
+
+       let arr = [];
+       arr.push(data);
+       console.info(arr);
+       $.ajax({
+           url: "/hotel/checkin/add-live",
+           type: "POST",
+           dataType: "json",
+           data: JSON.stringify(arr),
+           traditional: true,
+           contentType: "application/json",
+           success:function (result) {
+               if (result.success != false){
+                   $("#kk").modal('hide');
+                   alert("添加成功");
+               }
+           }
+       })
+
+   }
 </script>
 
 

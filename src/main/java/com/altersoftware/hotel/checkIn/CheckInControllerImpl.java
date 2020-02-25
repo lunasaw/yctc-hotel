@@ -2,6 +2,9 @@ package com.altersoftware.hotel.checkIn;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -285,26 +288,47 @@ public class CheckInControllerImpl implements CheckInController {
 
     @Override
     @PostMapping("add-live")
-    public ResultDO<Void> checkWith(List<CheckWithVO> list) {
+    public ResultDO<Void> checkWith(@RequestBody List<CheckWithVO> list) {
         CheckInWithDO checkInWithDO = new CheckInWithDO();
-        ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
-        if (deleteLoseEfficacy.isSuccess() == false) {
-            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-        }
-        for (int i = 0; i < list.size(); i++) {
-            CheckWithVO checkWithVO = list.get(i);
-            checkInWithDO.setPhone(checkWithVO.getPhone());
-            checkInWithDO.setName(checkWithVO.getName());
-            checkInWithDO.setCustomerId(checkWithVO.getCustomerId());
-            checkInWithDO.setRoomNumber(checkWithVO.getRoomNumber());
-            ResultDO<Void> insert = checkInWithService.insert(checkInWithDO);
-            if (insert.isSuccess() == false) {
-                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                    ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+        for (int j = 0; j < list.size(); j++) {
+            CheckWithVO checkWith = list.get(j);
+            ResultDO<List<RecordDO>> listResultDO = recordService.showRecordByCustomer(checkWith.getCustomerId());
+            List<RecordDO> resultDOModule = listResultDO.getModule();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            for (int n = 0; n < resultDOModule.size(); n++){
+                RecordDO recordDO = resultDOModule.get(n);
+                if (recordDO.getRoomNumber() == checkWith.getRoomNumber()){
+                    try {
+                        System.out.println(recordDO.getCheckOutTime());
+                        checkInWithDO.setLastTime(dateFormat.parse(recordDO.getCheckOutTime()));
+                        System.out.println(checkInWithDO.getLastTime());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
             }
+
+            ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
+            if (deleteLoseEfficacy.isSuccess() == false) {
+                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+            }
+            for (int i = 0; i < list.size(); i++) {
+                CheckWithVO checkWithVO = list.get(i);
+                checkInWithDO.setPhone(checkWithVO.getPhone());
+                checkInWithDO.setName(checkWithVO.getName());
+                checkInWithDO.setCustomerId(checkWithVO.getCustomerId());
+                checkInWithDO.setRoomNumber(checkWithVO.getRoomNumber());
+                ResultDO<Void> insert = checkInWithService.insert(checkInWithDO);
+                if (insert.isSuccess() == false) {
+                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                            ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                }
+            }
+
         }
         return new ResultDO<>(true, ResultCode.SUCCESS,
-            ResultCode.MSG_SUCCESS);
+                ResultCode.MSG_SUCCESS);
     }
 }

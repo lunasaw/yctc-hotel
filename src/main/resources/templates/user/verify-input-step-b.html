@@ -110,13 +110,13 @@
 
       <form>
         <div class="row" style="margin-top: 20px;">
-          <select multiple class="form-control col-md-8 offset-md-2 " id="id" required>
+          <select multiple class="form-control col-md-8 offset-md-2 "  id="selectun" required>
             <option hidden active>请选择房间号</option>
           </select>
         </div>
         <div class="row" style="margin:50px">
-          <a href="/hotel/checkin/step_c" class="col-md-12"><button class="btn btn-primary col-md-4 offset-md-4"
-              type="submit">下一步</button></a>
+          <a href="#" class="col-md-12" onclick="applynext()"><button class="btn btn-primary col-md-4 offset-md-4"
+              type="submit" >下一步</button></a>
         </div>
       </form>
 
@@ -136,26 +136,44 @@
   </footer>
 
   <script>
+      function getCookie(objName) {//获取指定名称的cookie的值
+          let arrStr = document.cookie.split(";");
+          for (let i = 0; i < arrStr.length; i++) {
+              let temp = arrStr[i].split("=");
+              if (temp[0] == objName)
+                  return unescape(temp[1]);
+          }
+      }
     $(document).ready(function () {
-      let data = [{
-          "id": "1001"
-        },
-        {
-          "id": "1002"
-        },
-        {
-          "id": "1003"
-        },
-        {
-          "id": "1004"
-        },
-      ];
-      let dd = $("#id");
-      data.forEach(item => {
-        dd.append('<option>' + item.id + '</option>')
+        console.log("获取用户名Id");
+        let userId = getCookie("userId");
+        console.log(userId);
+        $.ajax({
+            url: "/hotel/record/getnumbers-bycustomer",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": userId
+            },
+            success:function (result) {
+                var list = result.module;
+                for (var i = 0; i < list.length; i++) {
+                    document.getElementById("selectun").options.add(new Option(list[i], i));
+                }
+            }
+        })
+    });
+      
+      function applynext() {
+          let arr = [];
+          arr =  $("#selectun").find("option:selected").text();
+          console.info(arr);
+          for(let i=0; i< arr.length; i++){
 
-      });
-    })
+          }
+
+      }
+      
   </script>
 
  

@@ -1,6 +1,7 @@
 package com.altersoftware.hotel.vo;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 /**
  * @author Iszychen@win10
@@ -20,6 +21,7 @@ public class CheckWithVO {
     /** 预定客户编号 */
     @NotEmpty
     private long   customerId;
+
 
     public int getRoomNumber() {
         return roomNumber;
