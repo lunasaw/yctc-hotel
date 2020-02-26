@@ -110,6 +110,18 @@ public class CheckInControllerImpl implements CheckInController {
     }
 
     @Override
+    @PostMapping("check-hadcustomer")
+    public ResultDO<UserDO> checkCustomerWithPhone(String phone) {
+        ResultDO<UserDO> userDOByPhone = userIService.getUserDOByPhone(phone);
+        if (userDOByPhone.isSuccess() == false) {
+            return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+        }
+        return new ResultDO<>(true, ResultCode.SUCCESS,
+            ResultCode.MSG_SUCCESS, userDOByPhone.getModule());
+    }
+
+    @Override
     @PostMapping("idCard-check")
     public ResultDO<UserDO> checkIdCard(@RequestBody BaseVO base64VO) {
         try {

@@ -46,11 +46,12 @@
 <body>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
+	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/hotel/index">Alter Hotel</a>
 
 	<ul class="navbar-nav " style="left: 82%;position: absolute;">
 		<li>
 			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+			                                  th:src="@{/img/resizeApi3.png}"
 			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
 		</li>
 	</ul>
@@ -58,6 +59,7 @@
 	<ul class="navbar-nav " style="left: 84.5%;position: absolute;">
 		<li>
 			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+			                                  th:src="@{/img/resizeApi2.png}"
 			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
 		</li>
 	</ul>
@@ -65,6 +67,7 @@
 	<ul class="navbar-nav " style="left: 87%;position: absolute;">
 		<li>
 			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+			                                  th:src="@{/img/resizeApi1.png}"
 			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
 		</li>
 	</ul>
@@ -72,7 +75,7 @@
 	<ul class="navbar-nav " style="left: 90%;position: absolute;">
 		<li>
 			<a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
-					src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+					src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128" th:src="@{/img/user.png}"
 					style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
 			</a>
 		</li>
@@ -198,9 +201,7 @@
         // 获取url上的site参数并且传入表单
         var searchParams = new URLSearchParams(window.location.search);
         var phone = searchParams.get('phone');
-        if (phone != null) {
-            userId = null;
-        }
+
         // alert("抓取成功");
         //创建canvas
         let canvas = document.createElement('canvas');
@@ -212,6 +213,9 @@
         document.getElementById('captures').prepend(img);
         alert(canvas.toDataURL('image/png'));
         var userId = getCookie("userId");
+        if (phone != null) {
+            userId = null;
+        }
         url = "/hotel/checkin/body-check";
         data = {
             base64: canvas.toDataURL('image/png'),

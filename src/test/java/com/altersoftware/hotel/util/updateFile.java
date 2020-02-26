@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,5 +55,17 @@ public class updateFile {
     public void downLoad() throws Exception {
         String path = ResourceUtils.getURL("classpath:static/").getPath();
         FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + "10013.jpg", path, "body.jpg");
+    }
+
+    @Test
+    public void aTest() {
+        boolean b = FileUtils.deleteQuietly(new File(ConstantHolder.FILE_UPLOAD + "15696756582.jpg"));
+        System.out.println(b);
+    }
+
+    @Test
+    public void deleteServerFile() {
+        FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD, "15696756582.jpg");
+
     }
 }

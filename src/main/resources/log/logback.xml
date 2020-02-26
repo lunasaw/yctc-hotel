@@ -24,7 +24,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.iteknical.fusion.user" additivity="false" level="INFO">
+    <logger name="com.altersoftware.hotel" additivity="false" level="INFO">
         <appender-ref ref="serverLog"/>
     </logger>
 

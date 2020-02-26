@@ -82,6 +82,9 @@ public class TemplatePath {
     /** 修改我的信息 */
     public static final String USER_MY_INFORMATION_UPDATE                 = "user/my-informationupdate";
 
+    /** 错误页面 */
+    public static final String ERROR                                      = "error/common-error";
+
     // user end
 
     // news start
