@@ -60,13 +60,6 @@ public interface PermissionGroupPermissionDAO {
      * @return
      */
     @Select("select  permission_id from tb_permission_group_permission where permission_group_id=#{permissionGroupId} ")
-    @Results({
-        @Result(property = "id", column = "id"),
-        @Result(property = "permissionGroupId", column = "permission_group_id"),
-        @Result(property = "permissionId", column = "permission_id"),
-        @Result(property = "createTime", column = "create_time"),
-        @Result(property = "modifyTime", column = "modify_time")
-    })
     List<Long> getPermissionIdByPermissionGroupId(long permissionGroupId);
 
     /**
