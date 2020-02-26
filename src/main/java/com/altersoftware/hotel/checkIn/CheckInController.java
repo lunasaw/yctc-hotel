@@ -80,4 +80,12 @@ public interface CheckInController {
      */
     ResultDO<RecordDO> checkWithPhone(String phone);
 
+    /**
+     * 检查是否为注册用户
+     *
+     * @param phone
+     * @return
+     */
+    ResultDO<UserDO> checkCustomerWithPhone(String phone);
+
 }

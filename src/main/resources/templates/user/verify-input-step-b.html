@@ -27,39 +27,43 @@
 
 <body style="overflow-y: hidden">
 
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Alter Hotel</a>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/hotel/index">Alter Hotel</a>
 
-    <ul class="navbar-nav " style="left: 82%;position: absolute;">
-      <li>
-        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
-            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
-      </li>
-    </ul>
+	<ul class="navbar-nav " style="left: 82%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"
+			                                  th:src="@{/img/resizeApi3.png}"></a>
+		</li>
+	</ul>
 
-    <ul class="navbar-nav " style="left: 84.5%;position: absolute;">
-      <li>
-        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
-            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"></a>
-      </li>
-    </ul>
+	<ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"
+			                                  th:src="@{/img/resizeApi2.png}"></a>
+		</li>
+	</ul>
 
-    <ul class="navbar-nav " style="left: 87%;position: absolute;">
-      <li>
-        <a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
-            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"></a>
-      </li>
-    </ul>
+	<ul class="navbar-nav " style="left: 87%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"
+			                                  th:src="@{/img/resizeApi1.png}"></a>
+		</li>
+	</ul>
 
-    <ul class="navbar-nav " style="left: 90%;position: absolute;">
-      <li>
-        <a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
-            src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
-            style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;">
-        </a>
-      </li>
-    </ul>
-  </nav>
+	<ul class="navbar-nav " style="left: 90%;position: absolute;">
+		<li>
+			<a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
+					src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+					style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;"
+					th:src="@{/img/user.png}">
+			</a>
+		</li>
+	</ul>
+</nav>
 
   <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
     <div class="chartjs-size-monitor"
@@ -150,12 +154,25 @@
         // 获取url上的site参数并且传入表单
         var searchParams = new URLSearchParams(window.location.search);
         phone = searchParams.get('phone');
+        console.log(phone);
+        console.log("获取存在客户编号");
+        // 获取url上的site参数并且传入表单
+        var searchParams = new URLSearchParams(window.location.search);
+        customerId = searchParams.get('customerId');
+        console.log(customerId);
 
         console.log("获取用户名Id");
         let userId = getCookie("userId");
         console.log(userId);
-        if (phone != null) {
-            userId = null;
+
+        //如果用户不存在与系统中
+        if (customerId = null) {
+            //判断手机是否存在  是否是number传入
+            if (phone != null) {
+                userId = null;
+            }
+        } else {
+            userId = customerId;
         }
         if (phone == null) {
             $.ajax({

@@ -65,6 +65,20 @@ public class FileUtilsAlter {
     }
 
     /**
+     * 删除文件
+     * 
+     * @param filePath
+     * @param fileName
+     * @return
+     */
+    public static boolean deleteServerFile(String filePath, String fileName) {
+        boolean delete_flag = false;
+        File file = new File(filePath + fileName);
+        delete_flag = file.exists() && file.isFile() && file.delete();
+        return delete_flag;
+    }
+
+    /**
      * 获取http文件大小
      *
      * @param path 待下载的文件地址
