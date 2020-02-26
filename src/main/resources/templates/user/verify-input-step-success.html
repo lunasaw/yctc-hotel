@@ -34,8 +34,8 @@
             <div class="modal-body" style="height: 440px;">
                 <div class="container">
                     <form></form>
-                    <div class="row" style="margin: 50px 0; display: flex;  align: center;">
-                        <select class="custom-select col-md-3 col-sm-3" id="selectun">
+                    <div class="row" style="margin: 50px 0; display: flex; align-items: center; " >
+                        <select class="custom-select col-md-3 col-sm-3 offset-md-2 offset-sm-2" id="selectun" >
                             <option  disabled="disabled" selected="selected">请选择...</option>
                         </select>
                     </div>
@@ -201,25 +201,28 @@
            customerId:string,
            roomNumber:roomnumber
        };
-
-       let arr = [];
-       arr.push(data);
-       console.info(arr);
-       $.ajax({
-           url: "/hotel/checkin/add-live",
-           type: "POST",
-           dataType: "json",
-           data: JSON.stringify(arr),
-           traditional: true,
-           contentType: "application/json",
-           success:function (result) {
-               if (result.success != false){
-                   $("#kk").modal('hide');
-                   alert("添加成功");
+       if(data.name == null || data.phone <= 0 || data.roomNumber == null){
+           alert("不可空缺数据");
+       }
+       else {
+           let arr = [];
+           arr.push(data);
+           console.info(arr);
+           $.ajax({
+               url: "/hotel/checkin/add-live",
+               type: "POST",
+               dataType: "json",
+               data: JSON.stringify(arr),
+               traditional: true,
+               contentType: "application/json",
+               success:function (result) {
+                   if (result.success != false){
+                       $("#kk").modal('hide');
+                       alert("添加成功");
+                   }
                }
-           }
-       })
-
+           })
+       }
    }
 </script>
 
