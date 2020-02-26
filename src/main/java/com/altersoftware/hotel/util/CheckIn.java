@@ -215,4 +215,33 @@ public class CheckIn {
         }
         return null;
     }
+    public static String IDCardOCRBybase64(String base64path) {
+        try {
+
+            Credential cred =
+                    new Credential("AKIDrW1GK9nutd8PMLDdMs8dvz2smRQPraWH", "jJeRrOksmSyQeTGuMYXMuHMTQDl7d0Al");
+            HttpProfile httpProfile = new HttpProfile();
+            (httpProfile).setEndpoint("ocr.tencentcloudapi.com");
+            ClientProfile clientProfile = new ClientProfile();
+            clientProfile.setHttpProfile(httpProfile);
+            OcrClient client = new OcrClient(cred, "ap-shanghai", clientProfile);
+            // 身份证照片的的url地址
+            String params = "{\"ImageBase64\":\""+base64path+"\",\"CardSide\":\"FRONT\"}";
+            IDCardOCRRequest req = IDCardOCRRequest.fromJsonString(params, IDCardOCRRequest.class);
+
+            IDCardOCRResponse resp = client.IDCardOCR(req);
+            String string = IDCardOCRRequest.toJsonString(resp);
+            JSONObject jsonObject = JSONObject.parseObject(string);
+            Object retrunName = jsonObject.get("Name");
+            String reName = retrunName.toString();
+            Object retrunId = jsonObject.get("IdNum");
+            String reId = retrunId.toString();
+            String x = reName + "," + reId;
+            System.out.println(x);
+            return x;
+        } catch (TencentCloudSDKException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
