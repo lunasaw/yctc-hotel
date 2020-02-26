@@ -16,4 +16,8 @@ public interface CommonController {
      */
     String showIndexResturant();
 
+    String showIndexSvcenery();
+
+    String showIndexHealth();
+
 }
