@@ -23,7 +23,7 @@
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
     </button>
     <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增部门
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
     </button>
 </div>
 
@@ -366,8 +366,7 @@
     function deleteAll() {
         dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-        parameterPostRequest("/hotel/staff/delete-byidlist", filNames.map(item = > item.id), () =;
-    >
+        parameterPostRequest("/hotel/staff/delete-byidlist", filNames.map(item => item.id), () =>
         {
                 swal("删除", "文件删除成功", "success");
                 init();
@@ -432,9 +431,7 @@
             swal("错误", "请输入必输入项！", "error");
         }else {
             parameterPostRequest("/hotel/staff/update-userdo", data, () => {
-                $('#editModal';
-        ).
-            modal('hide');
+                $('#editModal').modal('hide');
                 swal("正确", "编辑成功", "success");
                 init();
         })
@@ -461,9 +458,7 @@
             swal("错误", "请输入必输入项！", "error");
         } else {
             parameterPostRequest("/hotel/staff/add-department", data, () => {
-                $('#addModal';
-        ).
-            modal('hide');
+                $('#addModal').modal('hide');
                 swal("正确", "添加成功", "success");
                 init();
         })
@@ -509,9 +504,7 @@
                 picture: "http://111.229.114.126:8087/iszychen/img/roomType/" + editId + ".jpg"
             };
             parameterPostRequest("/hotel/staff/update-userpic", data, () => {
-                $('#imgModal';
-        ).
-            modal('hide');
+                $('#imgModal').modal('hide');
                 $('#editModal').modal('hide');
                 swal("成功", "图片上传成功", "success");
                 init();

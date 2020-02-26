@@ -183,14 +183,6 @@
         $("#edit_Name").val(rows[index].name);
         $("#edit_num").val(rows[index].staffNumbers);
         $("#edit_staffid").val(rows[index].staffId);
-        parameterPostRequest("/hotel/department/get-department", rows[index].id, result => {
-            if(null !== result.module)
-        {
-                editType = rows[index].type;
-            } else {
-                swal("错误", "不存在该用户", "error");
-            }
-    })
     }
     function edit() {
         let data = {

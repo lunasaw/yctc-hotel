@@ -171,7 +171,9 @@
                   "evaluate":evaluate
               },
               success:function (result) {
-                  alert("退房成功");
+                  if (result.success != false) {
+                      alert("退房成功");
+                  }
               }
           })
       }

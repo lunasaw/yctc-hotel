@@ -41,7 +41,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title text-center" id="addModalLabel">
-                    新增物品信息
+                    新增
                 </h2>
             </div>
             <div class="modal-body">
@@ -359,14 +359,6 @@
         $("#edit_OutDate").val(rows[index].checkOutTime);
         $("#edit_Eva").val(rows[index].evaluate);
         $("#edit_State").val(rows[index].state);
-        parameterPostRequest("/hotel/record/get-byid", rows[index].id, result => {
-            if(null !== result.module)
-            {
-                editType = rows[index].type;
-            } else {
-                swal("错误", "不存在该用户", "error");
-            }
-    })
     }
     function edit() {
         let data = {

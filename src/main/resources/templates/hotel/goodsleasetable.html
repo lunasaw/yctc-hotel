@@ -23,10 +23,11 @@
 <table id="table">
 
 </table>
-    <button class="btn btn-success col-md-2" data-target="#dishes" data-toggle="modal" onclick="addinmodel()" type="button">
+    <div class="row">
+    <button class="btn btn-success col-md-2 col-md-offset-5" data-target="#dishes" data-toggle="modal" onclick="addinmodel()" type="button">
         提交订单
     </button>
-
+</div>
 
 
 
@@ -216,7 +217,7 @@
         for (let i = 0; i < data.length; ++i) {
             if (input[i].value !== "0") {
                 let dataSubmit = {
-                    goodsId: data[i].goodsId,
+                    goodsId: data[i].id,
                     customerId: userId,
 
                 };
@@ -300,10 +301,8 @@
                     }
                 } else {
                     console.log(result);
-                    var order = result.module;
-                    $('#orderId').val(order.id);
-                    $('#allpay').val(order.payMoney);
-                    // callback(result);
+                    $("#dishes").modal('hide');
+                    alert("交易成功");
                 }
             },
             error: function () {
