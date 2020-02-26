@@ -147,7 +147,7 @@
 					<!--					<img width="100%" height="300px" id="newImage2" src=""/>-->
 				</div>
 				<div class="card-footer">
-					<input accept="image/*" class="fileInpBtn" id="fileInpBtn2" type="file">
+					<input accept="image/*" class="fileInpBtn" id="fileInpBtn2"  id="upload1"  type="file">
 				</div>
 			</div>
 		</div>
@@ -161,87 +161,20 @@
 		</div>
 		<div class="row" style="margin-bottom: 150px">
 			<!--			id="stop"-->
-			<button class="btn btn-danger col-md-2 offset-md-5" ng-click="uploadIDver()" onclick="submit()"
+			<button class="btn btn-danger col-md-2 offset-md-5" ng-click="uploadIDver()" id="upload" onclick="submit()"
 			        type="button">上传
 			</button>
 		</div>
 	</div>
 </main>
+
 <footer
 		style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;">
 	<p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
 
 </footer>
 </body>
-<script src="angular.js">
 
-    myapp.controller('IDverificat', ['$scope', '$http', function ($scope, $http) {
-        var dialog = new auiDialog();
-        dialog.alert({
-            title: "证件上传须知",
-            msg: ` <div class="algin_leaft">
-				  <p>1,请保持拍摄清晰可见</p>
-				  <p>2,人像和国徽面不能有遮挡</p>
-				  <p>3,请上传本人身份证信息</p>
-				  </div>`,
-            buttons: ['确定']
-        });
-
-
-        let tapDatas = {};
-        let fileInpBtn1 = document.getElementById("fileInpBtn1");
-        fileInpBtn1.onclick = function () { //上传身份证
-            document.getElementById("newImage1").src = window.URL.createObjectURL(this.file[0]);
-            document.getElementById("newImage1").style.display = 'block';
-            document.getElementById("camera1").style.display = 'none';
-            var oFReader1 = new FlieReader();
-            console.log(oFReader1);
-            oFReader1.readAsDataURL(this.files[0]);
-            oFReader1.onload = function (oRFEvent) {
-                tapDatas.front = oRFEvent.target.result;
-            }
-        };
-
-        let fileInpBtn2 = document.getElementById("fileInpBtn2");
-        fileInpBtn1.onclick = function () { //上传身份证
-            document.getElementById("newImage2").src = window.URL.createObjectURL(this.file[0]);
-            document.getElementById("newImage2").style.display = 'block';
-            document.getElementById("camera2").style.display = 'none';
-            var oFReader1 = new FlieReader();
-            console.log(oFReader1);
-            oFReader1.readAsDataURL(this.files[0]);
-            oFReader1.onload = function (oRFEvent) {
-                tapDatas.back = oRFEvent.target.result;
-            }
-        };
-
-        $scope.uploadIDver = function () {
-
-            if (!tapDatas.front) {
-                dialog.alert({
-                    title: "提示",
-                    msg: `请拍照/上传人像面`,
-                    buttons: ['确定']
-                });
-                return;
-            }
-            if (!tapDatas.back) {
-                dialog.alert({
-                    title: "提示",
-                    msg: `请拍照/上传国徽面`,
-                    buttons: ['确定']
-                });
-                return;
-            }
-            console.log(tapDatas);
-            $http.post('/someUrl', tapDatas, {}).then(function () {
-
-            }, function () {
-
-            },);
-        }
-    }])
-</script>
 <script>
 
     function clickMode(id) {
@@ -300,7 +233,7 @@
         context.drawImage(video, 0, 0, 480, 320);
         str = canvas.toDataURL("image/png");
         $("#canvasx").attr("src", str);
-        alert(str);
+        // alert(str);
     });
 
     document.getElementById('capture1').addEventListener('click', function () {
@@ -408,5 +341,92 @@
                 return unescape(temp[1]);
         }
     }
+
+    // 图片上传
+    $("#upload").fileinput({
+        language: 'zh',     // 设置语言
+        dropZoneTitle: '可以将图片拖放到这里...',
+        uploadUrl: '/hotel/file/upload',
+        allowedFileExtensions : ['jpg', 'png'],
+        overwriteInitial: false,
+        minImageWidth: 50,      // 图片的最小宽度
+        minImageHeight: 50,     // 图片的最小高度
+        maxImageWidth: 1000,    // 图片的最大宽度
+        maxImageHeight: 1000,   // 图片的最大高度
+        maxFileSize: 1024,      // 单位为kb，如果为0表示不限制文件大小
+        minFileCount: 1,        // 每次上传允许的最少文件数。如果设置为0，则表示文件数是可选的。默认为0
+        maxFileCount: 1,        // 每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0
+        maxFilesNum: 1,
+        uploadExtraData: function() {
+            if (phone==null){
+                return {fileType: "img", fileName: "http://111.229.114.126:8087/iszychen/img/userInfo/" + customerId + ".jpg"};
+            } else {
+                return {fileType: "img", fileName: "http://111.229.114.126:8087/iszychen/img/userInfo/" + phone + ".jpg"};
+
+            }
+        }
+    }).on("fileuploaded", function(e, data) { // 文件上传成功的回调函数
+        if (data.response === null) {
+            swal("错误", "不支持该文件类型", "success");
+            return;
+        }
+
+        if (data.response.success === false) {
+            switch (data.response.code) {
+                case 9002: swal("错误", "参数错误", "error");     break;
+                case 9006: swal("错误", "文件创建错误", "error"); break;
+            }
+        } else {
+
+            $('#imgModal').modal('hide');
+            $('#editModal').modal('hide');
+            swal("成功", "图片上传成功", "success");
+            init();
+        }
+    });
+
+
+    // 图片上传
+    $("#upload1").fileinput({
+        language: 'zh',     // 设置语言
+        dropZoneTitle: '可以将图片拖放到这里...',
+        uploadUrl: '/hotel/file/upload',
+        allowedFileExtensions : ['jpg', 'png'],
+        overwriteInitial: false,
+        minImageWidth: 50,      // 图片的最小宽度
+        minImageHeight: 50,     // 图片的最小高度
+        maxImageWidth: 1000,    // 图片的最大宽度
+        maxImageHeight: 1000,   // 图片的最大高度
+        maxFileSize: 1024,      // 单位为kb，如果为0表示不限制文件大小
+        minFileCount: 1,        // 每次上传允许的最少文件数。如果设置为0，则表示文件数是可选的。默认为0
+        maxFileCount: 1,        // 每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0
+        maxFilesNum: 1,
+        uploadExtraData: function() {
+            if (phone==null){
+                return {fileType: "img", fileName: "http://111.229.114.126:8087/iszychen/img/userInfo/" + customerId + ".jpg"};
+            } else {
+                return {fileType: "img", fileName: "http://111.229.114.126:8087/iszychen/img/userInfo/" + phone + ".jpg"};
+
+            }
+        }
+    }).on("fileuploaded", function(e, data) { // 文件上传成功的回调函数
+        if (data.response === null) {
+            swal("错误", "不支持该文件类型", "success");
+            return;
+        }
+
+        if (data.response.success === false) {
+            switch (data.response.code) {
+                case 9002: swal("错误", "参数错误", "error");     break;
+                case 9006: swal("错误", "文件创建错误", "error"); break;
+            }
+        } else {
+
+            $('#imgModal').modal('hide');
+            $('#editModal').modal('hide');
+            swal("成功", "图片上传成功", "success");
+            init();
+        }
+    });
 </script>
 </html>

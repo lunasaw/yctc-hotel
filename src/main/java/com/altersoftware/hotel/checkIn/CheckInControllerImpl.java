@@ -132,6 +132,7 @@ public class CheckInControllerImpl implements CheckInController {
             ResultDO<UserDO> userDOById = userIService.getUserDOById(base64VO.getCustomerId());
             if (userDOById.getModule() != null) {
                 UserDO userDO = null;
+	            userDO = userDOById.getModule();
                 System.out.println("开始ocr识别");
                 // OCR识别身份信息
                 String s1 = CheckIn.IDCardOCRBybase64(base64VO.getId64());
@@ -151,7 +152,6 @@ public class CheckInControllerImpl implements CheckInController {
                     return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                         ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
                 }
-                userDO = userDOById.getModule();
                 String s = ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg";
 
 

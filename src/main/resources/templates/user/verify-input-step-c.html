@@ -211,7 +211,7 @@
         let img = document.createElement('img');
         img.src = canvas.toDataURL('image/png');
         document.getElementById('captures').prepend(img);
-        alert(canvas.toDataURL('image/png'));
+        // alert(canvas.toDataURL('image/png'));
         var userId = getCookie("userId");
         if (phone != null) {
             userId = null;
@@ -286,6 +286,8 @@
             }
         });
     }
+
+
 </script>
 
 
