@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.altersoftware.hotel.service.CheckInWithService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
@@ -22,7 +23,6 @@ import com.altersoftware.hotel.entity.CheckInWithDO;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.service.CheckInWithService;
 import com.altersoftware.hotel.service.CustomerService;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.UserIService;
@@ -319,7 +319,12 @@ public class CheckInControllerImpl implements CheckInController {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             for (int n = 0; n < resultDOModule.size(); n++) {
                 RecordDO recordDO = resultDOModule.get(n);
-                if (recordDO.getRoomNumber() == checkWith.getRoomNumber()) {
+	            ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(checkWith.getPhone());
+	            if (checkInWithPhone.getModule()==null){
+		            return new ResultDO<>(false, ResultCode.HAD_KIVE,
+				            ResultCode.MSG_HAD_KIVE, null);
+	            }
+	            if (recordDO.getRoomNumber() == checkWith.getRoomNumber()) {
                     try {
                         System.out.println(recordDO.getCheckOutTime());
                         checkInWithDO.setLastTime(dateFormat.parse(recordDO.getCheckOutTime()));
