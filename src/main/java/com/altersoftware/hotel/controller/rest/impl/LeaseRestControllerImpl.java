@@ -64,6 +64,7 @@ public class LeaseRestControllerImpl implements LeaseRestController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            System.out.println(returndate);
             LeaseDO leaseDO = new LeaseDO();
             leaseDO.setId(Long.parseLong(randomNumber.GetRandom()));
             leaseDO.setCustomerId(leaseVO.getCustomerId());

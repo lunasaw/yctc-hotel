@@ -287,14 +287,6 @@
         $("#edit_customid").val(rows[index].customerId);
         $("#edit_pay").val(rows[index].payMoney);
         $("#edit_state").val(rows[index].state);
-        parameterPostRequest("/hotel/order/get-byid", rows[index].id, result => {
-            if(null !== result.module)
-        {
-                editType = rows[index].type;
-            } else {
-                swal("错误", "不存在该用户", "error");
-            }
-    })
     }
     function edit() {
         let data = {
