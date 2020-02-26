@@ -51,8 +51,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="row" style="display:flex;align-items: center;justify-content: center;">
-                    <button type="button" class="btn btn-danger" onclick="addman()">提交</button>
+	            <div class="row" style="display:flex;align-items: center;justify-content: center;">
+		            <button type="button" class="btn btn-danger" onclick="addman()">继续添加</button>
+	            </div>
+	            <div class="row" style="display:flex;align-items: center;justify-content: center;">
+		            <button type="button" class="btn btn-danger" onclick="submit()">提交</button>
                 </div>
             </div>
         </div>
@@ -141,7 +144,7 @@
         <div class="row" style="margin-top: 50px">
             <div class="col-md-4 offset-md-4">
                 <h4 class="text-center" style="margin-bottom: 25px">已经完成操作</h4>
-	            <a class="btn btn-primary btn-block" href="">欢迎您的入住</a>
+	            <a class="btn btn-primary btn-block" href="/hotel/index">欢迎您的入住,期待您的加入</a>
                 <a data-toggle="modal" data-target="#kk" class="btn btn-danger btn-block" style="color: white;margin-top: 25px;">同伴入住</a>
             </div>
         </div>
@@ -192,29 +195,38 @@
             }
         })
     });
+    var arr = [];
    function addman() {
        console.log("获取用户名Id");
        var string = getCookie("userId");
        console.log(string);
-       let roomnumber = $("#selectun option:selected").text();
-       let name = $("#name").val();
-       let phone = $("#phone").val();
-       let data = {
+       var roomnumber = $("#selectun option:selected").text();
+       var name = $("#name").val();
+       var phone = $("#phone").val();
+       var data = {
            name:name,
            phone:phone,
            customerId:string,
            roomNumber:roomnumber
        };
+       console.log(data);
        if(data.name == null || data.phone <= 0 || data.roomNumber == null){
            alert("不可空缺数据");
        }
        else {
-           let arr = [];
            arr.push(data);
            console.info(arr);
-           url="/hotel/checkin/add-live";
-           parameterPostRequest(url,arr);
+
        }
+   }
+
+    function submit() {
+        if (arr.length == 0) {
+            alert("请先添加数据");
+            return;
+        }
+        url = "/hotel/checkin/add-live";
+        parameterPostRequest(url, arr);
    }
 
     // 有参数post请求
@@ -227,6 +239,7 @@
             traditional: true,
             contentType: "application/json",
             success: function (result) {
+                console.log(result);
                 if (result.success === false) {
                     switch (result.code) {
                         case 9007:

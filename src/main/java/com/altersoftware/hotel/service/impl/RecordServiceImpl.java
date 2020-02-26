@@ -213,6 +213,8 @@ public class RecordServiceImpl implements RecordService {
     public ResultDO<List<RecordDO>> showRecordByCustomer(long customerId) {
         List<RecordDO> recordDOByCustomerId = null;
         try {
+            // 删除未付款订单
+            recordDAO.deleteByNotPay();
             recordDOByCustomerId = recordDAO.getRecordDOByCustomerId(customerId);
             List<RecordDO> list = new ArrayList<>();
             for (int i = 0; i < recordDOByCustomerId.size(); i++) {

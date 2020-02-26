@@ -20,7 +20,7 @@ public interface CheckInWithDAO {
     @Insert(" INSERT INTO tb_checkin_with (id, pre_customerid, phone, name, idcard, room_number, picture, last_time, create_time, modify_time ) "
         +
         "VALUES(#{id}, #{customerId}, #{phone}, #{name}, #{idCard}, #{roomNumber}, #{idPiture}, #{lastTime}, now(), now()) ")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    // @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(CheckInWithDO checkInWithDO);
 
     /**

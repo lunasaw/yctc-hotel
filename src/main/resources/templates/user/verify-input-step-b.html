@@ -114,20 +114,20 @@
 			</div>
 		</div>
 
-		<form>
+
 			<div class="row" style="margin-top: 20px;">
 				<select multiple class="form-control col-md-8 offset-md-2 " id="selectun" required>
-					<option hidden active>请选择房间号</option>
+					<option active>请选择房间号</option>
 				</select>
 			</div>
 			<div class="row" style="margin:50px">
-				<a href="#" class="col-md-12" onclick="applynext()">
+
 					<button class="btn btn-primary col-md-4 offset-md-4"
-					        type="submit">下一步
+					        onclick="applynext()">下一步
 					</button>
-				</a>
+
 			</div>
-		</form>
+
 
 	</div>
 
@@ -185,9 +185,13 @@
                     "customerId": string
                 },
                 success: function (result) {
+                    console.log(result);
                     var list = result.module;
+
                     for (var i = 0; i < list.length; i++) {
-                        document.getElementById("selectun").options.add(new Option(list[i].roomNumber, i));
+                        console.log(list[i]);
+                        // document.getElementById("selectun").options.add(new Option(list[i].roomNumber.toString,list[i].roomNumber));
+                        $("#selectun").append("<option value=" + list[i] + ">" + list[i] + "</option>");  //为Select追加一个Option(下拉项)
                     }
                 }
             })
@@ -202,9 +206,10 @@
                 success: function (result) {
                     console.log(result);
                     var list = result.module;
-                    for (var i = 0; i < list.length; i++) {
-                        document.getElementById("selectun").options.add(new Option(list[i].roomNumber, i));
-                    }
+
+                    // document.getElementById("selectun").options.add(new Option(list.roomNumber, 1));
+                    $("#selectun").append("<option value=" + list.roomNumber + ">" + list.roomNumber + "</option>");  //为Select追加一个Option(下拉项)
+
                 }
             })
         }
@@ -213,13 +218,12 @@
     });
 
     function applynext() {
-        let arr = [];
-        arr = $("#selectun").find("option:selected").text();
+        var arr = $("#selectun").find("option:selected").text();
         console.info(arr);
         if (phone != null) {
-            window.location.href = "/hotel/checkin/step_c?phone=" + phone;
+            window.location.href = "/hotel/checkin/step_c?phone=" + phone + "&roomNumber=?" + arr;
         } else {
-            window.location.href = "/hotel/checkin/step_c"
+            window.location.href = "/hotel/checkin/step_c?roomNumber=?" + arr;
         }
 
     }
