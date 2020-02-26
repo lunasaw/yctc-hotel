@@ -197,11 +197,16 @@
                 data: {
                     "phone": phone
                 },
+                async: true,
                 success: function (result) {
                     console.log(result);
                     var list = result.module;
+                    console.log(list);
+                    console.log(list.roomNumber);
+                    document.getElementById("selectun").options.add(new Option(list.roomNumber));
                     // for (var i = 0; i < list.length; i++) {
-                    //     document.getElementById("selectun").options.add(new Option(list[i], i));
+                    //     console.info(list[i].roomNumber);
+                    //     document.getElementById("selectun").options.add(new Option(list[i].roomNumber, i));
                     // }
                 }
             })
