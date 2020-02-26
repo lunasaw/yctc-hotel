@@ -88,7 +88,6 @@ public class FaceIR {
             List<LivenessInfo> livenessInfoList = new ArrayList<LivenessInfo>();
             errorCode = faceEngine.getLiveness(livenessInfoList);
             int Flag = livenessInfoList.get(0).getLiveness();
-
             if (Flag == 1){
 	            return true;
             }

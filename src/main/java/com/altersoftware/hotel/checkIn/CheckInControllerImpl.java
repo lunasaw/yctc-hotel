@@ -138,7 +138,9 @@ public class CheckInControllerImpl implements CheckInController {
                 String s1 = CheckIn.IDCardOCRBybase64(base64VO.getId64());
                 String[] split = s1.split(",");
                 // 将识别的信息与预设信息比较
+                System.out.println(userDO);
                 if (split[0].equals(userDO.getName()) == false) {
+
                     return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
                             ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
                 }
@@ -203,6 +205,11 @@ public class CheckInControllerImpl implements CheckInController {
                         ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
                 }
                 System.out.println("解码完成");
+                boolean idface = IDface.idface(path + base64VO.getPhone() + ".jpg");
+                if (idface==false){
+                    return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                            ResultCode.MSG_PARAMETER_INVALID, null);
+                }
                 // 将图片上传到服务器
                 System.out.println("开始上传服务器");
                 File file = new File(path + base64VO.getPhone() + ".jpg");
