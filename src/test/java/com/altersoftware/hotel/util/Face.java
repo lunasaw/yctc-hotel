@@ -33,7 +33,7 @@ public class Face {
     @Test
     public void atest() throws Exception {
         String path = ResourceUtils.getURL("classpath:static/").getPath();
-        String s = Base64Utils.GetImageStr(path + "10019.jpg");
+        String s = Base64Utils.GetImageStr(path + "10014.jpg");
         // System.out.println(s);
         BaseVO baseVO = new BaseVO();
         baseVO.setId64(s);
@@ -47,7 +47,7 @@ public class Face {
     public void bface() throws FileNotFoundException {
         String path = ResourceUtils.getURL("classpath:static/").getPath();
 
-        String s = Base64Utils.GetImageStr(path + "body.jpg");
+        String s = Base64Utils.GetImageStr(path + "10014.jpg");
         FaceVO faceVO = new FaceVO();
         faceVO.setBase64(s);
         faceVO.setCustomerId(10014);
