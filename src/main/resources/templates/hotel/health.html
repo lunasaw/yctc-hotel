@@ -8,7 +8,7 @@
      <link href="../../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
      <link href="../../static/css/model-home.css" rel="stylesheet" th:href="@{/css/model-home.css}">
      <script src="../../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-     <script src="../../static/js/node_modules/@popperjs/core/dist/umd/popper.js" th:src="@{/js/node_modules/@popperjs/core/dist/umd/popper.js}"></script>
+     <script src="../../static/js/popper.js" th:src="@{/js/popper.js}"></script>
      <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
  </head>
 
@@ -22,8 +22,8 @@
                      <span class="navbar-brand" style="margin-left:-2%;color: tomato;">Server</span>
                  </a>
                  <ul class="nav navbar-nav navbar-right ">
-                     <li><a href="# "><span class="glyphicon glyphicon-user "></span>注册</a> </li>
-                     <li><a href="# "><span class="glyphicon glyphicon-log-in "></span> 登录</a></li>
+                     <li><a th:href="@{/user/sign-up}"><span class="glyphicon glyphicon-user "></span>注册</a> </li>
+                     <li><a th:href="@{/user/sign-in}"><span class="glyphicon glyphicon-log-in "></span> 登录</a></li>
                  </ul>
              </nav>
              <!-- logo -->
@@ -64,7 +64,7 @@
                 <hr style="background-color:rgb(124, 91, 6);height: 1px;width:90%;border: none">
                 <div class="row">
                     <div class="col-md-5 col-md-offset-1"
-                        style="height: 400px;background-image: url(img/sport1.jpg);background-position: center;background-size: cover;background-repeat: no-repeat;">
+                        style="height: 400px;background-image: url('/hotel/img/sport1.jpg');background-position: center;background-size: cover;background-repeat: no-repeat;">
                     </div>
                     <div class="col-md-4 col-md-offset-1">
                         <h3 style="color: rgb(124, 91, 6);font-family: 宋体;">渴望在水中展现英姿？</h3>
