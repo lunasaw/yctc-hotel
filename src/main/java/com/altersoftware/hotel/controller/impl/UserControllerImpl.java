@@ -64,7 +64,7 @@ public class UserControllerImpl implements UserController {
             LOG.error("sign up fail, userDO={}" + userDO);
             return "redirect:/" + StaticPath.COMMON_ERROR + "?" + initPermissionResultDO.getMsg();
         }
-        return "redirect:/" + StaticPath.USER_SIGNUP_SUCCESS;
+        return TemplatePath.USER_SIGN_UP_SUCCESS;
     }
 
     @Override

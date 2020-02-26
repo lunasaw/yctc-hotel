@@ -59,7 +59,7 @@ public interface PermissionGroupPermissionDAO {
      * @param permissionGroupId
      * @return
      */
-    @Select("select id, permission_group_id, permission_id, create_time, modify_time from tb_permission_group_permission where permission_group_id=#{permissionGroupId} ")
+    @Select("select  permission_id from tb_permission_group_permission where permission_group_id=#{permissionGroupId} ")
     @Results({
         @Result(property = "id", column = "id"),
         @Result(property = "permissionGroupId", column = "permission_group_id"),
