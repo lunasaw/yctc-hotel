@@ -9,9 +9,9 @@ public class TemplatePath {
     public static final String RESTAURANT                                 = "hotel/restaurant";
     // common end
 
-    public static final String SCENERY                                 = "hotel/scenery";
+    public static final String SCENERY                                    = "hotel/scenery";
 
-    public static final String HEALTH                                 = "hotel/health";
+    public static final String HEALTH                                     = "hotel/health";
     // common end
     // user start
     /** 用户主页 */
