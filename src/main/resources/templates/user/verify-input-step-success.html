@@ -212,22 +212,42 @@
            let arr = [];
            arr.push(data);
            console.info(arr);
-           $.ajax({
-               url: "/hotel/checkin/add-live",
-               type: "POST",
-               dataType: "json",
-               data: JSON.stringify(arr),
-               traditional: true,
-               contentType: "application/json",
-               success:function (result) {
-                   if (result.success != false){
-                       $("#kk").modal('hide');
-                       alert("添加成功");
-                   }
-               }
-           })
+           url="/hotel/checkin/add-live";
+           parameterPostRequest(url,arr);
        }
    }
+
+    // 有参数post请求
+    function parameterPostRequest(url, data, callback) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: JSON.stringify(data),
+            traditional: true,
+            contentType: "application/json",
+            success: function (result) {
+                if (result.success === false) {
+                    switch (result.code) {
+                        case 9007:
+                            alert("该客户已有入住信息,同行用户只能住一间房");
+                            break;
+                        case 9999:
+                            alert("系统错误");
+                            break;
+                    }
+                } else {
+                    console.log(result);
+                    $("#kk").modal('hide');
+                    alert("添加成功");
+
+                }
+            },
+            error: function () {
+                swal("错误", "404", "error");
+            }
+        });
+    }
 </script>
 
 

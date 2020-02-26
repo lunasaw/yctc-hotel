@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.altersoftware.hotel.service.CheckInWithService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
@@ -22,7 +23,6 @@ import com.altersoftware.hotel.entity.CheckInWithDO;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
-import com.altersoftware.hotel.service.CheckInWithService;
 import com.altersoftware.hotel.service.CustomerService;
 import com.altersoftware.hotel.service.RecordService;
 import com.altersoftware.hotel.service.UserIService;
@@ -132,11 +132,28 @@ public class CheckInControllerImpl implements CheckInController {
             ResultDO<UserDO> userDOById = userIService.getUserDOById(base64VO.getCustomerId());
             if (userDOById.getModule() != null) {
                 UserDO userDO = null;
+                System.out.println("开始ocr识别");
+                // OCR识别身份信息
+                String s1 = CheckIn.IDCardOCRBybase64(base64VO.getId64());
+                String[] split = s1.split(",");
+                // 将识别的信息与预设信息比较
+                if (split[0].equals(userDO.getName()) == false) {
+                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                            ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
+                }
+                if (split[1].equals(userDO.getIdCardNumber()) == false) {
+                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                            ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
+                }
+                System.out.println("结束ocr识别");
                 // 将拍摄 或者 上传 的身份证照片解码
                 if (Base64Utils.GenerateImage(base64VO.getId64(), path + base64VO.getCustomerId() + ".jpg") == false) {
                     return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                         ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
                 }
+                userDO = userDOById.getModule();
+                String s = ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg";
+
 
                 // 将图片上传到服务器
                 System.out.println("开始上传服务器");
@@ -144,30 +161,13 @@ public class CheckInControllerImpl implements CheckInController {
                 byte[] bytes = FileUtilsAlter.fileToByte(file);
                 UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
                 System.out.println("上传完成");
-                userDO = userDOById.getModule();
-                String s = ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg";
-
-                System.out.println("开始ocr识别");
-                // OCR识别身份信息
-                String s1 = CheckIn.IDCardOCR(base64VO.getCustomerId());
-                String[] split = s1.split(",");
-                // 将识别的信息与预设信息比较
-                if (split[0].equals(userDO.getName()) == false) {
-                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
-                        ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
-                }
-                if (split[1].equals(userDO.getIdCardNumber()) == false) {
-                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
-                        ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
-                }
-                System.out.println("结束ocr识别");
                 System.out.println("开始云端比较");
 
-                // 将识别到的信息与云端比较 上线之前先关闭远程api
-                // if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
-                // return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
-                // ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
-                // }
+                 //将识别到的信息与云端比较 上线之前先关闭远程api
+                 if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
+                 return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
+                 ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
+                 }
                 System.out.println("完成云端比较");
                 userDO.setFaceToken(s);
                 customerService.updateUserDO(userDO);
@@ -182,6 +182,18 @@ public class CheckInControllerImpl implements CheckInController {
                 if (!checkInWithPhone.isSuccess()) {
                     return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                         ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                }
+                // OCR识别身份信息
+                System.out.println("开始ocr识别");
+                String s1 = CheckIn.IDCardOCRBybase64((base64VO.getId64()));
+                System.out.println("结束ocr识别");
+
+                String[] split = s1.split(",");
+                CheckInWithDO module = checkInWithPhone.getModule();
+                // 将识别的信息与预设信息比较
+                if (!split[0].equals(module.getName())) {
+                    return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                            ResultCode.MSG_PARAMETER_INVALID, null);
                 }
                 System.out.println("解码开始");
 
@@ -198,28 +210,17 @@ public class CheckInControllerImpl implements CheckInController {
                 UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
                 System.out.println("上传完成");
 
-                CheckInWithDO module = checkInWithPhone.getModule();
+
                 String s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
                 module.setIdPiture(s);
-                // OCR识别身份信息
-                System.out.println("开始ocr识别");
-                String s1 = CheckIn.IDCardOCR(Long.parseLong(base64VO.getPhone()));
-                System.out.println("结束ocr识别");
 
-                String[] split = s1.split(",");
-
-                // 将识别的信息与预设信息比较
-                if (!split[0].equals(module.getName())) {
-                    return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
-                        ResultCode.MSG_PARAMETER_INVALID, null);
-                }
                 // // 将识别到的信息与云端比较
                 System.out.println("开始云端比较");
 
-                // if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
-                // return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                // ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                // }
+                 if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
+                 return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                 }
                 System.out.println("完成云端比较");
 
                 // 更新身份证号
@@ -319,7 +320,12 @@ public class CheckInControllerImpl implements CheckInController {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             for (int n = 0; n < resultDOModule.size(); n++) {
                 RecordDO recordDO = resultDOModule.get(n);
-                if (recordDO.getRoomNumber() == checkWith.getRoomNumber()) {
+	            ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(checkWith.getPhone());
+	            if (checkInWithPhone.getModule()==null){
+		            return new ResultDO<>(false, ResultCode.HAD_KIVE,
+				            ResultCode.MSG_HAD_KIVE, null);
+	            }
+	            if (recordDO.getRoomNumber() == checkWith.getRoomNumber()) {
                     try {
                         System.out.println(recordDO.getCheckOutTime());
                         checkInWithDO.setLastTime(dateFormat.parse(recordDO.getCheckOutTime()));
