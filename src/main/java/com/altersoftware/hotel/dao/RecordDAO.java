@@ -88,6 +88,13 @@ public interface RecordDAO {
     int deleteById(long id);
 
     /**
+     * 删除未付款订单
+     *
+     */
+    @Delete("DELETE FROM tb_record WHERE state=0")
+    void deleteByNotPay();
+
+    /**
      * 根据房间客房号查询所属订单
      *
      * @param roomNumber

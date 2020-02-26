@@ -149,7 +149,7 @@ public class CheckInWithServiceImpl implements CheckInWithService {
             for (int i = 0; i < checkInList.size(); i++) {
                 Date lastTime = checkInList.get(i).getLastTime();
                 Date now = new Date();
-                if (lastTime.before(now)) {
+                if (lastTime == null || lastTime.before(now)) {
                     checkInWithDAO.deleteById(checkInList.get(i).getId());
                 }
             }
