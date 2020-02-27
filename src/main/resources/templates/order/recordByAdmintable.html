@@ -317,7 +317,7 @@
     function deleteAll() {
         dialog("确定删除吗？", () => {
             let filNames = $("#table").bootstrapTable('getSelections');
-        parameterPostRequest("/hotel/record/delete-byidlist", filNames.map(item = > item.id), () =;
+        parameterPostRequest("/hotel/order/delete-byidlist", filNames.map(item = > item.id), () =;
     >
         {
                 swal("删除", "文件删除成功", "success");
