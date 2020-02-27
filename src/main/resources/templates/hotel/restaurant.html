@@ -10,6 +10,8 @@
 	<script src="../../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
 	<script src="../../static/js/node_modules/@popperjs/core/dist/umd/popper.js" th:src="@{/js/popper.js}"></script>
 	<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="text/css">
+
 </head>
 
 <body>
@@ -17,13 +19,13 @@
 	<div class="content" style="padding-bottom:300px ;">
 		<!-- 灰色导航栏 -->
 		<nav class="navbar navbar-top navbar-default " role="navigation" style="padding: 0px 20px;height: 25px;">
-			<a href="# ">
+			<a href="/hotel/index">
 				<span class="navbar-brand">Alter</span>
 				<span class="navbar-brand" style="margin-left:-2%;color: tomato;">Server</span>
 			</a>
 			<ul class="nav navbar-nav navbar-right ">
-				<li><a href="# "><span class="glyphicon glyphicon-user "></span>注册</a></li>
-				<li><a href="# "><span class="glyphicon glyphicon-log-in "></span> 登录</a></li>
+				<li><a th:href="@{/user/sign-up}"><span class="glyphicon glyphicon-user "></span>注册</a></li>
+				<li><a th:href="@{/user/sign-in}"><span class="glyphicon glyphicon-log-in "></span> 登录</a></li>
 			</ul>
 		</nav>
 		<!-- logo -->
@@ -72,7 +74,8 @@
 						轻舞刀叉，切下一块芳香四溢的肉，缓缓放入口中，迸溅在口腔中的汁水是否是您寻找多时的完美体验？轻抿一口葡萄酒，那柔顺的口感刺激着您的食欲，这时追求极致的您也能一醉于完美的盛宴之中。
 					</h4>
 					<h4 style="line-height: 25px;font-family: 宋体;">立刻入住Alter Hotel,享受高档西式餐厅的完美佳肴！</h4>
-					<a class="btn btn-danger" href="" style="margin-left:20%;margin-top:20px;width: 60%;">立即入住</a>
+					<a class="btn btn-danger" href="/hotel/checkin/step_a_number"
+					   style="margin-left:20%;margin-top:20px;width: 60%;">立即入住</a>
 				</div>
 			</div>
 			<hr style="background-color:rgb(124, 91, 6);height: 0.8px;width:90%;border: none">
@@ -82,7 +85,8 @@
 					<h4 style="font-family: 宋体;line-height: 25px;">
 						神秘的东方料理，最新鲜的食材提供最上等的美味，最丰富的处理方式提供最多样的珍馐，无限中石材迸发出无限的可能性，与我们的主厨近距离接触，享受独一无二的私人定制菜单。</h4>
 					<h4 style="line-height: 25px;font-family: 宋体;">立刻入住Alter Hotel,享受纯正东方料理的完美主义！</h4>
-					<a class="btn btn-danger" href="" style="margin-left:20%;margin-top:20px;width: 60%;">立即入住</a>
+					<a class="btn btn-danger" href="/hotel/checkin/step_a_number"
+					   style="margin-left:20%;margin-top:20px;width: 60%;">立即入住</a>
 				</div>
 				<div class="col-md-5 col-md-offset-1"
 					 id="two-img"
@@ -100,9 +104,9 @@
 					<h4 style="font-family: 宋体;line-height: 25px;">
 						坐在优雅古典风格的咖啡厅中，沐浴在午后温暖的阳光之中，闭上眼，抿一口香椿咖啡，还有什么事比这更加享受闲暇时光的吗？</h4>
 					<h4 style="line-height: 25px;font-family: 宋体;">立刻加盟Alter Hotel会员,享受免费午间咖啡的权益！</h4>
-					<a class="btn btn-primary" href=""
-					   style="margin-left:20%;margin-top:20px;width: 60%;">立即了解Alter
-						Hotel会员权益</a>
+					<a class="btn btn-danger" href="/hotel/checkin/step_a_number"
+					   style="margin-left:20%;margin-top:20px;width: 60%;">立即入住</a>
+
 				</div>
 			</div>
 			<hr style="background-color:rgb(124, 91, 6);height: 0.8px;width:90%;border: none">

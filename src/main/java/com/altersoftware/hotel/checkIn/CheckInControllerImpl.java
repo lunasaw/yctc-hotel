@@ -253,7 +253,7 @@ public class CheckInControllerImpl implements CheckInController {
                 String[] split = null;
                 // 判断是否为前端上传
                 System.out.println("判断开始");
-                FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg", path,
+                FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg", path,
                     "hadbody.jpg");
                 File files = new File(path + "hadbody.jpg");
                 boolean exists = files.exists();
@@ -262,7 +262,7 @@ public class CheckInControllerImpl implements CheckInController {
 
                     System.out.println("开始ocr识别");
                     // OCR识别身份信息  地址识别
-                    String s1 = CheckIn.IDCardOCR(base64VO.getCustomerId());
+                    String s1 = CheckIn.IDCardOCR(Long.parseLong(base64VO.getPhone()));
                     split = s1.split(",");
                     // 将识别的信息与预设信息比较
                     if (split[0].equals(module.getName()) == false) {
