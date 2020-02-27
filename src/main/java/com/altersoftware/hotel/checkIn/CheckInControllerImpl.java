@@ -166,6 +166,12 @@ public class CheckInControllerImpl implements CheckInController {
                     }
                     System.out.println("结束ocr识别");
 
+                    boolean idface = IDface.idface(path + "hadbody.jpg");
+                    if (idface == false) {
+                        return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                            ResultCode.MSG_PARAMETER_INVALID, null);
+                    }
+
                     System.out.println("开始云端比较");
 
                     // 将识别到的信息与云端比较 上线之前先关闭远程api
@@ -207,6 +213,11 @@ public class CheckInControllerImpl implements CheckInController {
                             ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
                     }
 
+                    boolean idface = IDface.idface(path + base64VO.getCustomerId() + ".jpg");
+                    if (idface == false) {
+                        return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                            ResultCode.MSG_PARAMETER_INVALID, null);
+                    }
 
                     // 将图片上传到服务器
                     System.out.println("开始上传服务器");
@@ -230,63 +241,111 @@ public class CheckInControllerImpl implements CheckInController {
 
             } else {
                 ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(base64VO.getPhone());
+                String s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
 
                 System.out.println("查住户");
-
                 // 用户不是同住用户
                 if (!checkInWithPhone.isSuccess()) {
                     return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                         ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
                 }
-                // OCR识别身份信息
-                System.out.println("开始ocr识别");
-                String s1 = CheckIn.IDCardOCRBybase64((base64VO.getId64()));
-                System.out.println("结束ocr识别");
-
-                String[] split = s1.split(",");
                 CheckInWithDO module = checkInWithPhone.getModule();
-                // 将识别的信息与预设信息比较
-                if (!split[0].equals(module.getName())) {
-                    return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
-                        ResultCode.MSG_PARAMETER_INVALID, null);
+                String[] split = null;
+                // 判断是否为前端上传
+                System.out.println("判断开始");
+                FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg", path,
+                    "hadbody.jpg");
+                File files = new File(path + "hadbody.jpg");
+                boolean exists = files.exists();
+                // 前端上传
+                if (exists) {
+
+                    System.out.println("开始ocr识别");
+                    // OCR识别身份信息  地址识别
+                    String s1 = CheckIn.IDCardOCR(base64VO.getCustomerId());
+                    split = s1.split(",");
+                    // 将识别的信息与预设信息比较
+                    if (split[0].equals(module.getName()) == false) {
+
+                        return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                            ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
+                    }
+                    module.setIdCard(split[1]);
+                    System.out.println("结束ocr识别");
+
+					//人像校验
+                    boolean idface = IDface.idface(path + "hadbody.jpg");
+                    if (idface == false) {
+                        return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                            ResultCode.MSG_PARAMETER_INVALID, null);
+                    }
+
+                    System.out.println("开始云端比较");
+
+                    // 将识别到的信息与云端比较 上线之前先关闭远程api
+                    if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
+                        return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
+                            ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
+                    }
+                    System.out.println("完成云端比较");
+
+                    module.setIdPiture(s);
+                    checkInWithService.updateCheckInWithDO(module);
+                    return new ResultDO<>(true, ResultCode.SUCCESS,
+                        ResultCode.MSG_SUCCESS);
+                }else {
+
+	                // OCR识别身份信息
+	                System.out.println("开始ocr识别");
+	                String s1 = CheckIn.IDCardOCRBybase64((base64VO.getId64()));
+	                System.out.println("结束ocr识别");
+
+	                split = s1.split(",");
+
+	                // 将识别的信息与预设信息比较
+	                if (!split[0].equals(module.getName())) {
+		                return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+				                ResultCode.MSG_PARAMETER_INVALID, null);
+	                }
+	                System.out.println("解码开始");
+
+	                // 将拍摄 或者 上传 的身份证照片解码
+	                if (!Base64Utils.GenerateImage(base64VO.getId64(), path + base64VO.getPhone() + ".jpg")) {
+		                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+				                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+	                }
+	                System.out.println("解码完成");
+
+	                // 检测照片是否有人像
+	                boolean idface = IDface.idface(path + base64VO.getPhone() + ".jpg");
+	                if (idface == false) {
+		                return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+				                ResultCode.MSG_PARAMETER_INVALID, null);
+	                }
+	                // 将图片上传到服务器
+	                System.out.println("开始上传服务器");
+	                File file = new File(path + base64VO.getPhone() + ".jpg");
+	                byte[] bytes = FileUtilsAlter.fileToByte(file);
+	                UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
+	                System.out.println("上传完成");
+
+	                module.setIdPiture(s);
+
+	                // // 将识别到的信息与云端比较
+	                System.out.println("开始云端比较");
+	                // 更新身份证号
+	                module.setIdCard(split[1]);
+	                if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
+		                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+				                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+	                }
+	                System.out.println("完成云端比较");
+
+	                checkInWithService.updateCheckInWithDO(module);
+	                return new ResultDO<>(true, ResultCode.SUCCESS,
+			                ResultCode.MSG_SUCCESS);
                 }
-                System.out.println("解码开始");
 
-                // 将拍摄 或者 上传 的身份证照片解码
-                if (!Base64Utils.GenerateImage(base64VO.getId64(), path + base64VO.getPhone() + ".jpg")) {
-                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                }
-                System.out.println("解码完成");
-                boolean idface = IDface.idface(path + base64VO.getPhone() + ".jpg");
-                if (idface == false) {
-                    return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
-                        ResultCode.MSG_PARAMETER_INVALID, null);
-                }
-                // 将图片上传到服务器
-                System.out.println("开始上传服务器");
-                File file = new File(path + base64VO.getPhone() + ".jpg");
-                byte[] bytes = FileUtilsAlter.fileToByte(file);
-                UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
-                System.out.println("上传完成");
-
-                String s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
-                module.setIdPiture(s);
-
-                // // 将识别到的信息与云端比较
-                System.out.println("开始云端比较");
-
-                if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
-                    return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                }
-                System.out.println("完成云端比较");
-
-                // 更新身份证号
-                module.setIdCard(split[1]);
-                checkInWithService.updateCheckInWithDO(module);
-                return new ResultDO<>(true, ResultCode.SUCCESS,
-                    ResultCode.MSG_SUCCESS);
             }
 
         } catch (Exception e) {
