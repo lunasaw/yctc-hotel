@@ -28,8 +28,8 @@
         <appender-ref ref="serverLog"/>
     </logger>
 
-    <!-- 控制台输出日志 -->
-    <!--    <root level="info">-->
-    <!--        <appender-ref ref="STDOUT"/>-->
-    <!--    </root>-->
+    <!--     控制台输出日志 -->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
 </configuration>
