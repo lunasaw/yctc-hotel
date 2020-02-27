@@ -70,7 +70,6 @@
 </div>
 
 
-
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
 	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/hotel/index">Alter Hotel</a>
 
@@ -345,6 +344,7 @@
                 return unescape(temp[1]);
         }
     }
+
     function submit() {
 
         var id64 = $('#canvasx')[0].src;
@@ -386,13 +386,13 @@
                             alert("对不起,拍摄不清晰,请上传或更换设备重试");
                             break;
                         case 9005:
-							alert("对不起,识别异常或拍摄身份证拍摄不清晰,请重试");
+                            alert("对不起,识别异常或拍摄身份证拍摄不清晰,请重试");
                             break;
                         case 9006:
                             alert("您的身份信息与账户不符,请上传本人信息");
                             break;
                         case 9007:
-							alert("错误", "文件不存在", "error");
+                            alert("错误", "文件不存在", "error");
                             break;
                         case 9999:
                             alert("系统错误");
@@ -420,7 +420,7 @@
         language: 'zh',     // 设置语言
         dropZoneTitle: '可以将图片拖放到这里...',
         uploadUrl: '/hotel/file/upload',
-        allowedFileExtensions : ['jpg', 'png'],
+        allowedFileExtensions: ['jpg', 'png'],
         overwriteInitial: false,
         minImageWidth: 50,      // 图片的最小宽度
         minImageHeight: 50,     // 图片的最小高度
@@ -430,8 +430,8 @@
         minFileCount: 1,        // 每次上传允许的最少文件数。如果设置为0，则表示文件数是可选的。默认为0
         maxFileCount: 1,        // 每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0
         maxFilesNum: 1,
-        uploadExtraData: function() {
-            if (phone==null){
+        uploadExtraData: function () {
+            if (phone == null) {
                 console.log(userId);
                 return {
                     fileType: "img",
@@ -446,7 +446,7 @@
 
             }
         }
-    }).on("fileuploaded", function(e, data) { // 文件上传成功的回调函数
+    }).on("fileuploaded", function (e, data) { // 文件上传成功的回调函数
         if (data.response === null) {
             swal("错误", "不支持该文件类型", "success");
             return;
@@ -454,11 +454,19 @@
 
         if (data.response.success === false) {
             switch (data.response.code) {
-                case 9002: swal("错误", "参数错误", "error");     break;
-                case 9006: swal("错误", "文件创建错误", "error"); break;
+                case 9002:
+                    swal("错误", "参数错误", "error");
+                    break;
+                case 9006:
+                    swal("错误", "文件创建错误", "error");
+                    break;
             }
         } else {
-
+            if (phone == null) {
+                $('#canvas1').attr("src", "http://111.229.114.126:8087/iszychen/img/userInfo/theback/" + userId + ".jpg");
+            } else {
+                $('#canvas1').attr("src", "http://111.229.114.126:8087/iszychen/img/userInfo/theback/" + phone + ".jpg");
+            }
             $('#imgModal').modal('hide');
             $('#editModal').modal('hide');
             alert("图片上传成功");
@@ -471,7 +479,7 @@
         language: 'zh',     // 设置语言
         dropZoneTitle: '可以将图片拖放到这里...',
         uploadUrl: '/hotel/file/upload',
-        allowedFileExtensions : ['jpg', 'png'],
+        allowedFileExtensions: ['jpg', 'png'],
         overwriteInitial: false,
         minImageWidth: 50,      // 图片的最小宽度
         minImageHeight: 50,     // 图片的最小高度
@@ -481,8 +489,8 @@
         minFileCount: 1,        // 每次上传允许的最少文件数。如果设置为0，则表示文件数是可选的。默认为0
         maxFileCount: 1,        // 每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0
         maxFilesNum: 1,
-        uploadExtraData: function() {
-            if (phone==null){
+        uploadExtraData: function () {
+            if (phone == null) {
                 console.log(userId);
                 return {
                     fileType: "img",
@@ -490,11 +498,14 @@
                 };
 
             } else {
-                return {fileType: "img", fileName: "http://111.229.114.126:8087/iszychen/img/userInfo/" + phone + ".jpg"};
+                return {
+                    fileType: "img",
+                    fileName: "http://111.229.114.126:8087/iszychen/img/userInfo/" + phone + ".jpg"
+                };
 
             }
         }
-    }).on("fileuploaded", function(e, data) { // 文件上传成功的回调函数
+    }).on("fileuploaded", function (e, data) { // 文件上传成功的回调函数
         if (data.response === null) {
             swal("错误", "不支持该文件类型", "success");
             return;
@@ -502,11 +513,19 @@
 
         if (data.response.success === false) {
             switch (data.response.code) {
-                case 9002: swal("错误", "参数错误", "error");     break;
-                case 9006: swal("错误", "文件创建错误", "error"); break;
+                case 9002:
+                    swal("错误", "参数错误", "error");
+                    break;
+                case 9006:
+                    swal("错误", "文件创建错误", "error");
+                    break;
             }
         } else {
-
+            if (phone == null) {
+                $('#canvasx').attr("src", "http://111.229.114.126:8087/iszychen/img/userInfo/" + userId + ".jpg");
+            } else {
+                $('#canvasx').attr("src", "http://111.229.114.126:8087/iszychen/img/userInfo/" + phone + ".jpg");
+            }
             $('#imgModal').modal('hide');
             $('#editModal').modal('hide');
             alert("图片上传成功");

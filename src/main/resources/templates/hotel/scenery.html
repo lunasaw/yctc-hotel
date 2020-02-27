@@ -12,6 +12,7 @@
    <script src="../../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
    <script src="../../static/js/popper.js" th:src="@{/js/popper.js}"></script>
    <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	 <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="text/css">
 
  </head>
 
@@ -20,7 +21,7 @@
      <div class="content" style="padding-bottom:300px ;">
        <!-- 灰色导航栏 -->
        <nav class="navbar navbar-top navbar-default " role="navigation" style="padding: 0px 20px;height: 25px;">
-         <a href="# ">
+	       <a href="/hotel/index">
            <span class="navbar-brand">Alter</span>
            <span class="navbar-brand" style="margin-left:-2%;color: tomato;">Server</span>
          </a>
@@ -101,7 +102,9 @@
          </div>
          <div class="row">
            <div style="margin-top: 15px;margin-bottom: 15px;" class="col-md-2 col-md-offset-5">
-             <a href=""><button class="btn btn-primary col-md-12" type="button">立即了解</button></a>
+	           <a href="/hotel/checkin/step_a_number">
+		           <button class="btn btn-primary col-md-12" type="button">立即了解</button>
+	           </a>
            </div>
          </div>
          <hr style="height: 1px;background-color: rgb(124, 91, 6); border: none;">
