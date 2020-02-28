@@ -12,6 +12,14 @@ public class TemplatePath {
     public static final String SCENERY                                    = "hotel/scenery";
 
     public static final String HEALTH                                     = "hotel/health";
+
+    public static final String WEDDING                                     = "hotel/wedding-celebration";
+
+    public static final String SOCIALIZING                                 = "hotel/socializing";
+
+    public static final String HOTEL_INTRODUCTION                         = "hotel/hotel-introduction";
+
+    public static final String DISCOUNTPRICE                                = "hotel/discourtPrice";
     // common end
     // user start
     /** 用户主页 */
