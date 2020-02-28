@@ -66,10 +66,9 @@
         var searchParams = new URLSearchParams(window.location.search);
         var recordId = searchParams.get('out_trade_no');
         console.log(recordId);
-        recordId=Number(recordId);
-        // if (recordId=null){
-        //     return;
-        // }
+        if (recordId=null){
+            return;
+        }
         $.ajax({
             url: "/hotel/record/get-byid",
             type: "POST",

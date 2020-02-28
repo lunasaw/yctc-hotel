@@ -91,4 +91,10 @@ public interface RecordService {
      * @return
      */
     ResultDO<List<RecordDO>> showRecordListByCustomer(long customerId);
+
+	/**
+	 * 删除未付款订单
+	 * @return
+	 */
+	ResultDO<Void> deleteByStateZero();
 }

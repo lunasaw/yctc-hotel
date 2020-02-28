@@ -15,6 +15,7 @@
 <!-- Begin page content -->
 <div class="container" onload="GetRequest">
 	<div class="text-center">
+		<h1>页面发生错误</h1>
 		<p id="errortext">正在跳转到用户主页，请稍候</p>
 	</div>
 </div>
@@ -29,31 +30,31 @@
 	timer = setTimeout('redirect()', 1 * 1000); //跳转
 </script>
 
-	<Script language="javascript">
-		function GetRequest() {
-			var url = location.search; //获取url中"?"符后的字串   
-			if (url == "?parameter%20invalid")
-				document.getElementById("errortext").innerHTML = "参数非法";
-			if (url == "?db%20error")
-				document.getElementById("errortext").innerHTML = "数据库错误";
-			if (url == "?sign%20in%20error")
-				document.getElementById("errortext").innerHTML = "登陆错误";
-			if (url == "?system%20error")
-				document.getElementById("errortext").innerHTML = "系统错误";
-			if (url == "?no%20such%20user")
-				document.getElementById("errortext").innerHTML = "没有当前用户";
-			if (url == "?verificationCode%20not%20match")
-				document.getElementById("errortext").innerHTML = "验证码不匹配";
-			if (url == "?verificationCode%20timeout")
-				document.getElementById("errortext").innerHTML = "验证码超时";
-			if (url == "?confirm%20invalid")
-				document.getElementById("errortext").innerHTML = "二次验证不一致";
-			if (url == "?incorrect%20number%20of%20password")
-				document.getElementById("errortext").innerHTML = "用户名或密码错误";
-			if (url == "?password%20error")
-				document.getElementById("errortext").innerHTML = "密码错误";
-		}
-	</script>
+<!--	<Script language="javascript">-->
+<!--		function GetRequest() {-->
+<!--			var url = location.search; //获取url中"?"符后的字串   -->
+<!--			if (url == "?parameter%20invalid")-->
+<!--				document.getElementById("errortext").innerHTML = "参数非法";-->
+<!--			if (url == "?db%20error")-->
+<!--				document.getElementById("errortext").innerHTML = "数据库错误";-->
+<!--			if (url == "?sign%20in%20error")-->
+<!--				document.getElementById("errortext").innerHTML = "登陆错误";-->
+<!--			if (url == "?system%20error")-->
+<!--				document.getElementById("errortext").innerHTML = "系统错误";-->
+<!--			if (url == "?no%20such%20user")-->
+<!--				document.getElementById("errortext").innerHTML = "没有当前用户";-->
+<!--			if (url == "?verificationCode%20not%20match")-->
+<!--				document.getElementById("errortext").innerHTML = "验证码不匹配";-->
+<!--			if (url == "?verificationCode%20timeout")-->
+<!--				document.getElementById("errortext").innerHTML = "验证码超时";-->
+<!--			if (url == "?confirm%20invalid")-->
+<!--				document.getElementById("errortext").innerHTML = "二次验证不一致";-->
+<!--			if (url == "?incorrect%20number%20of%20password")-->
+<!--				document.getElementById("errortext").innerHTML = "用户名或密码错误";-->
+<!--			if (url == "?password%20error")-->
+<!--				document.getElementById("errortext").innerHTML = "密码错误";-->
+<!--		}-->
+<!--	</script>-->
 </body>
 
 </html>
