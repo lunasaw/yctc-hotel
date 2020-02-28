@@ -6,16 +6,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import com.altersoftware.hotel.constant.ResultCode;
+import com.altersoftware.hotel.constant.entity.room.RoomState;
 import com.altersoftware.hotel.controller.rest.RecordRestController;
 import com.altersoftware.hotel.entity.RecordDO;
 import com.altersoftware.hotel.entity.ResultDO;
+import com.altersoftware.hotel.entity.RoomDO;
 import com.altersoftware.hotel.service.RecordService;
+import com.altersoftware.hotel.service.RoomService;
 
 /**
  * @author hzx
@@ -28,6 +33,10 @@ public class RecordRestControllerImpl implements RecordRestController {
 
     @Autowired
     RecordService recordService;
+
+
+    @Resource
+    RoomService roomService;
 
     /**
      * 展示订单信息
@@ -263,7 +272,18 @@ public class RecordRestControllerImpl implements RecordRestController {
         }
     }
 
-    /**
+	@Override
+	@GetMapping("delete-statezero")
+	public ResultDO<Void> deleteStateZero() {
+		ResultDO<Void> voidResultDO = recordService.deleteByStateZero();
+		if (voidResultDO.isSuccess() == false) {
+			return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+					ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+		} else {
+			return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+		}	}
+
+	/**
      * 查询所有订单信息
      *
      * @return
@@ -342,4 +362,24 @@ public class RecordRestControllerImpl implements RecordRestController {
 
         }
     }
+
+	@Override
+	@PostMapping("checkin")
+	public ResultDO<Void> checkin(String roomNumber) {
+    	int roomNUmbers =Integer.parseInt(roomNumber);
+		ResultDO<RoomDO> roomDOByNumber = roomService.getRoomDOByNumber(roomNUmbers);
+		if (roomDOByNumber.isSuccess() == false) {
+			return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+					ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+		}else {
+			RoomDO module = roomDOByNumber.getModule();
+			module.setState(RoomState.CHECK_IN);
+			ResultDO<Void> voidResultDO = roomService.updateRoom(module);
+			if (voidResultDO.isSuccess()==false){
+				return new ResultDO<Void>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+						ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+			}
+		}
+		return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+	}
 }

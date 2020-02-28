@@ -1,6 +1,5 @@
 package com.altersoftware.hotel.service.impl;
 
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -197,9 +196,9 @@ public class RecordServiceImpl implements RecordService {
                     }
                 }
             }
-            NumberFormat nf = NumberFormat.getNumberInstance();
-            nf.setMaximumFractionDigits(2);
-            actualMoney = Double.parseDouble(nf.format(actualMoney));
+//            NumberFormat nf = NumberFormat.getNumberInstance();
+//            nf.setMaximumFractionDigits(2);
+//            actualMoney = Double.parseDouble(nf.format(actualMoney));
         } catch (Exception e) {
             LOG.error("getActualMoney error, customerId={}, roomNumber={}", customerId, roomNumber, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
@@ -260,4 +259,17 @@ public class RecordServiceImpl implements RecordService {
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
     }
+
+	@Override
+	public ResultDO<Void> deleteByStateZero() {
+		try {
+			recordDAO.deleteByNotPay();
+			LOG.info("deleteByStateZero success");
+			return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+		} catch (Exception e) {
+			LOG.error("deleteByStateZero error", e);
+			return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+					ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
+		}
+	}
 }
