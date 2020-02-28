@@ -259,7 +259,10 @@ public class TemplatePath {
     public static final String PLACE_AN_ORDER_MENU                        = "order/placeanordermenu";
 
     /** 支付宝回调/返回是否支付成功页面 */
-    public static final String CHECK_ALI_PAY                              = "pay/checkalipay";
+	public static final String CHECK_ALI_PAY                              = "pay/checkalipay";
+
+	/** 支付宝回调/返回是否支付成功页面 */
+	public static final String HELLO                              = "pay/hello";
 
     /** 用户订单交付页面 */
     public static final String SUBMIT_RECORD                              = "pay/roomReserve";

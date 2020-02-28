@@ -221,9 +221,9 @@
         var arr = $("#selectun").find("option:selected").text();
         console.info(arr);
         if (phone != null) {
-            window.location.href = "/hotel/checkin/step_c?phone=" + phone + "&roomNumber=?" + arr;
+            window.location.href = "/hotel/checkin/step_c?phone=" + phone + "&roomNumber=" + arr;
         } else {
-            window.location.href = "/hotel/checkin/step_c?roomNumber=?" + arr;
+            window.location.href = "/hotel/checkin/step_c?roomNumber=" + arr;
         }
 
     }

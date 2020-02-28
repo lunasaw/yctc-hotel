@@ -263,26 +263,31 @@
                 "roomTypeName": type
             }),
             success: function (result) {
+				if (result.code==1025){
+				    alert("对不起,该类型的房间已住满,请选择其他类别的房间,或向我们留言,有空闲房间将会通知于您");
+                    $('#payforroom').modal('hide');
+                    return;
+				}if (result.success){
+                    var model = result.module;
+                    var ordernumber = model.id;
+                    console.log(ordernumber);
+                    var roomNumber = model.roomNumber;
+                    var customernum = model.customerId;
+                    var staffId = model.staffId;
+                    var payMoney = model.payMoney;
+                    var precheckInTime = model.precheckInTime;
+                    var checkInTime = model.checkInTime;
+                    var checkOutTime = model.checkOutTime;
 
-                var model = result.module;
-                var ordernumber = model.id;
-                console.log(ordernumber);
-                var roomNumber = model.roomNumber;
-                var customernum = model.customerId;
-                var staffId = model.staffId;
-                var payMoney = model.payMoney;
-                var precheckInTime = model.precheckInTime;
-                var checkInTime = model.checkInTime;
-                var checkOutTime = model.checkOutTime;
-
-                $("#userid").attr("value", customernum);
-                $("#order_reference").attr("value", ordernumber);
-                $("#room_num").attr("value", roomNumber);
-                $("#staff_id").attr("value", staffId);
-                $("#pay_money").attr("value", payMoney);
-                $("#pre_time").attr("value", precheckInTime);
-                $("#in_time").attr("value", checkInTime);
-                $("#out_time").attr("value", checkOutTime);
+                    $("#userid").attr("value", customernum);
+                    $("#order_reference").attr("value", ordernumber);
+                    $("#room_num").attr("value", roomNumber);
+                    $("#staff_id").attr("value", staffId);
+                    $("#pay_money").attr("value", payMoney);
+                    $("#pre_time").attr("value", precheckInTime);
+                    $("#in_time").attr("value", checkInTime);
+                    $("#out_time").attr("value", checkOutTime);
+	            }
             }
         })
     }
@@ -291,6 +296,16 @@
         document.getElementById("form").action = action;
         document.getElementById("form").submit()
     }
+
+    //模态框关闭事件 模态框id
+    $('#payforroom').on('hide.bs.modal', function () {
+        $.ajax({
+            url: "/hotel/record/delete-statezero",
+            type: "GET"
+        });
+        // alert('嘿，我听说您喜欢模态框...');
+    });
+
 </script>
 
 
