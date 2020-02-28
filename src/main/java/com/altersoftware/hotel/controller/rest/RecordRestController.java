@@ -84,6 +84,12 @@ public interface RecordRestController {
      */
     ResultDO<Void> deleteList(Long[] ids);
 
+	/**
+	 * 删除state为0的行
+	 * @return
+	 */
+	ResultDO<Void> deleteStateZero();
+
     /**
      * 查询所有订单信息
      *
@@ -106,4 +112,8 @@ public interface RecordRestController {
      */
     ResultDO<Void> updateOutime(long id, String evaluate);
 
+	/**
+	 * 完成入住
+	 */
+	ResultDO<Void> checkin(String roomNumber);
 }
