@@ -20,4 +20,12 @@ public interface CommonController {
 
     String showIndexHealth();
 
+    String showIndexWedding();
+
+    String showIndexSocial();
+
+    String showIndexIntroduction();
+
+    String showIndexDiscount();
+
 }

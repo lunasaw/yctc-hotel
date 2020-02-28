@@ -1,0 +1,130 @@
+ <!DOCTYPE html>
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+  <head lang="en">
+    <title>Alter Hotel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, ">
+    <link href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../../static/css/model-home.css" th:href="@{/css/model-home.css}" rel="stylesheet">
+    <link href="../../static/css/coolest.css" th:href="@{/css/coolest.css}" rel="stylesheet">
+    <script src="../../static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script src="../../static/js/popper.js" th:src="@{/js/popper.js}"></script>
+    <script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+  </head>
+
+ <body>
+   <div class="wrapper clearfix">
+     <div class="content" style="padding-bottom:300px ;">
+       <!-- 灰色导航栏 -->
+       <nav class="navbar navbar-top navbar-default " role="navigation" style="padding: 0px 20px;height: 25px;">
+         <a href="# ">
+           <span class="navbar-brand">Alter</span>
+           <span class="navbar-brand" style="margin-left:-2%;color: tomato;">Server</span>
+         </a>
+         <ul class="nav navbar-nav navbar-right">
+           <li><a th:href="@{/user/sign-up}"><span class="glyphicon glyphicon-user "></span>注册</a> </li>
+           <li><a th:href="@{/user/sign-in}"><span class="glyphicon glyphicon-log-in "></span> 登录</a></li>
+         </ul>
+       </nav>
+       <!-- logo -->
+       <div class="container-fluid"
+         style="display: flex;justify-content: center;align-items: center;height: 41px;margin-bottom: 25px;">
+         <img  th:src="@{/img/2124.png}" width="214.8px" height="33px">
+       </div>
+       <!-- 黑色导航栏 -->
+       <nav class="navbar navbar-default " role="navigation" style="background-color: rgb(61, 61, 61);border-radius:0">
+         <ul class="map-nav-ul">
+           <li class="map-nav-li"><a href="">酒店&旅游胜地</a> </li>
+           <li class="map-nav-li"><a href="">特惠价格</a> </li>
+           <li class="map-nav-li"><a href="">婚礼&庆席</a> </li>
+           <li class="map-nav-li"><a href="">社交</a> </li>
+         </ul>
+       </nav>
+
+       <!-- 主体内容 -->
+       <div class="container-fluid">
+        <h2 style="text-align: center;color: rgb(109, 85, 26);font-family: 宋体;">特惠价格</h2>
+        <hr style="background-color: rgb(109, 85, 26);height: 1px;border:none;width: 90%;">
+        <h2 style="text-align: center;font-family: 宋体;margin-top: 70px;margin-bottom: 65px;">探索所有优惠</h2>
+        <div class="container">
+          <div class="row">
+            <div class="coolest chong"
+              style="width: 30%;height:400px;margin-left:2.5%;margin-right: 2.5%;padding: 10px 10px;">
+              <img th:src="@{/img/discount-1.jpg}" width="100%" height="186px">
+              <h4 style="color: rgb(109, 85, 26);font-family: 宋体;margin-top: 15px;">Alter Hotel会员优惠</h4>
+              <h5 style="font-family: 黑体;line-height: 25px;margin-top: 22px;">会员专享优惠</h5>
+            </div>
+            <div class="coolest chong" style="width: 30%;height:400px;margin-right: 2.5%;padding: 10px 10px;">
+              <img th:src="@{/img/discount-2.jpg}"  width="100%" height="186px">
+              <h4 style="color: rgb(109, 85, 26);font-family: 宋体;margin-top: 15px;">周末优惠</h4>
+              <h5 style="font-family: 黑体;line-height: 25px;margin-top:22px;">从壮丽的山峰与葱郁的自然环境，到原始海滩与都市景观，选择我们精彩的优惠套餐欢度愉快周末。</h5>
+            </div>
+            <div class="coolest chong" style="width: 30%;height:400px;margin-right: 2.5%;padding: 10px 10px;">
+              <img th:src="@{/img/discount-3.jpg}" width="100%" height="186px">
+              <h4 style="color: rgb(109, 85, 26);font-family: 宋体;margin-top: 15px;">住宿优惠</h4>
+              <h5 style="font-family: 黑体;line-height: 25px;margin-top: 22px;">"无论是大型商业活动还是短暂的休闲度假，选择超值优惠套餐，享受丰富下榻体验和收获精彩纷呈的旅行回忆"。</h5>
+            </div>
+          </div>
+        </div>
+        <div class="container" style="margin-top:50px;margin-bottom: 65px;">
+          <div class="row">
+            <div class=" coolest chong"
+              style="width: 30%;height:400px;margin-left:2.5%;margin-right: 2.5%;padding: 10px 10px;">
+              <img th:src="@{/img/discount-4.jpg}" width="100%" height="186px">
+              <h4 style="color: rgb(109, 85, 26);font-family: 宋体;margin-top: 15px;">度假酒店优惠</h4>
+              <h5 style="font-family: 黑体;line-height: 25px;margin-top: 22px;">无论是寻找世外桃源或家庭度假，选择专享优惠与套餐，探索理想的度假体验。</h5>
+            </div>
+            <div class=" coolest chong" style="width: 30%;height:400px;margin-right: 2.5%;padding: 10px 10px;">
+              <img th:src="@{/img/discount-5.jpg}" width="100%" height="186px">
+              <h4 style="color: rgb(109, 85, 26);font-family: 宋体;margin-top: 15px;">全球优惠</h4>
+              <h5 style="font-family: 黑体;line-height: 25px;margin-top: 22px;">选择酒店与度假酒店的限时优惠，悦享舒适住宿体验。</h5>
+            </div>
+            <div class=" coolest chong" style="width: 30%;height:400px;margin-right: 2.5%;padding: 10px 10px;">
+              <img th:src="@{/img/discount-6.jpg}" width="100%" height="186px">
+              <h4 style="color: rgb(109, 85, 26);font-family: 宋体;margin-top: 15px;">家庭旅行优惠</h4>
+              <h5 style="font-family: 黑体;line-height: 25px;margin-top: 22px;">亲临我们的亲子酒店及度假村，势必让您在沉浸放松下达成和孩子们在欢乐的假日里创下属于彼此不朽的美好回忆。</h5>
+            </div>
+          </div>
+        </div>
+       </div>
+      
+       <div class="footer">
+         <ul class="ul-bottom" style="color: white;">
+           <li class="lead">酒店预订</li>
+           <li>列表预订</a></li>
+           <li>地图预订</li>
+           <li>城市预订</li>
+           <li>搜索我们</li>
+         </ul>
+
+         <ul class="ul-bottom" style="color: white;">
+           <li class="lead">合作加盟</li>
+           <li>商务合作</li>
+           <li>招标信息</li>
+           <li>供应商名录</li>
+           <li>合作通道</li>
+         </ul>
+
+         <ul class="ul-bottom" style="color: white;">
+           <li class="lead">关于我们</li>
+           <li>联系我们</li>
+           <li>友情链接</li>
+           <li>投资者关系</li>
+           <li>Alter Server</li>
+         </ul>
+
+         <ul class="ul-bottom" style="color: white;">
+           <li class="lead">Alter Hotel 微博</li>
+           <li>官方微博</li>
+           <li>投诉建议</li>
+           <li>联盟微博</li>
+           <li>315微博</li>
+         </ul>
+
+       </div>
+     </div>
+
+ </body>
+
+ </html>

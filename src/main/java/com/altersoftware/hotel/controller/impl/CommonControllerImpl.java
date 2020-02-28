@@ -43,4 +43,30 @@ public class CommonControllerImpl implements CommonController {
         return TemplatePath.HEALTH;
     }
 
+    @Override
+    @GetMapping("index/wedding")
+    public String showIndexWedding() {
+        return TemplatePath.WEDDING;
+    }
+
+    @Override
+    @GetMapping("index/social")
+    public String showIndexSocial() {
+        return TemplatePath.SOCIALIZING;
+    }
+
+    @Override
+    @GetMapping("index/introduction")
+    public String showIndexIntroduction() {
+        return TemplatePath.HOTEL_INTRODUCTION;
+    }
+
+    @Override
+    @GetMapping("index/discount")
+    public String showIndexDiscount() {
+        return TemplatePath.DISCOUNTPRICE;
+    }
+
+
+
 }
