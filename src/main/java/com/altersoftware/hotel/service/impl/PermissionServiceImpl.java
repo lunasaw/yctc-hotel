@@ -38,7 +38,7 @@ public class PermissionServiceImpl implements PermissionIService {
     private static final long            TEACHER_GROUP_ID         = UserType.CUSTOMER;
     /** 员工权限组 */
     private static final String          STAFF_GROUP_NAME         = "staff";
-    private static final long            STUDENT_GROUP_ID         = UserType.RECEPTION;
+    private static final long            STUDENT_GROUP_ID         = UserType.CLEAN;
     /** 管理员权限组 */
     private static final String          Admin_GROUP_NAME         = "administrator";
     private static final long            ADMINISTRATOR_GROUP_ID   = UserType.MANAGEMENT;
@@ -445,7 +445,7 @@ public class PermissionServiceImpl implements PermissionIService {
 
     // 增加单个permissionGroup
     @Override
-    public ResultDO<Void> addPermissionGroup(String permissionGroupName, List<Long> permissionIds) {
+    public ResultDO<Void> addPermissionGroup(long id, String permissionGroupName, List<Long> permissionIds) {
         // 参数检验
         if (StringUtils.isBlank(permissionGroupName) || permissionIds.size() == 0) {
             LOG.error("addPermissionGroup error, parameter illegal, permissionGroupName={}, permissionIds={}",
@@ -455,14 +455,15 @@ public class PermissionServiceImpl implements PermissionIService {
         try {
             // 添加角色组
             PermissionGroupDO permissionGroupDO = new PermissionGroupDO();
+            permissionGroupDO.setId(id);
             permissionGroupDO.setName(permissionGroupName);
             permissionGroupDAO.insert(permissionGroupDO);
             // 获得角色组id
-            long permissionGroupId = permissionGroupDAO.getPermissionGroupIdByName(permissionGroupName);
+//            long permissionGroupId = permissionGroupDAO.getPermissionGroupIdByName(permissionGroupName);
             // 添加权限
             PermissionGroupPermissionDO permissionGroupPermissionDO = new PermissionGroupPermissionDO();
             for (int i = 0; i < permissionIds.size(); i++) {
-                permissionGroupPermissionDO.setPermissionGroupId(permissionGroupId);
+                permissionGroupPermissionDO.setPermissionGroupId(id);
                 permissionGroupPermissionDO.setPermissionId(permissionIds.get(i));
                 permissionGroupPermissionDAO.insert(permissionGroupPermissionDO);
             }
@@ -524,6 +525,7 @@ public class PermissionServiceImpl implements PermissionIService {
             permissionGroupDAO.deleteById(permissionGroupId);
             // 添加角色组
             PermissionGroupDO permissionGroupDO = new PermissionGroupDO();
+            permissionGroupDO.setId(permissionGroupId);
             permissionGroupDO.setName(permissionGroupName);
             permissionGroupDAO.insert(permissionGroupDO);
             long newPermissionGroupId = permissionGroupDAO.getPermissionGroupIdByName(permissionGroupName);

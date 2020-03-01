@@ -167,6 +167,7 @@
         var phone = $('#phone').val();
         console.log(phone);
         var customerId;
+
         $.ajax({
             url: "/hotel/checkin/check-hadcustomer",
             type: "POST",
@@ -175,16 +176,16 @@
                 "phone": phone
             },
             success: function (result) {
+                console.log(result);
                 if (result.success === true) {
                     if (result.module.faceToken != null) {
-                        customerId = result.module.customerId;
+                        customerId = result.module.id;
                     }
                 }
             }
 
         });
-
-
+        console.log(customerId);
         $.ajax({
             url: "/hotel/checkin/check-phone",
             type: "POST",
@@ -197,6 +198,7 @@
                 if (result.success === true) {
                     if (customerId != null) {
                         window.location.href = "/hotel/checkin/step_b?phone=" + phone + "&customerId=" + customerId;
+                        return;
                     }
                     if (result.module != null) {
                         window.location.href = "/hotel/checkin/step_a_input?phone=" + phone;

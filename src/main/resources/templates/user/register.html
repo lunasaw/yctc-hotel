@@ -79,10 +79,12 @@
                       </label>
                     </div>
                     <div class="form-group">
-	                    <input class="input-material" data-msg="邀请码: 没有则不填" id="register-usertype" name="type" required
-	                           value="90000"
-	                           th:value="${userDO.type}" >
-                      <label for="register-username"  class="label-material active">邀请码: 没有则不填</label>
+	                    <input class="input-material" data-msg="邀请码: 默认填写90000" id="register-usertype" name="type"
+	                           required  th:value="${userDO.type}" >
+	                    <!--	                           required value="90000">-->
+
+
+                      <label for="register-username"  class="label-material active" th:value="90000">邀请码: 默认请填写90000</label>
                     </div>
                     <div class="form-group terms-conditions">
                       <input id="register-agree" name="registerAgree" type="checkbox" required value="1" data-msg="Your agreement is required" class="checkbox-template">

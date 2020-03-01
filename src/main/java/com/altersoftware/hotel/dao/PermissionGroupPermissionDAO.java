@@ -15,9 +15,9 @@ public interface PermissionGroupPermissionDAO {
      * 
      * @param permissionGroupPermissionDO
      */
-    @Insert(" INSERT INTO tb_permission_group_permission (id, permission_group_id, permission_id, create_time, modify_time ) "
+    @Insert(" INSERT INTO tb_permission_group_permission ( permission_group_id, permission_id, create_time, modify_time ) "
         +
-        "VALUES(#{id},  #{permissionGroupId},#{permissionId},  NOW(), NOW()) ")
+        "VALUES( #{permissionGroupId},#{permissionId},  NOW(), NOW()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void insert(PermissionGroupPermissionDO permissionGroupPermissionDO);
 

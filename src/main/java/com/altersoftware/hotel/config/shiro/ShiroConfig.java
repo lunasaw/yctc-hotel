@@ -125,7 +125,7 @@ public class ShiroConfig {
             filterMap.put("/" + TemplatePath.GOAWAY, "perms[customer:CheckOutOnline]");
             //在线退房
             filterMap.put("/" + TemplatePath.ORDER_BY_ADMIN, "perms[staff:RoomOrder]");
-            //管理员客房订单
+	        //管理员客房订单
             filterMap.put("/" + TemplatePath.MENU_ADMIN, "perms[staff:RoomOrder]");
             //菜品配送订单
             filterMap.put("/" + TemplatePath.RECORD_BY_ADMIN, "perms[staff:OrderForFood]");

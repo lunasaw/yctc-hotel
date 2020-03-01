@@ -84,6 +84,12 @@ public class CheckInControllerImpl implements CheckInController {
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
         try {
+	        // 删除失效请求
+	        ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
+	        if (deleteLoseEfficacy.isSuccess() == false) {
+		        return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+				        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+	        }
             ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(phone);
             if (!checkInWithPhone.isSuccess()) {
                 return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,

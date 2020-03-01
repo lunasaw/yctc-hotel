@@ -88,7 +88,9 @@ public class CustomerRestControllerImpl implements CustomerRestController {
             }
             if (userDO.getIdCardNumber() != null) {
                 userDObyNumber.setIdCardNumber(userDO.getIdCardNumber());
-
+            }else{
+	            return new ResultDO<Void>(false, ResultCode.UPDATE_FAILD,
+			            ResultCode.MSG_UPDATE_FAILD, null);
             }
             if (userDO.getName() != null) {
                 userDObyNumber.setName(userDO.getName());

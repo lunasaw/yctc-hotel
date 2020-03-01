@@ -145,7 +145,7 @@
             <div class="col-md-4 offset-md-4">
                 <h4 class="text-center" style="margin-bottom: 25px">已经完成操作</h4>
 	            <a class="btn btn-primary btn-block" href="/hotel/index">欢迎您的入住,期待您的加入</a>
-                <a data-toggle="modal" data-target="#kk" class="btn btn-danger btn-block" style="color: white;margin-top: 25px;">同伴入住</a>
+                <button data-toggle="modal" data-target="#kk" class="btn btn-danger btn-block" style="color: white;margin-top: 25px;">同伴入住</button>
             </div>
         </div>
 
@@ -168,6 +168,11 @@
         });
 
     });
+    console.log("获取手机账号");
+    // 获取url上的site参数并且传入表单
+    var searchParams = new URLSearchParams(window.location.search);
+    var phone = searchParams.get('phone');
+
     function getCookie(objName) {//获取指定名称的cookie的值
         var arrStr = document.cookie.split(";");
         for (var i = 0; i < arrStr.length; i++) {
@@ -180,6 +185,7 @@
         console.log("获取用户名Id");
         var userId = getCookie("userId");
         console.log(userId);
+
         $.ajax({
             url: "/hotel/record/getnumbers-bycustomer",
             type: "POST",
@@ -197,36 +203,48 @@
     });
     var arr = [];
    function addman() {
-       console.log("获取用户名Id");
-       var string = getCookie("userId");
-       console.log(string);
-       var roomnumber = $("#selectun option:selected").text();
-       var name = $("#name").val();
-       var phone = $("#phone").val();
-       var data = {
-           name:name,
-           phone:phone,
-           customerId:string,
-           roomNumber:roomnumber
-       };
-       console.log(data);
-       if(data.name == null || data.phone <= 0 || data.roomNumber == null){
-           alert("不可空缺数据");
-       }
-       else {
-           arr.push(data);
-           console.info(arr);
+       let number = checkwith();
+       if (number==0){
+           // return false;
+       }else {
+           console.log("获取用户名Id");
+           var string = getCookie("userId");
+           console.log(string);
+           var roomnumber = $("#selectun option:selected").text();
+           var name = $("#name").val();
+           var phone = $("#phone").val();
+           var data = {
+               name:name,
+               phone:phone,
+               customerId:string,
+               roomNumber:roomnumber
+           };
+           console.log(data);
+           if(data.name == null || data.phone <= 0 || data.roomNumber == null){
+               alert("不可空缺数据");
+           }
+           else {
+               arr.push(data);
+               console.info(arr);
 
+           }
        }
+
    }
 
     function submit() {
-        if (arr.length == 0) {
-            alert("请先添加数据");
-            return;
+        let number = checkwith();
+        if (number===0){
+
+        }else {
+            if (arr.length == 0) {
+                alert("请先添加数据");
+                return;
+            }
+            url = "/hotel/checkin/add-live";
+            parameterPostRequest(url, arr);
         }
-        url = "/hotel/checkin/add-live";
-        parameterPostRequest(url, arr);
+
    }
 
     // 有参数post请求
@@ -260,6 +278,16 @@
                 swal("错误", "404", "error");
             }
         });
+    }
+    function checkwith() {
+        alert("对不起,您不是预定用户");
+        if (phone!=null){
+            $('#kk').modal('hide');
+            var tag=0;
+        }else {
+            tag=1;
+        }
+		return tag;
     }
 </script>
 
