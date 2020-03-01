@@ -212,7 +212,7 @@
             }
         }
     }
-
+	var tag=0;
     $(document).ready(function () {
         var userId = getCookie("userId");
         console.log(userId);
@@ -230,6 +230,8 @@
                 if (list.length == 0) {
                     alert("对不起,未查到您的房间号,请先预定房间");
                     return;
+                }else {
+                    tag=1;
                 }
                 for (var i = 0; i < list.length; i++) {
                     document.getElementById("selectun").options.add(new Option(list[i], i));
@@ -243,6 +245,11 @@
     }
 
     function submin() {
+        if (tag==0){
+            alert("对不起,您还未预定房间");
+            $('#dishes').modal('hide');
+            return;
+        }
         $("#modalTbody").find("tr").remove();
 
         let data = $("#table").bootstrapTable("getData");

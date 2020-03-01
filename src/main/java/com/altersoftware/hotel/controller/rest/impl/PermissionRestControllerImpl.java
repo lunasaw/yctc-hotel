@@ -126,10 +126,11 @@ public class PermissionRestControllerImpl implements PermissionRestController {
         if (permissionGroupNameAndPermissionIdsVO == null) {
             return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
+        long id=permissionGroupNameAndPermissionIdsVO.getId();
         String permissionGroupName = permissionGroupNameAndPermissionIdsVO.getName();
         List<Long> permissionIds = permissionGroupNameAndPermissionIdsVO.getPermissonIds();
         System.out.println(permissionGroupName + " " + permissionIds);
-        return permissionService.addPermissionGroup(permissionGroupName, permissionIds);
+        return permissionService.addPermissionGroup(id, permissionGroupName, permissionIds);
     }
 
     @Override

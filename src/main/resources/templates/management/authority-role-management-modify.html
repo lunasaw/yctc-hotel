@@ -43,6 +43,10 @@
 						<a href="/hotel/education/authority-role-management" class="btn btn-secondary" role="button">返回</a>
 					</div>
 				</div>
+				<div style="height: 50px;">
+
+
+				</div>
 			</div>	
 		</div>
 	</div>
@@ -175,12 +179,13 @@
 	function modify() {
         var theRequest = {};
 		theRequest = getUrl();
-		var id = theRequest["id"];	
+		var id = $("#id").val();
 		var name =  $("#name").val();
         var permissonIds = [];
 		$('input[name="id"]:checked').each(function(){  
 			permissonIds.push($(this).val());  
-		}); 	
+		});
+		console.log(id);
 		$.ajax({
 			url: "/hotel/restpermission/modify-role",
 			type: "POST",

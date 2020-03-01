@@ -197,11 +197,12 @@
     };
 
     var roomNumber;
+    var phone;
     document.getElementById('captureBtn').onclick = function () {
         console.log("获取手机账号");
         // 获取url上的site参数并且传入表单
         var searchParams = new URLSearchParams(window.location.search);
-        var phone = searchParams.get('phone');
+	    phone = searchParams.get('phone');
         console.log("获取房间号");
         // 获取url上的site参数并且传入表单
         var searchParams = new URLSearchParams(window.location.search);
@@ -291,7 +292,11 @@
                         success: function (result) {
                             console.log(result);
                             alert("成功");
-                            window.location.href = "/hotel/checkin/step_success";
+                            if(phone==null){
+                                window.location.href = "/hotel/checkin/step_success";
+                            }else {
+                                window.location.href = "/hotel/checkin/step_success?phone="+phone;
+                            }
                             // callback(result);
                         }
                     });

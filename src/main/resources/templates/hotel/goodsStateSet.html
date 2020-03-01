@@ -224,7 +224,7 @@
                 return unescape(temp[1]);
         }
     }
-
+	var tag=0;
     $(document).ready(function () {
         console.log("获取用户名Id");
         var userId = getCookie("userId");
@@ -243,12 +243,21 @@
                 // for (var i = 0; i < data.length; i++) {
                 //     document.getElementById("selectun").options.add(new Option(data[i], i));
                 // }
+	            if (data.length ==0){
+	                alert("对不起,未查到您预定的房间,如您已预定,请与前台联系");
+	            } else {
+	                tag = 1;
+	            }
             }
         })
     });
 
 
     let submit = $('.sendupdategoods').submit(function (e) {
+        if (tag ==0){
+            alert("对不起,您还未预定房间");
+            return false;
+        }
         var roomNumber = $("#selectun").val();
         // alert(roomNumber);
         console.log(roomNumber);

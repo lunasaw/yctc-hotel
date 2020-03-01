@@ -248,8 +248,10 @@
                     //console.log(result);
                     if (result.success) {
                         alert("修改成功");
+                        window.location.reload();//刷新当前页面.
+                    }else {
+                        alert("身份证件不能为空,或手机邮箱已被注册")
                     }
-                    window.location.reload();//刷新当前页面.
                 },
                 error: function (xhr, resp, text) {
                     console.log(xhr, resp, text);

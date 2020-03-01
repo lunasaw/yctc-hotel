@@ -89,7 +89,7 @@ public interface PermissionIService {
      * @param permissionIds
      * @return
      */
-    ResultDO<Void> addPermissionGroup(String permissionGroupName, List<Long> permissionIds);
+    ResultDO<Void> addPermissionGroup(long id ,String permissionGroupName, List<Long> permissionIds);
 
     /**
      * 根据permissionGroupId删除permissionGroup

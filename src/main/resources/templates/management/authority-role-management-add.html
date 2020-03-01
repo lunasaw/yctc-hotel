@@ -23,6 +23,8 @@
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">角色名称（英文）</span>
+							<input aria-describedby="basic-addon3" class="form-control" id="id" placeholder="编号" type="text">
+
 						</div>
 						<input type="text" class="form-control" id="name" aria-describedby="basic-addon3">
 					</div>
@@ -41,6 +43,10 @@
 						<button onclick="add()" type="button" class="btn btn-primary">确定</button>
 						<a href="/hotel/education/authority-role-management" class="btn btn-secondary" role="button" id="authority-role-management">返回</a>
 					</div>
+				</div>
+				<div style="height: 50px;">
+
+
 				</div>
 			</div>	
 		</div>
@@ -78,6 +84,7 @@
 	
 	function add() {
 		var name =  $("#name").val();
+        var id =  $("#id").val();
         var permissonIds = [];
 		$('input[name="id"]:checked').each(function(){  
 			permissonIds.push($(this).val());  
@@ -86,6 +93,7 @@
 			url: "/hotel/restpermission/add-role",
 			type: "POST",
 			data: JSON.stringify({
+				"id":id,
 				"name": name,
 				"permissonIds": permissonIds,
 			}),

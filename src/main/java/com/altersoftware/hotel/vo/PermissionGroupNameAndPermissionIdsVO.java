@@ -3,10 +3,21 @@ package com.altersoftware.hotel.vo;
 import java.util.List;
 
 public class PermissionGroupNameAndPermissionIdsVO {
-
+	private long id;
     /** 权限组的名字 */
     private String name;
-    /** 可拥有的新权限ids */
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/** 可拥有的新权限ids */
+
+
     private List<Long> permissonIds;
 
     public String getName() {
@@ -30,8 +41,9 @@ public class PermissionGroupNameAndPermissionIdsVO {
         StringBuilder builder = new StringBuilder();
         builder.append("PermissionGroupNameAndPermissionIdsVO [name=");
         builder.append(name);
-
-        builder.append(", permissonIds=");
+	    builder.append(id);
+	    builder.append(", id=");
+	    builder.append(", permissonIds=");
         builder.append(permissonIds);
         builder.append("]");
         return builder.toString();

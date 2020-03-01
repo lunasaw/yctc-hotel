@@ -72,6 +72,7 @@
 					if (list.length == 0) {
 						$("#listTable thead").append("<tr><th>当前无角色</th></tr>");
 					} else {
+					    console.log(list);
 						$("#listTable thead").append(
 							"<tr><th scope='col'>序号</th><th scope='col'>角色名</th><th scope='col'>操作</th></tr>");
 						for (var i = 0; i < list.length; i++) {
@@ -154,7 +155,8 @@
 			return href;
 		}
 		
-		function modifyRole(id) { 
+		function modifyRole(id) {
+		    console.log(id);
 			window.location.href = "/hotel/education/authority-role-management-modify?id="+id;
 		}	
 		
