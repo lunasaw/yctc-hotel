@@ -61,7 +61,7 @@ public class StaffRestControllerImpl implements StaffRestController {
     @Override
     @PostMapping("getall")
     public ResultDO<List<UserDO>> getAllStaff() {
-        ResultDO<List<UserDO>> allCustomer = customerService.getAllCustomer();
+        ResultDO<List<UserDO>> allCustomer = staffService.getAllStaff();
         if (allCustomer.isSuccess() == false) {
             return new ResultDO<List<UserDO>>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                 ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
