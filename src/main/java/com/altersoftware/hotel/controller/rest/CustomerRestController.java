@@ -31,12 +31,22 @@ public interface CustomerRestController {
     ResultDO<Void> deleteByUserId(String number);
 
     /**
+     * 更新余额/退押金
+     * 
+     * @param number
+     * @param de
+     * @return
+     */
+    ResultDO<Void> updateAmount(long customerId, double de);
+
+    /**
      * 删除部分客户信息
      *
      * @param numbers
      * @return
      */
     ResultDO<Void> deleteList(String[] numbers);
+
     /**
      * 会员号搜索客户/员工
      *

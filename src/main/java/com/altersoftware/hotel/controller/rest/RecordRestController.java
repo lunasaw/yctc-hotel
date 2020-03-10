@@ -110,7 +110,7 @@ public interface RecordRestController {
      *
      * @param id
      */
-    ResultDO<Void> updateOutime(long id, String evaluate);
+    ResultDO<Double> updateOutime(long id, String evaluate);
 
 	/**
 	 * 完成入住

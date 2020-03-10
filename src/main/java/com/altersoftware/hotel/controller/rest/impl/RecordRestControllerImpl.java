@@ -334,15 +334,15 @@ public class RecordRestControllerImpl implements RecordRestController {
      */
     @Override
     @PostMapping("update-nowtime")
-    public ResultDO<Void> updateOutime(long id,String evaluate) {
+    public ResultDO<Double> updateOutime(long id, String evaluate) {
         //参数校验
         if (id <= 0 || StringUtils.isBlank(evaluate)) {
-            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+            return new ResultDO<Double>(false, ResultCode.PARAMETER_INVALID,
                     ResultCode.MSG_PARAMETER_INVALID, null);
         }
         ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(id);
         if (recordDOResultDO.isSuccess() == false) {
-            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+            return new ResultDO<Double>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                     ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -351,13 +351,19 @@ public class RecordRestControllerImpl implements RecordRestController {
             RecordDO doResultDOModule = recordDOResultDO.getModule();
             doResultDOModule.setCheckOutTime(now);
             doResultDOModule.setEvaluate(evaluate);
+            // 退押金
+            RecordDO module = recordDOResultDO.getModule();
+            int roomNumber = module.getRoomNumber();
+            ResultDO<RoomDO> roomDOByNumber = roomService.getRoomDOByNumber(roomNumber);
+            RoomDO module1 = roomDOByNumber.getModule();
+            double deposit = module1.getDeposit();
 
             ResultDO<Void> voidResultDO = recordService.updateRecord(doResultDOModule);
             if (voidResultDO.isSuccess() == false) {
-                return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                return new ResultDO<Double>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
                         ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
             } else {
-                return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+                return new ResultDO<Double>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, deposit);
             }
 
         }

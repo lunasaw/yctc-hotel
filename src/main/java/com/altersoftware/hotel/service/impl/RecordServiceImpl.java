@@ -42,6 +42,7 @@ public class RecordServiceImpl implements RecordService {
     @Resource
     private VipDAO              vipDAO;
 
+
     @Override
     public ResultDO<Void> createRecord(RecordDO recordDO) {
         try {
@@ -272,4 +273,5 @@ public class RecordServiceImpl implements RecordService {
 					ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
 		}
 	}
+
 }
