@@ -88,9 +88,9 @@ public class CustomerRestControllerImpl implements CustomerRestController {
             }
             if (userDO.getIdCardNumber() != null) {
                 userDObyNumber.setIdCardNumber(userDO.getIdCardNumber());
-            }else{
-	            return new ResultDO<Void>(false, ResultCode.UPDATE_FAILD,
-			            ResultCode.MSG_UPDATE_FAILD, null);
+            } else {
+                return new ResultDO<Void>(false, ResultCode.UPDATE_FAILD,
+                    ResultCode.MSG_UPDATE_FAILD, null);
             }
             if (userDO.getName() != null) {
                 userDObyNumber.setName(userDO.getName());
@@ -150,6 +150,37 @@ public class CustomerRestControllerImpl implements CustomerRestController {
             }
         }
 
+    }
+
+    @Override
+    @PostMapping("update-de")
+    public ResultDO<Void> updateAmount(long customerId, double de) {
+        System.out.println(de);
+
+        // 参数校验
+        if (customerId <= 0) {
+            return new ResultDO<Void>(false, ResultCode.PARAMETER_INVALID,
+                ResultCode.MSG_PARAMETER_INVALID, null);
+        }
+
+        ResultDO<UserDO> byNumber = customerService.getByCustomerId(customerId);
+        if (byNumber.isSuccess() == false) {
+            return new ResultDO<Void>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
+                ResultCode.MSG_DATABASE_CAN_NOT_FIND_DATA, null);
+        } else {
+            UserDO module = byNumber.getModule();
+            System.out.println(module);
+            if (module.getAccount() == null) {
+                module.setAccount(de);
+            }
+            module.setAccount(module.getAccount() + de);
+            ResultDO<Void> voidResultDO = customerService.updateUserDO(module);
+            if (voidResultDO.isSuccess() == false) {
+                return new ResultDO<Void>(false, ResultCode.DELETE_FAILD, ResultCode.MSG_DELETE_FAILD);
+            } else {
+                return new ResultDO<Void>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            }
+        }
     }
 
     /**

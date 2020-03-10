@@ -23,13 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSON;
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.controller.rest.PlaceAnOrderRestController;
-import com.altersoftware.hotel.entity.OrderDO;
-import com.altersoftware.hotel.entity.RecordDO;
-import com.altersoftware.hotel.entity.ResultDO;
-import com.altersoftware.hotel.entity.RoomDO;
-import com.altersoftware.hotel.service.OrderService;
-import com.altersoftware.hotel.service.RecordService;
-import com.altersoftware.hotel.service.RoomService;
+import com.altersoftware.hotel.entity.*;
+import com.altersoftware.hotel.service.*;
 import com.altersoftware.hotel.util.RandomNumber;
 import com.altersoftware.hotel.vo.RecordVO;
 
@@ -53,6 +48,12 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     @Resource
     private OrderService        orderService;
 
+    @Resource
+    private CustomerService     customerService;
+
+    @Resource
+    private VipService          vipService;
+
     /**
      * 接收订单
      *
@@ -62,6 +63,13 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
     @Override
     @PostMapping("accept-order")
     public ResultDO<RecordDO> acceptOrder(@RequestBody RecordVO recordVO) throws ParseException {
+        // 首先需向会员系统检查有无会员信息
+        ResultDO<Void> voidResultDO = customerService.insertVipDO(recordVO.getCustomerId());
+        if (voidResultDO.isSuccess() == false) {
+            return new ResultDO<RecordDO>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+        }
+
         // 生成随机数
         RandomNumber randomNumber = new RandomNumber();
         // 参数校验
@@ -156,8 +164,7 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
             if (trade_status.equals("TRADE_SUCCESS") == true) {
                 ResultDO<RecordDO> recordDOResultDO = recordService.showRecord(Long.parseLong(out_trade_no));
                 RecordDO recordDO = recordDOResultDO.getModule();
-                if (recordDOResultDO.isSuccess() && recordDOResultDO.isSuccess()
-                    || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
+                if (recordDOResultDO.isSuccess() || Integer.parseInt(buyer_pay_amount) == recordDO.getPayMoney()) {
                     recordDO.setState(1);
                     recordService.updateRecord(recordDO);
                     long customerId = recordDO.getCustomerId();
@@ -169,6 +176,12 @@ public class PlaceAnOrderRestControllerImpl implements PlaceAnOrderRestControlle
                         orderDO.setState(1);
                         orderService.updateOrder(orderDO);
                     }
+                    // 给会员权益加钱
+                    System.out.println("处理消费金额");
+                    ResultDO<VipDO> vipDOResultDO = vipService.showVipByCustomerId(customerId);
+                    VipDO module1 = vipDOResultDO.getModule();
+                    module1.setAmount(module1.getAmount() + Integer.parseInt(total_amount));
+                    vipService.updateVip(module1);
                 }
                 LOG.info("该订单已经完成付款 id={}", out_trade_no);
             }

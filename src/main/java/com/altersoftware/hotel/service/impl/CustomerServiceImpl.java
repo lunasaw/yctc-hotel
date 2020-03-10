@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.altersoftware.hotel.constant.ResultCode;
 import com.altersoftware.hotel.dao.UserDAO;
+import com.altersoftware.hotel.dao.VipDAO;
+import com.altersoftware.hotel.dao.VipGradeDAO;
 import com.altersoftware.hotel.entity.ResultDO;
 import com.altersoftware.hotel.entity.UserDO;
+import com.altersoftware.hotel.entity.VipDO;
 import com.altersoftware.hotel.service.CustomerService;
 
 /**
@@ -27,6 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Resource
     private UserDAO             userDAO;
+
+    @Resource
+    private VipDAO              vipDAO;
+
+    @Resource
+    private VipGradeDAO         vipGradeDAO;
 
     @Override
     public ResultDO<List<UserDO>> getAllCustomer() {
@@ -124,6 +133,30 @@ public class CustomerServiceImpl implements CustomerService {
             LOG.error("getByCustomerId error, customerId={}", customerId, e);
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, userDOByNumber);
+        }
+    }
+
+    @Override
+    public ResultDO<Void> insertVipDO(long custoemrId) {
+        VipDO vipDOByCustomerId = vipDAO.getVipDOByCustomerId(custoemrId);
+        if (vipDOByCustomerId == null) {
+            try {
+                UserDO userDOById = userDAO.getUserDOById(custoemrId);
+                VipDO vipDO = new VipDO();
+                vipDO.setCustomerNumber(custoemrId);
+                vipDO.setGrade("星会员");
+                vipDO.setId(Long.parseLong(userDOById.getNumber()));
+                vipDO.setAmount(0);
+                vipDAO.insert(vipDO);
+                LOG.info("insertVipDO success, custoemrId={}", custoemrId);
+                return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            } catch (NumberFormatException e) {
+                LOG.info("insertVipDO error, custoemrId={}", custoemrId);
+                return new ResultDO<>(false, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
+            }
+        } else {
+            LOG.info("insertVipDO success, custoemrId={}", custoemrId);
+            return new ResultDO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
         }
     }
 }

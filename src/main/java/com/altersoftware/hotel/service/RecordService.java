@@ -97,4 +97,5 @@ public interface RecordService {
 	 * @return
 	 */
 	ResultDO<Void> deleteByStateZero();
+
 }

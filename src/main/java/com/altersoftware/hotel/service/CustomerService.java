@@ -56,4 +56,9 @@ public interface CustomerService {
      * @return
      */
     ResultDO<UserDO> getByCustomerId(long customerId);
+
+    /**
+     * 插入会员系统
+     */
+    ResultDO<Void> insertVipDO(long custoemrId);
 }
