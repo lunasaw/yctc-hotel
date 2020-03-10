@@ -90,7 +90,7 @@
               <Span aria-hidden="true">&times;</Span>
             </button>
           </div>
-          <form>
+	        <div>
               <div class="modal-body" style="height: auto;">
                 <h3>非常感谢您的光临，请为我们的服务提出评价或者建议</h3>
                 <hr>
@@ -99,7 +99,7 @@
               <div class="modal-footer">
                   <button class="btn btn-success" onclick="goaway()">填写评价或退房</button>
               </div>
-          </form>
+	        </div>
       </div>
     </div>
   </div>
@@ -170,20 +170,21 @@
                   "evaluate":evaluate
               },
               success:function (result) {
-                  console.log(result);
+                  // console.log(result);
                   if (result.success != false) {
-                      var de = result.modal;
-                      alert(de);
+                      var de = result.module;
+                      // parseFloat(de);
                       $.ajax({
                           url: "/hotel/customer/update-de",
                           type: "POST",
                           contentType: "application/x-www-form-urlencoded",
                           data: {
                               "customerId": userId,
-                              "de": de
+                              "de": parseFloat(de)
                           },
                       });
                       alert("退房成功");
+                      $('#go').modal('hide');
                   }
               }
           })
