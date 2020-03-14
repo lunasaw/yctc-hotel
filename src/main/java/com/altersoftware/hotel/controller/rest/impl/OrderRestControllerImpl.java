@@ -95,6 +95,7 @@ public class OrderRestControllerImpl implements OrderRestController {
         // // 拿到订购的菜品
         // ResultDO<Double> actualMoney = orderService.getActualMoney(customerId);
         double x;// 支付总金额
+
         x = orderService.allOnceMoney(customerId);
         RecordDO recordDO = new RecordDO();
         Date date = new Date();
