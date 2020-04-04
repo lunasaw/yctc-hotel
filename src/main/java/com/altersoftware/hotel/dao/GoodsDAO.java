@@ -12,12 +12,12 @@ import com.altersoftware.hotel.entity.GoodsDO;
  */
 @Mapper
 public interface GoodsDAO {
-    /**
-     * 插入一条物品信息
-     *
-     *
-     */
-    @Insert(" INSERT INTO tb_goods (id, room_list, name, picture, buy_time, price, compensation_money, state, create_time, modify_time ) "
+	/**
+	 * 插入一条物品信息
+	 *
+	 * @param goodsDO
+	 */
+	@Insert(" INSERT INTO tb_goods (id, room_list, name, picture, buy_time, price, compensation_money, state, create_time, modify_time ) "
         +
         "VALUES(#{id}, #{roomNumberListToString},#{name}, #{picture}, #{buyTime}, #{price}, #{compensationMoeny}, #{state},  now(), now()) ")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
