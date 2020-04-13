@@ -24,12 +24,12 @@
         </encoder>
     </appender>
 
-    <logger name="com.altersoftware.hotel" additivity="false" level="INFO">
+    <logger name="com.altersoftware.hotel" additivity="false" level="WARN">
         <appender-ref ref="serverLog"/>
     </logger>
 
     <!--     控制台输出日志 -->
-    <root level="info">
+    <root level="WARN">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
