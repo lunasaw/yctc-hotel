@@ -18,12 +18,12 @@ import javax.annotation.Resource;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Test {
 
-	@Resource
-	PermissionIService permissionIService;
+    @Resource
+    PermissionIService permissionIService;
 
-	@org.junit.Test
-	public void aTest() {
-		permissionIService.initPermissionUserDOsByUserDO(10047);
-	}
+    @org.junit.Test
+    public void aTest() {
+        permissionIService.initPermissionUserDOsByUserDO(10047);
+    }
 
 }
