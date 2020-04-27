@@ -1,5 +1,9 @@
 package com.altersoftware.hotel;
  
+import com.altersoftware.hotel.util.FileUtilsAlter;
+import com.altersoftware.hotel.util.UploadUtils;
+import org.junit.Test;
+
 import java.io.File;
  
 public class FileRename {
@@ -27,4 +31,10 @@ public class FileRename {
 		}
 		
  	}
+
+    @Test
+    public void aTest() throws Exception {
+        // UploadUtils.uploadFile()
+        UploadUtils.delete("http://iszychen.club:8087/iszychen/img/genesis/lesson/img/", "1.jpg");
+    }
 }

@@ -1,13 +1,32 @@
-# hotel
-AlterSoftware.com 
-酒店管理
+# yctc-hotel
+![](https://img.shields.io/badge/yctc--hotel-1.0.0--SNAPSHOT-brightgreen)
 
-# Contributor
-- Iszychen 
-- 
+随着 AI 技术的不断发展，智能交互已经不断的进入人们的生活。机器变得
+更加的智能，人们的生活也变得更加的便捷。视觉 AI 技术的应用，不仅仅让机器能够看得见，还能看得懂。如何让 AI 更好的服务于大众，是个非常值得探索的问题。
+经济社会的快速发展以及信息技术和互联网技术的大规模应用为现代社会的发展带来了巨大的变革。尤其是互联网技术更是像一张网一样将各个产业、社会紧密地联系在了一起。酒店作为--种社会服务行业在“互联网+”的背景下应当将建设智能化酒店作为其重要的发展方向，通过将互联网技术、人工智能技术以及信息化技术等应用于其中，从而构建起一-种新型的集智能化、信息化为一体的智能型酒店，用以为客户提供更为优质的服务。
 
-# 代码规范
-- 后端使用同一份代码格式化膜模板ali-code-style.xml，ecplise直接导入使用，idea使用Eclipse Code Formatter插件配置xml后使用。
-- 前端代码使用vs插件的Beautify格式化，缩进使用TAB
-- 后端代码非特殊情况准守P3C插件规范
-- 注释要尽可能完整明晰，提交的代码必须要先格式化
+## Contributor
+- czy
+- hzx
+- qw
+- cll
+- zjy
+
+## 使用说明
+
++ 参见doc文档.doc
+
+
+## 更新日志
+
+### 4.2.0
+
++ 智能无人入住
+
++ 人脸识别,人证验证
+
++ 快捷办理,退房无忧
+
+
+### 版权说明
+![](https://img.shields.io/badge/License-Apache%20License%202.0-yellowgreen)

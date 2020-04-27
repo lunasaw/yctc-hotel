@@ -38,6 +38,14 @@ public class UploadUtils {
         return filePath + fileName;
     }
 
+    public static String delete(String filePath, String fileName) throws Exception {
+
+        Client client = new Client();
+        WebResource resource = client.resource(filePath + fileName);
+        resource.delete();
+        return filePath + fileName;
+    }
+
     public static void inputStreamToFile(InputStream ins, File file) {
         try {
             OutputStream os = new FileOutputStream(file);
