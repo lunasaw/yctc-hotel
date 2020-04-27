@@ -30,4 +30,4 @@
 
 
 ### 版权说明
-![](https://img.shields.io/badge/License-Apache%20License%202.0-yellowgreen)
+![](https://img.shields.io/badge/License-GPL3.0-brightgreen)
