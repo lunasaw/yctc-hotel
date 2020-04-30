@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageOutputStream;
 
 import org.apache.commons.io.FileUtils;
 
@@ -24,6 +25,21 @@ public class FileUtilsAlter {
             return dir.mkdirs();
         }
         return true;
+    }
+
+    public static void byte2image(byte[] data, String path) {
+        if (data.length < 3 || path.equals("")) {
+            return;
+        }
+        try {
+            FileImageOutputStream imageOutput = new FileImageOutputStream(new File(path));
+            imageOutput.write(data, 0, data.length);
+            imageOutput.close();
+            System.out.println("Make Picture success,Please find image in " + path);
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+            ex.printStackTrace();
+        }
     }
 
     /**

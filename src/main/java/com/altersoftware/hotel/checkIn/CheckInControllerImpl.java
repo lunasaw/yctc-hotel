@@ -7,7 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 
+import com.sun.imageio.plugins.common.ImageUtil;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
@@ -136,18 +139,35 @@ public class CheckInControllerImpl implements CheckInController {
     @Override
     @PostMapping("idCard-check")
     public ResultDO<UserDO> checkIdCard(@RequestBody BaseVO base64VO) {
+        String cut = "data:image/png;base64,";
+        base64VO.setId64(StrUtil.removePreAndLowerFirst(base64VO.getId64(), cut));
         try {
 
             String path = ResourceUtils.getURL("classpath:static/").getPath();
-
             // 先检查是预定用户 还是陪同用户
             ResultDO<UserDO> userDOById = userIService.getUserDOById(base64VO.getCustomerId());
             if (userDOById.getModule() != null) {
                 String s = ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg";
+                if (base64VO.getId64() != null) {
+                    byte[] bytes1 = Base64.decodeBase64(base64VO.getId64());
+
+                    /** 保存图片 */
+                    FileUtilsAlter.byte2image(bytes1, path + "hadbody.jpg");
+
+                    try {
+                        FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
+                        UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg", path,
+                        "hadbody.jpg");
+                }
+
                 // 判断是否为前端上传
                 System.out.println("判断开始");
-                FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg", path,
-                    "hadbody.jpg");
+
                 File files = new File(path + "hadbody.jpg");
                 boolean exists = files.exists();
                 // 获取用户数据
@@ -193,8 +213,7 @@ public class CheckInControllerImpl implements CheckInController {
                         ResultCode.MSG_SUCCESS, userDO);
 
                 } else {
-                    String cut = "data:image/png;base64,";
-                    base64VO.setId64(StrUtil.removePreAndLowerFirst(base64VO.getId64(), cut));
+                    // base64VO.setId64(StrUtil.removePreAndLowerFirst(base64VO.getId64(), cut));
 
                     System.out.println("开始ocr识别");
                     // OCR识别身份信息
@@ -247,7 +266,31 @@ public class CheckInControllerImpl implements CheckInController {
 
             } else {
                 ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(base64VO.getPhone());
+
+                if (base64VO.getId64() != null) {
+                    byte[] bytes1 = Base64.decodeBase64(base64VO.getId64());
+
+                    /** 保存图片 */
+                    FileUtilsAlter.byte2image(bytes1, path + "hadbody.jpg");
+
+                    try {
+                        FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
+                        UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg", path,
+                        "hadbody.jpg");
+                }
                 String s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
+                //
+                // byte[] bytes1 = Base64.decodeBase64(base64VO.getId64());
+                // /** 保存图片 */
+                // FileUtilsAlter.byte2image(bytes1,path+"hadbody.jpg");
+                // FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD ,base64VO.getPhone() + ".jpg");
+                //
+                // UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD ,base64VO.getPhone() + ".jpg");
 
                 System.out.println("查住户");
                 // 用户不是同住用户
@@ -259,8 +302,7 @@ public class CheckInControllerImpl implements CheckInController {
                 String[] split = null;
                 // 判断是否为前端上传
                 System.out.println("判断开始");
-                FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg", path,
-                    "hadbody.jpg");
+
                 File files = new File(path + "hadbody.jpg");
                 boolean exists = files.exists();
                 // 前端上传

@@ -16,9 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @author Iszychen@win10
  * @date 2020/2/5 14:48
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SmsWarpperTest {
 
     @Resource
@@ -28,12 +25,12 @@ public class SmsWarpperTest {
     private MailWarpper mailWrapper;
 
     // 由于此单测跑一遍发一个邮件，暂时注释掉
-    @Test
+    // @Test
     public void sendTestEmai() {
         mailWrapper.sendMail("15696756582@163.com", "title", "沙雕");
     }
 
-    @Test
+    // @Test
     public void sendTest() throws IOException {
         smsWarpper.sendSms("短信接口测试", "15696758582");
     }
