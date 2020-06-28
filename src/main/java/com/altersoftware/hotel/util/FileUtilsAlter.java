@@ -5,11 +5,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.URLConnection;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 import org.apache.commons.io.FileUtils;
 
 public class FileUtilsAlter {
@@ -26,6 +30,26 @@ public class FileUtilsAlter {
         }
         return true;
     }
+
+	/**
+	 * 判断文件是否存在
+	 *
+	 * @param httpPath
+	 * @return
+	 */
+	public static Boolean existHttpPath(String httpPath) throws Exception {
+		URL httpurl = null;
+
+		httpurl = new URL(new URI(httpPath).toASCIIString());
+		URLConnection urlConnection = httpurl.openConnection();
+		String headerField = urlConnection.getHeaderField(0);
+		if (headerField.startsWith("HTTP/1.1 404")) {
+			return false;
+		} else {
+			return true;
+		}
+		// urlConnection.getInputStream();
+	}
 
     public static void byte2image(byte[] data, String path) {
         if (data.length < 3 || path.equals("")) {
@@ -79,6 +103,17 @@ public class FileUtilsAlter {
         FileUtils.copyURLToFile(urlPath, new File(dir + fileName));
 
     }
+	/**
+	 * 删除httpd服务器文件
+	 *
+	 * @param filePath 网络路径
+	 * @throws Exception
+	 */
+	public static void delete(String filePath) throws Exception {
+		Client client = new Client();
+		WebResource resource = client.resource(filePath);
+		resource.delete();
+	}
 
     /**
      * 删除文件

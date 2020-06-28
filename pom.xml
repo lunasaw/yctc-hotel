@@ -43,12 +43,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <groupId>org.springframework.boot</groupId>-->
-            <!--                    <artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
+<!--                        <exclusions>-->
+<!--                            <exclusion>-->
+<!--                                <groupId>org.springframework.boot</groupId>-->
+<!--                                <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--                            </exclusion>-->
+<!--                        </exclusions>-->
         </dependency>
 
         <dependency>
@@ -57,6 +57,7 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
         <!-- 支付宝支付 -->
         <dependency>
@@ -64,7 +65,6 @@
             <artifactId>alipay-sdk-java</artifactId>
             <version>3.0.0</version>
         </dependency>
-
         <!-- alipay begin -->
 
 

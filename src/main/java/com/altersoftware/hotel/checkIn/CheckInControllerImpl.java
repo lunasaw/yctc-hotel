@@ -87,12 +87,12 @@ public class CheckInControllerImpl implements CheckInController {
                 ResultCode.MSG_PARAMETER_INVALID, null);
         }
         try {
-	        // 删除失效请求
-	        ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
-	        if (deleteLoseEfficacy.isSuccess() == false) {
-		        return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-				        ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-	        }
+            // 删除失效请求
+            ResultDO<Void> deleteLoseEfficacy = checkInWithService.deleteLoseEfficacy();
+            if (deleteLoseEfficacy.isSuccess() == false) {
+                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                    ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+            }
             ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(phone);
             if (!checkInWithPhone.isSuccess()) {
                 return new ResultDO<>(false, ResultCode.DATABASE_CAN_NOT_FIND_DATA,
@@ -148,149 +148,157 @@ public class CheckInControllerImpl implements CheckInController {
             ResultDO<UserDO> userDOById = userIService.getUserDOById(base64VO.getCustomerId());
             if (userDOById.getModule() != null) {
                 String s = ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg";
+                // 优先使用拍摄照片
                 if (base64VO.getId64() != null) {
+                    FileUtilsAlter.delete(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg");
+                }
+                // 判断是否为前端上传
+                System.out.println("判断开始");
+                Boolean aBoolean =
+                    FileUtilsAlter.existHttpPath(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg");
+                if (aBoolean) {
+                    FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg", path,
+                        "hadbody.jpg");
+                } else {
+                    // 解码
                     byte[] bytes1 = Base64.decodeBase64(base64VO.getId64());
-
                     /** 保存图片 */
                     FileUtilsAlter.byte2image(bytes1, path + "hadbody.jpg");
-
                     try {
-                        FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
-                        UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
+                        FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD,
+                            base64VO.getCustomerId() + ".jpg");
+                        UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD,
+                            base64VO.getCustomerId() + ".jpg");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getCustomerId() + ".jpg", path,
-                        "hadbody.jpg");
+
                 }
-
-                // 判断是否为前端上传
-                System.out.println("判断开始");
-
-                File files = new File(path + "hadbody.jpg");
-                boolean exists = files.exists();
+                // File files = new File(path + "hadbody.jpg");
+                // boolean exists = files.exists();
                 // 获取用户数据
                 UserDO userDO = userDOById.getModule();
-                // 未在前端上传
-                if (exists == true) {
+                System.out.println("开始ocr识别");
+                // OCR识别身份信息
+                String s1 = CheckIn.IDCardOCR(base64VO.getCustomerId());
+                String[] split = s1.split(",");
+                // 将识别的信息与预设信息比较
+                System.out.println(userDO);
+                if (split[0].equals(userDO.getName()) == false) {
 
-                    System.out.println("开始ocr识别");
-                    // OCR识别身份信息
-                    String s1 = CheckIn.IDCardOCR(base64VO.getCustomerId());
-                    String[] split = s1.split(",");
-                    // 将识别的信息与预设信息比较
-                    System.out.println(userDO);
-                    if (split[0].equals(userDO.getName()) == false) {
-
-                        return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
-                            ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
-                    }
-                    if (split[1].equals(userDO.getIdCardNumber()) == false) {
-                        return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
-                            ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
-                    }
-                    System.out.println("结束ocr识别");
-
-                    boolean idface = IDface.idface(path + "hadbody.jpg");
-                    if (idface == false) {
-                        return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
-                            ResultCode.MSG_PARAMETER_INVALID, null);
-                    }
-
-                    System.out.println("开始云端比较");
-
-                    // 将识别到的信息与云端比较 上线之前先关闭远程api
-                    if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
-                        return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
-                            ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
-                    }
-                    System.out.println("完成云端比较");
-
-                    userDO.setFaceToken(s);
-                    customerService.updateUserDO(userDO);
-                    return new ResultDO<>(true, ResultCode.SUCCESS,
-                        ResultCode.MSG_SUCCESS, userDO);
-
-                } else {
-                    // base64VO.setId64(StrUtil.removePreAndLowerFirst(base64VO.getId64(), cut));
-
-                    System.out.println("开始ocr识别");
-                    // OCR识别身份信息
-                    String s1 = CheckIn.IDCardOCRBybase64(base64VO.getId64());
-                    String[] split = s1.split(",");
-                    // 将识别的信息与预设信息比较
-                    System.out.println(userDO);
-                    if (split[0].equals(userDO.getName()) == false) {
-
-                        return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
-                            ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
-                    }
-                    if (split[1].equals(userDO.getIdCardNumber()) == false) {
-                        return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
-                            ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
-                    }
-                    System.out.println("结束ocr识别");
-                    // 将拍摄 或者 上传 的身份证照片解码
-                    if (Base64Utils.GenerateImage(base64VO.getId64(),
-                        path + base64VO.getCustomerId() + ".jpg") == false) {
-                        return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-                            ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-                    }
-
-                    boolean idface = IDface.idface(path + base64VO.getCustomerId() + ".jpg");
-                    if (idface == false) {
-                        return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
-                            ResultCode.MSG_PARAMETER_INVALID, null);
-                    }
-
-                    // 将图片上传到服务器
-                    System.out.println("开始上传服务器");
-                    File file = new File(path + base64VO.getCustomerId() + ".jpg");
-                    byte[] bytes = FileUtilsAlter.fileToByte(file);
-                    UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
-                    System.out.println("上传完成");
-                    System.out.println("开始云端比较");
-
-                    // 将识别到的信息与云端比较 上线之前先关闭远程api
-                    if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
-                        return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
-                            ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
-                    }
-                    System.out.println("完成云端比较");
-                    userDO.setFaceToken(s);
-                    customerService.updateUserDO(userDO);
-                    return new ResultDO<>(true, ResultCode.SUCCESS,
-                        ResultCode.MSG_SUCCESS, userDO);
+                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                        ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
                 }
+                if (split[1].equals(userDO.getIdCardNumber()) == false) {
+                    return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                        ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
+                }
+                System.out.println("结束ocr识别");
+
+                boolean idface = IDface.idface(path + "hadbody.jpg");
+                if (idface == false) {
+                    return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                        ResultCode.MSG_PARAMETER_INVALID, null);
+                }
+
+                System.out.println("开始云端比较");
+
+                // 将识别到的信息与云端比较 上线之前先关闭远程api
+                if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
+                    return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
+                        ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
+                }
+                System.out.println("完成云端比较");
+
+                userDO.setFaceToken(s);
+                customerService.updateUserDO(userDO);
+                return new ResultDO<>(true, ResultCode.SUCCESS,
+                    ResultCode.MSG_SUCCESS, userDO);
+
+                // } else {
+                // // base64VO.setId64(StrUtil.removePreAndLowerFirst(base64VO.getId64(), cut));
+                //
+                // System.out.println("开始ocr识别");
+                // // OCR识别身份信息
+                // String s1 = CheckIn.IDCardOCRBybase64(base64VO.getId64());
+                // String[] split = s1.split(",");
+                // // 将识别的信息与预设信息比较
+                // System.out.println(userDO);
+                // if (split[0].equals(userDO.getName()) == false) {
+                //
+                // return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                // ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
+                // }
+                // if (split[1].equals(userDO.getIdCardNumber()) == false) {
+                // return new ResultDO<>(false, ResultCode.ID_CARD_DOES_NOT_MATCH,
+                // ResultCode.MSG_ID_CARD_DOES_NOT_MATCH, null);
+                // }
+                // System.out.println("结束ocr识别");
+                // // 将拍摄 或者 上传 的身份证照片解码
+                // if (Base64Utils.GenerateImage(base64VO.getId64(),
+                // path + base64VO.getCustomerId() + ".jpg") == false) {
+                // return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                // ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                // }
+                //
+                // boolean idface = IDface.idface(path + base64VO.getCustomerId() + ".jpg");
+                // if (idface == false) {
+                // return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                // ResultCode.MSG_PARAMETER_INVALID, null);
+                // }
+                //
+                // // 将图片上传到服务器
+                // System.out.println("开始上传服务器");
+                // File file = new File(path + base64VO.getCustomerId() + ".jpg");
+                // byte[] bytes = FileUtilsAlter.fileToByte(file);
+                // UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getCustomerId() + ".jpg");
+                // System.out.println("上传完成");
+                // System.out.println("开始云端比较");
+                //
+                // // 将识别到的信息与云端比较 上线之前先关闭远程api
+                // if (CheckIn.idEnsure(userDO.getName(), userDO.getIdCardNumber()) == false) {
+                // return new ResultDO<>(false, ResultCode.IDENTIFICATION_OF_ABNORMAL,
+                // ResultCode.MSG_IDENTIFICATION_OF_ABNORMAL, null);
+                // }
+                // System.out.println("完成云端比较");
+                // userDO.setFaceToken(s);
+                // customerService.updateUserDO(userDO);
+                // return new ResultDO<>(true, ResultCode.SUCCESS,
+                // ResultCode.MSG_SUCCESS, userDO);
+                // }
 
             } else {
                 ResultDO<CheckInWithDO> checkInWithPhone = checkInWithService.getCheckInWithPhone(base64VO.getPhone());
 
+                String s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
+                // 优先使用拍摄照片
                 if (base64VO.getId64() != null) {
+                    FileUtilsAlter.delete(ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg");
+                }
+                // 判断是否为前端上传
+                System.out.println("判断开始");
+                Boolean aBoolean =
+                    FileUtilsAlter.existHttpPath(ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg");
+                if (aBoolean) {
+                    FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg", path,
+                        "hadbody.jpg");
+                } else {
+                    // 解码
                     byte[] bytes1 = Base64.decodeBase64(base64VO.getId64());
-
                     /** 保存图片 */
                     FileUtilsAlter.byte2image(bytes1, path + "hadbody.jpg");
-
                     try {
-                        FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
-                        UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
+                        FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD,
+                            base64VO.getPhone() + ".jpg");
+                        UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD,
+                            base64VO.getPhone() + ".jpg");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    FileUtilsAlter.downloadHttpUrl(ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg", path,
-                        "hadbody.jpg");
+
                 }
-                String s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
-                //
-                // byte[] bytes1 = Base64.decodeBase64(base64VO.getId64());
-                // /** 保存图片 */
-                // FileUtilsAlter.byte2image(bytes1,path+"hadbody.jpg");
-                // FileUtilsAlter.deleteServerFile(ConstantHolder.FILE_UPLOAD ,base64VO.getPhone() + ".jpg");
-                //
-                // UploadUtils.uploadFile(bytes1, ConstantHolder.FILE_UPLOAD ,base64VO.getPhone() + ".jpg");
+
+                s = ConstantHolder.FILE_UPLOAD + base64VO.getPhone() + ".jpg";
 
                 System.out.println("查住户");
                 // 用户不是同住用户
@@ -309,7 +317,7 @@ public class CheckInControllerImpl implements CheckInController {
                 if (exists) {
 
                     System.out.println("开始ocr识别");
-                    // OCR识别身份信息  地址识别
+                    // OCR识别身份信息 地址识别
                     String s1 = CheckIn.IDCardOCR(Long.parseLong(base64VO.getPhone()));
                     split = s1.split(",");
                     // 将识别的信息与预设信息比较
@@ -321,7 +329,7 @@ public class CheckInControllerImpl implements CheckInController {
                     module.setIdCard(split[1]);
                     System.out.println("结束ocr识别");
 
-					//人像校验
+                    // 人像校验
                     boolean idface = IDface.idface(path + "hadbody.jpg");
                     if (idface == false) {
                         return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
@@ -341,55 +349,57 @@ public class CheckInControllerImpl implements CheckInController {
                     checkInWithService.updateCheckInWithDO(module);
                     return new ResultDO<>(true, ResultCode.SUCCESS,
                         ResultCode.MSG_SUCCESS);
-                }else {
-
-	                // OCR识别身份信息
-	                System.out.println("开始ocr识别");
-	                String s1 = CheckIn.IDCardOCRBybase64((base64VO.getId64()));
-	                System.out.println("结束ocr识别");
-
-	                split = s1.split(",");
-
-	                // 将识别的信息与预设信息比较
-	                if (!split[0].equals(module.getName())) {
-		                return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
-				                ResultCode.MSG_PARAMETER_INVALID, null);
-	                }
-	                System.out.println("解码开始");
-
-	                // 将拍摄 或者 上传 的身份证照片解码
-	                if (!Base64Utils.GenerateImage(base64VO.getId64(), path + base64VO.getPhone() + ".jpg")) {
-		                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-				                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-	                }
-	                System.out.println("解码完成");
-
-	                // 检测照片是否有人像
-	                boolean idface = IDface.idface(path + base64VO.getPhone() + ".jpg");
-	                if (idface == false) {
-		                return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
-				                ResultCode.MSG_PARAMETER_INVALID, null);
-	                }
-	                // 将图片上传到服务器
-	                System.out.println("开始上传服务器");
-	                File file = new File(path + base64VO.getPhone() + ".jpg");
-	                byte[] bytes = FileUtilsAlter.fileToByte(file);
-	                UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
-	                System.out.println("上传完成");
-
-	                module.setIdPiture(s);
-
-	                // // 将识别到的信息与云端比较
-	                System.out.println("开始云端比较");
-	                // 更新身份证号
-	                module.setIdCard(split[1]);
-	                if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
-		                return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
-				                ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
-	                }
-	                System.out.println("完成云端比较");
-
-	                checkInWithService.updateCheckInWithDO(module);
+                } else {
+                    //
+                    // // OCR识别身份信息
+                    // System.out.println("开始ocr识别");
+                    // String s1 = CheckIn.IDCardOCRBybase64((base64VO.getId64()));
+                    // System.out.println("结束ocr识别");
+                    //
+                    // split = s1.split(",");
+                    //
+                    // // 将识别的信息与预设信息比较
+                    // if (!split[0].equals(module.getName())) {
+                    // return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                    // ResultCode.MSG_PARAMETER_INVALID, null);
+                    // }
+                    // System.out.println("解码开始");
+                    //
+                    // // 将拍摄 或者 上传 的身份证照片解码
+                    // if (!Base64Utils.GenerateImage(base64VO.getId64(), path + base64VO.getPhone() + ".jpg")) {
+                    // return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                    // ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                    // }
+                    // System.out.println("解码完成");
+                    //
+                    // // 检测照片是否有人像
+                    // boolean idface = IDface.idface(path + base64VO.getPhone() + ".jpg");
+                    // if (idface == false) {
+                    // return new ResultDO<>(false, ResultCode.PARAMETER_INVALID,
+                    // ResultCode.MSG_PARAMETER_INVALID, null);
+                    // }
+                    // // 将图片上传到服务器
+                    // System.out.println("开始上传服务器");
+                    // File file = new File(path + base64VO.getPhone() + ".jpg");
+                    // byte[] bytes = FileUtilsAlter.fileToByte(file);
+                    // UploadUtils.uploadFile(bytes, ConstantHolder.FILE_UPLOAD, base64VO.getPhone() + ".jpg");
+                    // System.out.println("上传完成");
+                    //
+                    // module.setIdPiture(s);
+                    //
+                    // // // 将识别到的信息与云端比较
+                    // System.out.println("开始云端比较");
+                    // // 更新身份证号
+                    // module.setIdCard(split[1]);
+                    // if (CheckIn.idEnsure(module.getName(), module.getIdCard()) == false) {
+                    // return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
+                    // ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
+                    // }
+                    // System.out.println("完成云端比较");
+                    //
+                    // checkInWithService.updateCheckInWithDO(module);
+                    // return new ResultDO<>(true, ResultCode.SUCCESS,
+                    // ResultCode.MSG_SUCCESS);
 	                return new ResultDO<>(true, ResultCode.SUCCESS,
 			                ResultCode.MSG_SUCCESS);
                 }
@@ -401,6 +411,7 @@ public class CheckInControllerImpl implements CheckInController {
             return new ResultDO<>(false, ResultCode.ERROR_SYSTEM_EXCEPTION,
                 ResultCode.MSG_ERROR_SYSTEM_EXCEPTION, null);
         }
+
     }
 
     @Override

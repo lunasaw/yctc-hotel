@@ -56,7 +56,7 @@ public class CheckIn {
                 FileUtilsAlter.downloadHttpUrl(psthWeb, path, customerId + ".jpg");
                 contract = myFaceContract.contract(path + customerId + ".jpg", path + "tmp.jpg");
             }
-            if (contract > 0.75) {
+            if (contract > 0.6) {
                 return true;
             }
         } catch (Exception e) {
