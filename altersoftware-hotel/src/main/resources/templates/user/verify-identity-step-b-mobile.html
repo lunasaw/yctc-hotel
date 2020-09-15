@@ -1,0 +1,174 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body>
+	<header th:replace="component/fram :: commonHeader"></header>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<i class="fas fa-user-check fa-2x"></i>
+				<h6>验证身份</h6>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<i class="fas fa-key fa-2x"></i>
+				<h6>找回密码</h6>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<i class="fas fa-check-circle fa-2x"></i>
+				<h6>完成修改</h6>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+
+		<div class="progress mt-4 mb-4">
+			<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 15%" aria-valuenow="15"
+			 aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<h4 class="text-center">为确认是否为本人操作，请您完成以下验证</h4>
+				<hr>
+				<form class="needs-validation" novalidate action="/hotel/user/verify-identity-step-b-mobile" method="post">
+					<div class="form-group row">
+						<div class="col-md-2">
+							<label class="col-form-label" for="phoneInput">手机号：</label>
+						</div>
+						<div class="col-md-7">
+							<input type="text" class="form-control" id="phoneInput" name="phone" placeholder="手机号" required />
+							<div class="invalid-feedback">请输入正确的手机号</div>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-secondary" id="getValidationCodeBtn">点击获取验证码</button>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-2">
+							<label class="col-form-label" for="verificationCode">验证码：</label>
+						</div>
+						<div class="col-md-10">
+							<input type="text" class="form-control" id="verificationCode" name="verificationCode"  placeholder="验证码" required/>
+						   <div class="invalid-feedback">验证码不能为空</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-4 offset-md-4">
+							<button type="submit" class="btn btn-primary btn-block">下一步</button> <!-- TODO 下一步的前端校验没有做 -->
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+    <!--	<footer th:replace="component/footer :: footer"></footer>-->
+
+	<script>
+	// Example starter JavaScript for disabling form submissions if there are invalid fields
+	(function() {
+	  'use strict';
+	  window.addEventListener('load', function() {
+	    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+	    var forms = document.getElementsByClassName('needs-validation');
+	    // Loop over them and prevent submission
+	    var validation = Array.prototype.filter.call(forms, function(form) {
+	      form.addEventListener('submit', function(event) {
+	        if (form.checkValidity() === false) {
+	          event.preventDefault();
+	          event.stopPropagation();
+	        }
+	        form.classList.add('was-validated');
+	      }, false);
+	    });
+	  }, false);
+	})();
+		// 获得验证码
+		function getCaptcha() {
+			var phone = document.getElementById("phoneInput").value;
+			$.ajax({
+				url: "/hotel/restwarpper/send-sms",
+				type: "POST",
+				data: phone,
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: false, //false 同步
+				success: function (result) {
+					//console.log(result);
+					if (result.success == false) {
+						if (result.code == 1002) {
+							alert("无当前用户");
+						} else if (result.code == 1003) {
+							alert("手机为空");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						} else if (result.code == 1005) {
+							alert("超过发送限制，同一手机号一小时只能发三次");
+						}
+					} else {
+						alert("短信已发送");
+					}
+				},
+				error: function (e) {
+					alert("异常,发送失败");
+				}
+			});
+		}
+	</script>
+	<script>
+		var countdown = 60;
+
+		function setTime(obj) {
+			if (countdown == 0) {
+				obj.removeAttribute("disabled");
+				obj.innerHTML = "点击获取验证码";
+				countdown = 60;
+				return;
+			} else {
+				obj.setAttribute("disabled", true);
+				obj.innerHTML = "重新发送(" + countdown + ")";
+				countdown--;
+			}
+			setTimeout(function () {
+				setTime(obj)
+			}, 1000)
+		}
+	</script>
+	<script>
+		//正则表达式手机验证
+		var getValidationCodeBtn = document.getElementById("getValidationCodeBtn");
+		getValidationCodeBtn.addEventListener("click", verify);
+
+		function verify() {
+			var pattern = /^(1.[0-9]{9})$/;
+			var txt = document.getElementById("phoneInput").value;
+			if (!pattern.test(txt)) {
+				//验证不通过
+				document.getElementById("phoneInput").classList.remove("is-valid");
+				document.getElementById("phoneInput").classList.add("is-invalid");
+			} else {
+				//验证通过
+				document.getElementById("phoneInput").classList.remove("is-invalid");
+				document.getElementById("phoneInput").classList.add("is-valid");
+
+				setTime(getValidationCodeBtn);
+				getCaptcha();
+			}
+		}
+	</script>
+
+	<div th:replace="component/fram :: commonFooter"></div>
+</body>
+
+</html>

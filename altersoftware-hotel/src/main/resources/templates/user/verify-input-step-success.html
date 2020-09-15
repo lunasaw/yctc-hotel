@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+	<title>办理成功</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}" href="../../static/css/left-side-menu.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="../../static/fonts/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/head.css" th:href="@{/css/head.css}">
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}" src="../../static/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="../../static/js/left-side-menu.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <script src="../../static/js/footposition.js" th:src="@{/js/footposition.js}"  type="text/javascript"></script>
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="text/css">
+
+</head>
+
+<body style="overflow-y: hidden">
+<!-- modal -->
+<div class="modal fade" id="kk" tabindex="-1" role="dialog" aria-labelledby="kk" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(226, 203, 145);">
+                <h5 class="modal-title" id="payforroomLabel">同伴入住</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <Span aria-hidden="true">&times;</Span>
+                </button>
+            </div>
+            <div class="modal-body" style="height: 440px;">
+                <div class="container">
+                    <form></form>
+                    <div class="row" style="margin: 50px 0; display: flex; align-items: center; " >
+                        <select class="custom-select col-md-3 col-sm-3 offset-md-2 offset-sm-2" id="selectun" >
+                            <option  disabled="disabled" selected="selected">请选择...</option>
+                        </select>
+                    </div>
+                    <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+                        <span class="offset-md-1 col-md-1">姓名</span>
+                        <input class="form-control col-md-8" type="text" id="name">
+                    </div>
+                    <div class="row" style="margin: 50px 0; display: flex;align-items: center;">
+                        <span class="offset-md-1 col-md-1">电话号码</span>
+                        <input class="form-control col-md-8" type="number" id="phone">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+	            <div class="row" style="display:flex;align-items: center;justify-content: center;">
+		            <button type="button" class="btn btn-danger" onclick="addman()">继续添加</button>
+	            </div>
+	            <div class="row" style="display:flex;align-items: center;justify-content: center;">
+		            <button type="button" class="btn btn-danger" onclick="submit()">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/hotel/index">Alter Hotel</a>
+
+	<ul class="navbar-nav " style="left: 82%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"
+			                                  th:src="@{/img/resizeApi3.png}"></a>
+		</li>
+	</ul>
+
+	<ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"
+			                                  th:src="@{/img/resizeApi2.png}"></a>
+		</li>
+	</ul>
+
+	<ul class="navbar-nav " style="left: 87%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"
+			                                  th:src="@{/img/resizeApi1.png}"></a>
+		</li>
+	</ul>
+
+	<ul class="navbar-nav " style="left: 90%;position: absolute;">
+		<li>
+			<a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
+					src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+					style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;"
+					th:src="@{/img/user.png}">
+			</a>
+		</li>
+	</ul>
+</nav>
+
+<main class="col-md-12 ml-sm-auto col-lg-12 px-4" role="main">
+    <div class="chartjs-size-monitor"
+         style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+        <div class="chartjs-size-monitor-expand"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink"
+             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+        </div>
+    </div>
+    <h2 style="color: rgb(135, 106, 32);font-family: 宋体;">恭喜已完成入住办理，您已成功入住</h2>
+    <br>
+    <br>
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <img th:src="@{/img/user.png}" width="36px" height="36px">
+                <h6>验证身份</h6>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <img th:src="@{/img/house.png}" width="36px" height="36px">
+                <h6>办理房间</h6>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <img th:src="@{/img/face1.png}" width="36px" height="36px">
+                <h6>人脸扫描</h6>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <div class="progress mt-4 mb-4">
+            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="15"
+                 class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:100%"></div>
+        </div>
+
+        <div class="row" style="margin-top: 50px">
+            <div class="col-md-4 offset-md-4">
+                <h4 class="text-center" style="margin-bottom: 25px">已经完成操作</h4>
+	            <a class="btn btn-primary btn-block" href="/hotel/index">欢迎您的入住,期待您的加入</a>
+                <button data-toggle="modal" data-target="#kk" class="btn btn-danger btn-block" style="color: white;margin-top: 25px;">同伴入住</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<footer
+        style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;">
+    <p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
+</footer>
+<script>
+    //初始化模态框
+    $(document).ready(function () {
+        $("#kk").on('hide.bs.modal',function() {
+            //关闭后重置表单数据
+            window.location.reload();
+        });
+
+    });
+    console.log("获取手机账号");
+    // 获取url上的site参数并且传入表单
+    var searchParams = new URLSearchParams(window.location.search);
+    var phone = searchParams.get('phone');
+
+    function getCookie(objName) {//获取指定名称的cookie的值
+        var arrStr = document.cookie.split(";");
+        for (var i = 0; i < arrStr.length; i++) {
+            var temp = arrStr[i].split("=");
+            if (temp[0] == objName)
+                return unescape(temp[1]);
+        }
+    }
+    $(document).ready(function () {
+        console.log("获取用户名Id");
+        var userId = getCookie("userId");
+        console.log(userId);
+
+        $.ajax({
+            url: "/hotel/record/getnumbers-bycustomer",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": userId
+            },
+            success:function (result) {
+                var list = result.module;
+                for (var i = 0; i < list.length; i++) {
+                    document.getElementById("selectun").options.add(new Option(list[i], i));
+                }
+            }
+        })
+    });
+    var arr = [];
+   function addman() {
+       let number = checkwith();
+       if (number==0){
+           // return false;
+       }else {
+           console.log("获取用户名Id");
+           var string = getCookie("userId");
+           console.log(string);
+           var roomnumber = $("#selectun option:selected").text();
+           var name = $("#name").val();
+           var phone = $("#phone").val();
+           var data = {
+               name:name,
+               phone:phone,
+               customerId:string,
+               roomNumber:roomnumber
+           };
+           console.log(data);
+           if(data.name == null || data.phone <= 0 || data.roomNumber == null){
+               alert("不可空缺数据");
+           }
+           else {
+               arr.push(data);
+               console.info(arr);
+
+           }
+       }
+
+   }
+
+    function submit() {
+        let number = checkwith();
+        if (number===0){
+
+        }else {
+            if (arr.length == 0) {
+                alert("请先添加数据");
+                return;
+            }
+            url = "/hotel/checkin/add-live";
+            parameterPostRequest(url, arr);
+        }
+
+   }
+
+    // 有参数post请求
+    function parameterPostRequest(url, data, callback) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: JSON.stringify(data),
+            traditional: true,
+            contentType: "application/json",
+            success: function (result) {
+                console.log(result);
+                if (result.success === false) {
+                    switch (result.code) {
+                        case 9007:
+                            alert("该客户已有入住信息,同行用户只能住一间房");
+                            break;
+                        case 9999:
+                            alert("系统错误");
+                            break;
+                    }
+                } else {
+                    console.log(result);
+                    $("#kk").modal('hide');
+                    alert("添加成功");
+
+                }
+            },
+            error: function () {
+                swal("错误", "404", "error");
+            }
+        });
+    }
+    function checkwith() {
+        alert("对不起,您不是预定用户");
+        if (phone!=null){
+            $('#kk').modal('hide');
+            var tag=0;
+        }else {
+            tag=1;
+        }
+		return tag;
+    }
+</script>
+
+
+</body>
+
+</html>

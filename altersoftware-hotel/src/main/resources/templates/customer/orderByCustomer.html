@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="component/head :: head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+
+</head>
+
+<body>
+
+  <header th:replace="component/fram :: commonHeader"></header>
+
+  <div class="container" th:replace="component/fram :: commonMenu"></div>
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+    <div class="content-wrapper" style="margin-bottom: 80px;">
+      <div class="container-fluid">
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fa fa-table"></i>消费历史记录</div>
+          <div class="card-body" style="padding:15px 15px;">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
+                style="margin-bottom: 50px; text-align: center;">
+                <thead>
+                  <tr>
+                    <th>消费内容</th>
+                    <th>消费时间</th>
+                    <th>消费金额</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+  </main>
+
+  <footer th:replace="component/fram :: commonFooter"></footer>
+
+  <script>
+      function getCookie(objName) {//获取指定名称的cookie的值
+          var arrStr = document.cookie.split(";");
+          for (var i = 0; i < arrStr.length; i++) {
+              var temp = arrStr[i].split("=");
+              if (temp[0] == objName)
+                  return unescape(temp[1]);
+          }
+      }
+    $(document).ready(function(){
+        console.log("获取用户名Id");
+        var string = getCookie("userId");
+        console.log(string);
+        $.ajax({
+            url: "/hotel/order/get-listbycustomerid",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": string
+            },
+            success:function (result) {
+                var item = result.module;
+                var tbody = $("#tbody");
+                for (let i = 0; i < item.length; i++){
+                    let menuId = item[i].menuId;
+                    $.ajax({
+                        url: "/hotel/menuinfo/get-byid",
+                        type: "POST",
+                        data: JSON.stringify(menuId),
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        async: true,
+                        success:function (result) {
+                            let re = result.module;
+                            let name = re.name;
+                            let date = item[i].createTime;
+                            let payMoney = item[i].payMoney;
+                            tbody.append('<tr>'+'<th>'+name+'</th>'+'<th>'+date+'</th>'+'<th>'+payMoney+'</th>'+'</tr>')
+                        }
+                    });
+                }
+
+            }
+        });
+
+
+    })
+  </script>
+
+</body>
+
+</html>

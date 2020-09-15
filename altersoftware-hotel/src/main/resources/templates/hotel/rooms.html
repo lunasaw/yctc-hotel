@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+
+
+</head>
+
+<body>
+
+<header th:replace="component/fram :: commonHeader"></header>
+
+<!-- Begin page content -->
+
+<div class="container" th:replace="component/fram :: commonMenu"></div>
+
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+
+    <h2 style="color:  rgb(135, 106, 32);"><small>房间详情</small></h2>
+    <hr color="lightgrey" width="85%" align="left">
+    <div class="container" style="padding-left: 0;margin-left: 0;">
+
+
+      <div class="nav-attribute col-md-12">
+        <ul>
+          <li>客房类型</li>
+          <li style="margin-left: 350px;">其他</li>
+        </ul>
+      </div>
+
+      <div id="container-wrapper">
+
+      </div>
+
+    </div>
+  </main>
+
+<footer th:replace="component/fram :: commonFooter"></footer>
+
+
+  <script>
+    $(document).ready(function () {
+        $.ajax({
+            url:"/hotel/roomTypeInfo/get-list",
+            type:"POST",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            success:function (result) {
+                  //div循环渲染
+                  var item = result.module;
+                  var containerwrapper = $("#container-wrapper");
+
+                  for (var i = 0; i < item.length; i++) {
+                      var roomtype = item[i].name;
+                      var picture = item[i].picture;
+                      var userNumber = item[i].userNumber;
+                      var description = item[i].description;
+                      var wide = item[i].wide;
+                      var addBed = item[i].addBed;
+                      var typeid = item[i].id;
+                      // alert(picture);
+                      containerwrapper.append('<div class="wrapper-circle" >' + '<div class="wrapper-left">' +
+                          '<div class="wrapper-picture">' + '<img id="pic" src="'+picture+'" style="width: 300px;height: 150px;">' + '</div>' +
+                          '<div class="wrapper-title-div">' +
+                          '<span >' + '房间类型:' + '</span>' + '<span >' + roomtype + '</span>' + '<br>' +
+                          '<span>' + '房间编号:' + '</span>' + '<span>' + typeid + '</span>' + '<br>' +
+                          '<span>' + '房间大小:' + '</span>' + '<span>' + wide + '</span>' + '<br>' +
+                          '<span>' + '预计入住人数:' + '</span>' + '<span>' + userNumber + '</span>' + '<br>' +
+                          '</div>' +
+                          '</div>' +
+                          '<div class="wrapper-right">' +
+                          '<div class="wrapper-deposit-div">' +
+                          '<span>' + '房间描述' + '</span>' + '<span style="margin-left:60%;">' + description + '</span>' +
+                          '<hr>' +
+                          '</div>' +
+                          '<div class="wrapper-price-div">' +
+                          '<span>' + '是否可加床' + '</span>' + '<span style="margin-left:60%;">' + addBed + '</span>' +
+                          '<hr>' +'<a href="/hotel/record/page">'+
+                          '<input class="btn btn-danger " type="button" id="booknow" style="margin-top: 7%;margin-left: 560px;" onclick="reserve()" value="立刻预订" >' +
+                        '</a>'+
+                          '</div>' +
+                          '</div>' +
+                          '</div>');
+
+                  }
+
+            }
+        })
+    })
+
+
+  </script>
+
+<!-- 入住与退房日期默认为本地日期 -->
+<script>
+    // document.getElementById('inDate').valueAsDate = new Date();
+    // document.getElementById('outDate').valueAsDate = new Date();
+
+    function reserve() {
+        window.location.href = "/hotel/record/page";
+    }
+</script>
+
+</body>
+
+</html>

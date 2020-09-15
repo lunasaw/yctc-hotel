@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head">
+	<style>
+		#myChart {
+			background-color: #ccc;
+		}
+	</style>
+</head>
+
+<body>
+	<header th:replace="component/fram :: commonHeader"></header>
+
+	<!-- Begin page content -->
+	
+	<div class="container" th:replace="component/fram :: commonMenu">
+	</div>
+	<!-- End page content -->
+
+	<footer th:replace="component/fram :: commonFooter"></footer>
+	
+
+</body>
+
+</html>

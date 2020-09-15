@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>订单选择</title>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/paper-css/0.4.1/paper.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/left-side-menu.css}"
+	      href="../../static/css/left-side-menu.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/iconfont.css}" href="../../static/fonts/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../../static/css/head.css" th:href="@{/css/head.css}">
+	<script type="text/javascript" th:src="@{/js/jquery.min.js}" src="../../static/js/jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.slimscroll.min.js}"
+	        src="../../static/js/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/left-side-menu.js}" src="../../static/js/left-side-menu.js"></script>
+	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="../../static/js/footposition.js" th:src="@{/js/footposition.js}" type="text/javascript"></script>
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="text/css">
+
+
+</head>
+
+<body style="overflow-y: hidden">
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/hotel/index">Alter Hotel</a>
+
+	<ul class="navbar-nav " style="left: 82%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1223096&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"
+			                                  th:src="@{/img/resizeApi3.png}"></a>
+		</li>
+	</ul>
+
+	<ul class="navbar-nav " style="left: 84.5%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1222625&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15px;height: 16px;"
+			                                  th:src="@{/img/resizeApi2.png}"></a>
+		</li>
+	</ul>
+
+	<ul class="navbar-nav " style="left: 87%;position: absolute;">
+		<li>
+			<a class="nav-link" href="#"><img src="https://www.easyicon.net/api/resizeApi.php?id=1225474&size=128"
+			                                  style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 12 px;height: 11px;width: 15 px;height: 16px;"
+			                                  th:src="@{/img/resizeApi1.png}"></a>
+		</li>
+	</ul>
+
+	<ul class="navbar-nav " style="left: 90%;position: absolute;">
+		<li>
+			<a class="nav-link" href="/hotel/user/sign-in">登录&nbsp&nbsp<img
+					src="https://www.easyicon.net/api/resizeApi.php?id=1103533&size=128"
+					style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(179deg) brightness(100%) contrast(103%);width: 13 px;height: 13px;"
+					th:src="@{/img/user.png}">
+			</a>
+		</li>
+	</ul>
+</nav>
+
+<main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
+	<div class="chartjs-size-monitor"
+	     style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+		<div class="chartjs-size-monitor-expand"
+		     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+			<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+		</div>
+		<div class="chartjs-size-monitor-shrink"
+		     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+			<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+		</div>
+	</div>
+	<h2 style="color: rgb(135, 106, 32);font-family: 宋体;">选择您将要入住的房间</h2>
+	<br>
+	<br>
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-1"></div>
+			<div class="col-md-2">
+				<img th:src="@{/img/user.png}" width="36px" height="36px">
+				<h6>验证身份</h6>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<img th:src="@{/img/house.png}" width="36px" height="36px">
+				<h6>办理房间</h6>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<img th:src="@{/img/face1.png}" width="36px" height="36px">
+				<h6>人脸扫描</h6>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+
+		<div class="progress mt-4 mb-4">
+			<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 66.66%"
+			     aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12" style="text-align: center;">
+				<h4 style="color: rgb(105, 105, 105);font-family: 宋体;">在接下来的步骤中，请选择您想要入住的房间号，入住时间，退房时间</h4>
+			</div>
+		</div>
+
+
+			<div class="row" style="margin-top: 20px;">
+				<select multiple class="form-control col-md-8 offset-md-2 " id="selectun" required>
+					<option active>请选择房间号</option>
+				</select>
+			</div>
+			<div class="row" style="margin:50px">
+
+					<button class="btn btn-primary col-md-4 offset-md-4"
+					        onclick="applynext()">下一步
+					</button>
+
+			</div>
+
+
+	</div>
+
+
+</main>
+
+<footer
+		style="background-color: rgb(231, 231, 231);height: 50px;width: 100%;text-align: center;line-height: 50px;position: fixed;bottom: 0;">
+	<p style="color:rgb(151, 150, 150) ;font-size: 12px;font-weight: 600;">ALTER SOFTWARE ©2020 1 25</p>
+
+</footer>
+
+<script>
+    function getCookie(objName) {//获取指定名称的cookie的值
+        let arrStr = document.cookie.split(";");
+        for (let i = 0; i < arrStr.length; i++) {
+            let temp = arrStr[i].split("=");
+            if (temp[0] == objName)
+                return unescape(temp[1]);
+        }
+    }
+
+    $(document).ready(function () {
+
+        console.log("获取手机账号");
+        // 获取url上的site参数并且传入表单
+        var searchParams = new URLSearchParams(window.location.search);
+        phone = searchParams.get('phone');
+        console.log(phone);
+        console.log("获取存在客户编号");
+        // 获取url上的site参数并且传入表单
+        var searchParams = new URLSearchParams(window.location.search);
+        customerId = searchParams.get('customerId');
+        console.log(customerId);
+
+        console.log("获取用户名Id");
+        let userId = getCookie("userId");
+        console.log(userId);
+
+        //如果用户不存在与系统中
+        if (customerId = null) {
+            //判断手机是否存在  是否是number传入
+            if (phone != null) {
+                userId = null;
+            }
+        } else {
+            var string = getCookie("userId");
+        }
+        if (phone == null) {
+            $.ajax({
+                url: "/hotel/record/getnumbers-bycustomer",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    "customerId": string
+                },
+                success: function (result) {
+                    console.log(result);
+                    var list = result.module;
+
+                    for (var i = 0; i < list.length; i++) {
+                        console.log(list[i]);
+                        // document.getElementById("selectun").options.add(new Option(list[i].roomNumber.toString,list[i].roomNumber));
+                        $("#selectun").append("<option value=" + list[i] + ">" + list[i] + "</option>");  //为Select追加一个Option(下拉项)
+                    }
+                }
+            })
+        } else {
+            $.ajax({
+                url: "/hotel/checkin/check-phone",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    "phone": phone
+                },
+                success: function (result) {
+                    console.log(result);
+                    var list = result.module;
+
+                    // document.getElementById("selectun").options.add(new Option(list.roomNumber, 1));
+                    $("#selectun").append("<option value=" + list.roomNumber + ">" + list.roomNumber + "</option>");  //为Select追加一个Option(下拉项)
+
+                }
+            })
+        }
+
+
+    });
+
+    function applynext() {
+        var arr = $("#selectun").find("option:selected").text();
+        console.info(arr);
+        if (phone != null) {
+            window.location.href = "/hotel/checkin/step_c?phone=" + phone + "&roomNumber=" + arr;
+        } else {
+            window.location.href = "/hotel/checkin/step_c?roomNumber=" + arr;
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

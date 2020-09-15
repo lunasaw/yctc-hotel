@@ -1,0 +1,153 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body>
+	<header th:replace="component/fram :: commonHeader"></header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+	<!-- Begin page content -->
+	<div class="container">
+		<div class="row">
+			<div th:replace="component/sidebar"></div>
+
+			<div class="col-md-9">
+				<div th:replace="component/page-title::pageTitle('修改邮箱')"></div>
+
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+						<form class="needs-validation" novalidate action="/hotel/user/updateMail" method="post">
+							<div class="form-group row">
+								<div class="col-md-3">
+									<label class="col-form-label" for="emailInput">输入新邮箱：</label>
+								</div>
+								<div class="col-md-9">
+									<input type="text" class="form-control" id="emailInput" name="mail" required  />
+									<div class="invalid-tooltip">请输入正确的邮箱</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-3">
+									<label class="col-form-label" for="verificationCode">输入验证码：</label>
+								</div>
+								<div class="col-md-6">
+									<input type="text" class="form-control" id="validationCodeInput" name="captchaFromFront" placeholder="验证码" required />
+								<div class="invalid-tooltip">验证码不能为空</div>
+								</div>
+								<div class="col-md-3">
+									<input type="button" class="btn btn-secondary" onclick="getCaptcha(this)"
+										value="获取验证码">
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-4 offset-md-4">
+									<button type="submit" class="btn btn-primary btn-block">下一步</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		//正则表达式邮箱验证
+		var getValidationCodeBtn = document.getElementById("getValidationCodeBtn");
+		getValidationCodeBtn.addEventListener("click", verify);
+
+		function verify() {
+			var pattern = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+			var txt = document.getElementById("emailInput").value;
+			if (!pattern.test(txt)) {
+				//验证不通过
+				document.getElementById("emailInput").classList.remove("is-valid");
+				document.getElementById("emailInput").classList.add("is-invalid");
+			} else {
+				//验证通过
+				document.getElementById("emailInput").classList.remove("is-invalid");
+				document.getElementById("emailInput").classList.add("is-valid");
+
+				setTime(getValidationCodeBtn);
+				getCaptcha();
+			}
+		}
+
+		/**
+		 *获得验证码
+		 */
+		function getCaptcha() {
+			var mail = document.getElementById("emailInput").value;
+			$.ajax({
+				url: "/hotel/restwarpper/send-mail-for-update-mail",
+				type: "POST",
+				data: mail,
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: false, //false 同步
+				success: function (result) {
+					console.log(result);
+					if (result.success == false) {
+						if (result.code == 1002) {
+							alert("无当前用户");
+						} else if (result.code == 1004) {
+							alert("邮箱为空");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						}
+					} else {
+						alert("邮件已发送");
+					}
+				},
+				error: function (e) {
+					alert("异常,发送失败");
+				}
+			});
+		}
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function() {
+		  'use strict';
+		  window.addEventListener('load', function() {
+		    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+		    var forms = document.getElementsByClassName('needs-validation');
+		    // Loop over them and prevent submission
+		    var validation = Array.prototype.filter.call(forms, function(form) {
+		      form.addEventListener('submit', function(event) {
+		        if (form.checkValidity() === false) {
+		          event.preventDefault();
+		          event.stopPropagation();
+		        }
+		        form.classList.add('was-validated');
+		      }, false);
+		    });
+		  }, false);
+		})();
+		
+		var countdown = 60;
+
+		function setTime(obj) {
+			if (countdown == 0) {
+				obj.removeAttribute("disabled");
+				obj.innerHTML = "点击获取验证码";
+				countdown = 60;
+				return;
+			} else {
+				obj.setAttribute("disabled", true);
+				obj.innerHTML = "重新发送(" + countdown + ")";
+				countdown--;
+			}
+			setTimeout(function () {
+				setTime(obj)
+			}, 1000)
+		}
+	</script>
+
+	<div th:replace="component/fram :: commonFooter"></div>
+</body>
+
+</html>

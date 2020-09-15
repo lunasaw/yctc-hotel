@@ -1,0 +1,126 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body onload="showAllPermissions()">
+<header th:replace="component/fram :: commonHeader"></header>
+
+<div class="container" th:replace="component/fram :: commonMenu">
+</div>
+	<!-- Begin page content -->
+<div class="container" style="float: right;">
+    <br>
+    <br>
+    <br>
+    <br>
+		<div class="row">
+
+			<div class="col-md-9">
+				<h5>权限管理—角色管理-角色增加</h5>
+				<hr />
+				<div class="col-md-12" id="addRoleDetails">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">角色名称（英文）</span>
+							<input aria-describedby="basic-addon3" class="form-control" id="id" placeholder="编号" type="text">
+
+						</div>
+						<input type="text" class="form-control" id="name" aria-describedby="basic-addon3">
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">设置该角色拥有的权限</span>
+						</div>
+					</div>
+					<table id="listTable" class="table table-striped">
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-md-8 offset-md-10">
+						<button onclick="add()" type="button" class="btn btn-primary">确定</button>
+						<a href="/hotel/education/authority-role-management" class="btn btn-secondary" role="button" id="authority-role-management">返回</a>
+					</div>
+				</div>
+				<div style="height: 50px;">
+
+
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	<script>
+	function showAllPermissions() {
+		//获取数据库中的所有权限
+		$.ajax({
+			url: "/hotel/restpermission/show-all-permissions",
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			async: true,
+			success: function (result) {
+				if (result.success == false) {
+					if (result.code == 9002) {
+						alert("参数错误");
+					} else if (result.code == 9999) {
+						alert("系统错误");
+					}
+				} else {
+					//得到权限list
+					var list = result.module;
+					for (var i = 0; i < list.length; i++) {
+							$("#listTable tbody").append("<tr class='col-md-6' style='float:left'><td class='col-md-12' style='display:inline-block'><input type='checkbox' style='margin-right:5%' name='id' value='"+list[i].id+"'>"+list[i].name+"</td></tr>");
+					}                         
+				}                             
+			},
+			error: function (e) {
+				alert("获取库中权限异常");
+			}
+		});
+	}
+	
+	function add() {
+		var name =  $("#name").val();
+        var id =  $("#id").val();
+        var permissonIds = [];
+		$('input[name="id"]:checked').each(function(){  
+			permissonIds.push($(this).val());  
+		}); 	
+		$.ajax({
+			url: "/hotel/restpermission/add-role",
+			type: "POST",
+			data: JSON.stringify({
+				"id":id,
+				"name": name,
+				"permissonIds": permissonIds,
+			}),
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			async: true,
+			success: function (result) {
+				if (result.success == false) {
+					if (result.code == 9002) {
+						alert("参数错误,请重新填写");
+					} else if (result.code == 9999) {
+						alert("系统错误");
+					}
+				} else {
+					alert("角色添加成功！");
+					window.location.href = "/hotel/education/authority-role-management";
+				}
+			},
+			error: function (e) {
+				alert("addRole异常");
+			}
+		});
+	}	
+	
+	</script>
+
+<footer th:replace="component/fram :: commonFooter"></footer>
+</body>
+
+</html>

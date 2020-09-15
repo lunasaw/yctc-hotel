@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body>
+<header th:replace="component/fram :: commonHeader"></header>
+
+<div class="container" th:replace="component/fram :: commonMenu">
+</div>
+<div class="container" style="float: right;">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+		<div class="row">
+
+			<div class="col-md-9">
+
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+						<form class="needs-validation" novalidate action="/hotel/user/mobile-authentication" method="post">
+							<div class="form-group row">
+								<div class="col-md-3">
+									<label class="col-form-label" for="mobileInput">旧手机：</label>
+								</div>
+								<div class="col-md-6">
+                                    <input class="form-control" id="mobileInput" name="mobile" readonly
+                                           th:value="${userDO.contactPhone}" type="text">
+								</div>
+								<div class="col-md-3">
+									<input type="button" class="btn btn-secondary" onclick="getCaptcha(this)" value="获取验证码">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-md-3">
+									<label class="col-form-label" for="verificationCode">验证码：</label>
+								</div>
+								<div class="col-md-9">
+									<input type="text" class="form-control" name="captchaFromFront" required/>
+									<div class="invalid-tooltip">验证码不能为空</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-4 offset-md-4">
+									<button type="submit" class="btn btn-primary btn-block">下一步</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<script>
+		var messageData;
+		var wait = 60; // 短信验证码60秒后才可获取下一个
+
+		/**
+		 *获得验证码
+		 */
+		function getCaptcha(that) {
+			var mobile = document.getElementById("mobileInput").value;
+			setButtonStatus(that); // 设置按钮倒计时
+			$.ajax({
+				url: "/hotel/restwarpper/send-sms",
+				type: "POST",
+				data: mobile,
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: false, //false 同步
+				success: function (result) {
+					console.log(result);
+					if (result.success == false) {
+						if (result.code == 1002) {
+							alert("无当前用户");
+						} else if (result.code == 1004) {
+							alert("手机号为空");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						}
+					} else {
+						alert("短信已发送");
+					}
+				},
+				error: function (e) {
+					alert("异常,发送失败");
+				}
+			});
+		}
+		/**
+		 * 设置按钮冷却状态
+		 */
+		function setButtonStatus(that) {
+			if (wait == 0) {
+				that.removeAttribute("disabled");
+				that.value = "获取验证码";
+				wait = 60;
+			} else {
+				that.setAttribute("disabled", true);
+				that.value = wait + "秒后可以重新发送";
+				wait--;
+				setTimeout(function () {
+					setButtonStatus(that)
+				}, 1000)
+			}
+		}
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function() {
+		  'use strict';
+		  window.addEventListener('load', function() {
+		    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+		    var forms = document.getElementsByClassName('needs-validation');
+		    // Loop over them and prevent submission
+		    var validation = Array.prototype.filter.call(forms, function(form) {
+		      form.addEventListener('submit', function(event) {
+		        if (form.checkValidity() === false) {
+		          event.preventDefault();
+		          event.stopPropagation();
+		        }
+		        form.classList.add('was-validated');
+		      }, false);
+		    });
+		  }, false);
+		})();
+	</script>
+<footer th:replace="component/fram :: commonFooter"></footer>
+
+</body>
+
+</html>

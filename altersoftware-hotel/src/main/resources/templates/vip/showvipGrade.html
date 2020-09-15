@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+  
+</head>
+
+<body>
+
+  <header th:replace="component/fram :: commonHeader"></header>
+  
+  <div class="container" th:replace="component/fram :: commonMenu"></div>
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+    <!-- 冲啊，这里就是正文，高贵的人，终极高贵！！！ -->
+    <h2 style="color:  rgb(135, 106, 32)"><small>会员权益</small></h2>
+    <hr align="left" width="80%">
+    <div class="wrapper-container">
+      <div class="top-picture"><img th:src="@{/img/title-picture.png}" width="1220px"></div>
+      <div class="card-wrapper">
+        <div class="icon-left"><img th:src="@{/img/LEFT.png}" width="100px" height="45px"></div>
+
+        <!-- 修改会员卡图片 -->
+        <div class="card-picture" id="card-picture">
+          <img th:src="@{/img/xing.png}" width="235px" height="145px"
+            style="position: relative;bottom: 60px;border-radius:5px 5px;box-shadow: black 1px 1px 8px ">
+        </div>
+
+        <div class="icon-right"><img th:src="@{/img/RIGHT.png}" width="100px" height="45px"></div>
+      </div>
+      <div class="card-text">
+        <div class="card-description">
+          <p>会籍资格</p>
+          <!-- 修改左侧会籍资格 -->
+          <p id="card-description">您仅需以合资格房价入住Alter Hotel，即可成为我们的星会员。</p>
+        </div>
+        <div class="card-level">
+          <!-- 修改会籍等级 -->
+          <p>您目前的会籍资格等级</p>
+          <p style="font-family:Montserrat,SimHei,Microsoft YaHei,sans-serif;font-size: 30px;font-weight: 100;"
+            id="card-level">星会员</p>
+        </div>
+        <div class="card-prediction">
+          <!-- 修改右侧会籍升级条件 -->
+          <p>升级您的会籍</p>
+          <p id="card-prediction">您仅需于一个日历年内，在任何一间Alter Hotel拥有10晚或5次合资格的入住记录，即可升级成为银会员。</p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <p class="p-rights"><small>权益一览</small></p>
+      <ul class="ul-rights">
+        <li class="li-rights">星会员</li>
+        <li class="li-rights">银会员</li>
+        <li class="li-rights">黄金会员</li>
+        <li class="li-rights">瑰金会员</li>
+      </ul>
+    </div>
+    <hr style="margin: 0 0;">
+    <div class="container-fluid" style="margin-bottom: 200px;">
+      <div class="container-rights col-md-12">
+        <p class="rights-head col-md-1" style="margin-top: 20px">专享礼遇</p>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">预先登记方便办理入住手续</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">同伴同住并可享用会员等级早餐</p>
+        <ul class="ul-colors-3">
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">每日在咖啡厅或指定餐厅享用自助早餐 </p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">若入住时如会员预订之房型已满，即可升级至更高一级别客房 </p>
+        <ul class="ul-colors-2">
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">为非入住宾客而设的礼宾服务</p>
+        <ul class="ul-colors-1">
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">客房预订优先候补 </p>
+        <ul class="ul-colors-3">
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">客房预订保证 – 抵达前72小时*</p>
+        <ul class="ul-colors-2">
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">客房预订保证 – 抵达前48小时*</p>
+        <ul class="ul-colors-1">
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">客房床型预订保证</p>
+        <ul class="ul-colors-2">
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">提前入住/延迟退房 - 上午11时/下午4时**</p>
+        <ul class="ul-colors-2">
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">提前入住/延迟退房 - 上午8时/晚上6时**</p>
+        <ul class="ul-colors-1">
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">抵达时熨烫一套西服</p>
+        <ul class="ul-colors-1">
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="notes-rights">
+        <p>请注意:</p>
+        <p>* 客房预订保证预置为豪华房之公开价格。订房时会员须提供信用卡号码以作保证。此优惠在若干日期不适用，亦不适用于兑换的客房奖励及只建有别墅的酒店。</p>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="rights-head col-md-1">迎宾项目</p>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">新鲜水果</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">巧克力</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">曲奇与牛奶</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">杯面</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">啤酒</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">可口可乐</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">气泡矿泉水</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">无气泡矿泉水</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">当时/时令食物</p>
+        <ul class="ul-colors-2">
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">一瓶白葡萄酒或者红葡萄酒</p>
+        <ul class="ul-colors-1">
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="notes-rights">
+        <p>请注意:</p>
+        <p>星会员:可任意选择三项</p>
+        <p>银会员:可任意选择四项</p>
+        <p>黄金会员:可任意选择五项</p>
+        <p>瑰金会员:可任意选择五项，还可专享抵店时新鲜水果</p>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="rights-head col-md-2">客房设施与服务</p>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">非吸烟客房</p>
+        <ul class="ul-colors-3">
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">私人订制床单*</p>
+        <ul class="ul-colors-2">
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">添床服务</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">睡枕选择</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="notes-rights">
+        <p>请注意:</p>
+        <p>*私人订制床单服务请提早10日进行预订,退房时允许贵客将私人订制床单带走</p>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="rights-head col-md-2">经济及财务优惠</p>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">免收当地电话费</p>
+        <ul class="ul-colors-3">
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">长途电话和传真只收取成本费用</p>
+        <ul class="ul-colors-2">
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+      <div class="container-rights col-md-12">
+        <p class="col-md-5 p-rights-t">免收外借充电宝费用</p>
+        <ul class="ul-colors-4">
+          <li class="xing-member"></li>
+          <li class="silver-member"></li>
+          <li class="golden-member"></li>
+          <li class="rosen-golden-member"></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+  </main>
+  
+  <footer th:replace="component/fram :: commonFooter"></footer>
+
+
+  <script>
+      function getCookie(objName) {//获取指定名称的cookie的值
+          var arrStr = document.cookie.split(";");
+          for (var i = 0; i < arrStr.length; i++) {
+              var temp = arrStr[i].split("=");
+              if (temp[0] == objName)
+                  return unescape(temp[1]);
+          }
+      }
+    $(document).ready(function () {
+        console.log("获取用户名Id");
+        var string = getCookie("userId");
+        console.log(string);
+        $.ajax({
+            url: "/hotel/vip/get-bycustomerId",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": string
+            },
+            success:function (result) {
+                var data = result.module;
+                console.log(data);
+                $('#card-level').text(data.grade);
+            }
+        })
+    })
+  </script>
+</body>
+
+</html>

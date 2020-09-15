@@ -1,0 +1,278 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+<header th:replace="component/fram :: commonHeader"></header>
+
+<div class="container" th:replace="component/fram :: commonMenu">
+</div>
+<body>
+
+	<!-- Begin page content -->
+    <div class="container" style="float: right;">
+
+        <br>
+        <br>
+        <br>
+        <br>
+		<div class="row">
+
+            <div class="col-md-9">
+				<h5>管理员-功能1：管理用户权限</h5>
+				<hr />
+				<div>
+					<div class="row">
+						<div class="col-md-4">
+							<label class="col-form-label" for="Input">输入将要权限更改的用户账号：</label>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="userNumber">
+						</div>
+						<div class="col-md-4">
+							<button type="button" class="btn btn-primary" onclick="showPermissionsHave();showPermissionsNotHave()">查询</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<button type="button" id="showHave" style="display:none" class="btn btn-primary" onclick="showHave()">已有权限</button>
+					</div>
+					<div class="col-md-6">
+						<button type="button" id="showNotHave" style="display:none" class="btn btn-primary" onclick="showNotHave()">未有权限</button>
+					</div>
+				</div>
+				<div id="showOne" class="col-12 tm-block-col">
+					<div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+						<table id="listTable" class="table table-striped" style="margin-top: 40px">
+							<thead>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="showTwo" class="col-12 tm-block-col">
+					<div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+						<table id="listTableTwo" class="table table-striped" style="margin-top: 40px">
+							<thead>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <footer th:replace="component/fram :: commonFooter"></footer>
+
+	<script>
+		/**
+		 *赋权
+		 */
+		function authorization(name) {
+			var userNumber = document.getElementById("userNumber").value;
+			var permissionName = name;
+			var authorizationVO = {
+				"userNumber": userNumber,
+				"permissionName": permissionName
+			};
+			$.ajax({
+				url: "/hotel/restpermission/add-permission",
+				type: "POST",
+				data: JSON.stringify(authorizationVO),
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: false, //false 同步
+				success: function (result) {
+					if (result.success == false) {
+						if (result.code == 1002) {
+							alert("无此用户");
+						} else if (result.code == 1008) {
+							alert("权限不存在");
+						} else if (result.code == 9002) {
+							alert("请填写被操作权限的用户账号");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						} else if (result.code == 1009) {
+							alert("赋权重复，用户已拥有该权限");
+						} else if (result.code == 1022) {
+							alert("该管理员无特有权限，赋予权限异常");
+						} else if (result.code == 1023) {
+							alert("该权限为管理员特有权限，不可赋予他人");
+						}
+					} else {
+						alert("赋权成功");
+						showPermissionsHave();
+						showPermissionsNotHave();
+					}
+				},
+				error: function (e) {
+					alert("异常,赋权失败");
+				}
+			});
+		}
+
+		/**
+		 *删除赋权
+		 */
+		function deletePermission(name) {
+			var userNumber = document.getElementById("userNumber").value;
+			var permissionName = name;
+			var authorizationVO = {
+				"userNumber": userNumber,
+				"permissionName": permissionName
+			};
+			$.ajax({
+				url: "/hotel/restpermission/delete-permission",
+				type: "POST",
+				data: JSON.stringify(authorizationVO),
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: false, //false 同步
+				success: function (result) {
+					if (result.success == false) {
+						if (result.code == 1002) {
+							alert("无此用户");
+						} else if (result.code == 1008) {
+							alert("权限不存在");
+						} else if (result.code == 9002) {
+							alert("请填写被操作权限的用户账号");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						} else if (result.code == 1020) {
+							alert("无此赋权记录，删除失败");
+						} else if (result.code == 1022) {
+							alert("该管理员无特有权限，删除权限异常");
+						} else if (result.code == 1023) {
+							alert("该权限为管理员特有权限，不可删除");
+						}
+					} else {
+						alert("删除成功");
+						showPermissionsHave();
+						showPermissionsNotHave();
+					}
+				},
+				error: function (e) {
+					alert("异常,删除失败");
+				}
+			});
+		}
+
+		function showPermissionsHave() {
+			var userNumber = document.getElementById("userNumber").value;
+			var userNumber = unescape(userNumber);
+			$.ajax({
+				url: "/hotel/restpermission/show-permissions-have",
+				type: "POST",
+				data: userNumber,
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: false,
+				success: function (result) {
+					if (result.success == false) {
+						$("#listTable thead").empty();
+						$("#listTable tbody").empty();
+						if (result.code == 1002) {
+							alert("展示用户权限，无此用户");
+						} else if (result.code == 9002) {
+							alert("请填写被操作权限的用户账号");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						}
+					} else {
+						$("#listTable thead").empty();
+						$("#listTable tbody").empty();
+						$("#showHave").css('display','block');
+						$("#showOne").css("display","none");
+						$("#showOne").css("display","none");
+						var list = result.module;
+						if (list.length == 0) {
+							$("#listTable thead").append("<tr><th>您没有任何权限</th></tr>");
+						} else {
+							$("#listTable thead").append(
+								"<tr><th>已有权限</th></tr><tr><th scope='col'>序号</th><th scope='col'>权限名</th><th scope='col'>操作</th></tr>");
+							for (var i = 0; i < list.length; i++) {
+								var id = list[i].id;
+								var listId = i + 1;
+								var name = list[i].name;
+								$("#listTable tbody").append("<tr><th scope=\"row\">" + listId +
+									"</th><td>" + name + "</td><td><input id=" + name +
+									" type='button' class='btn btn-danger' onclick='deletePermission(this.id)' value='删除权限'></td></tr>");
+							}
+						}
+
+					}
+				},
+				error: function (e) {
+					alert("showPermissionsHave异常");
+				}
+			});
+		}
+
+		function showPermissionsNotHave() {
+			var userId = document.getElementById("userNumber").value;
+			var id = unescape(userId);
+			$.ajax({
+				url: "/hotel/restpermission/show-permissions-not-have",
+				type: "POST",
+				data: id,
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',
+				async: false,
+				success: function (result) {
+					if (result.success == false) {
+						$("#listTableTwo thead").empty();
+						$("#listTableTwo tbody").empty();
+						if (result.code == 1002) {
+							alert("展示用户未有权限，无此用户");
+						} else if (result.code == 9002) {
+							alert("请填写被操作权限的用户账号");
+						} else if (result.code == 9999) {
+							alert("系统错误");
+						}
+					} else {
+						$("#listTableTwo thead").empty();
+						$("#listTableTwo tbody").empty();
+						$("#showNotHave").css('display','block');
+						$("#showTwo").css("display","none");
+						$("#showTwo").css("display","none");
+						var list = result.module;
+						if (list.length == 0) {
+							$("#listTableTwo thead").append("<tr><th>您已拥有全部权限</th></tr>");
+						} else {
+							$("#listTableTwo thead").append(
+								"<tr><th>未有权限</th></tr><tr><th scope='col'>序号</th><th scope='col'>权限名</th><th scope='col'>操作</th></tr>");
+							for (var i = 0; i < list.length; i++) {
+								var id = list[i].id;
+								var listId = i + 1;
+								var name = list[i].name;
+								$("#listTableTwo tbody").append("<tr><th scope=\"row\">" + listId + "</th><td>" + name + "</td><td><input id=" +
+									name + " type='button' class='btn btn-success' onclick='authorization(this.id)' value='增加权限'></td></tr>");
+							}
+						}
+					}
+				},
+				error: function (e) {
+					alert("showPermissionsNotHave异常");
+				}
+			});
+		}
+		
+		function showHave(){
+			$("#showOne").css("display","block");
+			$("#showOne").css("display","block");
+			$("#showTwo").css("display","none");
+			$("#showTwo").css("display","none");
+		}
+		
+		function showNotHave(){
+			$("#showTwo").css("display","block");
+			$("#showTwo").css("display","block");
+			$("#showOne").css("display","none");
+			$("#showOne").css("display","none");
+		}
+	</script>
+</body>
+
+</html>

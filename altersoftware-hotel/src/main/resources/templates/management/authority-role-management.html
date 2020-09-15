@@ -1,0 +1,168 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="component/head :: head"></head>
+
+<body onload="showAllRoles()">
+<header th:replace="component/fram :: commonHeader"></header>
+
+<div class="container" th:replace="component/fram :: commonMenu">
+</div>
+	<!-- Begin page content -->
+<div class="container" style="float: right;">
+    <br>
+    <br>
+    <br>
+    <br>
+		<div class="row">
+
+
+			<div class="col-md-9">
+				<h5>权限管理—角色管理</h5>
+				<hr />
+				
+			   <!-- 已有角色（可进行 角色的删除、修改） -->
+			   <div id="showRoles" class="col-12 tm-block-col">
+				   <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+						<table id="listTable" class="table table-striped">
+							<thead>								
+								<div class="row">
+									<div class="col-md-10">
+										已有角色
+									</div>
+									<div class="col-md-2">
+										<a href="/hotel/education/authority-role-management-add" class="btn btn-success">增加角色</a>
+									</div>	
+								</div>								
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+				   </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+	/**
+	 *展示所有的角色
+	 */
+	function showAllRoles() {
+		$.ajax({
+			url: "/hotel/restpermission/show-all-roles",
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+			async: false,
+			success: function (result) {
+				if (result.success == false) {
+					$("#listTable thead").empty();
+					$("#listTable tbody").empty();
+					if (result.code == 1002) {
+						alert("展示权限角色，无角色");
+					} else if (result.code == 9999) {
+						alert("系统错误");
+					} 
+				} else {
+					$("#listTable thead").empty();
+					$("#listTable tbody").empty();
+					var list = result.module;
+					if (list.length == 0) {
+						$("#listTable thead").append("<tr><th>当前无角色</th></tr>");
+					} else {
+					    console.log(list);
+						$("#listTable thead").append(
+							"<tr><th scope='col'>序号</th><th scope='col'>角色名</th><th scope='col'>操作</th></tr>");
+						for (var i = 0; i < list.length; i++) {
+							var id = list[i].id;
+							var listId = i + 1;
+							var name = list[i].name;
+							$("#listTable tbody").append("<tr><th scope=\"row\">" + listId +
+								"</th><td>" + name + "</td><td><input id=" + id +
+								" type='button' class='btn btn-danger' onclick='deleteRole(this.id)' value='删除'>&nbsp&nbsp&nbsp&nbsp<input id=" + id + 
+								" type='button' class='btn btn-primary' onclick='modifyRole(this.id)' value='修改'></td></tr>");
+						}
+					}
+
+				}
+			},
+			error: function (e) {
+				alert("showALLRoles异常");
+			}
+		});
+	}	
+	
+	
+		/**
+		 *删除角色
+		 */
+		function deleteRole(name) {
+			var msg = "确定要删除该角色吗？";
+			if(confirm(msg)==true){
+				var roleName = unescape(name);
+				$.ajax({
+					url: "/hotel/restpermission/delete-role-by-permissiongroupid",
+					type: "POST",
+					data: roleName,
+					contentType: "application/json; charset=utf-8",
+					dataType: 'json',
+					async: false, //false 同步
+					success: function (result) {
+						if (result.success == false) {
+							if (result.code == 1002) {
+								alert("无此用户");
+							} else if (result.code == 1008) {
+								alert("权限不存在");
+							}  else if (result.code == 9999) {
+								alert("系统错误");
+							} else if (result.code == 1034) {
+								alert("此角色为系统角色，不可删除");
+							} 
+						} else {
+							alert("角色删除成功");
+							showAllRoles();
+						}
+					},
+					error: function (e) {
+						alert("异常,删除失败");
+					}
+				});
+			}else {
+
+			}
+		}
+		
+		function getUrl() {
+			var url = location.search; //获取url中"?"符后的字串
+            var theRequest = {};
+			if (url.indexOf("?") != -1) {
+				var str = url.substr(1);
+				strs = str.split("&");
+				for (var i = 0; i < strs.length; i++) {
+					theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+				}
+			}
+			return theRequest;
+		}
+		
+		function redirectUrl() {
+            var theRequest = {};
+			theRequest = getUrl();
+			var id = theRequest["id"];
+			var href = getHref(id);
+			return href;
+		}
+		
+		function modifyRole(id) {
+		    console.log(id);
+			window.location.href = "/hotel/education/authority-role-management-modify?id="+id;
+		}	
+		
+	</script>
+<footer th:replace="component/fram :: commonFooter"></footer>
+
+</body>
+
+</html>

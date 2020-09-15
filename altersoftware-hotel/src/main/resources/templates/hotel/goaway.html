@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/4.2/examples/dashboard/ -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="component/head :: head">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>用户服务中心</title>
+
+</head>
+
+<body>
+
+  <header th:replace="component/fram :: commonHeader"></header>
+
+  <div class="container" th:replace="component/fram :: commonMenu"></div>
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="chartjs-size-monitor"
+      style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+      <div class="chartjs-size-monitor-expand"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+      </div>
+      <div class="chartjs-size-monitor-shrink"
+        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+        <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+      </div>
+    </div>
+
+
+
+    <div class="container-fluid">
+      <h2 style="color: rgb(135, 106, 32);"><small>在线退房</small></h2>
+      <hr align="left" width="80%">
+      <section>
+        <h4><small style="color: rgb(135, 106, 32);font-family: 黑体;">本酒店在线退房流程如下：</small></h4>
+        <h5><small style="color: rgb(135, 106, 32);font-family: 黑体;">情况一：您想退去预订的房间</small></h5>
+        <ul>
+          <li>1.在收到您的退房通知后，我们将立即通知工作人员进行退房处理</li>
+          <li>2.我们会将押金全额返还至您的支付账号，并账单发送至您留下的联系方式通知您</li>
+        </ul>
+        <hr>
+        <h5><small style="color: rgb(135, 106, 32);font-family: 黑体;">情况二：您想退去入住的房间</small></h5>
+        <ul>
+          <li>1.在收到您的退房通知后，我们将立即通知工作人员进行查房</li>
+          <li>2.我们将检查退房房间项目，整理出房间账单单据</li>
+          <li>3.如有损坏需要赔偿的物品，我们将入账处理</li>
+          <li>4.我们会将押金返还至您的支付账号，并账单发送至您留下的联系方式通知您</li>
+          <li>5.如有需要赔偿物品，我们将自动从您的押金中扣除，若有不足，请与15个工作日内偿还</li>
+        </ul>
+        <hr>
+      </section>
+      <div class="card">
+        <div class="card-header">
+          经过查询，您已预订或入住的房间如下：
+        </div>
+        <div class="card-body" style="padding:30px 15px;">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
+              style="margin-bottom: 50px; text-align: center;">
+              <thead>
+                <tr>
+                  <th>房间号</th>
+                  <th>入住时间</th>
+                  <th>预订入住天数</th>
+                  <th>入住付款</th>
+                  <th>退房程序</th>
+                </tr>
+              </thead>
+              <tbody id="tbody" style="line-height: 100px;">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!--留言模态框 -->
+  <div class="modal fade" id="go" tabindex="-1" role="dialog" aria-labelledby="go" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: rgb(226, 203, 145);">
+            <h5 class="modal-title" id="payforroomLabel">退房手续</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="close">
+              <Span aria-hidden="true">&times;</Span>
+            </button>
+          </div>
+	        <div>
+              <div class="modal-body" style="height: auto;">
+                <h3>非常感谢您的光临，请为我们的服务提出评价或者建议</h3>
+                <hr>
+                <textarea id="eva" class="form-control" rows="5" maxlength="50" placeholder="请在50个字内描述" style="color: rgb(135,92,120);font-size: 18px;"></textarea>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-success" onclick="goaway()">填写评价或退房</button>
+              </div>
+	        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer th:replace="component/fram :: commonFooter"></footer>
+
+  <script>
+      function getCookie(objName) {//获取指定名称的cookie的值
+          var arrStr = document.cookie.split(";");
+          for (var i = 0; i < arrStr.length; i++) {
+              var temp = arrStr[i].split("=");
+              if (temp[0] == objName)
+                  return unescape(temp[1]);
+          }
+      }
+      let id;
+      var userId;
+    $(document).ready(function () {
+        console.log("获取用户名Id");
+        userId = getCookie("userId");
+        console.log(userId);
+        $.ajax({
+            url: "/hotel/record/get-bynowcustomer",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+                "customerId": userId
+            },
+            success:function (result) {
+                let tbody = $("#tbody");
+                let item = result.module;
+                console.info(item);
+                for (let i = 0; i < item.length; i++){
+                    let roomNumber = item[i].roomNumber;
+                    let checkInTime = item[i].checkInTime;
+                    let precheckInTime = item[i].precheckInTime;
+                    let payMoney = item[i].payMoney;
+                     id = item[i].id;
+                    tbody.append('<tr>' + '<th>' + roomNumber + '</th>' + '<th>' + checkInTime + '</th>' + '<th>' + precheckInTime +
+                        '</th>' + '<th>' + payMoney + '</th>' + '<th>' +
+                        '<a href="" data-toggle="modal" data-target="#go">' + '确认退房' + '</a>' + '</th>' +
+                        '</tr>')
+                }
+            }
+        });
+
+        $("#area").on("input propertychange", function() {
+            var $this = $(this),
+                _val = $this.val(),
+                count = "";
+            if (_val.length > 20) {
+                $this.val(_val.substring(0, 20));
+            }
+            count = 20 - $this.val().length;
+            $("#text-count").text(count);
+          });
+      });
+
+      function goaway(){
+          let evaluate = $("#eva").val();
+          console.info(evaluate);
+          $.ajax({
+              url: "/hotel/record/update-nowtime",
+              type: "POST",
+              contentType: "application/x-www-form-urlencoded",
+              data: {
+                  "id": id,
+                  "evaluate":evaluate
+              },
+              success:function (result) {
+                  // console.log(result);
+                  if (result.success != false) {
+                      var de = result.module;
+                      // parseFloat(de);
+                      $.ajax({
+                          url: "/hotel/customer/update-de",
+                          type: "POST",
+                          contentType: "application/x-www-form-urlencoded",
+                          data: {
+                              "customerId": userId,
+                              "de": parseFloat(de)
+                          },
+                      });
+                      alert("退房成功");
+                      $('#go').modal('hide');
+                  }
+              }
+          })
+      }
+  </script>
+
+</body>
+
+</html>
